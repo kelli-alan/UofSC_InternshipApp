@@ -1,0 +1,17 @@
+[
+  {
+    "id": "b0fa35f9-3705-41b0-905a-92aa8a026642",
+    "firstName": "Margaret",
+    "lastName": "Adams",
+    "username": "m.adams",
+    "password": "adminaccess",
+    "type": "Moderator"
+  }, {
+    "id": "",
+    "firstName": "Steven",
+    "lastName": "Anderson",
+    "username": "anderson_s",
+    "password": "safety1st",
+    "type": "Moderator"
+  }
+]

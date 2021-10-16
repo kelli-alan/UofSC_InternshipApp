@@ -1,0 +1,23 @@
+[
+  {
+    "id": "f7c488aa-c468-40e4-b146-cc2c8d42505e",
+    "firstName": "Bob",
+    "lastName": "Jones",
+    "username": "jones_b",
+    "password": "IBMRecruiter",
+    "type": "Employer",
+    "companyName": "IBM",
+    "companyDescription": "International Business Machines invents things that matter.",
+    "internshipListings": ["43e2c2a7-24f2-4066-ad6c-bd018b31d8e2", "edee3bdc-1a41-4cc4-8695-35ea55361af9"]
+  }, {
+    "id": "1017967d-4f1d-4535-bda8-76b1465b41a6",
+    "firstName": "Martha",
+    "lastName": "Williams",
+    "username": "marthaw",
+    "password": "looking4interns",
+    "type": "Employer",
+    "companyName": "Microsoft",
+    "companyDescription": "Microsoft's mission is to empower every person and every organization on the planet to achieve more.",
+    "internshipListings": []
+  }
+]

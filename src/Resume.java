@@ -1,10 +1,6 @@
 import java.util.ArrayList;
-
-enum Month {
-
-    January, February, March, April, May, June, July, August,
-    September, October, November, December;
-}
+import java.util.UUID;
+import java.time.Month;
 
 enum Major {
 
@@ -18,7 +14,7 @@ enum Major {
  */
 public class Resume {
     
-    //insert ID
+    private UUID id;
     private String firstName;
     private String lastName;
     private String eMail;

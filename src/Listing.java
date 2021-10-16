@@ -1,7 +1,9 @@
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Listing implements Subject {
     
+    private UUID id;
     private String jobTitle;
     private String city;
     private String state;
