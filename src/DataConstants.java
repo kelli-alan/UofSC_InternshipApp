@@ -77,4 +77,9 @@ public abstract class DataConstants {
  protected static final String EXTRACURRICULAR_ACTIVITIES = "activities";
 
  protected static final String RESUME_SKILLS  = "skills";
+
+ // user types
+ protected static final String USER_TYPE_STUDENT = "Student";
+ protected static final String USER_TYPE_EMPLOYER = "Employer";
+ protected static final String USER_TYPE_MODERATOR = "Moderator";
 }
