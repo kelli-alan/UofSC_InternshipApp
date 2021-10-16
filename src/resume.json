@@ -1,0 +1,87 @@
+[
+  {
+    "id": "eb9e9de7-8fed-487c-97c7-be730dd3f452",
+    "eMail": "jsmith@yahoo.com",
+    "phoneNum": "(803)-555-1921",
+    "education": [
+      {
+        "university": "University of South Carolina",
+        "city": "Columbia",
+        "state": "SC",
+        "degreeType": "Bachelor of Science in Computer Science",
+        "major": "Computer Science",
+        "minor": "Mathematics",
+        "gradMonth": "May",
+        "gradYear": 2024,
+        "gpa": 3.50
+      }
+    ],
+    "workExperiences": [
+      {
+        "position": "Cashier",
+        "startMonth": "August",
+        "startYear": 2019,
+        "endMonth" : "",
+        "endYear" : null,
+        "company": "Office Depot",
+        "city": "Lexington",
+        "state": "SC",
+        "responsibilities": ["Improved customer service skills by answering customer phone calls daily", "Developed teamwork skills by working with 3-4 other cashiers"]
+      }
+    ],
+    "extracurriculars": [
+      {
+        "position": "member",
+        "startMonth": "August",
+        "startYear": 2020,
+        "endMonth": "",
+        "endYear": null,
+        "title": "Association for Computing Machinery",
+        "activities": ["Participated in a Code-a-thon"]
+      }
+    ],
+    "skills": ["Java", "C++", "R", "Unix/Linux", "Debugging", "Assembling computers"]
+  }, {
+        "id": "d7b13acd-61b8-401b-ae33-64bdca554336",
+        "eMail": "anaedwards@gmail.com",
+        "phoneNum": "(921)-555-7654",
+        "education": [
+          {
+            "university": "University of South Carolina",
+            "city": "Columbia",
+            "state": "SC",
+            "degreeType": "Bachelor of Science in Engineering in Computer Engineering",
+            "major": "Computer Engineering",
+            "minor": "",
+            "gradMonth": "December",
+            "gradYear": 2022,
+            "gpa": 3.84
+          }
+        ],
+        "workExperiences": [
+          {
+            "position": "Peer Mentor",
+            "startMonth": "January",
+            "startYear": 2021,
+            "endMonth" : "",
+            "endYear" : null,
+            "company": "University of South Carolina Student Success Center",
+            "city": "Columbia",
+            "state": "SC",
+            "responsibilities": ["Helped freshmen in computer related fields adjust to college", "Tutored students in Algorithmic Design"]
+          }
+        ],
+        "extracurriculars": [
+          {
+            "position": "Vice President",
+            "startMonth": "January",
+            "startYear": 2018,
+            "endMonth": "",
+            "endYear": null,
+            "title": "Society of Women Engineers",
+            "activities": ["Assisted the President with organizing weekly meetings", "Led an educational booth during Engineering Week"]
+          }
+        ],
+        "skills": ["Matlab", "Java", "Github", "C++", "Compiler design", "Assembling computers"]
+  }
+]

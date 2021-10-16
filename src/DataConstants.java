@@ -40,5 +40,41 @@ public abstract class DataConstants {
   protected static final String LISTING_OBSERVERS = "observers";
 
 
+ // resume constants
+ protected static final String RESUME_FILE_NAME = "/src/resume.json";
+ protected static final String RESUME_ID  = "id";
+ protected static final String RESUME_EMAIL = "eMail";
+ protected static final String RESUME_PHONE_NUM = "phoneNum";
 
+ protected static final String RESUME_EDUCATION_SECTION = "education";
+ protected static final String EDUCATION_UNIVERSITY = "university";
+ protected static final String EDUCATION_CITY  = "city";
+ protected static final String EDUCATION_STATE = "state";
+ protected static final String EDUCATION_DEGREE_TYPE = "degreeType";
+ protected static final String EDUCATION_MAJOR = "major";
+ protected static final String EDUCATION_MINOR = "minor";
+ protected static final String EDUCATION_GRAD_MONTH = "gradMonth";
+ protected static final String EDUCATION_GRAD_YEAR = "gradYear";
+ protected static final String EDUCATION_GPA = "gpa";
+
+ // experience constants for work experiences and extracurriculars
+ protected static final String EXPERIENCE_POSITION = "position";
+ protected static final String EXPERIENCE_START_MONTH = "startMonth";
+ protected static final String EXPERIENCE_START_YEAR = "startYear";
+ protected static final String EXPERIENCE_END_MONTH = "endMonth";
+ protected static final String EXPERIENCE_END_YEAR = "endYear";
+
+ // work experience specific constants
+ protected static final String RESUME_WORK_EXPERIENCES_SECTION = "workExperience";
+ protected static final String WORK_EXPERIENCE_COMPANY = "company";
+ protected static final String WORK_EXPERIENCE_CITY = "city";
+ protected static final String WORK_EXPERIENCE_STATE = "state";
+ protected static final String WORK_EXPERIENCE_RESPONSIBILITIES = "responsibilities";
+
+ // extracurricular specific constants
+ protected static final String RESUME_EXTRACURRICULARS_SECTION = "extracurriculars";
+ protected static final String EXTRACURRICULAR_TITLE = "title";
+ protected static final String EXTRACURRICULAR_ACTIVITIES = "activities";
+
+ protected static final String RESUME_SKILLS  = "skills";
 }
