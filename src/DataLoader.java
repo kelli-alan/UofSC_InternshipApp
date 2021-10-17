@@ -9,4 +9,12 @@ import org.json.simple.parser.JSONParser;
 
 public class DataLoader extends DataConstants {
 
+    public ArrayList<User> getUsers() {
+        return null;
+    }
+
+    public ArrayList<Listing> getListings() {
+        return null;
+    }
+
 }
