@@ -1,7 +1,3 @@
-enum Users {
-    USER_TYPE_STUDENT, USER_TYPE_EMPLOYER, USER_TYPE_MODERATOR;
-}
-
 /**
  * 
  * @authors Evan Grunewald
