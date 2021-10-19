@@ -25,10 +25,12 @@ public class Resume {
     private ArrayList<WorkExperience> workExperiences;
     private ArrayList<Extracurricular> extracurriculars;
 
-    public Resume(UUID id, String firstName, String lastName, ArrayList<String> skills, ArrayList<Education> education, ArrayList<WorkExperience> workExperiences, ArrayList<Extracurricular> extracurriculars) { 
+    public Resume(UUID id, String firstName, String lastName, String email, String phoneNum, ArrayList<String> skills, ArrayList<Education> education, ArrayList<WorkExperience> workExperiences, ArrayList<Extracurricular> extracurriculars) { 
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.id = id;
+        this.eMail = email;
+        this.phoneNum = phoneNum;
         this.skills = new ArrayList<String>();
         this.skills = skills;
         this.workExperiences = new ArrayList<WorkExperience>();

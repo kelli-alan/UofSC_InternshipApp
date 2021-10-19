@@ -376,7 +376,7 @@ public class Student extends User {
         }
         clearScreen();
 
-        resumes.add(new Resume(id, firstName, lastName, skills, education, workExperiences, extracurriculars));
+        resumes.add(new Resume(id, firstName, lastName, eMail, phoneNum, skills, education, workExperiences, extracurriculars));
 
         System.out.println("Resume Created!");
     }
