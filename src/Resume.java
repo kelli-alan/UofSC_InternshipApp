@@ -25,23 +25,26 @@ public class Resume {
     private ArrayList<WorkExperience> workExperiences;
     private ArrayList<Extracurricular> extracurriculars;
 
-    public Resume(UUID id, String firstName, String lastName) { 
+    public Resume(UUID id, String firstName, String lastName, String email, String phoneNum) { 
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.id = id;
+        this.eMail = email;
+        this.phoneNum = phoneNum;
         this.skills = new ArrayList<String>();
-        this.workExperiences = new ArrayList<WorkExperience>();
         this.education = new ArrayList<Education>();
+        this.workExperiences = new ArrayList<WorkExperience>();
         this.extracurriculars = new ArrayList<Extracurricular>();
     }
 
-    public void addWorkExperience(String company, String position, Month startMonth, int startYear, Month endMonth, int endYear) {
-        // City and State are missing here?
-        this.workExperiences.add(new WorkExperience(position, startMonth, startYear, company, "city", "state"));
+    public void addWorkExperience(String position, Month startMonth, int startYear, String company, 
+                                  String city, String state) {
+        this.workExperiences.add(new WorkExperience(position, startMonth, startYear, 
+                                                      company, city, state));
     }
 
     public void addEducation(String university, String city, String state, String degreeType, Major major, String minor, Month gradMonth, int gradYear, double GPA) {
-        Education temp = new Education(university, city, degreeType, major, gradMonth, gradYear);
+        Education temp = new Education(university, city, state, degreeType, major, gradMonth, gradYear);
         temp.addGPA(GPA);
         temp.addMinor(minor);
         this.education.add(temp);
