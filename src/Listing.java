@@ -17,8 +17,18 @@ public class Listing implements Subject {
     private ArrayList<Resume> applications;
     // add in observer list
 
-    public Listing(String jobTitle, String city, String state, String startDate, int hoursPerWeek, double pay, boolean isRemote) {
-
+    public Listing(UUID id, String jobTitle, String city, String state, String startDate, int hoursPerWeek, double pay, boolean isRemote, 
+    ArrayList<String> desiredSkills, ArrayList<String> duties) {
+        this.id = id;
+        this.jobTitle = jobTitle;
+        this.city = city;
+        this.state = state;
+        this.startDate = startDate;
+        this.hoursPerWeek = hoursPerWeek;
+        this.pay = pay;
+        this.isRemote = isRemote;
+        this.desiredSkills = desiredSkills;
+        this.duties = duties;
     }
 
     public void setSkills() {

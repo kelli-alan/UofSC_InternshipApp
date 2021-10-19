@@ -12,8 +12,8 @@ public class Education {
     private int gradYear;
     private double GPA;
 
-    public Education(String university, String city, String degreeType, Major major, Month gradMonth, int gradYear) {
-
+    public Education(String university, String city, String state, String degreeType, Major major, Month gradMonth, int gradYear) {
+        
     }
 
     public void addGPA(double GPA) {

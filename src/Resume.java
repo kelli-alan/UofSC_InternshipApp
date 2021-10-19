@@ -24,14 +24,20 @@ public class Resume {
     private ArrayList<WorkExperience> workExperiences;
     private ArrayList<Extracurricular> extracurriculars;
 
-    public Resume(UUID id, String firstName, String lastName) { 
+    public Resume(UUID id, String firstName, String lastName, String email, String phoneNum, ArrayList<String> skills, ArrayList<Education> education, ArrayList<WorkExperience> workExperiences, ArrayList<Extracurricular> extracurriculars) { 
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.id = id;
+        this.eMail = email;
+        this.phoneNum = phoneNum;
         this.skills = new ArrayList<String>();
+        this.skills = skills;
         this.workExperiences = new ArrayList<WorkExperience>();
+        this.workExperiences = workExperiences;
         this.education = new ArrayList<Education>();
+        this.education = education;
         this.extracurriculars = new ArrayList<Extracurricular>();
+        this.extracurriculars = extracurriculars;
     }
 
     public void addWorkExperience(String company, String position, Month startMonth, int startYear, Month endMonth, int endYear, String city, String state) {
@@ -39,11 +45,11 @@ public class Resume {
     }
 
     public void addExtracurricular(String title, String position, Month startMonth, int startYear, Month endMonth, int endYear) {
-        this.extracurriculars.add(new Extracurricular(position, startMonth, startYear, title) );
+        this.extracurriculars.add(new Extracurricular(position, startMonth, startYear, title, activities, endMonth, endYear) );
     }
 
     public void addEducation(String university, String city, String state, String degreeType, Major major, Month gradMonth, int gradYear) {
-        this.education.add(new Education(university, city, degreeType, major, gradMonth, gradYear) );
+        this.education.add(new Education(university, city, state, degreeType, major, gradMonth, gradYear) );
     }
     
     public void addSkill(String skill) {
