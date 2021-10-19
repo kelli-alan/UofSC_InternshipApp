@@ -41,7 +41,7 @@ public class Resume {
     }
 
     public void addEducation(String university, String city, String state, String degreeType, Major major, String minor, Month gradMonth, int gradYear, double GPA) {
-        Education temp = new Education(university, city, degreeType, major, gradMonth, gradYear);
+        Education temp = new Education(university, city, state, degreeType, major, gradMonth, gradYear);
         temp.addGPA(GPA);
         temp.addMinor(minor);
         this.education.add(temp);

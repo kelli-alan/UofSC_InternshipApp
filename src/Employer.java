@@ -66,7 +66,9 @@ public class Employer extends User implements EmployerObserver {
         while(cont.equalsIgnoreCase("y")) {
 
             System.out.println("Enter duties for this position (Enter \"done\" when finished): ");
-            duties.add(key.nextLine());
+            if(!key.nextLine().equalsIgnoreCase("done"))
+                duties.add(key.nextLine());
+            else {cont = key.nextLine();}
         }
 
         clearScreen();
@@ -76,7 +78,9 @@ public class Employer extends User implements EmployerObserver {
         while(cont.equalsIgnoreCase("y")) {
 
             System.out.println("Enter skills for this position (Enter \"done\" when finished): ");
-            skills.add(key.nextLine());
+            if(!key.nextLine().equalsIgnoreCase("done"))
+                skills.add(key.nextLine());
+            else {cont = key.nextLine();}
         }
 
         clearScreen();
