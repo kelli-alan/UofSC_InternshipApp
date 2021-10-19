@@ -24,4 +24,8 @@ public class Education {
         
     }
 
+    public String toString() {
+        return "";
+    }
+
 }

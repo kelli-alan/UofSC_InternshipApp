@@ -4,7 +4,6 @@ import java.util.UUID;
 import java.time.Month;
 
 enum Major {
-
     COMPUTER_SCIENCE, COMPUTER_INFORMATION_SYSTEMS, 
     COMPUTER_ENGINEERING, INTEGRATED_INFORMATION_TECHNOLOGY;
 }
@@ -35,16 +34,16 @@ public class Resume {
         this.extracurriculars = new ArrayList<Extracurricular>();
     }
 
-    public void addWorkExperience(String company, String position, Month startMonth, int startYear, Month endMonth, int endYear) {
-        // City and State are missing here?
-        this.workExperiences.add(new WorkExperience(position, startMonth, startYear, company, "city", "state"));
+    public void addWorkExperience(String company, String position, Month startMonth, int startYear, Month endMonth, int endYear, String city, String state) {
+        this.workExperiences.add(new WorkExperience(position, startMonth, startYear, company, city, state) );
     }
 
-    public void addEducation(String university, String city, String state, String degreeType, Major major, String minor, Month gradMonth, int gradYear, double GPA) {
-        Education temp = new Education(university, city, degreeType, major, gradMonth, gradYear);
-        temp.addGPA(GPA);
-        temp.addMinor(minor);
-        this.education.add(temp);
+    public void addExtracurricular(String title, String position, Month startMonth, int startYear, Month endMonth, int endYear) {
+        this.extracurriculars.add(new Extracurricular(position, startMonth, startYear, title) );
+    }
+
+    public void addEducation(String university, String city, String state, String degreeType, Major major, Month gradMonth, int gradYear) {
+        this.education.add(new Education(university, city, degreeType, major, gradMonth, gradYear) );
     }
     
     public void addSkill(String skill) {
@@ -58,7 +57,6 @@ public class Resume {
     public void addPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
-
     
     public void deleteWorkExperience(WorkExperience workExperience) {
         workExperiences.remove(workExperience);
@@ -90,7 +88,6 @@ public class Resume {
             ret += skills.get(i) + "\n";
         }
 
-        // This is assuming workexperience and extracurricular and education get a ToString at some point
         ret += "Education:\n";
         for(int i = 0; i < education.size(); i++) {
             ret += education.get(i) + "\n";

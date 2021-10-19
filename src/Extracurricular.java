@@ -17,4 +17,8 @@ public class Extracurricular extends Experience {
     public boolean contains(String responsibility, Extracurricular extracurricular) {
         return false;
     }
+
+    public String toString() {
+        return "";
+    }
 }

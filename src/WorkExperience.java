@@ -19,4 +19,8 @@ public class WorkExperience extends Experience {
     public boolean contains(String responsibility, WorkExperience workexperience) {
         return false;
     }
+
+    public String toString() {
+        return "";
+    }
 }
