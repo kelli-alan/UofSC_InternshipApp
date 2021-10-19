@@ -25,19 +25,23 @@ public class Resume {
     private ArrayList<WorkExperience> workExperiences;
     private ArrayList<Extracurricular> extracurriculars;
 
-    public Resume(UUID id, String firstName, String lastName) { 
+    public Resume(UUID id, String firstName, String lastName, ArrayList<String> skills, ArrayList<Education> education, ArrayList<WorkExperience> workExperiences, ArrayList<Extracurricular> extracurriculars) { 
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = id;
         this.skills = new ArrayList<String>();
+        this.skills = skills;
         this.workExperiences = new ArrayList<WorkExperience>();
+        this.workExperiences = workExperiences;
         this.education = new ArrayList<Education>();
+        this.education = education;
         this.extracurriculars = new ArrayList<Extracurricular>();
+        this.extracurriculars = extracurriculars;
     }
 
-    public void addWorkExperience(String company, String position, Month startMonth, int startYear, Month endMonth, int endYear) {
+    public void addWorkExperience(String company, String position, Month startMonth, int startYear, String city, String state, Month endMonth, int endYear, ArrayList<String> responsibilities) {
         // City and State are missing here?
-        this.workExperiences.add(new WorkExperience(position, startMonth, startYear, company, "city", "state"));
+        this.workExperiences.add(new WorkExperience(position, startMonth, startYear, company, city, state, responsibilities));
     }
 
     public void addEducation(String university, String city, String state, String degreeType, Major major, String minor, Month gradMonth, int gradYear, double GPA) {
