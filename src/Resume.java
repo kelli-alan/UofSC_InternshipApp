@@ -24,20 +24,16 @@ public class Resume {
     private ArrayList<WorkExperience> workExperiences;
     private ArrayList<Extracurricular> extracurriculars;
 
-    public Resume(UUID id, String firstName, String lastName, String email, String phoneNum, ArrayList<String> skills, ArrayList<Education> education, ArrayList<WorkExperience> workExperiences, ArrayList<Extracurricular> extracurriculars) { 
+    public Resume(UUID id, String firstName, String lastName, String email, String phoneNum) { 
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.eMail = email;
         this.phoneNum = phoneNum;
         this.skills = new ArrayList<String>();
-        this.skills = skills;
-        this.workExperiences = new ArrayList<WorkExperience>();
-        this.workExperiences = workExperiences;
         this.education = new ArrayList<Education>();
-        this.education = education;
+        this.workExperiences = new ArrayList<WorkExperience>();
         this.extracurriculars = new ArrayList<Extracurricular>();
-        this.extracurriculars = extracurriculars;
     }
 
     public void addWorkExperience(String company, String position, Month startMonth, int startYear, Month endMonth, int endYear, String city, String state) {
