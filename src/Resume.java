@@ -36,16 +36,16 @@ public class Resume {
         this.extracurriculars = new ArrayList<Extracurricular>();
     }
 
-    public void addWorkExperience(String company, String position, Month startMonth, int startYear, Month endMonth, int endYear, String city, String state) {
-        this.workExperiences.add(new WorkExperience(position, startMonth, startYear, company, city, state) );
+    public void addWorkExperience(WorkExperience workXP) {
+        this.workExperiences.add(workXP);
     }
 
-    public void addExtracurricular(String title, String position, Month startMonth, int startYear, Month endMonth, int endYear) {
-        this.extracurriculars.add(new Extracurricular(position, startMonth, startYear, title, activities, endMonth, endYear) );
+    public void addExtracurricular(Extracurricular extrac) {
+        this.extracurriculars.add(extrac);
     }
 
     public void addEducation(String university, String city, String state, String degreeType, Major major, Month gradMonth, int gradYear) {
-        this.education.add(new Education(university, city, state, degreeType, major, gradMonth, gradYear) );
+        this.education.add(new Education(university, city, state, degreeType, major, gradMonth, gradYear));
     }
     
     public void addSkill(String skill) {
