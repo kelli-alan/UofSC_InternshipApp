@@ -40,8 +40,13 @@ public class Resume {
         this.workExperiences.add(workXP);
     }
 
+<<<<<<< HEAD
     public void addExtracurricular(Extracurricular extrac) {
         this.extracurriculars.add(extrac);
+=======
+    public void addExtracurricular(String title, String position, Month startMonth, int startYear, Month endMonth, int endYear) {
+        this.extracurriculars.add(new Extracurricular(position, startMonth, startYear, title));
+>>>>>>> 6433f265cd0b8b14a4c1fd802029005e8b938861
     }
 
     public void addEducation(String university, String city, String state, String degreeType, Major major, Month gradMonth, int gradYear) {
