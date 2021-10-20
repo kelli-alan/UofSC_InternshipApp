@@ -13,8 +13,8 @@ public class Student extends User {
     private ArrayList<Listing> savedListings;
     private FilterBehavior filterBehavior;
     private Scanner key = new Scanner(System.in);
-    private Month month;
-    private Month endMonth;
+    //private Month month;
+    //private Month endMonth;
     private Major major;
 
     public Student(UUID id, String firstName, String lastName, String username,
@@ -35,25 +35,22 @@ public class Student extends User {
         System.out.println("Enter phone number: ");
         String phoneNum = key.nextLine();
 
+        Resume res = new Resume(id, firstName, lastName, eMail, phoneNum);
+        
         clearScreen();
         
         String cont = "y";
 
-        ArrayList<String> skills = new ArrayList<String>();
-
         while(cont.equalsIgnoreCase("y")) {
             System.out.println("Enter your skills (enter \"done\" when finished): ");
             if(!key.nextLine().equalsIgnoreCase("done"))
-                skills.add(key.nextLine());
+                res.addSkill(key.nextLine());
             else {cont = key.nextLine();}
         }
 
         clearScreen();
 
-        ArrayList<Education> education = new ArrayList<Education>();
-        
         cont = "y";
-
         while(cont.equalsIgnoreCase("y")) {
             
             System.out.println("Enter the university: ");
@@ -90,57 +87,23 @@ public class Student extends User {
                     hasMajor = false;
                 }
             }
-
-            
-            boolean hasMonth = false;
-
-            while(!hasMonth) {
-                System.out.println("Enter the number of your graduation month (January is 1, February is 2, etc.): ");
-                int case1 = key.nextInt();
-                key.nextLine();
-                hasMonth = true;
-                switch (case1) {
-                    case 1: month = Month.JANUARY;
-                    break;
-                    case 2: month = Month.FEBRUARY;
-                    break;
-                    case 3: month = Month.MARCH;
-                    break;
-                    case 4: month = Month.APRIL;
-                    break;
-                    case 5: month = Month.MAY;
-                    break;
-                    case 6: month = Month.JUNE;
-                    break;
-                    case 7: month = Month.JULY;
-                    break;
-                    case 8: month = Month.AUGUST;
-                    break;
-                    case 9: month = Month.SEPTEMBER;
-                    break;
-                    case 10: month = Month.OCTOBER;
-                    break;
-                    case 11: month = Month.NOVEMBER;
-                    break;
-                    case 12: month = Month.DECEMBER;
-                    break;
-                    default: System.out.println("INVALID MONTH");
-                            hasMonth = false;
-                }
-            }
+            System.out.println("Enter the number of your graduation month (January is 1, February is 2, etc.): ");
+            int monthNumber = key.nextInt();
+            key.nextLine();
+            Month gradMonth = determineMonth(monthNumber);
 
             System.out.println("Enter your graduation year: ");
             int gradYear = key.nextInt();
             key.nextLine();
 
-            education.add(new Education(university, city, state, degreeType, major, month, gradYear));
+            res.addEducation(university, city, state, degreeType, major, gradMonth, gradYear);
             System.out.println("Would you like to enter another education? (y)es or (n)o?");
             cont = key.nextLine();
         }
 
         clearScreen();
 
-        ArrayList<WorkExperience> workExperiences = new ArrayList<WorkExperience>();
+        // create work experience section
 
         System.out.println("Would you like to enter any work experience? (y)es or (n)o?");
         cont = key.nextLine();
@@ -159,104 +122,38 @@ public class Student extends User {
             System.out.println("Enter the state: ");
             String Wstate = key.nextLine();
 
-            boolean hasMonth = false;
-
-            while(!hasMonth) {
-                System.out.println("Enter the number of the month you started (January is 1, February is 2, etc.): ");
-                int case1 = key.nextInt();
-                key.nextLine();
-                hasMonth = true;
-                switch (case1) {
-                    case 1: month = Month.JANUARY;
-                    break;
-                    case 2: month = Month.FEBRUARY;
-                    break;
-                    case 3: month = Month.MARCH;
-                    break;
-                    case 4: month = Month.APRIL;
-                    break;
-                    case 5: month = Month.MAY;
-                    break;
-                    case 6: month = Month.JUNE;
-                    break;
-                    case 7: month = Month.JULY;
-                    break;
-                    case 8: month = Month.AUGUST;
-                    break;
-                    case 9: month = Month.SEPTEMBER;
-                    break;
-                    case 10: month = Month.OCTOBER;
-                    break;
-                    case 11: month = Month.NOVEMBER;
-                    break;
-                    case 12: month = Month.DECEMBER;
-                    break;
-                    default: System.out.println("INVALID MONTH");
-                            hasMonth = false;
-                }
-            }
+            System.out.println("Enter the number of the month you started (January is 1, February is 2, etc.): ");
+            int monthNumber = key.nextInt();
+            key.nextLine();
+            Month startMonth = determineMonth(monthNumber);
 
             System.out.println("Enter the year you started: ");
             int startYear = key.nextInt();
             key.nextLine();
 
-            ArrayList<String> responsibilities = new ArrayList<String>();
+            /* creates a work experience with given position, month, startYear, company, city, state; work experience constructor creates a responsibilities array for this work experience */
+            WorkExperience workXP = new WorkExperience(position, startMonth, startYear, company, Wcity, Wstate);
+
             String inner = "no";
             System.out.println("Enter responsibilities (type \"done\" when finished)");
             while(!inner.equalsIgnoreCase("done")) {
                 inner = key.nextLine();
                 if(!inner.equalsIgnoreCase("done"))
-                    responsibilities.add(inner);
-            }
+                    workXP.addResponsibility(inner);            }
 
             System.out.println("Are you currently working this position? (y)es or (n)o");
             if(key.nextLine().equalsIgnoreCase("n")) {
-                hasMonth = false;
-                while(!hasMonth) {
-                    System.out.println("Enter the number of the month you ended (January is 1, February is 2, etc.): ");
-                    int case1 = key.nextInt();
-                    key.nextLine();
-                    hasMonth = true;
-                    switch (case1) {
-                        case 1: endMonth = Month.JANUARY;
-                        break;
-                        case 2: endMonth = Month.FEBRUARY;
-                        break;
-                        case 3: endMonth = Month.MARCH;
-                        break;
-                        case 4: endMonth = Month.APRIL;
-                        break;
-                        case 5: endMonth = Month.MAY;
-                        break;
-                        case 6: endMonth = Month.JUNE;
-                        break;
-                        case 7: endMonth = Month.JULY;
-                        break;
-                        case 8: endMonth = Month.AUGUST;
-                        break;
-                        case 9: endMonth = Month.SEPTEMBER;
-                        break;
-                        case 10: endMonth = Month.OCTOBER;
-                        break;
-                        case 11: endMonth = Month.NOVEMBER;
-                        break;
-                        case 12: endMonth = Month.DECEMBER;
-                        break;
-                        default: System.out.println("INVALID MONTH");
-                                hasMonth = false;
-                    }
-                }
+                monthNumber = key.nextInt();
+                key.nextLine();
+                Month endMonth = determineMonth(monthNumber);
 
                 System.out.println("Enter the year you ended: ");
                 int endYear = key.nextInt();
                 key.nextLine();
 
-                workExperiences.add(new WorkExperience(position, month, startYear, company, Wcity, Wstate, responsibilities, endMonth, endYear));
-
+                workXP.addEndDate(endMonth, endYear);
             }
-
-            workExperiences.add(new WorkExperience(position, month, startYear, company, Wcity, Wstate, responsibilities));
-
+            res.addWorkExperience(workXP);
             System.out.println("Would you like to add another work experience? (y)es or (n)o?");
             cont = key.nextLine();
         }
@@ -273,110 +170,47 @@ public class Student extends User {
 
             System.out.println("Enter your position within the organization: ");
             String position = key.nextLine();
-
-            boolean hasMonth = false;
-
-            while(!hasMonth) {
-                System.out.println("Enter the number of the month you joined (January is 1, February is 2, etc.): ");
-                int case1 = key.nextInt();
-                key.nextLine();
-                hasMonth = true;
-                switch (case1) {
-                    case 1: month = Month.JANUARY;
-                    break;
-                    case 2: month = Month.FEBRUARY;
-                    break;
-                    case 3: month = Month.MARCH;
-                    break;
-                    case 4: month = Month.APRIL;
-                    break;
-                    case 5: month = Month.MAY;
-                    break;
-                    case 6: month = Month.JUNE;
-                    break;
-                    case 7: month = Month.JULY;
-                    break;
-                    case 8: month = Month.AUGUST;
-                    break;
-                    case 9: month = Month.SEPTEMBER;
-                    break;
-                    case 10: month = Month.OCTOBER;
-                    break;
-                    case 11: month = Month.NOVEMBER;
-                    break;
-                    case 12: month = Month.DECEMBER;
-                    break;
-                    default: System.out.println("INVALID MONTH");
-                            hasMonth = false;
-                }
-            }
+            
+            System.out.println("Enter the number of the month you joined (January is 1, February is 2, etc.): ");
+            int monthNumber = key.nextInt();
+            key.nextLine();
+            Month startMonth = determineMonth(monthNumber);
 
             System.out.println("Enter the year you joined: ");
             int startYear = key.nextInt();
             key.nextLine();
 
-            ArrayList<String> activities = new ArrayList<String>();
+            Extracurricular extrac = new Extracurricular(position, startMonth, startYear, title);
 
             String inner = "no";
             System.out.println("Enter responsibilities/activities (type \"done\" when finished)");
             while(!inner.equalsIgnoreCase("done")) {
                 inner = key.nextLine();
                 if(!inner.equalsIgnoreCase("done"))
-                    activities.add(inner);
+                    extrac.addExtracurricularActivity(inner);
             }
 
             System.out.println("Are you currently in this organization? (y)es or (n)o");
             if(key.nextLine().equalsIgnoreCase("n")) {
-                hasMonth = false;
-                while(!hasMonth) {
-                    System.out.println("Enter the number of the month you ended (January is 1, February is 2, etc.): ");
-                    int case1 = key.nextInt();
-                    key.nextLine();
-                    hasMonth = true;
-                    switch (case1) {
-                        case 1: endMonth = Month.JANUARY;
-                        break;
-                        case 2: endMonth = Month.FEBRUARY;
-                        break;
-                        case 3: endMonth = Month.MARCH;
-                        break;
-                        case 4: endMonth = Month.APRIL;
-                        break;
-                        case 5: endMonth = Month.MAY;
-                        break;
-                        case 6: endMonth = Month.JUNE;
-                        break;
-                        case 7: endMonth = Month.JULY;
-                        break;
-                        case 8: endMonth = Month.AUGUST;
-                        break;
-                        case 9: endMonth = Month.SEPTEMBER;
-                        break;
-                        case 10: endMonth = Month.OCTOBER;
-                        break;
-                        case 11: endMonth = Month.NOVEMBER;
-                        break;
-                        case 12: endMonth = Month.DECEMBER;
-                        break;
-                        default: System.out.println("INVALID MONTH");
-                                hasMonth = false;
-                    }
-                }
+              System.out.println("Enter the number of the month you ended (January is 1, February is 2, etc.): ");
+              monthNumber = key.nextInt();
+              key.nextLine();
+              Month endMonth = determineMonth(monthNumber);
 
-                System.out.println("Enter the year you ended: ");
-                int endYear = key.nextInt();
-                key.nextLine();
-
-                extracurriculars.add(new Extracurricular(position, month, startYear, title, activities, endMonth, endYear));
+              System.out.println("Enter the year you ended: ");
+              int endYear = key.nextInt();
+              key.nextLine();
+              extrac.addEndDate(endMonth, endYear);
             }
-            extracurriculars.add(new Extracurricular(position, month, startYear, title, activities));
-        
+            
+            res.addExtracurricular(extrac);
+
             System.out.println("Would you like to add another extracurricular? (y)es or (n)o?");
             cont = key.nextLine();
         }
         clearScreen();
 
-        resumes.add(new Resume(id, firstName, lastName, eMail, phoneNum, skills, education, workExperiences, extracurriculars));
+        resumes.add(res);
 
         System.out.println("Resume Created!");
     }
@@ -409,4 +243,40 @@ public class Student extends User {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
-}
+
+    private Month determineMonth(int monthNumber) {
+      Month month = Month.JANUARY;
+      while(monthNumber < 1 || monthNumber > 12) {
+        System.out.println("Invalid Month. Please enter a number 1 through 12");
+        monthNumber = key.nextInt();
+        key.nextLine();
+      }
+
+      switch (monthNumber) {
+        case 1: month =  Month.JANUARY;
+          break;
+        case 2: month = Month.FEBRUARY;
+          break;
+        case 3: month = Month.MARCH;
+          break;
+        case 4: month = Month.APRIL;
+          break;
+        case 5: month = Month.MAY;
+          break;
+        case 6: month = Month.JUNE;
+          break;
+        case 7: month = Month.JULY;
+          break;
+        case 8: month = Month.AUGUST;
+          break;
+        case 9: month = Month.SEPTEMBER;
+          break;
+        case 10: month = Month.OCTOBER;
+          break;
+        case 11: month = Month.NOVEMBER;
+          break;
+        case 12: month = Month.DECEMBER;
+      }
+      return month;
+    }
+  }
