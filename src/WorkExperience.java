@@ -35,7 +35,7 @@ public class WorkExperience extends Experience {
         responsibilities.add(responsibility);
       }
     }
-
+ 
     public boolean listed(String responsibility) {
       for (int i = 0; i < responsibilities.size(); i++) {
         if (responsibilities.get(i).equalsIgnoreCase(responsibility)) {

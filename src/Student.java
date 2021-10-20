@@ -103,9 +103,6 @@ public class Student extends User {
 
         clearScreen();
 
-        // create work experience section
-        ArrayList<WorkExperience> workExperiences = new ArrayList<WorkExperience>();
-
         System.out.println("Would you like to enter any work experience? (y)es or (n)o?");
         cont = key.nextLine();
 
@@ -154,7 +151,6 @@ public class Student extends User {
 
                 workXP.addEndDate(endMonth, endYear);
             }
-            workExperiences.add(workXP);
 
             System.out.println("Would you like to add another work experience? (y)es or (n)o?");
             cont = key.nextLine();
