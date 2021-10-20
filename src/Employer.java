@@ -59,6 +59,8 @@ public class Employer extends User implements EmployerObserver {
         isRemote = key.nextBoolean();
         key.nextLine();
 
+        Listing list = new Listing(id, jobTitle, city, state, startDate, hoursPerWeek, pay, isRemote);
+
         clearScreen();
 
         String cont = "y";
@@ -67,7 +69,7 @@ public class Employer extends User implements EmployerObserver {
 
             System.out.println("Enter duties for this position (Enter \"done\" when finished): ");
             if(!key.nextLine().equalsIgnoreCase("done"))
-                duties.add(key.nextLine());
+                list.addDuties(key.nextLine());
             else {cont = key.nextLine();}
         }
 
@@ -79,13 +81,15 @@ public class Employer extends User implements EmployerObserver {
 
             System.out.println("Enter skills for this position (Enter \"done\" when finished): ");
             if(!key.nextLine().equalsIgnoreCase("done"))
-                skills.add(key.nextLine());
+                list.addSkills(key.nextLine());
             else {cont = key.nextLine();}
         }
 
         clearScreen();
+
+        System.out.println("Listing Created!");
         
-        internshipListings.add(new Listing(id, jobTitle, city, state, startDate, hoursPerWeek, pay, isRemote, skills, duties));
+        internshipListings.add(list);
     }
 
     public void fillListing(Listing listing) {

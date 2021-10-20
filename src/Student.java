@@ -50,6 +50,8 @@ public class Student extends User {
 
         clearScreen();
 
+        //TODO Create education object and use that in creating the resume, add GPA and minor capabilities
+
         cont = "y";
         while(cont.equalsIgnoreCase("y")) {
             
@@ -97,6 +99,7 @@ public class Student extends User {
             key.nextLine();
 
             res.addEducation(university, city, state, degreeType, major, gradMonth, gradYear);
+
             System.out.println("Would you like to enter another education? (y)es or (n)o?");
             cont = key.nextLine();
         }
