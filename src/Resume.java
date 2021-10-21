@@ -4,7 +4,6 @@ import java.util.UUID;
 import java.time.Month;
 
 enum Major {
-
     COMPUTER_SCIENCE, COMPUTER_INFORMATION_SYSTEMS, 
     COMPUTER_ENGINEERING, INTEGRATED_INFORMATION_TECHNOLOGY;
 }
@@ -25,30 +24,28 @@ public class Resume {
     private ArrayList<WorkExperience> workExperiences;
     private ArrayList<Extracurricular> extracurriculars;
 
-    public Resume(UUID id, String firstName, String lastName, ArrayList<String> skills, ArrayList<Education> education, ArrayList<WorkExperience> workExperiences, ArrayList<Extracurricular> extracurriculars) { 
+    public Resume(UUID id, String firstName, String lastName, String email, String phoneNum) { 
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.id = id;
+        this.eMail = email;
+        this.phoneNum = phoneNum;
         this.skills = new ArrayList<String>();
-        this.skills = skills;
-        this.workExperiences = new ArrayList<WorkExperience>();
-        this.workExperiences = workExperiences;
         this.education = new ArrayList<Education>();
-        this.education = education;
+        this.workExperiences = new ArrayList<WorkExperience>();
         this.extracurriculars = new ArrayList<Extracurricular>();
-        this.extracurriculars = extracurriculars;
     }
 
-    public void addWorkExperience(String company, String position, Month startMonth, int startYear, String city, String state, Month endMonth, int endYear, ArrayList<String> responsibilities) {
-        // City and State are missing here?
-        this.workExperiences.add(new WorkExperience(position, startMonth, startYear, company, city, state, responsibilities));
+    public void addWorkExperience(WorkExperience workXP) {
+        this.workExperiences.add(workXP);
     }
 
-    public void addEducation(String university, String city, String state, String degreeType, Major major, String minor, Month gradMonth, int gradYear, double GPA) {
-        Education temp = new Education(university, city, state, degreeType, major, gradMonth, gradYear);
-        temp.addGPA(GPA);
-        temp.addMinor(minor);
-        this.education.add(temp);
+    public void addExtracurricular(Extracurricular extrac) {
+        this.extracurriculars.add(extrac);
+    }
+
+    public void addEducation(Education edu) {
+        this.education.add(edu);
     }
     
     public void addSkill(String skill) {
@@ -62,7 +59,6 @@ public class Resume {
     public void addPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
-
     
     public void deleteWorkExperience(WorkExperience workExperience) {
         workExperiences.remove(workExperience);
@@ -94,7 +90,6 @@ public class Resume {
             ret += skills.get(i) + "\n";
         }
 
-        // This is assuming workexperience and extracurricular and education get a ToString at some point
         ret += "Education:\n";
         for(int i = 0; i < education.size(); i++) {
             ret += education.get(i) + "\n";
