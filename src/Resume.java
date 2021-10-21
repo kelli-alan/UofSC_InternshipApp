@@ -103,7 +103,6 @@ public class Resume {
         for(int i = 0; i < extracurriculars.size(); i++) {
             ret += "\t" + extracurriculars.get(i).toString() + "\n";
         }
-
         return ret;
     }
 }
