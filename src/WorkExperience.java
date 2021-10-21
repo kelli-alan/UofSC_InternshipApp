@@ -33,13 +33,13 @@ public class WorkExperience extends Experience {
 
     public void addResponsibility(String responsibility) {
       if(!listed(responsibility)) {
-        responsibilities.add(responsibility);
+        this.responsibilities.add(responsibility);
       }
     }
  
     public boolean listed(String responsibility) {
-      for (int i = 0; i < responsibilities.size(); i++) {
-        if (responsibilities.get(i).equalsIgnoreCase(responsibility)) {
+      for (int i = 0; i < this.responsibilities.size(); i++) {
+        if (this.responsibilities.get(i).equalsIgnoreCase(responsibility)) {
           return true;
         }
       }

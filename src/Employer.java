@@ -5,21 +5,24 @@ import java.util.Scanner;
  *
  * @authors Yousef Afshar
  */
-public class Employer extends User implements EmployerObserver {
+public class Employer extends User implements Observer {
+    private Subject subject;
     private String companyName;
     private String companyDescription;
     private ArrayList<Listing> internshipListings;
     private SortBehavior sortBehavior;
-    private ArrayList<Resume> resumes;
+    private ArrayList<Resume> applications;
     private Scanner key = new Scanner(System.in);
     private UUID id;
 
     public Employer(UUID id, Subject subject, String firstName, String lastName, String username,
         String password, Users USER_TYPE_EMPLOYER, String companyName, String companyDescription) {
             super(id, firstName, lastName, username, password, USER_TYPE_EMPLOYER);
+            subject.registerObserver(this);
             this.companyName = companyName;
             this.companyDescription = companyDescription;
-            internshipListings = new ArrayList<Listing>();
+            this.internshipListings = new ArrayList<Listing>();
+            this.applications = new ArrayList<Resume>();
 
     }
 
@@ -31,8 +34,6 @@ public class Employer extends User implements EmployerObserver {
         int hoursPerWeek; 
         double pay;
         boolean isRemote;
-        ArrayList<String> duties = new ArrayList<String>();
-        ArrayList<String> skills = new ArrayList<String>();
         UUID listingID = UUID.randomUUID();
 
         System.out.println("Enter job title: ");
@@ -89,7 +90,7 @@ public class Employer extends User implements EmployerObserver {
 
         System.out.println("Listing Created!");
         
-        internshipListings.add(list);
+        this.internshipListings.add(list);
     }
 
     public void fillListing(Listing listing) {
@@ -97,15 +98,15 @@ public class Employer extends User implements EmployerObserver {
     }
 
     public ArrayList<Resume> sortApplications(Listing listing) {
-        return resumes;
+        return applications;
     }
 
     public ArrayList<Resume> viewAllApplications(Listing listing) {
-        return resumes;
+        return applications;
     }
 
-    public void update(Listing listing) {
-
+    public void update(Resume resume) {
+        this.applications.add(resume);
     }
 
     private void clearScreen() {
