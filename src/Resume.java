@@ -15,8 +15,6 @@ enum Major {
 public class Resume {
     
     private UUID id;
-    private String firstName;
-    private String lastName;
     private String eMail;
     private String phoneNum;
     private ArrayList<String> skills;
@@ -24,10 +22,8 @@ public class Resume {
     private ArrayList<WorkExperience> workExperiences;
     private ArrayList<Extracurricular> extracurriculars;
 
-    public Resume(UUID id, String firstName, String lastName, String email, String phoneNum) { 
+    public Resume(UUID id, String email, String phoneNum) { 
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.eMail = email;
         this.phoneNum = phoneNum;
         this.skills = new ArrayList<String>();

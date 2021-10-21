@@ -32,7 +32,7 @@ public class Student extends User {
         System.out.println("Enter phone number: ");
         String phoneNum = key.nextLine();
 
-        Resume res = new Resume(UUID.randomUUID(), this.firstName, this.lastName, eMail, phoneNum);
+        Resume res = new Resume(UUID.randomUUID(), eMail, phoneNum);
         
         clearScreen();
         
