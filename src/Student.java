@@ -133,7 +133,20 @@ public class Student extends User {
             int gradYear = key.nextInt();
             key.nextLine();
 
-            education.add(new Education(university, city, state, degreeType, major, month, gradYear));
+            Education edu = new Education(university, city, state, degreeType, major, month, gradYear);
+
+            System.out.println("Enter your minor (enter \"none\" if you don't have one): ");
+            String minor = key.nextLine();
+            if(!minor.equalsIgnoreCase("none"))
+              edu.addMinor(minor);
+            
+            System.out.println("Enter your GPA (Enter -1 if you do not wish to include a GPA): ");
+            double gpa = key.nextDouble();
+            key.nextLine();
+            if(gpa != -1)
+              edu.addGPA(gpa);
+
+            
             System.out.println("Would you like to enter another education? (y)es or (n)o?");
             cont = key.nextLine();
         }
