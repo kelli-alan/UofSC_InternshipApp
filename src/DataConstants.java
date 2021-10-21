@@ -41,7 +41,7 @@ public abstract class DataConstants {
 
 
  // resume constants
- protected static final String RESUME_FILE_NAME = "/src/resume.json";
+ protected static final String RESUME_FILE_NAME = "src/resume.json";
  protected static final String RESUME_ID  = "id";
  protected static final String RESUME_EMAIL = "eMail";
  protected static final String RESUME_PHONE_NUM = "phoneNum";

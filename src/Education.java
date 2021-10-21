@@ -6,13 +6,13 @@ public class Education {
     private String city;
     private String state;
     private String degreeType;
-    private Major major;
+    private String major;
     private String minor;
     private Month gradMonth;
     private int gradYear;
     private double GPA;
 
-    public Education(String university, String city, String state, String degreeType, Major major, Month gradMonth, int gradYear) {
+    public Education(String university, String city, String state, String degreeType, String major, Month gradMonth, int gradYear) {
         this.university = university;
         this.city = city;
         this.state = state;

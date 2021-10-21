@@ -62,28 +62,9 @@ public class Student extends User {
             System.out.println("Enter the degree type: ");
             String degreeType = key.nextLine();
 
+            System.out.println("Enter your major: ");
+            String major = key.nextLine();
             
-            boolean hasMajor = false;
-
-            while(!hasMajor) {
-            System.out.println("Enter the number for your major:\n"+
-            "1. Computer Science\n2. Computer Information Systems\n3. Computer Engineering\n4. Integrated Information Systems");
-            int case1 = key.nextInt();
-            key.nextLine();
-            hasMajor = true;
-            switch(case1) {
-                    case 1: major = Major.COMPUTER_SCIENCE;
-                    break;
-                    case 2: major = Major.COMPUTER_INFORMATION_SYSTEMS;
-                    break;
-                    case 3: major = Major.COMPUTER_ENGINEERING;
-                    break;
-                    case 4: major = Major.INTEGRATED_INFORMATION_TECHNOLOGY;
-                    break;
-                    default: System.out.println("INVALID MAJOR");
-                    hasMajor = false;
-                }
-            }
             System.out.println("Enter the number of your graduation month (January is 1, February is 2, etc.): ");
             int monthNumber = key.nextInt();
             key.nextLine();
