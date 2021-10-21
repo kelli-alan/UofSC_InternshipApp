@@ -25,17 +25,14 @@ public class Student extends User {
         }
 
     public void createResume() {
-        UUID id = UUID.randomUUID();
-        String firstName = this.firstName;
-        String lastName = this.lastName;
-        
+
         System.out.println("Enter email: ");
         String eMail = key.nextLine();
 
         System.out.println("Enter phone number: ");
         String phoneNum = key.nextLine();
 
-        Resume res = new Resume(id, firstName, lastName, eMail, phoneNum);
+        Resume res = new Resume(UUID.randomUUID(), this.firstName, this.lastName, eMail, phoneNum);
         
         clearScreen();
         
@@ -49,8 +46,6 @@ public class Student extends User {
         }
 
         clearScreen();
-
-        //TODO Create education object and use that in creating the resume, add GPA and minor capabilities
 
         cont = "y";
         while(cont.equalsIgnoreCase("y")) {
