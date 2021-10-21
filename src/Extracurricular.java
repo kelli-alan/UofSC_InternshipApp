@@ -42,9 +42,9 @@ public class Extracurricular extends Experience {
      * Extracurricular format
      * Name of extracurricular
      * position, start date - end date  (ongoing ? : in-line if-else)
-     *    * activity 1
+     *    - activity 1
      *         ...
-     *    * activity n
+     *    - activity n
      */
     public String toString() {
       String ret = this.title + "\n" + this.position + ", " + 
@@ -54,7 +54,7 @@ public class Extracurricular extends Experience {
                                     " " + this.endYear) + "\n";
           
       for(int i = 0; i < activities.size(); i++) {
-        ret += "  * " + activities.get(i) + "\n";
+        ret += "\t- " + activities.get(i) + "\n";
       }
       return ret;
     }

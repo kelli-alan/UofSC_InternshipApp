@@ -81,28 +81,27 @@ public class Resume {
     }
 
     public String toString() {
-        String ret = "Resume of\n" + lastName + ", " + firstName + "\n"
-        + "E-mail: " + eMail + "\n"
+        String ret = "E-mail: " + eMail + "\n"
         + "Phone Number: " + phoneNum + "\n"
         + "Skills:\n";
 
         for(int i = 0; i < skills.size(); i++) {
-            ret += skills.get(i) + "\n";
+            ret += "\t- " + skills.get(i) + "\n";
         }
 
         ret += "Education:\n";
         for(int i = 0; i < education.size(); i++) {
-            ret += education.get(i) + "\n";
+            ret += "\t" + education.get(i).toString() + "\n";
         }
     
         ret += "Work Experiences:\n";
         for(int i = 0; i < workExperiences.size(); i++) {
-            ret += workExperiences.get(i) + "\n";
+            ret += "\t" + workExperiences.get(i).toString() + "\n";
         }
 
         ret += "Extracurriculars:\n";
         for(int i = 0; i < extracurriculars.size(); i++) {
-            ret += extracurriculars.get(i) + "\n";
+            ret += "\t" + extracurriculars.get(i).toString() + "\n";
         }
 
         return ret;

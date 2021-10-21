@@ -50,9 +50,9 @@ public class WorkExperience extends Experience {
      * Work format
      * company, city, state
      * position, start date - end date  (ongoing ? : in-line if-else)
-     *    * responsibility 1
+     *    - responsibility 1
      *         ...
-     *    * responsibility n
+     *    - responsibility n
      */
     public String toString() {
       String ret = this.company + ", " + this.city + ", " + this.state + "\n" + 
@@ -62,7 +62,7 @@ public class WorkExperience extends Experience {
                                 " " + this.endYear) + "\n";
       
       for(int i = 0; i < responsibilities.size(); i++) {
-        ret += "  * " + responsibilities.get(i) + "\n";
+        ret += "\t- " + responsibilities.get(i) + "\n";
       }
       return ret;
     }

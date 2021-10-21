@@ -251,6 +251,10 @@ public class Student extends User {
         return listing;
     }
 
+    public String displayResume(int i) {
+        return this.firstName + " " + this.lastName + "\n" + this.resumes.get(i).toString();
+    }
+
     private void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();

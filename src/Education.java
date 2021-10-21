@@ -20,6 +20,7 @@ public class Education {
         this.major = major;
         this.gradMonth = gradMonth;
         this.gradYear = gradYear;
+        this.GPA = 0;
     }
 
     public void addGPA(double GPA) {
@@ -32,7 +33,15 @@ public class Education {
     }
 
     public String toString() {
-        return "";
+        
+        String ret = this.university + "\n" + this.city + ", " + this.state;
+        ret += "\n" + this.degreeType + " in " + this.major;
+        if(this.minor != null)
+            ret += "\nMinor in" + this.minor; 
+        if(this.GPA != 0)
+            ret += "\n" + this.GPA + " GPA";
+        ret += "\nGraduation " + this.gradMonth + " " + this.gradYear;        
+        return ret;
     }
 
 }
