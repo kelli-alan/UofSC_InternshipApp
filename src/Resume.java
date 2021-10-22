@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.UUID;
-
 import java.time.Month;
 
 enum Major {

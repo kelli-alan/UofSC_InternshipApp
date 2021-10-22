@@ -6,7 +6,7 @@ enum Users {
 
 /*
  *
- * @authors Yousef Afshar
+ * @author Yousef Afshar
  */
 public class User {
     
