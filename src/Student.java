@@ -13,18 +13,30 @@ public class Student extends User {
     private ArrayList<Listing> savedListings;
     //private FilterBehavior filterBehavior;
     private Scanner key = new Scanner(System.in);
-    //private Month month;
-    //private Month endMonth;
-    private Major major;
+    private String major;
 
-    public Student(UUID id, String firstName, String lastName, String username,
-        String password, Users USER_TYPE_STUDENT) {
-            super(id, firstName, lastName, username, password, USER_TYPE_STUDENT);
-            this.resumes = new ArrayList<Resume>();
-            this.savedListings = new ArrayList<Listing>();
-        }
+      // constructor for loading students who have an id
+      public Student(UUID id, String firstName, String lastName, String username,
+                      String password, Users type) {
+        super(id, firstName, lastName, username, password, type);
+        this.resumes = new ArrayList<Resume>();
+        this.savedListings = new ArrayList<Listing>();
+      }
 
-    public void createResume() {
+      // constructor for creating students who need an id
+      public Student(String firstName, String lastName, String username,
+                      String password, Users type) {
+        super(firstName, lastName, username, password, type);
+        this.resumes = new ArrayList<Resume>();
+        this.savedListings = new ArrayList<Listing>();
+      }
+
+      public void addResume(Resume resume) {
+        this.resumes.add(resume);
+      }
+        
+
+      public void createResume() {
 
         System.out.println("Enter email: ");
         String eMail = key.nextLine();
@@ -234,6 +246,14 @@ public class Student extends User {
 
     public String displayResume(int i) {
         return this.firstName + " " + this.lastName + "\n" + this.resumes.get(i).toString();
+    }
+
+    public String toString() {
+      String ret = super.toString();
+      for (int i = 0; i < this.resumes.size(); i++) {
+        ret+= displayResume(i);
+      }
+      return ret;
     }
 
     private void clearScreen() {
