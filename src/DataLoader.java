@@ -141,10 +141,57 @@ public class DataLoader extends DataConstants {
       return null;
     }
 
-
-
     public ArrayList<Listing> loadListings() {
-        return null;
+      ArrayList<Listing> listings = new ArrayList<Listing>();
+      try {
+        FileReader reader = new FileReader(LISTING_FILE_NAME);
+        JSONParser parser = new JSONParser();
+        JSONArray listingsJSON = (JSONArray)parser.parse(reader);
+  
+        for (int i = 0; i < listingsJSON.size(); i++) {
+          JSONObject listingJSON = (JSONObject)listingsJSON.get(i);
+          UUID id = UUID.fromString((String)listingJSON.get(LISTING_ID));
+          String jobTitle = (String)listingJSON.get(LISTING_TITLE);
+          String city = (String)listingJSON.get(LISTING_CITY);
+          String state = (String)listingJSON.get(LISTING_STATE);
+          String startDate = (String)listingJSON.get(LISTING_STATE);
+          int hours = (int)listingJSON.get(LISTING_HOURS_PER_WEEK);
+          double pay = (double)listingJSON.get(LISTING_PAY);
+          Boolean isRemote = (Boolean)listingJSON.get(LISTING_IS_REMOTE);
+  
+          // creates base listing
+          Listing currListing = new Listing(id, jobTitle, city, state, startDate, hours, pay, isRemote);
+          listings.add(new Listing(id, jobTitle, city, state, startDate, hours, pay, isRemote));
+          
+          // add list of skills
+          JSONArray skillsJSON = (JSONArray)listingJSON.get(LISTING_DESIRED_SKILLS);
+          for (int j = 0; j < skillsJSON.size(); j++) {
+            currListing.addSkills(skillsJSON.get(j).toString());
+          }
+
+          // add list of duties
+          JSONArray dutiesJSON = (JSONArray)listingJSON.get(LISTING_DUTIES);
+          for (int j = 0; j < dutiesJSON.size(); j++) {
+            currListing.addDuties(dutiesJSON.get(j).toString());
+          }
+
+          // add list of applications(resumes from resume id)
+          JSONArray appsJSON = (JSONArray)listingJSON.get(LISTING_DUTIES);
+          for (int j = 0; j < appsJSON.size(); j++) {
+            currListing.updateApplications((Resume)appsJSON.get(j));
+          }
+
+          // add list of applications(resumes from resume id)
+          JSONArray observerJSON = (JSONArray)listingJSON.get(LISTING_DUTIES);
+          for (int j = 0; j < observerJSON.size(); j++) {
+            currListing.registerObserver((Observer)observerJSON.get(j));
+          }
+  
+        }
+      }catch (Exception e) {
+        e.printStackTrace();
+      }
+      return listings;
     }
 
 }
