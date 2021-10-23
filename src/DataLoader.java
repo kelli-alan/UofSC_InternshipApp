@@ -15,9 +15,9 @@ public class DataLoader extends DataConstants {
     try {
       FileReader reader = new FileReader(RESUME_FILE_NAME);
       JSONParser parser = new JSONParser();
-      JSONArray resumesJSON = (JSONArray)new JSONParser().parse(reader);
+      JSONArray resumesJSON = (JSONArray)parser.parse(reader);
 
-      for (int i=0; i < resumesJSON.size(); i++) {
+      for (int i = 0; i < resumesJSON.size(); i++) {
         JSONObject resumeJSON = (JSONObject)resumesJSON.get(i);
         UUID id = UUID.fromString((String)resumeJSON.get(RESUME_ID));
         String eMail = (String)resumeJSON.get(RESUME_EMAIL);
@@ -26,10 +26,10 @@ public class DataLoader extends DataConstants {
         // creates base resume
         resumes.add(new Resume(id, eMail,phoneNum));
         
-        // add education section = array list of educations
+        // add education section, an array list of educations
         JSONArray educationsJSON = (JSONArray)resumeJSON.get(RESUME_EDUCATION_SECTION);
 
-        for (int j=0; j < educationsJSON.size(); j++) {
+        for (int j = 0; j < educationsJSON.size(); j++) {
           JSONObject educationJSON = (JSONObject)educationsJSON.get(j);
           String university = (String)educationJSON.get(EDUCATION_UNIVERSITY);
           String city = (String)educationJSON.get(EDUCATION_CITY);
@@ -37,14 +37,92 @@ public class DataLoader extends DataConstants {
           String degreeType = (String)educationJSON.get(EDUCATION_DEGREE_TYPE);
           String major = (String)educationJSON.get(EDUCATION_MAJOR);
           String minor = (String)educationJSON.get(EDUCATION_MINOR);
-          long gradMonth = (Long)educationJSON.get(EDUCATION_GRAD_MONTH);
-          long gradYear = (Long)educationJSON.get(EDUCATION_GRAD_YEAR);
-          double gpa = (Double)educationJSON.get(EDUCATION_GPA);
+          Month gradMonth = Month.values()[((Long)educationJSON.get(EDUCATION_GRAD_MONTH)).intValue()-1];
+          int gradYear = ((Long)educationJSON.get(EDUCATION_GRAD_YEAR)).intValue();
+          double gpa = ((Double)educationJSON.get(EDUCATION_GPA)).doubleValue();
 
-          Month month = Month.values()[(int)gradMonth-1];
           
-          resumes.get(i).addEducation(new Education(university, city, state, degreeType, major, month, (int)gradYear));
+          Education currEd = new Education(university, city, state, degreeType, major, gradMonth, (int)gradYear);
+          
+          currEd.addMinor(minor);
+          currEd.addGPA(gpa);
+          
+          resumes.get(i).addEducation(currEd);
         }
+
+        // add work experience section, an array list of work experiences
+        JSONArray workExperiencesJSON = (JSONArray)resumeJSON.get(RESUME_WORK_EXPERIENCES_SECTION);
+
+        for (int j = 0; j < workExperiencesJSON.size(); j++) {
+          JSONObject workExperienceJSON = (JSONObject)workExperiencesJSON.get(j);
+          String position = (String)workExperienceJSON.get(EXPERIENCE_POSITION);
+          Month startMonth = Month.values()[((Long)workExperienceJSON.get(EXPERIENCE_START_MONTH)).intValue()-1];
+          int startYear = ((Long)workExperienceJSON.get(EXPERIENCE_START_YEAR)).intValue();
+          boolean ongoing = (Boolean)workExperienceJSON.get(EXPERIENCE_ONGOING);
+          String company = (String)workExperienceJSON.get(WORK_EXPERIENCE_COMPANY);
+          String city = (String)workExperienceJSON.get(WORK_EXPERIENCE_CITY);
+          String state = (String)workExperienceJSON.get(WORK_EXPERIENCE_STATE);
+
+
+          // create base work experience
+          WorkExperience currXP = new WorkExperience(position, startMonth, startYear, company, city, state);
+          if (!ongoing) {
+            Month endMonth = Month.values()[((Long)workExperienceJSON.get(EXPERIENCE_END_MONTH)).intValue()-1];
+            int endYear = ((Long)workExperienceJSON.get(EXPERIENCE_END_YEAR)).intValue();
+             
+            // add end date, error checking done within the method
+            currXP.addEndDate(endMonth, endYear);
+          }
+          
+          // add responsibilities array to work experience
+          JSONArray workExperienceResponsibilitiesJSON = (JSONArray)workExperienceJSON.get(WORK_EXPERIENCE_RESPONSIBILITIES);
+
+          for (int k = 0; k < workExperienceResponsibilitiesJSON.size(); k++) {
+            currXP.addResponsibility(workExperienceResponsibilitiesJSON.get(k).toString());
+          }
+
+          // add work experience to resume
+          resumes.get(i).addWorkExperience(currXP);
+
+        }
+
+        JSONArray extracurricularsJSON = (JSONArray)resumeJSON.get(RESUME_EXTRACURRICULARS_SECTION);
+        for (int j = 0; j < extracurricularsJSON.size(); j++) {
+          JSONObject extracurricularJSON = (JSONObject)extracurricularsJSON.get(j);
+          String position = (String)extracurricularJSON.get(EXPERIENCE_POSITION);
+          Month startMonth = Month.values()[((Long)extracurricularJSON.get(EXPERIENCE_START_MONTH)).intValue()-1];
+          int startYear = ((Long)extracurricularJSON.get(EXPERIENCE_START_YEAR)).intValue();
+          boolean ongoing = (Boolean)extracurricularJSON.get(EXPERIENCE_ONGOING);
+          String title = (String)extracurricularJSON.get(EXTRACURRICULAR_TITLE);
+
+          // creates base extracurricular
+          Extracurricular currEC = new Extracurricular(position, startMonth, startYear, title);
+
+          // add end date to currEC if applicable
+          if (!ongoing) {
+            Month endMonth = Month.values()[((Long)extracurricularJSON.get(EXPERIENCE_END_MONTH)).intValue()-1];
+            int endYear = ((Long)extracurricularJSON.get(EXPERIENCE_END_YEAR)).intValue(); 
+            
+            currEC.addEndDate(endMonth, endYear);
+          }
+
+          // add array of activities
+          JSONArray extracurricularActivitiesJSON = (JSONArray)extracurricularJSON.get(EXTRACURRICULAR_ACTIVITIES);
+
+          for (int k = 0; k < extracurricularActivitiesJSON.size(); k++) {
+            currEC.addExtracurricularActivity(extracurricularActivitiesJSON.get(k).toString());
+          }
+
+          // add to resume
+          resumes.get(i).addExtracurricular(currEC);
+        }
+
+        JSONArray skillsJSON = (JSONArray)resumeJSON.get(RESUME_SKILLS);
+
+        for (int j = 0; j < skillsJSON.size(); j++) {
+          resumes.get(i).addSkill(skillsJSON.get(j).toString());
+        }
+
       }
     }catch (Exception e) {
       e.printStackTrace();
@@ -65,7 +143,7 @@ public class DataLoader extends DataConstants {
 
 
 
-    public ArrayList<Listing> getListings() {
+    public ArrayList<Listing> loadListings() {
         return null;
     }
 

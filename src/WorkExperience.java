@@ -22,15 +22,6 @@ public class WorkExperience extends Experience {
         this.responsibilities = new ArrayList<String>();
     }
 
-    public WorkExperience(String position, Month startMonth, int startYear,
-                           String company, String city, String state, Month endMonth, int endYear) {
-        super(position, startMonth, startYear);
-        this.company = company;
-        this.city = city;
-        this.state = state;
-        this.responsibilities = new ArrayList<String>();
-    }
-
     public void addResponsibility(String responsibility) {
       if(!listed(responsibility)) {
         this.responsibilities.add(responsibility);

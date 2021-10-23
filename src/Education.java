@@ -20,7 +20,7 @@ public class Education {
         this.major = major;
         this.gradMonth = gradMonth;
         this.gradYear = gradYear;
-        this.GPA = 0;
+        this.GPA = 0.0;
     }
 
     public void addGPA(double GPA) {
@@ -29,7 +29,9 @@ public class Education {
     }
 
     public void addMinor(String minor) {
+      if (minor != "") {
         this.minor = minor;
+      }
     }
 
     public String toString() {

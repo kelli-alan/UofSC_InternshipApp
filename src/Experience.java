@@ -15,8 +15,11 @@ public abstract class Experience {
       this.ongoing = true;
     }
     public void addEndDate(Month endMonth, int endYear) {
-      this.endMonth = endMonth;
-      this.endYear = endYear;
-      this.ongoing = false;
+      if(endMonth != null && endYear >= 2000) {
+        this.endMonth = endMonth;
+        this.endYear = endYear;
+        this.ongoing = false;
+      }
+
     }
 }

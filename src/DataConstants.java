@@ -63,9 +63,10 @@ public abstract class DataConstants {
  protected static final String EXPERIENCE_START_YEAR = "startYear";
  protected static final String EXPERIENCE_END_MONTH = "endMonth";
  protected static final String EXPERIENCE_END_YEAR = "endYear";
+ protected static final String EXPERIENCE_ONGOING = "ongoing";
 
  // work experience specific constants
- protected static final String RESUME_WORK_EXPERIENCES_SECTION = "workExperience";
+ protected static final String RESUME_WORK_EXPERIENCES_SECTION = "workExperiences";
  protected static final String WORK_EXPERIENCE_COMPANY = "company";
  protected static final String WORK_EXPERIENCE_CITY = "city";
  protected static final String WORK_EXPERIENCE_STATE = "state";

@@ -13,6 +13,7 @@ public class Extracurricular extends Experience {
 
     public Extracurricular(String position, Month startMonth, int startYear, String title) {
         super(position, startMonth, startYear);
+        this.title = title;
         this.activities = new ArrayList<String>();
     }
 

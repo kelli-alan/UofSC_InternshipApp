@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.time.Month;
 /*
  *
- * @authors Yousef Afshar, Robbie Clark
+ * @authors Yousef Afshar, Robbie Clark, Kelli Alan
  */
 public class Student extends User {
     
