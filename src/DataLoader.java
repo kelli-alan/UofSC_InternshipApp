@@ -212,13 +212,13 @@ public class DataLoader extends DataConstants {
           }
 
           // add list of applications(resumes from resume id)
-          JSONArray appsJSON = (JSONArray)listingJSON.get(LISTING_DUTIES);
+          JSONArray appsJSON = (JSONArray)listingJSON.get(LISTING_APPLICATIONS);
           for (int j = 0; j < appsJSON.size(); j++) {
             currListing.updateApplications((Resume)appsJSON.get(j));
           }
 
           // add list of applications(resumes from resume id)
-          JSONArray observerJSON = (JSONArray)listingJSON.get(LISTING_DUTIES);
+          JSONArray observerJSON = (JSONArray)listingJSON.get(LISTING_OBSERVERS);
           for (int j = 0; j < observerJSON.size(); j++) {
             currListing.registerObserver((Observer)observerJSON.get(j));
           }
