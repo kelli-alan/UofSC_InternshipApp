@@ -190,7 +190,7 @@ public class DataLoader extends DataConstants {
           String jobTitle = (String)listingJSON.get(LISTING_TITLE);
           String city = (String)listingJSON.get(LISTING_CITY);
           String state = (String)listingJSON.get(LISTING_STATE);
-          String startDate = (String)listingJSON.get(LISTING_STATE);
+          String startDate = (String)listingJSON.get(LISTING_START_DATE);
           int hours = (int)listingJSON.get(LISTING_HOURS_PER_WEEK);
           double pay = (double)listingJSON.get(LISTING_PAY);
           Boolean isRemote = (Boolean)listingJSON.get(LISTING_IS_REMOTE);
