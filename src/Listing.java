@@ -42,7 +42,7 @@ public class Listing implements Subject {
             this.duties.add(duty);
     }
 
-    private boolean containsSkill(String skill) {
+    public boolean containsSkill(String skill) {
         for (int i = 0; i < this.desiredSkills.size(); i++) {
             if (this.desiredSkills.get(i).equalsIgnoreCase(skill)) {
               return true;
@@ -106,6 +106,22 @@ public class Listing implements Subject {
     public void notifyObservers(Resume resume) {
         for(Observer observers : this.observers)
             observers.update(resume);
+    }
+
+    public int getHoursPerWeek() {
+        return hoursPerWeek;
+    }
+
+    public ArrayList<String> getSkill() {
+        return desiredSkills;
+    }
+
+    public String getLocation() {
+        return state;
+    }
+
+    public Double getPay() {
+        return pay;
     }
 
 }

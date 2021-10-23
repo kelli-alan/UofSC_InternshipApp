@@ -11,7 +11,7 @@ public class Student extends User {
     private ArrayList<Resume> resumes;
     private ArrayList<Listing> listing;
     private ArrayList<Listing> savedListings;
-    private FilterBehavior filterBehavior;
+    //private FilterBehavior filterBehavior;
     private Scanner key = new Scanner(System.in);
     //private Month month;
     //private Month endMonth;
@@ -215,14 +215,14 @@ public class Student extends User {
     public void applyToListing(Listing listing,  Resume resume) {
 
     }
-
+/*
     public ArrayList<Listing> filterListings(ArrayList<Listing> savedListings) {
         return savedListings;
     }
 
     public void setFilterBehavior(FilterBehavior filterBehavior) {
 
-    }
+    }*/
 
     public void saveListing(Listing listing) {
 
