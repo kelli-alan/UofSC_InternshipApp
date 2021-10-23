@@ -197,7 +197,7 @@ public class DataLoader extends DataConstants {
   
           // creates base listing
           Listing currListing = new Listing(id, jobTitle, city, state, startDate, hours, pay, isRemote);
-          listings.add(new Listing(id, jobTitle, city, state, startDate, hours, pay, isRemote));
+          listings.add(currListing);
           
           // add list of skills
           JSONArray skillsJSON = (JSONArray)listingJSON.get(LISTING_DESIRED_SKILLS);
@@ -217,17 +217,15 @@ public class DataLoader extends DataConstants {
             currListing.updateApplications((Resume)appsJSON.get(j));
           }
 
-          // add list of applications(resumes from resume id)
+          // add list of employers(employer from user id)
           JSONArray observerJSON = (JSONArray)listingJSON.get(LISTING_OBSERVERS);
           for (int j = 0; j < observerJSON.size(); j++) {
-            currListing.registerObserver((Observer)observerJSON.get(j));
+            currListing.registerObserver((Employer)observerJSON.get(j));
           }
-  
         }
       }catch (Exception e) {
         e.printStackTrace();
       }
       return listings;
     }
-
 }
