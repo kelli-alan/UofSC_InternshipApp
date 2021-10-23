@@ -1,11 +1,5 @@
 import java.util.ArrayList;
 import java.util.UUID;
-import java.time.Month;
-
-enum Major {
-    COMPUTER_SCIENCE, COMPUTER_INFORMATION_SYSTEMS, 
-    COMPUTER_ENGINEERING, INTEGRATED_INFORMATION_TECHNOLOGY;
-}
 
 /**
  * 
@@ -21,6 +15,7 @@ public class Resume {
     private ArrayList<WorkExperience> workExperiences;
     private ArrayList<Extracurricular> extracurriculars;
 
+    // constructor for reading from database
     public Resume(UUID id, String email, String phoneNum) { 
         this.id = id;
         this.eMail = email;
@@ -29,6 +24,21 @@ public class Resume {
         this.education = new ArrayList<Education>();
         this.workExperiences = new ArrayList<WorkExperience>();
         this.extracurriculars = new ArrayList<Extracurricular>();
+    }
+
+    // constructor for new resumes that do not have an id yet
+    public Resume(String email, String phoneNum) {
+        this.id = UUID.randomUUID();
+        this.eMail = email;
+        this.phoneNum = phoneNum;
+        this.skills = new ArrayList<String>();
+        this.education = new ArrayList<Education>();
+        this.workExperiences = new ArrayList<WorkExperience>();
+        this.extracurriculars = new ArrayList<Extracurricular>();
+    }
+
+    public UUID getUUID() {
+      return this.id;
     }
 
     public void addWorkExperience(WorkExperience workXP) {
@@ -77,12 +87,7 @@ public class Resume {
 
     public String toString() {
         String ret = "E-mail: " + eMail + "\n"
-        + "Phone Number: " + phoneNum + "\n"
-        + "Skills:\n";
-
-        for(int i = 0; i < skills.size(); i++) {
-            ret += "\t- " + skills.get(i) + "\n";
-        }
+        + "Phone Number: " + phoneNum + "\n";
 
         ret += "Education:\n";
         for(int i = 0; i < education.size(); i++) {
@@ -97,6 +102,12 @@ public class Resume {
         ret += "Extracurriculars:\n";
         for(int i = 0; i < extracurriculars.size(); i++) {
             ret += "\t" + extracurriculars.get(i).toString() + "\n";
+        }
+
+        ret += "Skills:\n";
+
+        for(int i = 0; i < skills.size(); i++) {
+            ret += "\t- " + skills.get(i) + "\n";
         }
         return ret;
     }

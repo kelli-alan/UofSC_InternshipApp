@@ -1,7 +1,7 @@
 import java.util.UUID;
 
 enum Users {
-    USER_TYPE_STUDENT, USER_TYPE_EMPLOYER, USER_TYPE_MODERATOR;
+    STUDENT, EMPLOYER, MODERATOR;
 }
 
 /*
@@ -17,6 +17,7 @@ public class User {
     protected String password;
     protected Users type;
 
+    // constructors for loading users who already have an id
     public User(UUID id, String firstName, String lastName, String username,
     String password, Users type) {
         this.id = id;
@@ -25,5 +26,20 @@ public class User {
         this.username = username;
         this.password = password;
         this.type = type;
+    }
+
+    // constructor for creating users who need an id
+    public User(String firstName, String lastName, String username,
+    String password, Users type) {
+        this.id = UUID.randomUUID();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.type = type;
+    }
+
+    public String toString() {
+      return this.type + "\n";
     }
 }

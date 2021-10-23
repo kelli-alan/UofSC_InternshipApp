@@ -131,14 +131,50 @@ public class DataLoader extends DataConstants {
   }
 
 
-  public static ArrayList<User> loadUsers() {
-        ArrayList<User> users = new ArrayList<User>();
-
+  public static ArrayList<Student> loadStudents() {
+        ArrayList<Student> students = new ArrayList<Student>();
+        
         try {
-        } catch (Exception e) {
+          FileReader reader = new FileReader(STUDENT_FILE_NAME);
+          JSONParser parser = new JSONParser();
+          JSONArray studentsJSON = (JSONArray)parser.parse(reader);
+          // load all resumes, so they can be added to the correct student
+          ArrayList<Resume> studentResumes = loadResumes();
+
+          for (int i = 0; i < studentsJSON.size(); i++) {
+            JSONObject studentJSON = (JSONObject)studentsJSON.get(i);
+            UUID id = UUID.fromString((String)studentJSON.get(USER_ID));
+            String firstName = (String)studentJSON.get(USER_FIRST_NAME);
+            String lastName = (String)studentJSON.get(USER_LAST_NAME);
+            String username = (String)studentJSON.get(USER_USERNAME);
+            String password = (String)studentJSON.get(USER_PASSWORD);
+            Users type = Users.STUDENT;
+            
+            // create a student
+            Student currStudent = new Student(id, firstName, lastName, username, password, type);
+
+            // array list of UUIDs corresponding to resumes
+            JSONArray studentresumesJSON = (JSONArray)studentJSON.get(STUDENT_RESUMES);
+
+            // find matching resumes and add to current student
+            for (int j = 0; j < studentresumesJSON.size(); j++) {
+              for (int k = 0; k < studentResumes.size(); k++) {
+                 if (studentresumesJSON.get(j).equals((studentResumes.get(k)).getUUID().toString())) {
+                      currStudent.addResume(studentResumes.get(k));
+                      break;
+                 }
+              }
+            }
+
+            students.add(currStudent);
+          
+          
+          }
+        }
+         catch (Exception e) {
           e.printStackTrace();
     }  
-      return null;
+      return students;
     }
 
 
