@@ -30,16 +30,12 @@ public abstract class DataConstants {
   protected static final String LISTING_STATE = "state";
   protected static final String LISTING_START_MONTH = "startMonth";
   protected static final String LISTING_START_YEAR = "startYear";
-  protected static final String LISTING_START_DATE = "startDate";
   protected static final String LISTING_HOURS_PER_WEEK = "hoursPerWeek";
   protected static final String LISTING_PAY = "pay";
-  protected static final String LISTING_IS_FILLED = "isFilled";
   protected static final String LISTING_IS_REMOTE = "isRemote";
   protected static final String LISTING_DESIRED_SKILLS = "desiredSkills";
   protected static final String LISTING_DUTIES = "duties";
   protected static final String LISTING_APPLICATIONS = "applications";
-  protected static final String LISTING_OBSERVERS = "observers";
-
   // resume constants
   protected static final String RESUME_FILE_NAME = "src/resume.json";
   protected static final String RESUME_ID = "id";

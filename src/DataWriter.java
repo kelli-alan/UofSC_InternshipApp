@@ -13,16 +13,33 @@ public class DataWriter extends DataConstants {
     saveModerators();
   }
 
+  public static void saveListings() {
+    ListingList listings = ListingList.getInstance();
+    ArrayList<Listing> listingList = listings.getAllListings();
+    JSONArray jsonListings = new JSONArray();
+
+    for (int i = 0; i < listingList.size(); i++) {
+      jsonListings.add(getListingJSON(listingList.get(i)));
+    }
+
+    try (FileWriter file = new FileWriter(LISTING_FILE_NAME)) {
+      file.write(jsonListings.toJSONString());
+      file.flush();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
   public static void saveStudents() {
     ArrayList<Student> studentList = UserList.getInstance().getAllStudents();
-    JSONArray JSONStudents = new JSONArray();
+    JSONArray jsonStudents = new JSONArray();
 
     for (int i = 0; i < studentList.size(); i++) {
-      JSONStudents.add(getStudentJSON(studentList.get(i)));
+      jsonStudents.add(getStudentJSON(studentList.get(i)));
     }
 
     try (FileWriter file = new FileWriter(STUDENT_FILE_NAME)) {
-      file.write(JSONStudents.toJSONString());
+      file.write(jsonStudents.toJSONString());
       file.flush();
     } catch (Exception e) {
       e.printStackTrace();
@@ -31,14 +48,15 @@ public class DataWriter extends DataConstants {
 
   public static void saveEmployers() {
     ArrayList<Employer> employerList = UserList.getInstance().getAllEmployers();
-    JSONArray JSONEmployers = new JSONArray();
+    JSONArray jsonEmployers = new JSONArray();
 
     for (int i = 0; i < employerList.size(); i++) {
-      JSONEmployers.add(getEmployerJSON(employerList.get(i)));
+      jsonEmployers.add(getEmployerJSON(employerList.get(i)));
     }
 
     try (FileWriter file = new FileWriter(EMPLOYER_FILE_NAME)) {
-      file.write(JSONEmployers.toJSONString());
+      file.write(jsonEmployers.toJSONString());
+      file.flush();
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -46,14 +64,14 @@ public class DataWriter extends DataConstants {
 
   public static void saveModerators() {
     ArrayList<Moderator> moderatorList = UserList.getInstance().getAllModerators();
-    JSONArray JSONModerators = new JSONArray();
+    JSONArray jsonModerators = new JSONArray();
 
     for (int i = 0; i < moderatorList.size(); i++) {
-      JSONModerators.add(getModeratorJSON(moderatorList.get(i)));
+      jsonModerators.add(getModeratorJSON(moderatorList.get(i)));
     }
 
     try (FileWriter file = new FileWriter(MODERATOR_FILE_NAME)) {
-      file.write(JSONModerators.toJSONString());
+      file.write(jsonModerators.toJSONString());
       file.flush();
     } catch (Exception e) {
       e.printStackTrace();
@@ -119,12 +137,48 @@ public class DataWriter extends DataConstants {
     return moderatorDetails;
   }
 
-  public static void saveListings() {
+  public static JSONObject getListingJSON(Listing listing) {
+    JSONObject listingDetails = new JSONObject();
+    listingDetails.put(LISTING_ID, listing.getID().toString());
+    listingDetails.put(LISTING_TITLE, listing.getJobTitle());
+    listingDetails.put(LISTING_CITY, listing.getCity());
+    listingDetails.put(LISTING_STATE, listing.getState());
+    listingDetails.put(LISTING_START_MONTH, listing.getStartMonth().getValue());
+    listingDetails.put(LISTING_START_YEAR, listing.getStartYear());
+    listingDetails.put(LISTING_HOURS_PER_WEEK, listing.getHoursPerWeek());
+    listingDetails.put(LISTING_PAY, listing.getPay());
+    listingDetails.put(LISTING_IS_REMOTE, listing.getIsRemote());
 
+    ArrayList<String> listingSkills = listing.getSkills();
+    JSONArray skills = new JSONArray();
+    for (String skill : listingSkills) {
+      skills.add(skill);
+    }
+
+    listingDetails.put(LISTING_DESIRED_SKILLS, skills);
+
+    ArrayList<String> listingDuties = listing.getDuties();
+    JSONArray duties = new JSONArray();
+    for (String duty : listingDuties) {
+      duties.add(duty);
+    }
+
+    listingDetails.put(LISTING_DUTIES, duties);
+
+    ArrayList<Resume> listingApplications = listing.getApplications();
+    JSONArray applicationIDs = new JSONArray();
+
+    for (Resume application : listingApplications) {
+      applicationIDs.add(application.getUUID().toString());
+    }
+
+    listingDetails.put(LISTING_APPLICATIONS, applicationIDs);
+
+    return listingDetails;
   }
 
   public static void saveResumes() {
-    
+
   }
 
 }
