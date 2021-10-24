@@ -1,24 +1,28 @@
-/**
+import java.util.ArrayList;/**
  * 
  * @authors Evan Grunewald
  */
 public class InternshipApp {
+    
+    private UserList userlist;
+    private ListingList listinglist;
+    private User user;
 
-  private UserList userlist;
-  private ListingList listinglist;
-  private User user;
+    public InternshipApp() {
+        this.userlist = userlist.getInstance();
+        this.listinglist = listinglist.getInstance();
+    }
 
-  public InternshipApp() {
+    public User login(String username, String password) {
+        return userlist.hasUser(username, password);
+    }
 
-  }
+    public void logout() {
+        System.out.println("Thank you for using the Internship App");
+        System.exit(0);
+    }
 
-  public void login(String username, String password) {
-
-  }
-
-  public void logout() {
-
-  }
+  
 
   public User createUser(String firstName, String lastName, String username, String password, Users type) {
     return null;
