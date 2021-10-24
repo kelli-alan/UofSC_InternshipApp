@@ -240,7 +240,7 @@ public class Student extends User {
     }*/
 
     public void saveListing(Listing listing) {
-
+      this.savedListings.add(listing);
     }
 
     public ArrayList<Listing> viewAllListings() {
@@ -255,6 +255,11 @@ public class Student extends User {
       String ret = super.toString();
       for (int i = 0; i < this.resumes.size(); i++) {
         ret+= displayResume(i);
+      }
+
+      ret+= "Saved Listings: " + "\n";
+      for (int i = 0; i < this.savedListings.size(); i++)  {
+        ret+= savedListings.get(i).toString();
       }
       return ret;
     }

@@ -152,6 +152,9 @@ public class DataLoader extends DataConstants {
           // load all resumes, so they can be added to the correct student
           ArrayList<Resume> studentResumes = loadResumes();
 
+          // load all listings, so they can be added to the correct student's saved listings
+          ArrayList<Listing> listings = loadListings();
+          
           for (int i = 0; i < studentsJSON.size(); i++) {
             JSONObject studentJSON = (JSONObject)studentsJSON.get(i);
             UUID id = UUID.fromString((String)studentJSON.get(USER_ID));
@@ -175,6 +178,18 @@ public class DataLoader extends DataConstants {
                       currStudent.addResume(studentResumes.get(k));
                       break;
                  }
+              }
+            }
+
+            // array list of UUIDs corresponding ot saved listings
+            JSONArray studentSavedListingsJSON = (JSONArray)studentJSON.get(STUDENT_SAVED_LISTINGS);
+            
+            // find matching listings and add to current student's saved listing
+            for (int j = 0; j < studentSavedListingsJSON.size(); j++){
+              for (int k = 0; k < listings.size(); k++) {
+                if (studentSavedListingsJSON.get(j).equals(listings.get(k).getID().toString())) {
+                  currStudent.saveListing(listings.get(k));
+                }
               }
             }
 

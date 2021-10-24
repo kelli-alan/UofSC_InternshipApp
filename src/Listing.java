@@ -120,4 +120,8 @@ public class Listing {
         return pay;
     }
 
+    public UUID getID() {
+      return this.id;
+    }
+
 }
