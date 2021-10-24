@@ -26,7 +26,33 @@ public class UserList {
     for (int i = 0; i < numberUsers; i++) {
       Users type = getAllUsers().get(i).type;
       if (type == Users.STUDENT) {
-        ret.add((Student)getAllUsers().get(i));
+        ret.add((Student) getAllUsers().get(i));
+      }
+    }
+
+    return ret;
+  }
+
+  public ArrayList<Employer> getAllEmployers() {
+    ArrayList<Employer> ret = new ArrayList<Employer>();
+    int numberUsers = getAllUsers().size();
+    for (int i = 0; i < numberUsers; i++) {
+      Users type = getAllUsers().get(i).type;
+      if (type == Users.EMPLOYER) {
+        ret.add((Employer) getAllUsers().get(i));
+      }
+    }
+
+    return ret;
+  }
+
+  public ArrayList<Moderator> getAllModerators() {
+    ArrayList<Moderator> ret = new ArrayList<Moderator>();
+    int numberUsers = getAllUsers().size();
+    for (int i = 0; i < numberUsers; i++) {
+      Users type = getAllUsers().get(i).type;
+      if (type == Users.MODERATOR) {
+        ret.add((Moderator) getAllUsers().get(i));
       }
     }
 
