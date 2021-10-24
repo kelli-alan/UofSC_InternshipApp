@@ -29,36 +29,70 @@ public class Education {
     return this.university;
   }
 
+  public void setUniversity(String university) {
+    if (university != "")
+        this.university = university;
+  }
+
   public String getCity() {
-    return this.city;
+    return city;
+  }
+
+  public void setCity(String city) {
+    if (city != "")
+        this.city = city;
   }
 
   public String getState() {
-    return this.state;
+    return state;
+  }
+
+  public void setState(String state) {
+    if (state != "")
+        this.state = state;
   }
 
   public String getDegreeType() {
-    return this.degreeType;
+    return degreeType;
+  }
+
+  public void setDegreeType(String degreeType) {
+    if (degreeType != "")
+        this.degreeType = degreeType;
   }
 
   public String getMajor() {
-    return this.major;
+    return major;
+  }
+
+  public void setMajor(String major) {
+    if (major != "")
+        this.major = major;
   }
 
   public String getMinor() {
-    return this.minor;
+    return minor;
   }
 
   public Month getGradMonth() {
-    return this.gradMonth;
+    return gradMonth;
+  }
+
+  public void setGradMonth(Month month) {
+      this.gradMonth = month;
   }
 
   public int getGradYear() {
-    return this.gradYear;
+    return gradYear;
   }
 
+  public void setGradYear(int year) {
+    if(year > 2000 && year < 2100)
+        this.gradYear = year;
+}
+
   public double getGPA() {
-    return this.GPA;
+    return GPA;
   }
 
   public void addGPA(double GPA) {
@@ -74,13 +108,13 @@ public class Education {
 
   public String toString() {
 
-    String ret = this.university + "\n" + this.city + ", " + this.state;
-    ret += "\n" + this.degreeType + " in " + this.major;
-    if (this.minor != null)
-      ret += "\nMinor in" + this.minor;
-    if (this.GPA != 0)
-      ret += "\n" + this.GPA + " GPA";
-    ret += "\nGraduation " + this.gradMonth + " " + this.gradYear;
+    String ret = university + "\n" + city + ", " + state;
+    ret += "\n" + degreeType + " in " + major;
+    if (minor != null)
+      ret += "\nMinor in" + minor;
+    if (GPA != 0)
+      ret += "\n" +GPA + " GPA";
+    ret += "\nGraduation " + gradMonth + " " + gradYear;
     return ret;
   }
 
