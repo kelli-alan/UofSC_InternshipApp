@@ -8,55 +8,56 @@ import java.util.Locale;
  */
 public class Extracurricular extends Experience {
 
-    private String title;
-    private ArrayList<String> activities;
+  private String title;
+  private ArrayList<String> activities;
 
-    public Extracurricular(String position, Month startMonth, int startYear, String title) {
-        super(position, startMonth, startYear);
-        this.title = title;
-        this.activities = new ArrayList<String>();
-    }
+  public Extracurricular(String position, Month startMonth, int startYear, String title) {
+    super(position, startMonth, startYear);
+    this.title = title;
+    this.activities = new ArrayList<String>();
+  }
 
-    public void addExtracurricularActivity(String activity) {
-      if(!listed(activity))
-        this.activities.add(activity);
-    }
+  public void addExtracurricularActivity(String activity) {
+    if (!listed(activity))
+      this.activities.add(activity);
+  }
 
-    
+  public String getTitle() {
+    return this.title;
+  }
 
-    /**
-     * Ensures extracurriculars do not have duplicate details
-     * @param activity detail to add under an extracurricular
-     * @return true if activity is in list of activities, false otherwise
-     * @Override 
-     */
-    public boolean listed(String activity) {
-      for (int i = 0; i < activities.size(); i++) {
-        if (activities.get(i).equalsIgnoreCase(activity)) {
-          return true;
-        }
+  public ArrayList<String> getActivities() {
+    return this.activities;
+  }
+
+  /**
+   * Ensures extracurriculars do not have duplicate details
+   * 
+   * @param activity detail to add under an extracurricular
+   * @return true if activity is in list of activities, false otherwise
+   * @Override
+   */
+  public boolean listed(String activity) {
+    for (int i = 0; i < activities.size(); i++) {
+      if (activities.get(i).equalsIgnoreCase(activity)) {
+        return true;
       }
-      return false;
     }
+    return false;
+  }
 
-    /**
-     * Extracurricular format
-     * Name of extracurricular
-     * position, start date - end date  (ongoing ? : in-line if-else)
-     *    - activity 1
-     *         ...
-     *    - activity n
-     */
-    public String toString() {
-      String ret = this.title + "\n" + this.position + ", " + 
-          this.startMonth.getDisplayName(TextStyle.FULL, Locale.US) + " " + 
-          this.startYear + " - " 
-          + (ongoing ? "present" : this.endMonth.getDisplayName(TextStyle.FULL, Locale.US) + 
-                                    " " + this.endYear) + "\n";
-          
-      for(int i = 0; i < activities.size(); i++) {
-        ret += "\t- " + activities.get(i) + "\n";
-      }
-      return ret;
+  /**
+   * Extracurricular format Name of extracurricular position, start date - end
+   * date (ongoing ? : in-line if-else) - activity 1 ... - activity n
+   */
+  public String toString() {
+    String ret = this.title + "\n" + this.position + ", " + this.startMonth.getDisplayName(TextStyle.FULL, Locale.US)
+        + " " + this.startYear + " - "
+        + (ongoing ? "present" : this.endMonth.getDisplayName(TextStyle.FULL, Locale.US) + " " + this.endYear) + "\n";
+
+    for (int i = 0; i < activities.size(); i++) {
+      ret += "\t- " + activities.get(i) + "\n";
     }
+    return ret;
+  }
 }

@@ -1,26 +1,26 @@
 import java.util.ArrayList;
 
 public class ListingList {
-    
-    private static ListingList listingList;
-    private ArrayList<Listing> listings;
 
-    private ListingList() {
-      listings = DataLoader.loadListings();
+  private static ListingList listingList;
+  private ArrayList<Listing> listings;
+
+  private ListingList() {
+    listings = DataLoader.loadListings();
   }
-    public static ListingList getInstance() {
-        if(listingList == null)
-            listingList = new ListingList();
 
-        return listingList;
-    }
+  public static ListingList getInstance() {
+    if (listingList == null)
+      listingList = new ListingList();
 
-    
-    public ArrayList<Listing> getListing(String keyword) {
-        return listings;
-    }
+    return listingList;
+  }
 
-    public ArrayList<Listing> getAllListings() {
-      return listings;
-    }
+  public ArrayList<Listing> getListing(String keyword) {
+    return listings;
+  }
+
+  public ArrayList<Listing> getAllListings() {
+    return listings;
+  }
 }

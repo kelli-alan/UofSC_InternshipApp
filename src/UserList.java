@@ -1,27 +1,26 @@
 import java.util.ArrayList;
 
 public class UserList {
-    
-    private static UserList userList;
-    private ArrayList<User> users;
 
-    private UserList() {
-      users = DataLoader.loadUsers();
-    }
-   
-    public static UserList getInstance() {
-        if(userList == null)
-            userList = new UserList();
+  private static UserList userList;
+  private ArrayList<User> users;
 
-        return userList;
-    }
+  private UserList() {
+    users = DataLoader.loadUsers();
+  }
 
-    
-    public ArrayList<User> getUser(String keyword) {
-        return users;
-    }
+  public static UserList getInstance() {
+    if (userList == null)
+      userList = new UserList();
 
-    public ArrayList<User> getAllUsers() {
-      return users;
-    }
+    return userList;
+  }
+
+  public ArrayList<User> getUser(String keyword) {
+    return users;
+  }
+
+  public ArrayList<User> getAllUsers() {
+    return users;
+  }
 }
