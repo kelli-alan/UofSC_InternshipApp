@@ -24,11 +24,13 @@ public abstract class DataConstants {
 
 
   // listing constants
-  protected static final String LISTING_FILE_NAME = "/src/listing.json";
+  protected static final String LISTING_FILE_NAME = "src/listing.json";
   protected static final String LISTING_ID = "id";
   protected static final String LISTING_TITLE = "jobTitle";
   protected static final String LISTING_CITY = "city";
   protected static final String LISTING_STATE = "state";
+  protected static final String LISTING_START_MONTH = "startMonth";
+  protected static final String LISTING_START_YEAR = "startYear";
   protected static final String LISTING_START_DATE = "startDate";
   protected static final String LISTING_HOURS_PER_WEEK = "hoursPerWeek";
   protected static final String LISTING_PAY = "pay";

@@ -7,34 +7,50 @@ import java.util.Scanner;
  */
 public class Moderator extends User {
 
-    private ArrayList<Resume> resumes;
-    private ArrayList<Listing> listings;
+    private ArrayList<Student> students;
+    //private ArrayList<Employer> employers;
+    //private ArrayList<Listing> listings;
     Scanner reader = new Scanner(System.in);
+    
     //Index 4 is the username field in each of the user classes.
-    String usernameIndex = resumes.get(4).toString();
+    //String usernameIndex;
 
     public Moderator(UUID id, String firstName, String lastName, String username,
             String password, Users USER_TYPE_MODERATOR) {
                 super(id, firstName, lastName, username, password, USER_TYPE_MODERATOR);
-                this.resumes = new ArrayList<Resume>();
-                this.listings = new ArrayList<Listing>();
-            }
+                
+                this.students = DataLoader.loadStudents();
+                
+                //this.listings = DataLoader.loadListings();
+                
+                //this.usernameIndex = resumes.get(4).toString();
+                
+              }
     
-    public void viewUserResumes(String username) {
-    System.out.println("Enter username to display resumes for: ");
-    username = reader.nextLine();
-    while (true) {
-            if(username == usernameIndex) {
-                System.out.println(resumes);
-                break;
-            }
-            else {
-                System.out.println("Invalid username. Please try again.");
-            }
-    }
-}
 
-    public void viewUserListings(String username) {
+    public void viewUserResumes(String username) {
+      boolean found = false;
+      do {
+        for (int i = 0; i < this.students.size(); i++) {
+          if(username == students.get(i).username) {
+            for (int j = 0; j < (students.get(i)).getResumes().size(); j++) {
+              students.get(i).displayResume(j);
+              found = true;
+            }
+              
+            break;
+          }
+        }  
+        if (!found) {
+          System.out.println("Invalid username. Please try again.");
+        }
+      } while(!found);
+      
+                
+    }
+
+
+    /*public void viewUserListings(String username) {
         System.out.println("Enter username to display listings for: ");
         username = reader.nextLine();
         while (true) {
@@ -79,5 +95,9 @@ public class Moderator extends User {
                 System.out.println("Invalid username. Please try again.");
             }
     }
+    }
+*/
+    public String toString() {
+      return super.toString();
     }
 }

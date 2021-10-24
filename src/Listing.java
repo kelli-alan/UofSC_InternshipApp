@@ -1,35 +1,36 @@
 import java.util.ArrayList;
+import java.time.Month;
 import java.util.UUID;
 
-public class Listing implements Subject {
+public class Listing {
     
     private UUID id;
     private String jobTitle;
     private String city;
     private String state;
-    private String startDate;
+    private Month startMonth;
+    private int startYear;
     private int hoursPerWeek;
     private double pay;
-    private boolean isFilled;
     private boolean isRemote;
     private ArrayList<String> desiredSkills;
     private ArrayList<String> duties;
     private ArrayList<Resume> applications;
-    private ArrayList<Observer> observers;
 
-    public Listing(UUID id, String jobTitle, String city, String state, String startDate, int hoursPerWeek, double pay, boolean isRemote) {
+
+    public Listing(UUID id, String jobTitle, String city, String state, Month startMonth, int startYear, int hoursPerWeek, double pay, boolean isRemote) {
         this.id = id;
         this.jobTitle = jobTitle;
         this.city = city;
         this.state = state;
-        this.startDate = startDate;
+        this.startMonth = startMonth;
+        this.startYear = startYear;
         this.hoursPerWeek = hoursPerWeek;
         this.pay = pay;
         this.isRemote = isRemote;
         this.desiredSkills = new ArrayList<String>();
         this.duties = new ArrayList<String>();
         this.applications = new ArrayList<Resume>();
-        this.observers = new ArrayList<Observer>();
     }
 
     public void addSkills(String skill) {
@@ -66,7 +67,6 @@ public class Listing implements Subject {
      */
     public void updateApplications(Resume resume) {
         this.applications.add(resume);
-        notifyObservers(resume);
     }
 
     public String toString() {
@@ -75,37 +75,33 @@ public class Listing implements Subject {
 
         ret += this.city + ", " + this.state + "\n";
 
-        ret += "Start Date: " + this.startDate;
+        ret += "Start Date: " + this.startMonth + " " + this.startYear + "\n";
 
         ret += this.hoursPerWeek + " hours per week\n";
 
         ret += "$" + this.pay + " per hour\n";
 
-        if(this.isRemote)
+        if (this.isRemote)
             ret += "Remote Internship\n";
         else
             ret += "In-Person Internship\n";
 
         ret += "Desired Skills: \n";
 
-        for(int i = 0; i < this.desiredSkills.size(); i++)
-            ret += "\t- " + this.desiredSkills.get(i);
+        for (int i = 0; i < this.desiredSkills.size(); i++)
+            ret += "\t- " + this.desiredSkills.get(i) + "\n";
 
         ret += "Duties: \n";
 
-        for(int i = 0; i < this.duties.size(); i++)
-            ret += "\t- " + this.duties.get(i);
+        for (int i = 0; i < this.duties.size(); i++)
+            ret += "\t- " + this.duties.get(i) + "\n";
        
+        ret += "Applicants: \n";
+        for (int i = 0; i < applications.size(); i++) {
+          ret+= applications.get(i).toString() + "\n";
+        }
+        
         return ret;
-    }
-
-    public void registerObserver(Observer observer) {
-        this.observers.add(observer);
-    }
-
-    public void notifyObservers(Resume resume) {
-        for(Observer observers : this.observers)
-            observers.update(resume);
     }
 
     public int getHoursPerWeek() {

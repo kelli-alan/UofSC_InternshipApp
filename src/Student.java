@@ -11,7 +11,6 @@ public class Student extends User {
     private ArrayList<Resume> resumes;
     private ArrayList<Listing> listing;
     private ArrayList<Listing> savedListings;
-    //private FilterBehavior filterBehavior;
     private Scanner key = new Scanner(System.in);
     private String major;
 
@@ -222,6 +221,10 @@ public class Student extends User {
 
     public void deleteResume(int id) {
 
+    }
+
+    public ArrayList<Resume> getResumes() {
+      return this.resumes;
     }
 
     public void applyToListing(Listing listing,  Resume resume) {

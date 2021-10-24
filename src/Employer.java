@@ -3,22 +3,19 @@ import java.util.UUID;
 import java.util.Scanner;
 /*
  *
- * @authors Yousef Afshar
+ * @authors Yousef Afshar, Kelli Alan
  */
-public class Employer extends User implements Observer {
-    private Subject subject;
+public class Employer extends User {
     private String companyName;
     private String companyDescription;
     private ArrayList<Listing> internshipListings;
-    private SortBehavior sortBehavior;
     private ArrayList<Resume> applications;
     private Scanner key = new Scanner(System.in);
     private UUID id;
 
-    public Employer(UUID id, Subject subject, String firstName, String lastName, String username,
+    public Employer(UUID id, String firstName, String lastName, String username,
         String password, Users USER_TYPE_EMPLOYER, String companyName, String companyDescription) {
             super(id, firstName, lastName, username, password, USER_TYPE_EMPLOYER);
-            subject.registerObserver(this);
             this.companyName = companyName;
             this.companyDescription = companyDescription;
             this.internshipListings = new ArrayList<Listing>();
@@ -60,7 +57,8 @@ public class Employer extends User implements Observer {
         isRemote = key.nextBoolean();
         key.nextLine();
 
-        Listing list = new Listing(id, jobTitle, city, state, startDate, hoursPerWeek, pay, isRemote);
+        /** rework ui to account for month, year format for date */
+        /*Listing list = new Listing(id, jobTitle, city, state, startMonth, startYear, hoursPerWeek, pay, isRemote);
 
         clearScreen();
 
@@ -90,11 +88,12 @@ public class Employer extends User implements Observer {
 
         System.out.println("Listing Created!");
         
-        this.internshipListings.add(list);
-    }
+        this.internshipListings.add(list);*/
+      }
 
+    // if a listing is filled, it doesn't need to display to the user
     public void fillListing(Listing listing) {
-
+      this.internshipListings.remove(listing);
     }
 
     public ArrayList<Resume> sortApplications(Listing listing) {

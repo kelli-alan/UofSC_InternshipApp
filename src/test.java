@@ -4,9 +4,9 @@ import java.util.ArrayList;
 public class test {
     
     public static void main(String[] args) {
-      ArrayList<Student> students = DataLoader.loadStudents();
-      for (int i = 0; i < students.size(); i++) {
-       System.out.println(students.get(i).toString());
+      ArrayList<Listing> listings = DataLoader.loadListings();
+      for (int i = 0; i < listings.size(); i++) {
+       System.out.println(listings.get(i).toString());
       }
     }
 }

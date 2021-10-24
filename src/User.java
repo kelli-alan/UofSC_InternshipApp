@@ -40,6 +40,6 @@ public class User {
     }
 
     public String toString() {
-      return this.type + "\n";
+      return this.type + "\n"  + this.firstName + " " + this.lastName + "\nUsername: " + this.username + "\nPassword: " + this.password;
     }
 }

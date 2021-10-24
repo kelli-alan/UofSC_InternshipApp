@@ -4,28 +4,26 @@
     "jobTitle": "Software Dev Intern",
     "city": "Columbia",
     "state": "SC",
-    "startDate": "January 2022",
+    "startMonth": 1,
+    "startYear": 2022,
     "hoursPerWeek": 20,
     "pay": 21.00,
-    "isFilled": false,
-    "isRemote": false,
+    "isRemote": true,
     "desiredSkills": ["Knowledge of Agile", "Proficient in Java"],
     "duties":["Debugging", "Assist development team"],
-    "applications": [],
-    "observers": ["f7c488aa-c468-40e4-b146-cc2c8d42505e"]
+    "applications": []
   }, {
     "id": "edee3bdc-1a41-4cc4-8695-35ea55361af9",
     "jobTitle": "IT Front Desk Intern",
     "city": "Charlotte",
     "state": "NC",
-    "startDate": "June 2022",
+    "startMonth": 6,
+    "startYear": 2022,
     "hoursPerWeek": 40,
     "pay": 19.00,
-    "isFilled": false,
     "isRemote": false,
     "desiredSkills": ["Fundamentals of modern computer architecture", "Customer service"],
     "duties":["Helping customers with technical difficulties", "Perform routine maintenance"],
-    "applications": ["eb9e9de7-8fed-487c-97c7-be730dd3f452"],
-    "observers": ["f7c488aa-c468-40e4-b146-cc2c8d42505e"]
+    "applications": ["eb9e9de7-8fed-487c-97c7-be730dd3f452"]
   }
 ]
