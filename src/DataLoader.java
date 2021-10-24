@@ -204,6 +204,48 @@ public class DataLoader extends DataConstants {
       return students;
     }
 
+    public static ArrayList<Employer> loadEmployers() {
+      ArrayList<Employer> employers = new ArrayList<Employer>();
+        
+        try {
+          FileReader reader = new FileReader(EMPLOYER_FILE_NAME);
+          JSONParser parser = new JSONParser();
+          JSONArray employersJSON = (JSONArray)parser.parse(reader);
+
+          // load all listings, so they can be added to the correct employer
+          ArrayList<Listing> listings = loadListings();
+          
+          for (int i = 0; i < employersJSON.size(); i++) {
+            JSONObject employerJSON = (JSONObject)employersJSON.get(i);
+            UUID id = UUID.fromString((String)employerJSON.get(USER_ID));
+            String firstName = (String)employerJSON.get(USER_FIRST_NAME);
+            String lastName = (String)employerJSON.get(USER_LAST_NAME);
+            String username = (String)employerJSON.get(USER_USERNAME);
+            String password = (String)employerJSON.get(USER_PASSWORD);
+            Users type = Users.EMPLOYER;
+            String companyName = (String)employerJSON.get(EMPLOYER_COMPANY_NAME);
+            String companyDescription = (String)employerJSON.get(EMPLOYER_COMPANY_DESCRIPTION);
+
+            // create base employer
+            Employer currEmployer = new Employer(id, firstName, lastName, username, password, type, companyName, companyDescription);
+            
+            JSONArray employerListingsJSON = (JSONArray)employerJSON.get(EMPLOYER_INTERNSHIP_LISTINGS);
+            
+            // find matching listings and add to current employer
+            for (int j = 0; j < employerListingsJSON.size(); j++){
+              for (int k = 0; k < listings.size(); k++) {
+                if (employerListingsJSON.get(j).equals(listings.get(k).getID().toString())) {
+                  currEmployer.addListing(listings.get(k));
+                }
+              }
+            }
+            employers.add(currEmployer);
+          }
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+        return employers;
+      }
     public static ArrayList<Moderator> loadModerators() {
       ArrayList<Moderator> moderators = new ArrayList<Moderator>();
       

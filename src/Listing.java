@@ -124,4 +124,8 @@ public class Listing {
       return this.id;
     }
 
+    public ArrayList<Resume> getApplications() {
+      return this.applications;
+    }
+
 }

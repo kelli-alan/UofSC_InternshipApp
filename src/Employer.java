@@ -9,7 +9,6 @@ public class Employer extends User {
     private String companyName;
     private String companyDescription;
     private ArrayList<Listing> internshipListings;
-    private ArrayList<Resume> applications;
     private Scanner key = new Scanner(System.in);
     private UUID id;
 
@@ -19,8 +18,11 @@ public class Employer extends User {
             this.companyName = companyName;
             this.companyDescription = companyDescription;
             this.internshipListings = new ArrayList<Listing>();
-            this.applications = new ArrayList<Resume>();
 
+    }
+
+    public void addListing(Listing listing) {
+      this.internshipListings.add(listing);
     }
 
     public void createListing() {
@@ -97,19 +99,26 @@ public class Employer extends User {
     }
 
     public ArrayList<Resume> sortApplications(Listing listing) {
-        return applications;
+        return listing.getApplications();
     }
 
     public ArrayList<Resume> viewAllApplications(Listing listing) {
-        return applications;
-    }
-
-    public void update(Resume resume) {
-        this.applications.add(resume);
+        return listing.getApplications();
     }
 
     private void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    public String toString() {
+      String ret = super.toString();
+      ret += "Company: " + this.companyName +"\n\t" + this.companyDescription + "\n";
+      ret += "My Listings: \n";
+      
+      for (int i = 0; i < internshipListings.size(); i++) {
+        ret+= internshipListings.get(i).toString() + "\n";
+      }
+      return ret;
     }
 }
