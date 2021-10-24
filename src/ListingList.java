@@ -2,21 +2,25 @@ import java.util.ArrayList;
 
 public class ListingList {
     
-    private ListingList listinglist;
+    private static ListingList listingList;
     private ArrayList<Listing> listings;
 
-    public ListingList getInstance() {
-        if(listinglist == null)
-            listinglist = new ListingList();
-
-        return listinglist;
-    }
-
     private ListingList() {
-        listings = new ArrayList<Listing>();
+      listings = DataLoader.loadListings();
+  }
+    public static ListingList getInstance() {
+        if(listingList == null)
+            listingList = new ListingList();
+
+        return listingList;
     }
 
+    
     public ArrayList<Listing> getListing(String keyword) {
         return listings;
+    }
+
+    public ArrayList<Listing> getAllListings() {
+      return listings;
     }
 }

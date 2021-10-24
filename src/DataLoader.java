@@ -270,6 +270,27 @@ public class DataLoader extends DataConstants {
       return moderators;
     }
 
+    public static ArrayList<User> loadUsers() {
+      ArrayList<User> users = new ArrayList<User>();
+      ArrayList<Student> students = loadStudents();
+      ArrayList<Employer> employers = loadEmployers();
+      ArrayList<Moderator> moderators = loadModerators();
+
+      for (Student student : students) {
+        users.add(student);
+      }
+
+      for (Employer employer : employers) {
+        users.add(employer);
+      }
+
+      for (Moderator moderator : moderators) {
+        users.add(moderator);
+      }
+      return users;
+
+    }
+
     public static ArrayList<Listing> loadListings() {
       ArrayList<Listing> listings = new ArrayList<Listing>();
       ArrayList<Resume> studentResumes = loadResumes();

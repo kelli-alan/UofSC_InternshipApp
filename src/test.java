@@ -4,9 +4,7 @@ import java.util.ArrayList;
 public class test {
     
     public static void main(String[] args) {
-      ArrayList<Employer> employers = DataLoader.loadEmployers();
-      for (int i = 0; i < employers.size(); i++) {
-       System.out.println(employers.get(i).toString());
-      }
+      ListingList lL = ListingList.getInstance();
+      System.out.print(lL.getAllListings());
     }
 }
