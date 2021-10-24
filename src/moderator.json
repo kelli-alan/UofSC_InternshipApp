@@ -5,13 +5,13 @@
     "lastName": "Adams",
     "username": "m.adams",
     "password": "adminaccess",
-    "type": "Moderator"
+    "type": "MODERATOR"
   }, {
     "id": "7ae1b274-5bb6-4c94-b02c-2ccf79d27c09",
     "firstName": "Steven",
     "lastName": "Anderson",
     "username": "anderson_s",
     "password": "safety1st",
-    "type": "Moderator"
+    "type": "MODERATOR"
   }
 ]

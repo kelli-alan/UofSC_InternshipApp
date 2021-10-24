@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class test {
     
     public static void main(String[] args) {
-      ListingList lL = ListingList.getInstance();
-      System.out.print(lL.getAllListings());
+      DataLoader.loadStudents();
+      DataWriter.saveUsers(); 
     }
-}
+  }
