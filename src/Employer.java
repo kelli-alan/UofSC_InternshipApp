@@ -24,8 +24,8 @@ public class Employer extends User {
 
   //This Employer constructor without a UUID is used by the InternshipUI.
   public Employer(String firstName, String lastName, String username, String password,
-      Users EMPLOYER, String companyName, String companyDescription) {
-    super(firstName, lastName, username, password, EMPLOYER);
+      Users USER_TYPE_EMPLOYER, String companyName, String companyDescription) {
+    super(firstName, lastName, username, password, USER_TYPE_EMPLOYER);
     this.companyName = companyName;
     this.companyDescription = companyDescription;
     this.internshipListings = new ArrayList<Listing>();

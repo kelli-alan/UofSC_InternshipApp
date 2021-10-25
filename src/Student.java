@@ -26,8 +26,8 @@ public class Student extends User {
   }
 
   // constructor for creating students who need an id
-  public Student(String firstName, String lastName, String username, String password, Users STUDENT) {
-    super(firstName, lastName, username, password, STUDENT);
+  public Student(String firstName, String lastName, String username, String password, Users USER_TYPE_STUDENT) {
+    super(firstName, lastName, username, password, USER_TYPE_STUDENT);
     this.resumes = new ArrayList<Resume>();
     this.listings = DataLoader.loadListings();
     this.savedListings = new ArrayList<Listing>();

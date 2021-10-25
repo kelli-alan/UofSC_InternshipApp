@@ -14,8 +14,8 @@ public class Moderator extends User {
   Scanner reader = new Scanner(System.in);
 
   public Moderator(UUID id, String firstName, String lastName, String username, String password,
-      Users MODERATOR) {
-    super(id, firstName, lastName, username, password, MODERATOR);
+      Users USER_TYPE_MODERATOR) {
+    super(id, firstName, lastName, username, password, USER_TYPE_MODERATOR);
 
     this.students = DataLoader.loadStudents();
 
@@ -23,8 +23,8 @@ public class Moderator extends User {
   }
 
   public Moderator(String firstName, String lastName, String username, String password,
-      Users MODERATOR) {
-    super(firstName, lastName, username, password, MODERATOR);
+      Users USER_TYPE_MODERATOR) {
+    super(firstName, lastName, username, password, USER_TYPE_MODERATOR);
 
     this.students = DataLoader.loadStudents();
   }
@@ -45,7 +45,6 @@ public class Moderator extends User {
         System.out.println("Invalid username. Please try again.");
       }
     } while (!found);
-
   }
 
   /*
