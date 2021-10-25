@@ -1,6 +1,7 @@
-import java.util.ArrayList;/**
+import java.util.ArrayList;
+/**
  * 
- * @authors Evan Grunewald
+ * @authors Evan Grunewald, Robbie Clark
  */
 public class InternshipApp {
     
@@ -22,9 +23,11 @@ public class InternshipApp {
         System.exit(0);
     }
 
-  
+    public void viewAllListings() {
+        this.listinglist.getAllListings();
+    }
 
-  public User createUser(String firstName, String lastName, String username, String password, Users type) {
-    return null;
-  }
+    public User createUser(String firstName, String lastName, String username, String password, Users type) {
+      return null;
+    }
 }

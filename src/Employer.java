@@ -19,7 +19,14 @@ public class Employer extends User {
     this.companyName = companyName;
     this.companyDescription = companyDescription;
     this.internshipListings = new ArrayList<Listing>();
+  }
 
+  public Employer(String firstName, String lastName, String username, String password,
+      Users EMPLOYER, String companyName, String companyDescription) {
+    super(firstName, lastName, username, password, EMPLOYER);
+    this.companyName = companyName;
+    this.companyDescription = companyDescription;
+    this.internshipListings = new ArrayList<Listing>();
   }
 
   public void addListing(Listing listing) {
