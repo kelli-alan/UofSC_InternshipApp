@@ -63,8 +63,6 @@
         "position": "member",
         "startMonth": 10,
         "startYear": 2020,
-        "endMonth": null,
-        "endYear": null,
         "title": "Association for Computing Machinery",
         "activities": ["Participated in a Code-a-thon"],
         "ongoing": true
@@ -114,8 +112,6 @@
         "position": "Peer Mentor",
         "startMonth": 1,
         "startYear": 2021,
-        "endMonth": null,
-        "endYear": null,
         "company": "UofSC Student Success Center",
         "city": "Columbia",
         "state": "SC",
@@ -131,8 +127,6 @@
         "position": "Vice President",
         "startMonth": 1,
         "startYear": 2018,
-        "endMonth": null,
-        "endYear": null,
         "title": "Society of Women Engineers",
         "activities": [
           "Assisted the President with organizing weekly meetings",
