@@ -22,6 +22,13 @@ public class Moderator extends User {
     // this.listings = DataLoader.loadListings();
   }
 
+  public Moderator(String firstName, String lastName, String username, String password,
+      Users MODERATOR) {
+    super(firstName, lastName, username, password, MODERATOR);
+
+    this.students = DataLoader.loadStudents();
+  }
+
   public void viewUserResumes(String username) {
     boolean found = false;
     do {
