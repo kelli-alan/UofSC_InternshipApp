@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /*
  *
- * @authors Yousef Afshar, Kelli Alan
+ * @authors Yousef Afshar, Kelli Alan, Robbie Clark
  */
 public class Employer extends User {
   private String companyName;
@@ -13,6 +13,7 @@ public class Employer extends User {
   private Scanner key = new Scanner(System.in);
   private UUID id;
 
+  //This Employer constructor with a UUID is used by the DataLoader.
   public Employer(UUID id, String firstName, String lastName, String username, String password,
       Users EMPLOYER, String companyName, String companyDescription) {
     super(id, firstName, lastName, username, password, EMPLOYER);
@@ -21,6 +22,7 @@ public class Employer extends User {
     this.internshipListings = new ArrayList<Listing>();
   }
 
+  //This Employer constructor without a UUID is used by the InternshipUI.
   public Employer(String firstName, String lastName, String username, String password,
       Users EMPLOYER, String companyName, String companyDescription) {
     super(firstName, lastName, username, password, EMPLOYER);
@@ -120,13 +122,37 @@ public class Employer extends User {
   }
 
   public ArrayList<Resume> sortApplications(Listing listing) {
+    //Prompt for how user would like to sort (in InternshipUI)
+    //Temp structure here for now. If we want new sorts, this
+    //will need to be updated obviously but going for time being
+    // we have our default sort and by time recieved.
+    Scanner key = new Scanner(System.in);
+    System.out.println("Input your desired sort:\n1. Sort by time recieved.\n"
+    + "2. Default sort.");
+    String userInput = key.nextLine();
+    key.close();
+    if( userInput == "1") {
+      //Calls SortByTimeRecieved (sorting not written yet).
+    } else if (userInput == "2") {
+      return listing.getApplications();
+    } else {
+      System.out.println("Invalid input. Please try again with 1 or 2.");
+      sortApplications(listing);
+    }
     return listing.getApplications();
   }
 
+  /* Unlike Moderator, doesn't ahve to filtter through as there is no
+   * input from the user required after the method is called whereas
+   * Moderator must check the user's name and sort for that specific
+   * users resumes.
+   */
   public ArrayList<Resume> viewAllApplications(Listing listing) {
     return listing.getApplications();
   }
 
+  //This method probably doesn't need to exist in Employer after UI handles
+  //almost all of our interface. 
   private void clearScreen() {
     System.out.print("\033[H\033[2J");
     System.out.flush();
