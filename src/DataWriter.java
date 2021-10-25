@@ -30,6 +30,23 @@ public class DataWriter extends DataConstants {
     }
   }
 
+  public static void saveResumes() {
+    ResumeList resumes = ResumeList.getInstance();
+    ArrayList<Resume> resumeList = resumes.getResumes();
+    JSONArray jsonResumes = new JSONArray();
+
+    for (int i = 0; i < resumeList.size(); i++) {
+      jsonResumes.add(getResumeJSON(resumeList.get(i)));
+    }
+
+    try (FileWriter file = new FileWriter(RESUME_FILE_NAME)) {
+      file.write(jsonResumes.toJSONString());
+      file.flush();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
   public static void saveStudents() {
     ArrayList<Student> studentList = UserList.getInstance().getAllStudents();
     JSONArray jsonStudents = new JSONArray();
@@ -177,8 +194,124 @@ public class DataWriter extends DataConstants {
     return listingDetails;
   }
 
-  public static void saveResumes() {
+  public static JSONObject getResumeJSON(Resume resume) {
+    JSONObject resumeDetails = new JSONObject();
+    resumeDetails.put(RESUME_ID, resume.getUUID().toString());
+    resumeDetails.put(RESUME_EMAIL, resume.getEMail());
+    resumeDetails.put(RESUME_PHONE_NUM, resume.getPhoneNum());
 
+    // education section
+    ArrayList<Education> educationList = resume.getEducations();
+    JSONArray jsonEducations = new JSONArray();
+
+    for (int i = 0; i < educationList.size(); i++) {
+      jsonEducations.add(getEducationJSON(educationList.get(i)));
+
+    }
+
+    resumeDetails.put(RESUME_EDUCATION_SECTION, jsonEducations);
+
+    // work experience section
+    ArrayList<WorkExperience> workExperienceList = resume.getWorkExperiences();
+    JSONArray jsonWorkExperience = new JSONArray();
+
+    for (int i = 0; i < educationList.size(); i++) {
+      jsonWorkExperience.add(getWorkExperienceJSON(workExperienceList.get(i)));
+
+    }
+
+    resumeDetails.put(RESUME_WORK_EXPERIENCES_SECTION, jsonWorkExperience);
+
+    // extracurriculars section
+    ArrayList<Extracurricular> extracurricularsList = resume.getExtracurriculars();
+    JSONArray jsonExtracurricular = new JSONArray();
+
+    for (int i = 0; i < extracurricularsList.size(); i++) {
+      jsonExtracurricular.add(getExtracurricularsJSON(extracurricularsList.get(i)));
+    }
+
+    resumeDetails.put(RESUME_EXTRACURRICULARS_SECTION, jsonExtracurricular);
+
+    ArrayList<String> skillsList = resume.getSkills();
+    JSONArray jsonSkills = new JSONArray();
+
+    for (String skill : skillsList) {
+      jsonSkills.add(skill);
+    }
+
+    resumeDetails.put(RESUME_SKILLS, jsonSkills);
+
+    return resumeDetails;
+  }
+
+  public static JSONObject getEducationJSON(Education education) {
+    JSONObject educationDetails = new JSONObject();
+    educationDetails.put(EDUCATION_UNIVERSITY, education.getUniversity());
+    educationDetails.put(EDUCATION_CITY, education.getCity());
+    educationDetails.put(EDUCATION_STATE, education.getState());
+    educationDetails.put(EDUCATION_DEGREE_TYPE, education.getDegreeType());
+    educationDetails.put(EDUCATION_MAJOR, education.getMajor());
+    educationDetails.put(EDUCATION_MINOR, education.getMinor());
+    educationDetails.put(EDUCATION_GRAD_MONTH, education.getGradMonth().getValue());
+    educationDetails.put(EDUCATION_GRAD_YEAR, education.getGradYear());
+    educationDetails.put(EDUCATION_GPA, education.getGPA());
+
+    return educationDetails;
+  }
+
+  public static JSONObject getWorkExperienceJSON(WorkExperience workExperience) {
+    JSONObject workExperienceDetails = new JSONObject();
+    workExperienceDetails.put(EXPERIENCE_POSITION, workExperience.getPostion());
+    workExperienceDetails.put(EXPERIENCE_START_MONTH, workExperience.getStartMonth().getValue());
+    workExperienceDetails.put(EXPERIENCE_START_YEAR, workExperience.getStartYear());
+    workExperienceDetails.put(EXPERIENCE_ONGOING, workExperience.getOngoing());
+
+    // ensure an end date exists, so null data is not stored
+    if (!workExperience.getOngoing()) {
+      workExperienceDetails.put(EXPERIENCE_END_MONTH, workExperience.getEndMonth().getValue());
+      workExperienceDetails.put(EXPERIENCE_END_YEAR, workExperience.getEndYear());
+    }
+
+    workExperienceDetails.put(WORK_EXPERIENCE_COMPANY, workExperience.getCompany());
+    workExperienceDetails.put(WORK_EXPERIENCE_CITY, workExperience.getCity());
+    workExperienceDetails.put(WORK_EXPERIENCE_STATE, workExperience.getState());
+
+    // adds array of responsibilities
+    ArrayList<String> workExperienceResponsibilities = workExperience.getResponsibilities();
+    JSONArray responsibilities = new JSONArray();
+    for (String responsibility : workExperienceResponsibilities) {
+      responsibilities.add(responsibility);
+    }
+    workExperienceDetails.put(WORK_EXPERIENCE_RESPONSIBILITIES, responsibilities);
+
+    return workExperienceDetails;
+  }
+
+  public static JSONObject getExtracurricularsJSON(Extracurricular extracurricular) {
+    JSONObject extracurricularDetails = new JSONObject();
+    extracurricularDetails.put(EXPERIENCE_POSITION, extracurricular.getPostion());
+    extracurricularDetails.put(EXPERIENCE_START_MONTH, extracurricular.getStartMonth().getValue());
+    extracurricularDetails.put(EXPERIENCE_START_YEAR, extracurricular.getStartYear());
+    extracurricularDetails.put(EXPERIENCE_ONGOING, extracurricular.getOngoing());
+
+    // ensure an end date exists, before saving it
+    if (!extracurricular.getOngoing()) {
+      extracurricularDetails.put(EXPERIENCE_END_MONTH, extracurricular.getEndMonth().getValue());
+      extracurricularDetails.put(EXPERIENCE_END_YEAR, extracurricular.getEndYear());
+    }
+
+    extracurricularDetails.put(EXTRACURRICULAR_TITLE, extracurricular.getTitle());
+
+    // adds array of activities
+    ArrayList<String> extracurricularActivities = extracurricular.getActivities();
+    JSONArray activities = new JSONArray();
+    for (String activity : extracurricularActivities) {
+      activities.add(activity);
+    }
+
+    extracurricularDetails.put(EXTRACURRICULAR_ACTIVITIES, activities);
+
+    return extracurricularDetails;
   }
 
 }
