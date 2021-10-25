@@ -14,8 +14,8 @@ public class Moderator extends User {
   Scanner reader = new Scanner(System.in);
 
   public Moderator(UUID id, String firstName, String lastName, String username, String password,
-      Users USER_TYPE_MODERATOR) {
-    super(id, firstName, lastName, username, password, USER_TYPE_MODERATOR);
+      Users MODERATOR) {
+    super(id, firstName, lastName, username, password, MODERATOR);
 
     this.students = DataLoader.loadStudents();
 
@@ -31,7 +31,6 @@ public class Moderator extends User {
             students.get(i).displayResume(j);
             found = true;
           }
-
           break;
         }
       }

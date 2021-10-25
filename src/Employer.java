@@ -14,8 +14,8 @@ public class Employer extends User {
   private UUID id;
 
   public Employer(UUID id, String firstName, String lastName, String username, String password,
-      Users USER_TYPE_EMPLOYER, String companyName, String companyDescription) {
-    super(id, firstName, lastName, username, password, USER_TYPE_EMPLOYER);
+      Users EMPLOYER, String companyName, String companyDescription) {
+    super(id, firstName, lastName, username, password, EMPLOYER);
     this.companyName = companyName;
     this.companyDescription = companyDescription;
     this.internshipListings = new ArrayList<Listing>();

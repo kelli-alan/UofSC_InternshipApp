@@ -10,24 +10,28 @@ import java.time.Month;
 public class Student extends User {
   private ArrayList<Student> students;
   private ArrayList<Resume> resumes;
+  private ArrayList<Listing> listings;
+  private ArrayList<Resume> listingApplications;
   private ArrayList<Listing> savedListings;
   private Scanner key = new Scanner(System.in);
   private String major;
 
   // constructor for loading students who have an id
-  public Student(UUID id, String firstName, String lastName, String username, String password, Users USER_TYPE_STUDENT) {
-    super(id, firstName, lastName, username, password, USER_TYPE_STUDENT);
+  public Student(UUID id, String firstName, String lastName, String username, String password, Users STUDENT) {
+    super(id, firstName, lastName, username, password, STUDENT);
     this.resumes = new ArrayList<Resume>();
+    this.listings = DataLoader.loadListings();
     this.savedListings = new ArrayList<Listing>();
-    this.students = DataLoader.loadStudents();
+    this.listingApplications = new ArrayList<Resume>();
   }
 
   // constructor for creating students who need an id
-  public Student(String firstName, String lastName, String username, String password, Users USER_TYPE_STUDENT) {
-    super(firstName, lastName, username, password, USER_TYPE_STUDENT);
+  public Student(String firstName, String lastName, String username, String password, Users STUDENT) {
+    super(firstName, lastName, username, password, STUDENT);
     this.resumes = new ArrayList<Resume>();
+    this.listings = DataLoader.loadListings();
     this.savedListings = new ArrayList<Listing>();
-    this.students = DataLoader.loadStudents();
+    this.listingApplications = new ArrayList<Resume>();
   }
 
   public ArrayList<Resume> getResumes() {
@@ -250,8 +254,13 @@ public class Student extends User {
     } while (!found);
   }
 
+  //How are listings made into applications? They are passed as an arraylist
+  // of resumes, applications, but how do these exist/are used in relation to
+  // data loader, etc.
   public void applyToListing(Listing listing, Resume resume) {
-
+    if ( resumes.contains(resume)) {
+      listingApplications.add(resume);
+    }
   }
   /*
    * public ArrayList<Listing> filterListings(ArrayList<Listing> savedListings) {
@@ -267,7 +276,9 @@ public class Student extends User {
   }
 
   public ArrayList<Listing> viewAllSavedListings() {
-    return this.savedListings;
+    for (int i = 0; i < savedListings.size(); i++)
+    savedListings.get(i);
+      return savedListings;
   }
 
   public String displayResume(int i) {
