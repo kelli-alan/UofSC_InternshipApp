@@ -254,15 +254,14 @@ public class Student extends User {
     } while (!found);
   }
 
-  //How are listings made into applications? They are passed as an arraylist
-  // of resumes, applications, but how do these exist/are used in relation to
-  // data loader, etc.
   public void applyToListing(Listing listing, Resume resume) {
     if ( resumes.contains(resume)) {
       listingApplications.add(resume);
     }
   }
+
   /*
+   * Is this still necessary?  
    * public ArrayList<Listing> filterListings(ArrayList<Listing> savedListings) {
    * return savedListings; }
    * 
