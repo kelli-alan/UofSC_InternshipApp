@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /*
  *
- * @authors Yousef Afshar
+ * @authors Yousef Afshar, Kelli Alan
  */
 public class Moderator extends User {
 
@@ -13,9 +13,6 @@ public class Moderator extends User {
   // private ArrayList<Listing> listings;
   Scanner reader = new Scanner(System.in);
 
-  // Index 4 is the username field in each of the user classes.
-  // String usernameIndex;
-
   public Moderator(UUID id, String firstName, String lastName, String username, String password,
       Users USER_TYPE_MODERATOR) {
     super(id, firstName, lastName, username, password, USER_TYPE_MODERATOR);
@@ -23,9 +20,6 @@ public class Moderator extends User {
     this.students = DataLoader.loadStudents();
 
     // this.listings = DataLoader.loadListings();
-
-    // this.usernameIndex = resumes.get(4).toString();
-
   }
 
   public void viewUserResumes(String username) {

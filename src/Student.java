@@ -8,24 +8,26 @@ import java.time.Month;
  * @authors Yousef Afshar, Robbie Clark, Kelli Alan
  */
 public class Student extends User {
-
+  private ArrayList<Student> students;
   private ArrayList<Resume> resumes;
   private ArrayList<Listing> savedListings;
   private Scanner key = new Scanner(System.in);
   private String major;
 
   // constructor for loading students who have an id
-  public Student(UUID id, String firstName, String lastName, String username, String password, Users type) {
-    super(id, firstName, lastName, username, password, type);
+  public Student(UUID id, String firstName, String lastName, String username, String password, Users USER_TYPE_STUDENT) {
+    super(id, firstName, lastName, username, password, USER_TYPE_STUDENT);
     this.resumes = new ArrayList<Resume>();
     this.savedListings = new ArrayList<Listing>();
+    this.students = DataLoader.loadStudents();
   }
 
   // constructor for creating students who need an id
-  public Student(String firstName, String lastName, String username, String password, Users type) {
-    super(firstName, lastName, username, password, type);
+  public Student(String firstName, String lastName, String username, String password, Users USER_TYPE_STUDENT) {
+    super(firstName, lastName, username, password, USER_TYPE_STUDENT);
     this.resumes = new ArrayList<Resume>();
     this.savedListings = new ArrayList<Listing>();
+    this.students = DataLoader.loadStudents();
   }
 
   public ArrayList<Resume> getResumes() {
@@ -230,8 +232,22 @@ public class Student extends User {
     System.out.println("Resume Created!");
   }
 
-  public void deleteResume(int id) {
-
+  public void deleteResume(UUID id) {
+    boolean found = false;
+    do {
+      for (int i = 0; i < this.students.size(); i++) {
+        if (id == students.get(i).id) {
+          for (int j = 0; j < (students.get(i)).getResumes().size(); j++) {
+            students.remove(j);
+            found = true;
+          }
+          break;
+        }
+      }
+      if (!found) {
+        System.out.println("Invalid ID. Please try again.");
+      }
+    } while (!found);
   }
 
   public void applyToListing(Listing listing, Resume resume) {
