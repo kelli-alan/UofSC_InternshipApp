@@ -124,35 +124,30 @@ public class Listing {
 
   public String toString() {
     String ret = "";
-    ret += this.jobTitle + "\n";
+    ret += this.jobTitle + "\n\t";
 
-    ret += this.city + ", " + this.state + "\n";
+    ret += this.city + ", " + this.state + "\n\t";
 
-    ret += "Start Date: " + this.startMonth + " " + this.startYear + "\n";
+    ret += "Start Date: " + this.startMonth + " " + this.startYear + "\n\t";
 
-    ret += this.hoursPerWeek + " hours per week\n";
+    ret += this.hoursPerWeek + " hours per week\n\t";
 
-    ret += "$" + this.pay + " per hour\n";
+    ret += "$" + this.pay + " per hour\n\t";
 
     if (this.isRemote)
-      ret += "Remote Internship\n";
+      ret += "Remote Internship\n\t";
     else
-      ret += "In-Person Internship\n";
+      ret += "In-Person Internship\n\t";
 
-    ret += "Desired Skills: \n";
+    ret += "Desired Skills: \n\t";
 
     for (int i = 0; i < this.desiredSkills.size(); i++)
-      ret += "\t- " + this.desiredSkills.get(i) + "\n";
+      ret += "\t- " + this.desiredSkills.get(i) + "\n\t";
 
-    ret += "Duties: \n";
+    ret += "Duties: \n\t";
 
     for (int i = 0; i < this.duties.size(); i++)
-      ret += "\t- " + this.duties.get(i) + "\n";
-
-    ret += "Applicants: \n";
-    for (int i = 0; i < applications.size(); i++) {
-      ret += applications.get(i).toString() + "\n";
-    }
+      ret += "\t- " + this.duties.get(i) + "\n\t";
 
     return ret;
   }

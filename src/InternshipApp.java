@@ -8,12 +8,18 @@ public class InternshipApp {
     private UserList userlist;
     private ListingList listinglist;
     private User user;
+    private ResumeList resumeList;
+    private ArrayList<Listing> listing;
 
     public InternshipApp() {
         this.userlist = userlist.getInstance();
         this.listinglist = listinglist.getInstance();
+        this.resumeList = resumeList.getInstance();
+        this.listing = new ArrayList<Listing>();
+        this.listing = this.listinglist.getAllListings();
     }
 
+    //logs user in from userlist's arraylist
     public User login(String username, String password) {
         return userlist.hasUser(username, password);
     }
@@ -24,7 +30,10 @@ public class InternshipApp {
     }
 
     public void viewAllListings() {
-        this.listinglist.getAllListings();
+        
+        for(int i = 0; i < this.listing.size(); i++) {
+            System.out.println((i+1)+": "+this.listing.get(i).toString());
+        }
     }
 
     public User createUser(String firstName, String lastName, String username, String password, Users type) {
