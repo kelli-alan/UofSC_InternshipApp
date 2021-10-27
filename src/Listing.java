@@ -2,6 +2,11 @@ import java.util.ArrayList;
 import java.time.Month;
 import java.util.UUID;
 
+/**
+ * 
+ * @authors Robbie Clark, Evan Grunewald
+ */
+
 public class Listing {
 
   private UUID id;
@@ -17,6 +22,19 @@ public class Listing {
   private ArrayList<String> duties;
   private ArrayList<Resume> applications;
 
+  /**
+   * The main constructor for Listing, takes in all needed fields
+   * 
+   * @param id The Listing's unique identifier
+   * @param jobTitle The Listing's title
+   * @param city The Listing's city
+   * @param state The Listing's state
+   * @param startMonth The Listing's starting month (enumeration)
+   * @param startYear The Listing's starting year
+   * @param hoursPerWeek The Listing's hours per week
+   * @param pay The Listing's pay
+   * @param isRemote The Listing's flag for whether or not it is remote
+   */
   public Listing(UUID id, String jobTitle, String city, String state, Month startMonth, int startYear, int hoursPerWeek,
       double pay, boolean isRemote) {
     this.id = id;
@@ -33,68 +51,149 @@ public class Listing {
     this.applications = new ArrayList<Resume>();
   }
 
+  /**
+   * Return the Listings unique ID for global access
+   * 
+   * @return the user ID as a UUID
+   */
   public UUID getID() {
     return this.id;
   }
 
+  /**
+   * Return the Listings job title for global access
+   * 
+   * @return the job title as a String
+   */
   public String getJobTitle() {
     return this.jobTitle;
   }
 
+  /**
+   * Return the Listings city for global access
+   * 
+   * @return the locations city as a String
+   */
   public String getCity() {
     return this.city;
   }
 
+  /**
+   * Return the Listings state for global access
+   * 
+   * @return the locations state as a String
+   */
   public String getState() {
     return this.state;
   }
 
+  /**
+   * Return the Listings start month for global access
+   * 
+   * @return the starting month as a Month
+   */
   public Month getStartMonth() {
     return this.startMonth;
   }
 
+  /**
+   * Return the Listings start year for global access
+   * 
+   * @return the starting year as an int
+   */
   public int getStartYear() {
     return this.startYear;
   }
 
+  /**
+   * Return the Listings hours per week for global access
+   * 
+   * @return the hours per week as an int
+   */
   public int getHoursPerWeek() {
     return this.hoursPerWeek;
   }
 
+  /**
+   * Return the Listings pay value for global access
+   * 
+   * @return the pay as a double
+   */
   public Double getPay() {
     return this.pay;
   }
 
+  /**
+   * Return the Listings isRemote flag for global access
+   * 
+   * @return Boolean for if the Listing is remote work
+   */
   public boolean getIsRemote() {
     return this.isRemote;
   }
 
+  /**
+   * Return the Listings skills for global access
+   * 
+   * @return the list of skills
+   */
   public ArrayList<String> getSkills() {
     return this.desiredSkills;
   }
 
+  /**
+   * Return the Listings duties for global access
+   * 
+   * @return the list of duties
+   */
   public ArrayList<String> getDuties() {
     return this.duties;
   }
 
+  /**
+   * Return the Listings applications for global access
+   * 
+   * @return the list of applications
+   */
   public ArrayList<Resume> getApplications() {
     return this.applications;
   }
 
+  /**
+   * Return the Listings location for global access
+   * 
+   * @return the location as a String
+   */
   public String getLocation() {
     return this.city + ", " + this.state;
   }
 
+  /**
+   * Adds a new skill to the Listings list of skills
+   * 
+   * @param skill The skill to add to the list
+   */
   public void addSkills(String skill) {
     if (skill != null && !containsSkill(skill))
       this.desiredSkills.add(skill);
   }
 
+  /**
+   * Adds a new duty to the Listings list of duties
+   * 
+   * @param duty The duty to add to the list
+   */
   public void addDuties(String duty) {
     if (duty != null && !containsDuties(duty))
       this.duties.add(duty);
   }
 
+  /**
+   * Check all skills in the Listing to see if any match what is provided
+   * 
+   * @param skill The name of the skill to look for
+   * @return Boolean for if the skill was found
+   */
   public boolean containsSkill(String skill) {
     for (int i = 0; i < this.desiredSkills.size(); i++) {
       if (this.desiredSkills.get(i).equalsIgnoreCase(skill)) {
@@ -104,6 +203,12 @@ public class Listing {
     return false;
   }
 
+  /**
+   * Check all duties in the Listing to see if any match what is provided
+   * 
+   * @param duty The name of the duty to look for
+   * @return Boolean for if the duty was found
+   */
   private boolean containsDuties(String duty) {
     for (int i = 0; i < this.duties.size(); i++) {
       if (this.duties.get(i).equalsIgnoreCase(duty)) {
@@ -122,6 +227,11 @@ public class Listing {
     this.applications.add(resume);
   }
 
+  /**
+   * Return a String object of all fields of the Listing put together
+   * 
+   * @return The completed String of fields
+   */
   public String toString() {
     String ret = "";
     ret += this.jobTitle + "\n\t";
