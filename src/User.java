@@ -32,7 +32,7 @@ public class User {
   }
 
   /** 
-   *  Constructor for creating users who need to have to an ID.
+   *  Constructor for creating users who need to have to a new random UUID, id.
    */
   public User(String firstName, String lastName, String username, String password, Users type) {
     this.id = UUID.randomUUID();

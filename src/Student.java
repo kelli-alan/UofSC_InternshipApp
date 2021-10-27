@@ -3,7 +3,7 @@ import java.util.UUID;
 import java.util.Scanner;
 import java.time.Month;
 
-/*
+/**
  *
  * @authors Yousef Afshar, Robbie Clark, Kelli Alan
  */

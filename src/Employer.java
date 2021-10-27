@@ -1,17 +1,19 @@
 import java.util.ArrayList;
 import java.util.UUID;
+//To-be removed after InternshipUI up.
 import java.util.Scanner;
 
-/*
+/**
  *
  * @authors Yousef Afshar, Kelli Alan, Robbie Clark
  */
 public class Employer extends User {
   private String companyName;
   private String companyDescription;
+  private ArrayList<Employer> employers;
   private ArrayList<Listing> internshipListings;
+  //To-be moved to InternshipUI
   private Scanner key = new Scanner(System.in);
-  private UUID id;
 
   //This Employer constructor with a UUID is used by the DataLoader.
   public Employer(UUID id, String firstName, String lastName, String username, String password,
@@ -156,6 +158,28 @@ public class Employer extends User {
   private void clearScreen() {
     System.out.print("\033[H\033[2J");
     System.out.flush();
+  }
+
+  public void deleteListing(UUID id) {
+    boolean found = false;
+    do {
+      for (int i = 0; i < this.employers.size(); i++) {
+        if (id == employers.get(i).id) {
+          for (int j = 0; j < (employers.get(i)).getListings().size(); j++) {
+            employers.remove(j);
+            found = true;
+          }
+          break;
+        }
+      }
+      if (!found) {
+        System.out.println("Invalid ID. Please try again.");
+      }
+    } while (!found);
+  }
+
+  public String displayListing(int i) {
+    return this.firstName + " " + this.lastName + "\n" + this.internshipListings.get(i).toString();
   }
 
   public String toString() {
