@@ -37,6 +37,17 @@ public class Resume {
     this.extracurriculars = new ArrayList<Extracurricular>();
   }
 
+  public void setEmail(String eMail) {
+    if(eMail != "" && eMail.contains("@"));
+      this.eMail = eMail;
+  }
+
+  public void setPhoneNum(String phoneNum) {
+    if(phoneNum.length() >= 10) {
+      this.phoneNum = phoneNum;
+    }
+  }
+
   public UUID getUUID() {
     return this.id;
   }
@@ -79,14 +90,6 @@ public class Resume {
 
   public void addSkill(String skill) {
     this.skills.add(skill);
-  }
-
-  public void addEmail(String eMail) {
-    this.eMail = eMail;
-  }
-
-  public void addPhoneNum(String phoneNum) {
-    this.phoneNum = phoneNum;
   }
 
   public void deleteWorkExperience(WorkExperience workExperience) {

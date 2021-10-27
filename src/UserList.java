@@ -16,7 +16,7 @@ public class UserList {
     return userList;
   }
 
-  public ArrayList<User> getUser(String keyword) {
+  public ArrayList<User> getAllUsers() {
     return users;
   }
 
@@ -57,10 +57,6 @@ public class UserList {
     }
 
     return ret;
-  }
-
-  public ArrayList<User> getAllUsers() {
-    return users;
   }
 
   public User hasUser(String username, String password) {

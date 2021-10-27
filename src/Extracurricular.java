@@ -35,7 +35,6 @@ public class Extracurricular extends Experience {
    * 
    * @param activity detail to add under an extracurricular
    * @return true if activity is in list of activities, false otherwise
-   * @Override
    */
   public boolean listed(String activity) {
     for (int i = 0; i < activities.size(); i++) {

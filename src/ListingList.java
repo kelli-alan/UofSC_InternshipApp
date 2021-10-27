@@ -16,10 +16,6 @@ public class ListingList {
     return listingList;
   }
 
-  public ArrayList<Listing> getListing(String keyword) {
-    return listings;
-  }
-
   public ArrayList<Listing> getAllListings() {
     return listings;
   }
