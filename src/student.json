@@ -1,22 +1,25 @@
 [
   {
-    "id": "c05dd51b-8665-4093-b637-52535c3e7258",
     "firstName": "John",
     "lastName": "Smith",
-    "username": "jsmith",
     "password": "successfulFuture2024",
-    "type": "Student",
+    "savedListings": [
+      "edee3bdc-1a41-4cc4-8695-35ea55361af9",
+      "43e2c2a7-24f2-4066-ad6c-bd018b31d8e2"
+    ],
+    "id": "c05dd51b-8665-4093-b637-52535c3e7258",
+    "type": "STUDENT",
     "resumes": ["eb9e9de7-8fed-487c-97c7-be730dd3f452"],
-    "savedListings": ["edee3bdc-1a41-4cc4-8695-35ea55361af9", "43e2c2a7-24f2-4066-ad6c-bd018b31d8e2"]
+    "username": "jsmith"
   },
   {
-    "id": "ccf6b34f-caba-4100-880e-c4b87fb35dba",
     "firstName": "Ana",
     "lastName": "Edwards",
-    "username": "edwards_a",
     "password": "jobhunting",
-    "type": "Student",
+    "savedListings": ["43e2c2a7-24f2-4066-ad6c-bd018b31d8e2"],
+    "id": "ccf6b34f-caba-4100-880e-c4b87fb35dba",
+    "type": "STUDENT",
     "resumes": ["d7b13acd-61b8-401b-ae33-64bdca554336"],
-    "savedListings": ["43e2c2a7-24f2-4066-ad6c-bd018b31d8e2"]
+    "username": "edwards_a"
   }
 ]

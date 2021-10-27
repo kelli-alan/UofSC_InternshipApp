@@ -5,6 +5,8 @@ public class UserList {
   private static UserList userList;
   private ArrayList<User> users;
 
+  //add user method??
+
   private UserList() {
     users = DataLoader.loadUsers();
   }

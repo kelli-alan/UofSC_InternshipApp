@@ -1,17 +1,1 @@
-[
-  {
-    "id": "b0fa35f9-3705-41b0-905a-92aa8a026642",
-    "firstName": "Margaret",
-    "lastName": "Adams",
-    "username": "m.adams",
-    "password": "adminaccess",
-    "type": "MODERATOR"
-  }, {
-    "id": "7ae1b274-5bb6-4c94-b02c-2ccf79d27c09",
-    "firstName": "Steven",
-    "lastName": "Anderson",
-    "username": "anderson_s",
-    "password": "safety1st",
-    "type": "MODERATOR"
-  }
-]
+[{"firstName":"Margaret","lastName":"Adams","password":"adminaccess","id":"b0fa35f9-3705-41b0-905a-92aa8a026642","type":"MODERATOR","username":"m.adams"},{"firstName":"Steven","lastName":"Anderson","password":"safety1st","id":"7ae1b274-5bb6-4c94-b02c-2ccf79d27c09","type":"MODERATOR","username":"anderson_s"}]

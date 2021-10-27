@@ -84,11 +84,27 @@ public class InternshipUI {
             }
             clearScreen();
             System.out.println("Log out Successful");
+            app.logout();
 
         }
         //employer menu
         else if(user.type == Users.EMPLOYER) {
-            displayEmployerOptions();
+            while(command != 3) {
+                displayEmployerOptions();
+                command = scanner.nextInt();
+                scanner.nextLine();
+                switch(command) {
+                    case 1: clearScreen();
+                            ListingMenu();
+                    break;
+                    case 2: clearScreen();
+                            System.out.println("Ratings coming soon");
+                    break;
+                }
+            }
+            clearScreen();
+            System.out.println("Log out Successful");
+            app.logout();
         }
     }
 
@@ -188,6 +204,7 @@ public class InternshipUI {
             Student newStudent = new Student(firstname, lastname, username, password, type);
             //ADD RESUME CREATOR
             user = newStudent;
+            app.addUser(newStudent);
         }
         else if(sType.equalsIgnoreCase("e")) {
             Users type = Users.EMPLOYER;
@@ -197,11 +214,13 @@ public class InternshipUI {
             String companyDescription = scanner.nextLine();
             Employer newEmployer = new Employer(firstname, lastname, username, password, type, companyName, companyDescription);
             user = newEmployer;
+            app.addUser(newEmployer);
         }
         else if(sType.equalsIgnoreCase("m")) {
             Users type = Users.MODERATOR;
             Moderator mod = new Moderator(firstname, lastname, username, password, type);
             user = mod;
+            app.addUser(mod);
         }
         clearScreen();
         System.out.println("User created successfully");

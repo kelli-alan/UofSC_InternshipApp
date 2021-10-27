@@ -8,11 +8,13 @@ public class InternshipApp {
     private UserList userlist;
     private ListingList listinglist;
     private User user;
+    private ArrayList<User> users;
     private ResumeList resumeList;
     private ArrayList<Listing> listing;
 
     public InternshipApp() {
         this.userlist = userlist.getInstance();
+        this.users = this.userlist.getAllUsers();
         this.listinglist = listinglist.getInstance();
         this.resumeList = resumeList.getInstance();
         this.listing = new ArrayList<Listing>();
@@ -21,6 +23,7 @@ public class InternshipApp {
 
     //logs user in from userlist's arraylist
     public User login(String username, String password) {
+        
         return userlist.hasUser(username, password);
     }
 
@@ -39,7 +42,8 @@ public class InternshipApp {
         }
     }
 
-    public User createUser(String firstName, String lastName, String username, String password, Users type) {
-      return null;
+    public void addUser(User user) {
+
+        this.users.add(user);
     }
 }
