@@ -103,7 +103,7 @@ public class Student extends User {
   }
 
   public String displayResume(int i) {
-    return "\t\t\t\t\t\t\t\t" +  this.firstName + " " + this.lastName + "\n" + this.phoneNumber +"\t\t\t\t" + this.email + this.resumes.get(i).toString();
+    return "\t\t\t" +  this.firstName + " " + this.lastName + "\n" + this.phoneNumber +"\t\t\t\t" + this.email + this.resumes.get(i).toString();
   }
 
   public String toString() {

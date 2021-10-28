@@ -88,7 +88,7 @@ public class Resume {
   }
 
   public String toString() {
-    String ret = "Education:\n";
+    String ret = "\nEducation:\n";
     for (int i = 0; i < education.size(); i++) {
       ret += "\t" + education.get(i).toString() + "\n";
     }

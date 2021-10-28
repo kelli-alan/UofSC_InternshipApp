@@ -6,13 +6,14 @@ import java.time.Month;
  * @author Robbie Clark
  */
 public class InternshipUI {
-    private static final String WELCOME = "Welcome to the Internship App";
+    private static final String WELCOME = "\t  Welcome to the Internship App";
     private static final String[] OPEN_OPTIONS = {"Create Account", "Log In"};
     private static final String[] EMPLOYER_OPTIONS = {"Listings", "Ratings", "Logout"};
-    private static final String[] STUDENT_OPTIONS = {"Resumes", "Find Internship Listings", "Ratings", "Logout"};
+    private static final String[] STUDENT_OPTIONS = {"Resumes", "View All Internship Listings", "View Internship Listings by Filter", "Ratings", "Logout"};
     private static final String[] RESUME_OPTIONS = {"View Resumes", "Create New Resume", "Edit Resume", "Back"};
     private static final String[] LISTING_OPTIONS = {"View Listings", "Create New Listing", "Edit Listing", "Back"};
     private static final String[] LISTING_LIST_OPTIONS = {"Apply", "Save", "Back"};
+    private static final String[] LISTING_LIST_FILTERS = {"Skills", "Hours per week", "Location", "Pay"};
 
     
     private Scanner scanner;
@@ -77,7 +78,6 @@ public class InternshipUI {
                                 scanner.nextLine();
                                 //student.saveListing();
                             }//save
-                            
                     break;
                     case 3: System.out.println("Ratings coming soon");
                     break;
@@ -163,6 +163,14 @@ public class InternshipUI {
         System.out.print("\nSelection: ");
     }
 
+    private void displayListingFilters() {
+        System.out.println("************** Choose an option **************");
+        for(int i = 0; i < LISTING_LIST_FILTERS.length; i++) {
+            System.out.println( (i+1) + ". " + LISTING_LIST_FILTERS[i]);
+        }
+        System.out.print("\nSelection: ");
+    }
+
     //log in method, asks for username and password and sets user if they are in the list
     private void Login() {
         
@@ -238,7 +246,11 @@ public class InternshipUI {
         scanner.nextLine();
         while(command != 4) {
             switch(command) {
-                case 1: displayResumes();
+                case 1: clearScreen();
+                        displayResumes();
+                        System.out.println("Enter \"back\" when you want to go back to manu");
+                        scanner.nextLine();
+                        clearScreen();
                 break;
                 case 2: clearScreen();
                 createResume();
@@ -246,6 +258,10 @@ public class InternshipUI {
                 case 3: //edit resume
                 break;
             }
+            
+            displayResumeOptions();
+            command = scanner.nextInt();
+            scanner.nextLine();
         }
     }
 
@@ -263,6 +279,9 @@ public class InternshipUI {
                 case 3: //edit listing
                 break;
             }
+            displayListingOptions();
+            command = scanner.nextInt();
+            scanner.nextLine();
         }
     }
 
@@ -509,8 +528,9 @@ public class InternshipUI {
       }
 
       private void displayResumes() {
-          for(int i = 0; i < student.getResumes().size(); i++) {
-              System.out.println(student.displayResume(i));
+          int size = student.getResumes().size();
+          for(int i = 0; i < size; i++) {
+              System.out.println("\n"+(i+1)+":\n"+student.displayResume(i));
           }
       }
 
