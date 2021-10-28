@@ -14,10 +14,14 @@ public class Student extends User {
   private ArrayList<Listing> savedListings;
   private Scanner key = new Scanner(System.in);
   private String major;
+  private String phoneNumber;
+  private String email;
 
   // constructor for loading students who have an id
-  public Student(UUID id, String firstName, String lastName, String username, String password, Users STUDENT) {
+  public Student(UUID id, String firstName, String lastName, String username, String password, String email, String phoneNumber, Users STUDENT) {
     super(id, firstName, lastName, username, password, STUDENT);
+    this.email = email;
+    this.phoneNumber = phoneNumber;
     this.resumes = new ArrayList<Resume>();
     this.listings = DataLoader.loadListings();
     this.savedListings = new ArrayList<Listing>();
@@ -33,6 +37,15 @@ public class Student extends User {
     this.listingApplications = new ArrayList<Resume>();
   }
 
+  public String getEmail() {
+    return this.email;
+  }
+
+  public String getPhoneNumber() {
+    return this.phoneNumber;
+  }
+
+  
   public ArrayList<Resume> getResumes() {
     return this.resumes;
   }
@@ -90,7 +103,7 @@ public class Student extends User {
   }
 
   public String displayResume(int i) {
-    return this.firstName + " " + this.lastName + "\n" + this.resumes.get(i).toString();
+    return "\t\t\t\t\t\t\t\t" +  this.firstName + " " + this.lastName + "\n" + this.phoneNumber +"\t\t\t\t" + this.email + this.resumes.get(i).toString();
   }
 
   public String toString() {

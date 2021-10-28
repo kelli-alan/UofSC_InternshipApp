@@ -102,6 +102,8 @@ public class DataWriter extends DataConstants {
     studentDetails.put(USER_LAST_NAME, student.getLastName());
     studentDetails.put(USER_USERNAME, student.getUserName());
     studentDetails.put(USER_PASSWORD, student.getPassword());
+    studentDetails.put(STUDENT_EMAIL, student.getEmail());
+    studentDetails.put(STUDENT_PHONE_NUMBER, student.getPhoneNumber());
     studentDetails.put(USER_TYPE, student.getType().toString());
 
     ArrayList<Resume> studentResumes = student.getResumes();

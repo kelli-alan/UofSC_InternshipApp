@@ -152,10 +152,12 @@ public class DataLoader extends DataConstants {
         String lastName = (String) studentJSON.get(USER_LAST_NAME);
         String username = (String) studentJSON.get(USER_USERNAME);
         String password = (String) studentJSON.get(USER_PASSWORD);
+        String email = (String) studentJSON.get(STUDENT_EMAIL);
+        String phoneNumber = (String) studentJSON.get(STUDENT_PHONE_NUMBER);
         Users type = Users.STUDENT;
 
         // create a student
-        Student currStudent = new Student(id, firstName, lastName, username, password, type);
+        Student currStudent = new Student(id, firstName, lastName, username, password, email, phoneNumber, type);
 
         // array list of UUIDs corresponding to resumes
         JSONArray studentResumesJSON = (JSONArray) studentJSON.get(STUDENT_RESUMES);

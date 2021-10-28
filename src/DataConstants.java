@@ -12,6 +12,8 @@ public abstract class DataConstants {
   protected static final String STUDENT_FILE_NAME = "src/student.json";
   protected static final String STUDENT_RESUMES = "resumes";
   protected static final String STUDENT_SAVED_LISTINGS = "savedListings";
+  protected static final String STUDENT_EMAIL = "email";
+  protected static final String STUDENT_PHONE_NUMBER = "phoneNumber";
 
   // employer specific constants
   protected static final String EMPLOYER_FILE_NAME = "src/employer.json";
@@ -39,8 +41,6 @@ public abstract class DataConstants {
   // resume constants
   protected static final String RESUME_FILE_NAME = "src/resume.json";
   protected static final String RESUME_ID = "id";
-  protected static final String RESUME_EMAIL = "eMail";
-  protected static final String RESUME_PHONE_NUM = "phoneNum";
 
   protected static final String RESUME_EDUCATION_SECTION = "education";
   protected static final String EDUCATION_UNIVERSITY = "university";

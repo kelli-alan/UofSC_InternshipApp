@@ -10,7 +10,9 @@
     "id": "c05dd51b-8665-4093-b637-52535c3e7258",
     "type": "STUDENT",
     "resumes": ["eb9e9de7-8fed-487c-97c7-be730dd3f452"],
-    "username": "jsmith"
+    "username": "jsmith",
+    "phoneNumber": "(803) 555-1578",
+    "email": "jsmith@yahoo.com"
   },
   {
     "firstName": "Ana",
@@ -20,6 +22,8 @@
     "id": "ccf6b34f-caba-4100-880e-c4b87fb35dba",
     "type": "STUDENT",
     "resumes": ["d7b13acd-61b8-401b-ae33-64bdca554336"],
-    "username": "edwards_a"
+    "username": "edwards_a",
+    "phoneNumber": "(803) 746-8164",
+    "email": "anaedwards@gmail.com"
   }
 ]
