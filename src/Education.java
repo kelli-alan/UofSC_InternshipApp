@@ -110,8 +110,8 @@ public class Education {
 
     String ret = university + "\n" + city + ", " + state;
     ret += "\n" + degreeType + " in " + major;
-    if (minor != null)
-      ret += "\nMinor in" + minor;
+    if (minor != "")
+      ret += "\nMinor in " + minor;
     if (GPA != 0)
       ret += "\n" +GPA + " GPA";
     ret += "\nGraduation " + gradMonth + " " + gradYear;

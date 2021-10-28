@@ -238,9 +238,10 @@ public class InternshipUI {
         scanner.nextLine();
         while(command != 4) {
             switch(command) {
-                case 1: //view all resumes
+                case 1: displayResumes();
                 break;
-                case 2: //create resume
+                case 2: clearScreen();
+                createResume();
                 break;
                 case 3: //edit resume
                 break;
@@ -505,6 +506,12 @@ public class InternshipUI {
           month = Month.DECEMBER;
         }
         return month;
+      }
+
+      private void displayResumes() {
+          for(int i = 0; i < student.getResumes().size(); i++) {
+              System.out.println(student.displayResume(i));
+          }
       }
 
     public static void main(String[] args) {
