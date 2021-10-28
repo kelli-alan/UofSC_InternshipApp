@@ -1,1 +1,141 @@
-[{"skills":["Java","C++","R","Unix\/Linux","Debugging","Assembling computers"],"education":[{"gradMonth":5,"major":"Computer Science","minor":"Mathematics","city":"Columbia","university":"University of South Carolina","degreeType":"Bachelor of Science in Computer Science","gpa":3.5,"state":"SC","gradYear":2024},{"gradMonth":12,"major":"Computer Technology Applications","minor":"","city":"Columbia","university":"Midlands Technical College","degreeType":"Associate","gpa":0.0,"state":"SC","gradYear":2021}],"workExperiences":[{"ongoing":false,"responsibilities":["Improved customer service skills by answering customer phone calls daily","Developed teamwork skills by working with 3-4 other cashiers"],"startMonth":10,"city":"Lexington","startYear":2019,"company":"Office Depot","position":"Cashier","state":"SC","endMonth":3,"endYear":2020},{"ongoing":true,"responsibilities":["Assisted customers remotely with computer issues"],"startMonth":6,"city":"Columbia","startYear":2020,"company":"BlueCross BlueShield","position":"Front Desk IT Intern","state":"SC"}],"phoneNum":"(803)-555-1921","id":"eb9e9de7-8fed-487c-97c7-be730dd3f452","eMail":"jsmith@yahoo.com","extracurriculars":[{"ongoing":true,"startMonth":10,"activities":["Participated in a Code-a-thon"],"startYear":2020,"position":"member","title":"Association for Computing Machinery"},{"ongoing":false,"startMonth":10,"activities":["Participated in a capture-the-flag cybersecurity competition with 3 other members","Attended weekly meetings to improve cybersecurity skills"],"startYear":2020,"position":"member","endMonth":6,"title":"Cybersecurity Club","endYear":2021}]},{"skills":["Matlab","Java","Github","C++","Compiler design","Assembling computers"],"education":[{"gradMonth":12,"major":"Computer Engineering","minor":"","city":"Columbia","university":"University of South Carolina","degreeType":"Bachelor of Science in Engineering in Computer Engineering","gpa":3.84,"state":"SC","gradYear":2022}],"workExperiences":[{"ongoing":true,"responsibilities":["Helped freshmen in computer related fields adjust to college","Tutored students in Algorithmic Design"],"startMonth":1,"city":"Columbia","startYear":2021,"company":"UofSC Student Success Center","position":"Peer Mentor","state":"SC"}],"phoneNum":"(921)-555-7654","id":"d7b13acd-61b8-401b-ae33-64bdca554336","eMail":"anaedwards@gmail.com","extracurriculars":[{"ongoing":true,"startMonth":1,"activities":["Assisted the President with organizing weekly meetings","Led an educational booth during Engineering Week"],"startYear":2018,"position":"Vice President","title":"Society of Women Engineers"}]}]
+[
+  {
+    "skills": [
+      "Java",
+      "C++",
+      "R",
+      "Unix/Linux",
+      "Debugging",
+      "Assembling computers"
+    ],
+    "education": [
+      {
+        "gradMonth": 5,
+        "major": "Computer Science",
+        "minor": "Mathematics",
+        "city": "Columbia",
+        "university": "University of South Carolina",
+        "degreeType": "Bachelor of Science in Computer Science",
+        "gpa": 3.5,
+        "state": "SC",
+        "gradYear": 2024
+      },
+      {
+        "gradMonth": 12,
+        "major": "Computer Technology Applications",
+        "minor": "",
+        "city": "Columbia",
+        "university": "Midlands Technical College",
+        "degreeType": "Associate",
+        "gpa": 0.0,
+        "state": "SC",
+        "gradYear": 2021
+      }
+    ],
+    "workExperiences": [
+      {
+        "ongoing": false,
+        "responsibilities": [
+          "Improved customer service skills by answering customer phone calls daily",
+          "Developed teamwork skills by working with 3-4 other cashiers"
+        ],
+        "startMonth": 10,
+        "city": "Lexington",
+        "startYear": 2019,
+        "company": "Office Depot",
+        "position": "Cashier",
+        "state": "SC",
+        "endMonth": 3,
+        "endYear": 2020
+      },
+      {
+        "ongoing": true,
+        "responsibilities": [
+          "Assisted customers remotely with computer issues"
+        ],
+        "startMonth": 6,
+        "city": "Columbia",
+        "startYear": 2020,
+        "company": "BlueCross BlueShield",
+        "position": "Front Desk IT Intern",
+        "state": "SC"
+      }
+    ],
+    "id": "eb9e9de7-8fed-487c-97c7-be730dd3f452",
+    "extracurriculars": [
+      {
+        "ongoing": true,
+        "startMonth": 10,
+        "activities": ["Participated in a Code-a-thon"],
+        "startYear": 2020,
+        "position": "member",
+        "title": "Association for Computing Machinery"
+      },
+      {
+        "ongoing": false,
+        "startMonth": 10,
+        "activities": [
+          "Participated in a capture-the-flag cybersecurity competition with 3 other members",
+          "Attended weekly meetings to improve cybersecurity skills"
+        ],
+        "startYear": 2020,
+        "position": "member",
+        "endMonth": 6,
+        "title": "Cybersecurity Club",
+        "endYear": 2021
+      }
+    ]
+  },
+  {
+    "skills": [
+      "Matlab",
+      "Java",
+      "Github",
+      "C++",
+      "Compiler design",
+      "Assembling computers"
+    ],
+    "education": [
+      {
+        "gradMonth": 12,
+        "major": "Computer Engineering",
+        "minor": "",
+        "city": "Columbia",
+        "university": "University of South Carolina",
+        "degreeType": "Bachelor of Science in Engineering in Computer Engineering",
+        "gpa": 3.84,
+        "state": "SC",
+        "gradYear": 2022
+      }
+    ],
+    "workExperiences": [
+      {
+        "ongoing": true,
+        "responsibilities": [
+          "Helped freshmen in computer related fields adjust to college",
+          "Tutored students in Algorithmic Design"
+        ],
+        "startMonth": 1,
+        "city": "Columbia",
+        "startYear": 2021,
+        "company": "UofSC Student Success Center",
+        "position": "Peer Mentor",
+        "state": "SC"
+      }
+    ],
+    "id": "d7b13acd-61b8-401b-ae33-64bdca554336",
+    "extracurriculars": [
+      {
+        "ongoing": true,
+        "startMonth": 1,
+        "activities": [
+          "Assisted the President with organizing weekly meetings",
+          "Led an educational booth during Engineering Week"
+        ],
+        "startYear": 2018,
+        "position": "Vice President",
+        "title": "Society of Women Engineers"
+      }
+    ]
+  }
+]

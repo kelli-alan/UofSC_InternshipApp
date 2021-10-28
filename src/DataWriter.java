@@ -197,8 +197,6 @@ public class DataWriter extends DataConstants {
   public static JSONObject getResumeJSON(Resume resume) {
     JSONObject resumeDetails = new JSONObject();
     resumeDetails.put(RESUME_ID, resume.getUUID().toString());
-    resumeDetails.put(RESUME_EMAIL, resume.getEMail());
-    resumeDetails.put(RESUME_PHONE_NUM, resume.getPhoneNum());
 
     // education section
     ArrayList<Education> educationList = resume.getEducations();

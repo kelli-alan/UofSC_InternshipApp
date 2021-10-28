@@ -29,9 +29,9 @@ public class InternshipApp {
 
     public void logout() {
         System.out.println("Thank you for using the Internship App");
-        DataWriter.saveUsers();
-        DataWriter.saveResumes();
-        DataWriter.saveListings();
+       // DataWriter.saveUsers();
+       // DataWriter.saveResumes();
+       // DataWriter.saveListings();
         System.exit(0);
     }
 

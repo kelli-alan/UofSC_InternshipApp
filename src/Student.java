@@ -48,16 +48,9 @@ public class Student extends User {
 
   public void createResume() {
 
-    System.out.println("Enter email: ");
-    String eMail = key.nextLine();
-
-    System.out.println("Enter phone number: ");
-    String phoneNum = key.nextLine();
-
-    Resume res = new Resume(UUID.randomUUID(), eMail, phoneNum);
+    Resume res = new Resume();
 
     clearScreen();
-
     String cont = "y";
 
     while (cont.equalsIgnoreCase("y")) {

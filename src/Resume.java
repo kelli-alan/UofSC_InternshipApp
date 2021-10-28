@@ -8,18 +8,14 @@ import java.util.UUID;
 public class Resume {
 
   private UUID id;
-  private String eMail;
-  private String phoneNum;
   private ArrayList<String> skills;
   private ArrayList<Education> education;
   private ArrayList<WorkExperience> workExperiences;
   private ArrayList<Extracurricular> extracurriculars;
 
   // constructor for reading from database
-  public Resume(UUID id, String email, String phoneNum) {
+  public Resume(UUID id) {
     this.id = id;
-    this.eMail = email;
-    this.phoneNum = phoneNum;
     this.skills = new ArrayList<String>();
     this.education = new ArrayList<Education>();
     this.workExperiences = new ArrayList<WorkExperience>();
@@ -27,37 +23,16 @@ public class Resume {
   }
 
   // constructor for new resumes that do not have an id yet
-  public Resume(String email, String phoneNum) {
+  public Resume() {
     this.id = UUID.randomUUID();
-    this.eMail = email;
-    this.phoneNum = phoneNum;
     this.skills = new ArrayList<String>();
     this.education = new ArrayList<Education>();
     this.workExperiences = new ArrayList<WorkExperience>();
     this.extracurriculars = new ArrayList<Extracurricular>();
   }
 
-  public void setEmail(String eMail) {
-    if(eMail != "" && eMail.contains("@"));
-      this.eMail = eMail;
-  }
-
-  public void setPhoneNum(String phoneNum) {
-    if(phoneNum.length() >= 10) {
-      this.phoneNum = phoneNum;
-    }
-  }
-
   public UUID getUUID() {
     return this.id;
-  }
-
-  public String getEMail() {
-    return this.eMail;
-  }
-
-  public String getPhoneNum() {
-    return this.phoneNum;
   }
 
   public ArrayList<String> getSkills() {
@@ -113,9 +88,7 @@ public class Resume {
   }
 
   public String toString() {
-    String ret = "E-mail: " + eMail + "\n" + "Phone Number: " + phoneNum + "\n";
-
-    ret += "Education:\n";
+    String ret = "Education:\n";
     for (int i = 0; i < education.size(); i++) {
       ret += "\t" + education.get(i).toString() + "\n";
     }

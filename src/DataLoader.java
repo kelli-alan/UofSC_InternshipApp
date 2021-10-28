@@ -19,11 +19,9 @@ public class DataLoader extends DataConstants {
       for (int i = 0; i < resumesJSON.size(); i++) {
         JSONObject resumeJSON = (JSONObject) resumesJSON.get(i);
         UUID id = UUID.fromString((String) resumeJSON.get(RESUME_ID));
-        String eMail = (String) resumeJSON.get(RESUME_EMAIL);
-        String phoneNum = (String) resumeJSON.get(RESUME_PHONE_NUM);
 
         // creates base resume
-        resumes.add(new Resume(id, eMail, phoneNum));
+        resumes.add(new Resume(id));
 
         // add education section, an array list of educations
         JSONArray educationsJSON = (JSONArray) resumeJSON.get(RESUME_EDUCATION_SECTION);
