@@ -5,26 +5,25 @@ import java.util.ArrayList;
  */
 public class InternshipApp {
     
-    private UserList userlist;
-    private ListingList listinglist;
-    private User user;
+    private UserList userList;
+    private ListingList listingList;
     private ArrayList<User> users;
     private ResumeList resumeList;
     private ArrayList<Listing> listing;
 
     public InternshipApp() {
-        this.userlist = userlist.getInstance();
-        this.users = this.userlist.getAllUsers();
-        this.listinglist = listinglist.getInstance();
-        this.resumeList = resumeList.getInstance();
+        this.userList = UserList.getInstance();
+        this.users = this.userList.getAllUsers();
+        this.listingList = ListingList.getInstance();
+        this.resumeList = ResumeList.getInstance();
         this.listing = new ArrayList<Listing>();
-        this.listing = this.listinglist.getAllListings();
+        this.listing = this.listingList.getAllListings();
     }
 
     //logs user in from userlist's arraylist
     public User login(String username, String password) {
         
-        return userlist.hasUser(username, password);
+        return userList.hasUser(username, password);
     }
 
     public void logout() {
