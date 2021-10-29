@@ -160,13 +160,6 @@ public class Employer extends User {
     return listing.getApplications();
   }
 
-  //This method probably doesn't need to exist in Employer after UI handles
-  //almost all of our interface. 
-  private void clearScreen() {
-    System.out.print("\033[H\033[2J");
-    System.out.flush();
-  }
-
   /**
    * Delete's a listing by having an employer enter the listing ID
    * and has a corresponding error message if they input an invalid ID.
