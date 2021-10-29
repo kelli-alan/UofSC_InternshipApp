@@ -17,7 +17,17 @@ public class Student extends User {
   private String phoneNumber;
   private String email;
 
-  // Constructor for loading students who have an id.
+  /**
+   * Constructor for loading students who have a pre-existing id.
+   * @param id
+   * @param firstName
+   * @param lastName
+   * @param username
+   * @param password
+   * @param email
+   * @param phoneNumber
+   * @param STUDENT
+   */
   public Student(UUID id, String firstName, String lastName, String username, String password, String email, String phoneNumber, Users STUDENT) {
     super(id, firstName, lastName, username, password, STUDENT);
     this.email = email;
@@ -28,7 +38,14 @@ public class Student extends User {
     this.listingApplications = new ArrayList<Resume>();
   }
 
-  // Constructor for creating students who need an id.
+  /**
+   * Constructor for creating students who need an id.
+   * @param firstName
+   * @param lastName
+   * @param username
+   * @param password
+   * @param USER_TYPE_STUDENT
+   */
   public Student(String firstName, String lastName, String username, String password, Users USER_TYPE_STUDENT) {
     super(firstName, lastName, username, password, USER_TYPE_STUDENT);
     this.resumes = new ArrayList<Resume>();
