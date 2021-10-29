@@ -7,8 +7,16 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+/**
+ * Loads data from JSON files
+ * @authors Kelli Alan and Evan Grunewald
+ */
 public class DataLoader extends DataConstants {
 
+  /**
+   * Loads all resume data from resume.json
+   * @return an ArrayList containing all student's resumes
+   */
   public static ArrayList<Resume> loadResumes() {
     ArrayList<Resume> resumes = new ArrayList<Resume>();
     try {
@@ -34,7 +42,9 @@ public class DataLoader extends DataConstants {
           String degreeType = (String) educationJSON.get(EDUCATION_DEGREE_TYPE);
           String major = (String) educationJSON.get(EDUCATION_MAJOR);
           String minor = (String) educationJSON.get(EDUCATION_MINOR);
-          Month gradMonth = Month.values()[((Long) educationJSON.get(EDUCATION_GRAD_MONTH)).intValue() - 1];
+          // index into Month enum to convert stored integer to Month type
+          Month gradMonth = Month.values()
+                                  [((Long) educationJSON.get(EDUCATION_GRAD_MONTH)).intValue() - 1];
           int gradYear = ((Long) educationJSON.get(EDUCATION_GRAD_YEAR)).intValue();
           double gpa = ((Double) educationJSON.get(EDUCATION_GPA)).doubleValue();
 
@@ -55,7 +65,8 @@ public class DataLoader extends DataConstants {
         for (int j = 0; j < workExperiencesJSON.size(); j++) {
           JSONObject workExperienceJSON = (JSONObject) workExperiencesJSON.get(j);
           String position = (String) workExperienceJSON.get(EXPERIENCE_POSITION);
-          Month startMonth = Month.values()[((Long) workExperienceJSON.get(EXPERIENCE_START_MONTH)).intValue() - 1];
+          Month startMonth = Month.values()
+                          [((Long) workExperienceJSON.get(EXPERIENCE_START_MONTH)).intValue() - 1];
           int startYear = ((Long) workExperienceJSON.get(EXPERIENCE_START_YEAR)).intValue();
           boolean ongoing = (Boolean) workExperienceJSON.get(EXPERIENCE_ONGOING);
           String company = (String) workExperienceJSON.get(WORK_EXPERIENCE_COMPANY);
@@ -63,9 +74,13 @@ public class DataLoader extends DataConstants {
           String state = (String) workExperienceJSON.get(WORK_EXPERIENCE_STATE);
 
           // create base work experience
-          WorkExperience currXP = new WorkExperience(position, startMonth, startYear, company, city, state);
+          WorkExperience currXP = 
+                          new WorkExperience(position, startMonth, startYear, company, city, state);
+          
+          // checks that an end date exists before attempting to load; avoids null data
           if (!ongoing) {
-            Month endMonth = Month.values()[((Long) workExperienceJSON.get(EXPERIENCE_END_MONTH)).intValue() - 1];
+            Month endMonth = Month.values()
+                            [((Long) workExperienceJSON.get(EXPERIENCE_END_MONTH)).intValue() - 1];
             int endYear = ((Long) workExperienceJSON.get(EXPERIENCE_END_YEAR)).intValue();
 
             // add end date, error checking done within the Experience class
@@ -73,8 +88,8 @@ public class DataLoader extends DataConstants {
           }
 
           // add responsibilities array to work experience
-          JSONArray workExperienceResponsibilitiesJSON = (JSONArray) workExperienceJSON
-              .get(WORK_EXPERIENCE_RESPONSIBILITIES);
+          JSONArray workExperienceResponsibilitiesJSON = 
+                              (JSONArray) workExperienceJSON.get(WORK_EXPERIENCE_RESPONSIBILITIES);
 
           for (int k = 0; k < workExperienceResponsibilitiesJSON.size(); k++) {
             currXP.addResponsibility(workExperienceResponsibilitiesJSON.get(k).toString());
@@ -85,11 +100,14 @@ public class DataLoader extends DataConstants {
 
         }
 
-        JSONArray extracurricularsJSON = (JSONArray) resumeJSON.get(RESUME_EXTRACURRICULARS_SECTION);
+        // add extracurriculars section
+        JSONArray extracurricularsJSON = 
+                                        (JSONArray) resumeJSON.get(RESUME_EXTRACURRICULARS_SECTION);
         for (int j = 0; j < extracurricularsJSON.size(); j++) {
           JSONObject extracurricularJSON = (JSONObject) extracurricularsJSON.get(j);
           String position = (String) extracurricularJSON.get(EXPERIENCE_POSITION);
-          Month startMonth = Month.values()[((Long) extracurricularJSON.get(EXPERIENCE_START_MONTH)).intValue() - 1];
+          Month startMonth = Month.values()
+                          [((Long) extracurricularJSON.get(EXPERIENCE_START_MONTH)).intValue() - 1];
           int startYear = ((Long) extracurricularJSON.get(EXPERIENCE_START_YEAR)).intValue();
           boolean ongoing = (Boolean) extracurricularJSON.get(EXPERIENCE_ONGOING);
           String title = (String) extracurricularJSON.get(EXTRACURRICULAR_TITLE);
@@ -99,7 +117,8 @@ public class DataLoader extends DataConstants {
 
           // add end date to currEC if applicable
           if (!ongoing) {
-            Month endMonth = Month.values()[((Long) extracurricularJSON.get(EXPERIENCE_END_MONTH)).intValue() - 1];
+            Month endMonth = Month.values()
+                            [((Long) extracurricularJSON.get(EXPERIENCE_END_MONTH)).intValue() - 1];
             int endYear = ((Long) extracurricularJSON.get(EXPERIENCE_END_YEAR)).intValue();
 
             currEC.addEndDate(endMonth, endYear);
@@ -130,6 +149,10 @@ public class DataLoader extends DataConstants {
     return resumes;
   }
 
+  /**
+   * loads all student data from student.json
+   * @return ArrayList containing all students
+   */
   public static ArrayList<Student> loadStudents() {
     ArrayList<Student> students = new ArrayList<Student>();
 
@@ -141,10 +164,11 @@ public class DataLoader extends DataConstants {
       // load all resumes, so they can be added to the correct student
       ArrayList<Resume> studentResumes = loadResumes();
 
-      // load all listings, so they can be added to the correct student's saved
-      // listings
+      /* load all listings, so they can be added to the correct student's saved
+       listings */
       ArrayList<Listing> listings = loadListings();
 
+      // parse student properties
       for (int i = 0; i < studentsJSON.size(); i++) {
         JSONObject studentJSON = (JSONObject) studentsJSON.get(i);
         UUID id = UUID.fromString((String) studentJSON.get(USER_ID));
@@ -157,13 +181,13 @@ public class DataLoader extends DataConstants {
         Users type = Users.STUDENT;
 
         // create a student
-        Student currStudent = new Student(id, firstName, lastName, username, password, email, phoneNumber, type);
+        Student currStudent = 
+                new Student(id, firstName, lastName, username, password, email, phoneNumber, type);
 
         // array list of UUIDs corresponding to resumes
         JSONArray studentResumesJSON = (JSONArray) studentJSON.get(STUDENT_RESUMES);
 
-        // find matching resumes and add to current student; studentResumesJSON only
-        // holds UUID
+        // find matching resumes and add to current student's ArrayList of resumes
         for (int j = 0; j < studentResumesJSON.size(); j++) {
           for (int k = 0; k < studentResumes.size(); k++) {
             if (studentResumesJSON.get(j).equals((studentResumes.get(k)).getUUID().toString())) {
@@ -185,6 +209,7 @@ public class DataLoader extends DataConstants {
           }
         }
 
+        // add student ArrayList of all students
         students.add(currStudent);
 
       }
@@ -194,6 +219,10 @@ public class DataLoader extends DataConstants {
     return students;
   }
 
+  /**
+   * Loads all employer data from employer.json
+   * @return ArrayList of all employers
+   */
   public static ArrayList<Employer> loadEmployers() {
     ArrayList<Employer> employers = new ArrayList<Employer>();
 
@@ -202,9 +231,10 @@ public class DataLoader extends DataConstants {
       JSONParser parser = new JSONParser();
       JSONArray employersJSON = (JSONArray) parser.parse(reader);
 
-      // load all listings, so they can be added to the correct employer
+      // load all listings, so they can be matched to the correct employer
       ArrayList<Listing> listings = loadListings();
 
+      // parse employer properties
       for (int i = 0; i < employersJSON.size(); i++) {
         JSONObject employerJSON = (JSONObject) employersJSON.get(i);
         UUID id = UUID.fromString((String) employerJSON.get(USER_ID));
@@ -217,9 +247,10 @@ public class DataLoader extends DataConstants {
         String companyDescription = (String) employerJSON.get(EMPLOYER_COMPANY_DESCRIPTION);
 
         // create base employer
-        Employer currEmployer = new Employer(id, firstName, lastName, username, password, type, companyName,
-            companyDescription);
+        Employer currEmployer = new Employer(id, firstName, lastName, username, password, type, 
+                                                companyName, companyDescription);
 
+        // array of UUIDs of listings created by current employer
         JSONArray employerListingsJSON = (JSONArray) employerJSON.get(EMPLOYER_INTERNSHIP_LISTINGS);
 
         // find matching listings and add to current employer
@@ -230,6 +261,7 @@ public class DataLoader extends DataConstants {
             }
           }
         }
+        // add employer to ArrayList of all employers
         employers.add(currEmployer);
       }
     } catch (Exception e) {
@@ -238,6 +270,10 @@ public class DataLoader extends DataConstants {
     return employers;
   }
 
+  /**
+   * Loads all data from moderator.json
+   * @return ArrayList of all moderators
+   */
   public static ArrayList<Moderator> loadModerators() {
     ArrayList<Moderator> moderators = new ArrayList<Moderator>();
 
@@ -246,6 +282,7 @@ public class DataLoader extends DataConstants {
       JSONParser parser = new JSONParser();
       JSONArray moderatorsJSON = (JSONArray) parser.parse(reader);
 
+      // parse moderator properties
       for (int i = 0; i < moderatorsJSON.size(); i++) {
         JSONObject moderatorJSON = (JSONObject) moderatorsJSON.get(i);
         UUID id = UUID.fromString((String) moderatorJSON.get(USER_ID));
@@ -254,6 +291,7 @@ public class DataLoader extends DataConstants {
         String username = (String) moderatorJSON.get(USER_USERNAME);
         String password = (String) moderatorJSON.get(USER_PASSWORD);
         Users type = Users.MODERATOR;
+        // create moderator and add to ArrayList of all moderators
         moderators.add(new Moderator(id, firstName, lastName, username, password, type));
       }
     } catch (Exception e) {
@@ -262,29 +300,44 @@ public class DataLoader extends DataConstants {
     return moderators;
   }
 
+  /**
+   * Combines functionality of loadStudents, loadEmployers, and loadModerators into one call
+   * @return an ArrayList of all users
+   */
   public static ArrayList<User> loadUsers() {
     ArrayList<User> users = new ArrayList<User>();
     ArrayList<Student> students = loadStudents();
     ArrayList<Employer> employers = loadEmployers();
     ArrayList<Moderator> moderators = loadModerators();
 
+    // add all students
     for (Student student : students) {
       users.add(student);
     }
 
+    // add all employers
     for (Employer employer : employers) {
       users.add(employer);
     }
 
+    // all all moderators
     for (Moderator moderator : moderators) {
       users.add(moderator);
     }
+
     return users;
 
   }
 
+  /**
+   * Loads all data from listing.json
+   * @return ArrayList of all listings created by any employer
+   */
   public static ArrayList<Listing> loadListings() {
     ArrayList<Listing> listings = new ArrayList<Listing>();
+    
+    /* load resumes to match with a listings ArrayList of applications (an application consist of   
+       just the student's resume) */
     ArrayList<Resume> studentResumes = loadResumes();
 
     try {
@@ -292,14 +345,15 @@ public class DataLoader extends DataConstants {
       JSONParser parser = new JSONParser();
       JSONArray listingsJSON = (JSONArray) parser.parse(reader);
 
+      // parse basic listing properties
       for (int i = 0; i < listingsJSON.size(); i++) {
         JSONObject listingJSON = (JSONObject) listingsJSON.get(i);
         UUID id = UUID.fromString((String) listingJSON.get(LISTING_ID));
         String jobTitle = (String) listingJSON.get(LISTING_TITLE);
         String city = (String) listingJSON.get(LISTING_CITY);
         String state = (String) listingJSON.get(LISTING_STATE);
-        Month startMonth = Month.values()[((Long) listingJSON.get(LISTING_START_MONTH)).intValue() - 1];
-        ;
+        Month startMonth = Month.values()
+                                    [((Long) listingJSON.get(LISTING_START_MONTH)).intValue() - 1];
 
         int startYear = ((Long) listingJSON.get(LISTING_START_YEAR)).intValue();
         int hours = ((Long) listingJSON.get(LISTING_HOURS_PER_WEEK)).intValue();
@@ -307,22 +361,25 @@ public class DataLoader extends DataConstants {
         boolean isRemote = (Boolean) listingJSON.get(LISTING_IS_REMOTE);
 
         // creates base listing
-        Listing currListing = new Listing(id, jobTitle, city, state, startMonth, startYear, hours, pay, isRemote);
+        Listing currListing = new Listing(id, jobTitle, city, state, startMonth, startYear, hours, 
+                                             pay, isRemote);
+        
+        // adds current listing to ArrayList of all listings
         listings.add(currListing);
 
-        // add list of skills
+        // add list of skills desired by employer
         JSONArray skillsJSON = (JSONArray) listingJSON.get(LISTING_DESIRED_SKILLS);
         for (int j = 0; j < skillsJSON.size(); j++) {
           currListing.addSkills(skillsJSON.get(j).toString());
         }
 
-        // add list of duties
+        // add list of duties for the listing
         JSONArray dutiesJSON = (JSONArray) listingJSON.get(LISTING_DUTIES);
         for (int j = 0; j < dutiesJSON.size(); j++) {
           currListing.addDuties(dutiesJSON.get(j).toString());
         }
 
-        // add list of applications(resumes from resume id)
+        // add list of applications (load resumes by matching resume id's)
         JSONArray appsJSON = (JSONArray) listingJSON.get(LISTING_APPLICATIONS);
         for (int j = 0; j < appsJSON.size(); j++) {
           for (int k = 0; k < studentResumes.size(); k++) {

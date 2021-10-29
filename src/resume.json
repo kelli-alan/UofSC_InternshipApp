@@ -8,30 +8,6 @@
       "Debugging",
       "Assembling computers"
     ],
-    "education": [
-      {
-        "gradMonth": 5,
-        "major": "Computer Science",
-        "minor": "Mathematics",
-        "city": "Columbia",
-        "university": "University of South Carolina",
-        "degreeType": "Bachelor of Science in Computer Science",
-        "gpa": 3.5,
-        "state": "SC",
-        "gradYear": 2024
-      },
-      {
-        "gradMonth": 12,
-        "major": "Computer Technology Applications",
-        "minor": "",
-        "city": "Columbia",
-        "university": "Midlands Technical College",
-        "degreeType": "Associate",
-        "gpa": 0.0,
-        "state": "SC",
-        "gradYear": 2021
-      }
-    ],
     "workExperiences": [
       {
         "ongoing": false,
@@ -59,6 +35,30 @@
         "company": "BlueCross BlueShield",
         "position": "Front Desk IT Intern",
         "state": "SC"
+      }
+    ],
+    "education": [
+      {
+        "gradMonth": 5,
+        "major": "Computer Science",
+        "minor": "Mathematics",
+        "city": "Columbia",
+        "university": "University of South Carolina",
+        "degreeType": "Bachelor of Science in Computer Science",
+        "gpa": 3.5,
+        "state": "SC",
+        "gradYear": 2024
+      },
+      {
+        "gradMonth": 12,
+        "major": "Computer Technology Applications",
+        "minor": "",
+        "city": "Columbia",
+        "university": "Midlands Technical College",
+        "degreeType": "Associate",
+        "gpa": 0.0,
+        "state": "SC",
+        "gradYear": 2021
       }
     ],
     "id": "eb9e9de7-8fed-487c-97c7-be730dd3f452",
@@ -95,19 +95,6 @@
       "Compiler design",
       "Assembling computers"
     ],
-    "education": [
-      {
-        "gradMonth": 12,
-        "major": "Computer Engineering",
-        "minor": "",
-        "city": "Columbia",
-        "university": "University of South Carolina",
-        "degreeType": "Bachelor of Science in Engineering in Computer Engineering",
-        "gpa": 3.84,
-        "state": "SC",
-        "gradYear": 2022
-      }
-    ],
     "workExperiences": [
       {
         "ongoing": true,
@@ -121,6 +108,19 @@
         "company": "UofSC Student Success Center",
         "position": "Peer Mentor",
         "state": "SC"
+      }
+    ],
+    "education": [
+      {
+        "gradMonth": 12,
+        "major": "Computer Engineering",
+        "minor": "",
+        "city": "Columbia",
+        "university": "University of South Carolina",
+        "degreeType": "Bachelor of Science in Engineering in Computer Engineering",
+        "gpa": 3.84,
+        "state": "SC",
+        "gradYear": 2022
       }
     ],
     "id": "d7b13acd-61b8-401b-ae33-64bdca554336",

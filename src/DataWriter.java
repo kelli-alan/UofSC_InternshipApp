@@ -1,18 +1,30 @@
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+/**
+ * @author Kelli Alan
+ * Writes data to the appropriate JSON file
+ */
 public class DataWriter extends DataConstants {
 
+  /**
+   * Write user data to JSON file matching a user's type
+   * Combines functionality of saveStudents, saveEmployers, and saveModerators into one call for
+   * simplicity
+   */
   public static void saveUsers() {
     saveStudents();
     saveEmployers();
     saveModerators();
   }
 
+  /**
+   * Writes all listings to listing.json
+   */
   public static void saveListings() {
     ListingList listings = ListingList.getInstance();
     ArrayList<Listing> listingList = listings.getAllListings();
@@ -30,6 +42,9 @@ public class DataWriter extends DataConstants {
     }
   }
 
+  /**
+   * Writes all resumes to resume.json
+   */
   public static void saveResumes() {
     ResumeList resumes = ResumeList.getInstance();
     ArrayList<Resume> resumeList = resumes.getResumes();
@@ -47,6 +62,9 @@ public class DataWriter extends DataConstants {
     }
   }
 
+  /**
+   * Write all student data to student.json
+   */
   public static void saveStudents() {
     ArrayList<Student> studentList = UserList.getInstance().getAllStudents();
     JSONArray jsonStudents = new JSONArray();
@@ -63,6 +81,9 @@ public class DataWriter extends DataConstants {
     }
   }
 
+  /**
+   * Write all employer data to employer.json
+   */
   public static void saveEmployers() {
     ArrayList<Employer> employerList = UserList.getInstance().getAllEmployers();
     JSONArray jsonEmployers = new JSONArray();
@@ -79,6 +100,9 @@ public class DataWriter extends DataConstants {
     }
   }
 
+  /**
+   * Write all moderator data to moderator.json
+   */
   public static void saveModerators() {
     ArrayList<Moderator> moderatorList = UserList.getInstance().getAllModerators();
     JSONArray jsonModerators = new JSONArray();
@@ -95,8 +119,15 @@ public class DataWriter extends DataConstants {
     }
   }
 
-  public static JSONObject getStudentJSON(Student student) {
-    JSONObject studentDetails = new JSONObject();
+  /**
+   * Maps a student's attributes to JSON constants for storage
+   * @param student a student user
+   * @return JSONObject representing a given student
+   */
+  public static JSONObject getStudentJSON(Student student) { 
+    
+    // map base properties of a student
+    HashMap<String,Object> studentDetails = new HashMap<String,Object>();
     studentDetails.put(USER_ID, student.getID().toString());
     studentDetails.put(USER_FIRST_NAME, student.getFirstName());
     studentDetails.put(USER_LAST_NAME, student.getLastName());
@@ -106,24 +137,34 @@ public class DataWriter extends DataConstants {
     studentDetails.put(STUDENT_PHONE_NUMBER, student.getPhoneNumber());
     studentDetails.put(USER_TYPE, student.getType().toString());
 
+    
+    // store resume UUIDs for reference to their resumes
     ArrayList<Resume> studentResumes = student.getResumes();
-    JSONArray studentResumeIDs = new JSONArray();
+    ArrayList<String> studentResumeIDs = new ArrayList<String>();
     for (Resume resume : studentResumes) {
       studentResumeIDs.add(resume.getUUID().toString());
     }
     studentDetails.put(STUDENT_RESUMES, studentResumeIDs);
+    
+    // store listing UUIDs for reference to their saved listings
     ArrayList<Listing> savedListings = student.getSavedListings();
-    JSONArray savedListingIDs = new JSONArray();
+    ArrayList<String> savedListingIDs = new ArrayList<String>();
     for (Listing savedListing : savedListings) {
       savedListingIDs.add(savedListing.getID().toString());
     }
     studentDetails.put(STUDENT_SAVED_LISTINGS, savedListingIDs);
 
-    return studentDetails;
+    return new JSONObject(studentDetails);
   }
 
+  /**
+   * Maps an employer's attributes to JSON constants for storage
+   * @param employer an employer user
+   * @return JSONObject representing a given employer
+   */
   public static JSONObject getEmployerJSON(Employer employer) {
-    JSONObject employerDetails = new JSONObject();
+    // maps base properties of an employer
+    HashMap<String,Object> employerDetails = new HashMap<String,Object>();
     employerDetails.put(USER_ID, employer.getID().toString());
     employerDetails.put(USER_FIRST_NAME, employer.getFirstName());
     employerDetails.put(USER_LAST_NAME, employer.getLastName());
@@ -133,19 +174,25 @@ public class DataWriter extends DataConstants {
     employerDetails.put(EMPLOYER_COMPANY_NAME, employer.getCompanyName());
     employerDetails.put(EMPLOYER_COMPANY_DESCRIPTION, employer.getCompanyDescription());
 
+    // stores employer's listings as UUIDs
     ArrayList<Listing> employerListings = employer.getListings();
-    JSONArray employerListingIDs = new JSONArray();
+    ArrayList<String> employerListingIDs = new ArrayList<String>();
     for (Listing listing : employerListings) {
       employerListingIDs.add(listing.getID().toString());
     }
 
     employerDetails.put(EMPLOYER_INTERNSHIP_LISTINGS, employerListingIDs);
 
-    return employerDetails;
+    return new JSONObject(employerDetails);
   }
 
+  /**
+   * Maps a moderator's attributes to JSON constants for storage
+   * @param moderator a moderator user
+   * @return JSONObject representing a given moderator
+   */
   public static JSONObject getModeratorJSON(Moderator moderator) {
-    JSONObject moderatorDetails = new JSONObject();
+    HashMap<String,Object> moderatorDetails = new HashMap<String,Object>();
     moderatorDetails.put(USER_ID, moderator.getID().toString());
     moderatorDetails.put(USER_FIRST_NAME, moderator.getFirstName());
     moderatorDetails.put(USER_LAST_NAME, moderator.getLastName());
@@ -153,11 +200,17 @@ public class DataWriter extends DataConstants {
     moderatorDetails.put(USER_PASSWORD, moderator.getPassword());
     moderatorDetails.put(USER_TYPE, moderator.getType().toString());
 
-    return moderatorDetails;
+    return new JSONObject(moderatorDetails);
   }
 
+  /**
+   * Maps a listing's attributes to JSON constants for storage
+   * @param listing a job listing
+   * @return JSONObject representation of a job listing
+   */
   public static JSONObject getListingJSON(Listing listing) {
-    JSONObject listingDetails = new JSONObject();
+    // maps all listing properties directly except applications
+    HashMap<String,Object> listingDetails = new HashMap<String,Object>();
     listingDetails.put(LISTING_ID, listing.getID().toString());
     listingDetails.put(LISTING_TITLE, listing.getJobTitle());
     listingDetails.put(LISTING_CITY, listing.getCity());
@@ -167,25 +220,13 @@ public class DataWriter extends DataConstants {
     listingDetails.put(LISTING_HOURS_PER_WEEK, listing.getHoursPerWeek());
     listingDetails.put(LISTING_PAY, listing.getPay());
     listingDetails.put(LISTING_IS_REMOTE, listing.getIsRemote());
-
-    ArrayList<String> listingSkills = listing.getSkills();
-    JSONArray skills = new JSONArray();
-    for (String skill : listingSkills) {
-      skills.add(skill);
-    }
-
-    listingDetails.put(LISTING_DESIRED_SKILLS, skills);
-
-    ArrayList<String> listingDuties = listing.getDuties();
-    JSONArray duties = new JSONArray();
-    for (String duty : listingDuties) {
-      duties.add(duty);
-    }
-
-    listingDetails.put(LISTING_DUTIES, duties);
-
+    listingDetails.put(LISTING_DESIRED_SKILLS, listing.getSkills());
+    listingDetails.put(LISTING_DUTIES, listing.getDuties());
+    
+    /* stores a listing's list of applications as the UUID's associated with each application(the 
+       student's resume) */
     ArrayList<Resume> listingApplications = listing.getApplications();
-    JSONArray applicationIDs = new JSONArray();
+    ArrayList<String> applicationIDs = new ArrayList<String>();
 
     for (Resume application : listingApplications) {
       applicationIDs.add(application.getUUID().toString());
@@ -193,16 +234,21 @@ public class DataWriter extends DataConstants {
 
     listingDetails.put(LISTING_APPLICATIONS, applicationIDs);
 
-    return listingDetails;
+    return new JSONObject(listingDetails);
   }
 
+  /**
+   * Maps resume properties to JSON constants for storage
+   * @param resume a student's resume
+   * @return JSONObject representation of a student's resume
+   */
   public static JSONObject getResumeJSON(Resume resume) {
-    JSONObject resumeDetails = new JSONObject();
+    HashMap<String,Object> resumeDetails = new HashMap<String, Object>();
     resumeDetails.put(RESUME_ID, resume.getUUID().toString());
 
     // education section
     ArrayList<Education> educationList = resume.getEducations();
-    JSONArray jsonEducations = new JSONArray();
+    ArrayList<JSONObject> jsonEducations = new ArrayList<JSONObject>();
 
     for (int i = 0; i < educationList.size(); i++) {
       jsonEducations.add(getEducationJSON(educationList.get(i)));
@@ -213,7 +259,7 @@ public class DataWriter extends DataConstants {
 
     // work experience section
     ArrayList<WorkExperience> workExperienceList = resume.getWorkExperiences();
-    JSONArray jsonWorkExperience = new JSONArray();
+    ArrayList<JSONObject> jsonWorkExperience = new ArrayList<JSONObject>();
 
     for (int i = 0; i < educationList.size(); i++) {
       jsonWorkExperience.add(getWorkExperienceJSON(workExperienceList.get(i)));
@@ -224,7 +270,7 @@ public class DataWriter extends DataConstants {
 
     // extracurriculars section
     ArrayList<Extracurricular> extracurricularsList = resume.getExtracurriculars();
-    JSONArray jsonExtracurricular = new JSONArray();
+    ArrayList<JSONObject> jsonExtracurricular = new ArrayList<JSONObject>();
 
     for (int i = 0; i < extracurricularsList.size(); i++) {
       jsonExtracurricular.add(getExtracurricularsJSON(extracurricularsList.get(i)));
@@ -232,20 +278,18 @@ public class DataWriter extends DataConstants {
 
     resumeDetails.put(RESUME_EXTRACURRICULARS_SECTION, jsonExtracurricular);
 
-    ArrayList<String> skillsList = resume.getSkills();
-    JSONArray jsonSkills = new JSONArray();
+    resumeDetails.put(RESUME_SKILLS, resume.getSkills());
 
-    for (String skill : skillsList) {
-      jsonSkills.add(skill);
-    }
-
-    resumeDetails.put(RESUME_SKILLS, jsonSkills);
-
-    return resumeDetails;
+    return new JSONObject(resumeDetails);
   }
 
+  /**
+   * Maps education properties to JSON constants for storage
+   * @param education a degree (earned or ongoing) and its details
+   * @return JSONObject representation of an educational experience
+   */
   public static JSONObject getEducationJSON(Education education) {
-    JSONObject educationDetails = new JSONObject();
+    HashMap<String, Object> educationDetails = new HashMap<String, Object>();
     educationDetails.put(EDUCATION_UNIVERSITY, education.getUniversity());
     educationDetails.put(EDUCATION_CITY, education.getCity());
     educationDetails.put(EDUCATION_STATE, education.getState());
@@ -256,17 +300,22 @@ public class DataWriter extends DataConstants {
     educationDetails.put(EDUCATION_GRAD_YEAR, education.getGradYear());
     educationDetails.put(EDUCATION_GPA, education.getGPA());
 
-    return educationDetails;
+    return new JSONObject(educationDetails);
   }
 
+  /**
+   * Maps work experience properties to JSON constants for storage
+   * @param workExperience a job (previous or ongoing) and its details
+   * @return JSONObject representation of a work experience
+   */
   public static JSONObject getWorkExperienceJSON(WorkExperience workExperience) {
-    JSONObject workExperienceDetails = new JSONObject();
+    HashMap<String, Object> workExperienceDetails = new HashMap<String, Object>();
     workExperienceDetails.put(EXPERIENCE_POSITION, workExperience.getPostion());
     workExperienceDetails.put(EXPERIENCE_START_MONTH, workExperience.getStartMonth().getValue());
     workExperienceDetails.put(EXPERIENCE_START_YEAR, workExperience.getStartYear());
     workExperienceDetails.put(EXPERIENCE_ONGOING, workExperience.getOngoing());
 
-    // ensure an end date exists, so null data is not stored
+    // ensure an end date exists before storing, so null data is not stored
     if (!workExperience.getOngoing()) {
       workExperienceDetails.put(EXPERIENCE_END_MONTH, workExperience.getEndMonth().getValue());
       workExperienceDetails.put(EXPERIENCE_END_YEAR, workExperience.getEndYear());
@@ -275,20 +324,20 @@ public class DataWriter extends DataConstants {
     workExperienceDetails.put(WORK_EXPERIENCE_COMPANY, workExperience.getCompany());
     workExperienceDetails.put(WORK_EXPERIENCE_CITY, workExperience.getCity());
     workExperienceDetails.put(WORK_EXPERIENCE_STATE, workExperience.getState());
+    workExperienceDetails.put(WORK_EXPERIENCE_RESPONSIBILITIES, 
+                                                              workExperience.getResponsibilities());
 
-    // adds array of responsibilities
-    ArrayList<String> workExperienceResponsibilities = workExperience.getResponsibilities();
-    JSONArray responsibilities = new JSONArray();
-    for (String responsibility : workExperienceResponsibilities) {
-      responsibilities.add(responsibility);
-    }
-    workExperienceDetails.put(WORK_EXPERIENCE_RESPONSIBILITIES, responsibilities);
-
-    return workExperienceDetails;
+    return new JSONObject(workExperienceDetails);
   }
 
+  /**
+  * Maps extracurricular properties to JSON constants for storage
+  * @param extracurricular any valuable experience (not covered in education or work experience
+  *                        sections) and its details
+  * @return JSONObject representation of an extracurricular activity
+  */
   public static JSONObject getExtracurricularsJSON(Extracurricular extracurricular) {
-    JSONObject extracurricularDetails = new JSONObject();
+    HashMap<String, Object> extracurricularDetails = new HashMap<String, Object>();
     extracurricularDetails.put(EXPERIENCE_POSITION, extracurricular.getPostion());
     extracurricularDetails.put(EXPERIENCE_START_MONTH, extracurricular.getStartMonth().getValue());
     extracurricularDetails.put(EXPERIENCE_START_YEAR, extracurricular.getStartYear());
@@ -301,17 +350,9 @@ public class DataWriter extends DataConstants {
     }
 
     extracurricularDetails.put(EXTRACURRICULAR_TITLE, extracurricular.getTitle());
+    extracurricularDetails.put(EXTRACURRICULAR_ACTIVITIES,extracurricular.getActivities());
 
-    // adds array of activities
-    ArrayList<String> extracurricularActivities = extracurricular.getActivities();
-    JSONArray activities = new JSONArray();
-    for (String activity : extracurricularActivities) {
-      activities.add(activity);
-    }
-
-    extracurricularDetails.put(EXTRACURRICULAR_ACTIVITIES, activities);
-
-    return extracurricularDetails;
+    return new JSONObject(extracurricularDetails);
   }
 
 }

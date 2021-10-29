@@ -1,1 +1,27 @@
-[{"firstName":"Bob","lastName":"Jones","internshipListings":["43e2c2a7-24f2-4066-ad6c-bd018b31d8e2","edee3bdc-1a41-4cc4-8695-35ea55361af9"],"password":"IBMRecruiter","companyName":"IBM","companyDescription":"International Business Machines invents things that matter.","id":"f7c488aa-c468-40e4-b146-cc2c8d42505e","type":"EMPLOYER","username":"jones_b"},{"firstName":"Martha","lastName":"Williams","internshipListings":[],"password":"looking4interns","companyName":"Microsoft","companyDescription":"Microsoft's mission is to empower every person and every organization on the planet to achieve more.","id":"1017967d-4f1d-4535-bda8-76b1465b41a6","type":"EMPLOYER","username":"marthaw"}]
+[
+  {
+    "firstName": "Bob",
+    "lastName": "Jones",
+    "internshipListings": [
+      "43e2c2a7-24f2-4066-ad6c-bd018b31d8e2",
+      "edee3bdc-1a41-4cc4-8695-35ea55361af9"
+    ],
+    "password": "IBMRecruiter",
+    "companyName": "IBM",
+    "companyDescription": "International Business Machines invents things that matter.",
+    "id": "f7c488aa-c468-40e4-b146-cc2c8d42505e",
+    "type": "EMPLOYER",
+    "username": "jones_b"
+  },
+  {
+    "firstName": "Martha",
+    "lastName": "Williams",
+    "internshipListings": [],
+    "password": "looking4interns",
+    "companyName": "Microsoft",
+    "companyDescription": "Microsoft's mission is to empower every person and every organization on the planet to achieve more.",
+    "id": "1017967d-4f1d-4535-bda8-76b1465b41a6",
+    "type": "EMPLOYER",
+    "username": "marthaw"
+  }
+]
