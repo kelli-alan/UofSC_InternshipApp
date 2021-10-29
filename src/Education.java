@@ -153,7 +153,7 @@ public class Education {
     }
   }
 
-  //Returns a string with all the Education fields together.
+  // Returns a string with all the Education fields together.
   public String toString() {
 
     String ret = university + "\n" + city + ", " + state;

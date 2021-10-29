@@ -17,6 +17,10 @@ public class Extracurricular extends Experience {
     this.activities = new ArrayList<String>();
   }
 
+  /**
+   * Method that adds an extracirricular activity to the ArrayList of activities.
+   * @param activity
+   */
   public void addExtracurricularActivity(String activity) {
     if (!listed(activity))
       this.activities.add(activity);

@@ -91,6 +91,7 @@ public class User {
     return this.type;
   }
 
+  // Returns the user's information to a string containing their user type, name, username, and password.
   public String toString() {
     return this.type + "\n" + this.firstName + " " + this.lastName + "\nUsername: " + this.username + "\nPassword: "
         + this.password;
