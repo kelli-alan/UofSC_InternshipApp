@@ -1,3 +1,7 @@
+/**
+ * Holds all constants needed for reading from and writing to the JSON files
+ * @author Kelli Alan
+ */
 public abstract class DataConstants {
 
   // constants for all users
@@ -38,10 +42,12 @@ public abstract class DataConstants {
   protected static final String LISTING_DESIRED_SKILLS = "desiredSkills";
   protected static final String LISTING_DUTIES = "duties";
   protected static final String LISTING_APPLICATIONS = "applications";
+  
   // resume constants
   protected static final String RESUME_FILE_NAME = "src/resume.json";
   protected static final String RESUME_ID = "id";
 
+  // resume education section
   protected static final String RESUME_EDUCATION_SECTION = "education";
   protected static final String EDUCATION_UNIVERSITY = "university";
   protected static final String EDUCATION_CITY = "city";
@@ -74,9 +80,4 @@ public abstract class DataConstants {
   protected static final String EXTRACURRICULAR_ACTIVITIES = "activities";
 
   protected static final String RESUME_SKILLS = "skills";
-
-  // user types
-  protected static final String USER_TYPE_STUDENT = "Student";
-  protected static final String USER_TYPE_EMPLOYER = "Employer";
-  protected static final String USER_TYPE_MODERATOR = "Moderator";
 }

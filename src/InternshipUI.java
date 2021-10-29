@@ -508,7 +508,7 @@ public class InternshipUI {
         return month;
       }
 
-      private void displayResumes() {
+      private void displayResumes() {   
           for(int i = 0; i < student.getResumes().size(); i++) {
               System.out.println(student.displayResume(i));
           }
