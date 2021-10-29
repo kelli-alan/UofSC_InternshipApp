@@ -17,7 +17,7 @@ public class ResumeList {
   }
 
   /**
-   *  Method to get an instance of a resumeList if one doesn't already exist.
+   * Method to get an instance of a resumeList if one doesn't already exist.
    * @return A resumeList instance
    */
   public static ResumeList getInstance() {

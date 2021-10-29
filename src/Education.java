@@ -80,7 +80,11 @@ public class Education {
     return degreeType;
   }
 
-  // Setter method for the students degree type.
+  /**
+   * Setter method for the students degree type. Checks that if the string degreeType
+   * is not empty, it will set the degreeType.
+   * @param degreeType
+   */
   public void setDegreeType(String degreeType) {
     if (degreeType != "")
         this.degreeType = degreeType;
@@ -91,7 +95,11 @@ public class Education {
     return major;
   }
 
-  // Setter method for the student's college major.
+  /**
+   * Setter method for the student's college major. Checks that if the string major
+   * is not empty, it will set the major.
+   * @param major
+   */
   public void setMajor(String major) {
     if (major != "")
         this.major = major;
@@ -120,7 +128,8 @@ public class Education {
   /**
    * Getter method for the graduation month of the student.
    * Also checks that the student's graduation year is within
-   * the 21st century.
+   * the 21st century as it is unlikely a current college student
+   * has already graduated a college as well as graduating it before 2000.
    * @param year
    */
   public void setGradYear(int year) {
