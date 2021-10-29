@@ -13,7 +13,7 @@ public class Moderator extends User {
   private ArrayList<Student> students;
   private ArrayList<Employer> employers;
 
-  //Constructor for a moderator that already has an existing ID.
+  // Constructor for a moderator that already has an existing ID.
   public Moderator(UUID id, String firstName, String lastName, String username, String password,
       Users USER_TYPE_MODERATOR) {
     super(id, firstName, lastName, username, password, USER_TYPE_MODERATOR);
@@ -22,7 +22,7 @@ public class Moderator extends User {
     this.employers = DataLoader.loadEmployers();
   }
 
-  //Constructor for creating a moderator that does not have an ID. 
+  // Constructor for creating a moderator that does not have an ID. 
   public Moderator(String firstName, String lastName, String username, String password,
       Users USER_TYPE_MODERATOR) {
     super(firstName, lastName, username, password, USER_TYPE_MODERATOR);
@@ -127,7 +127,7 @@ public class Moderator extends User {
            } while (!found); 
           }
 
-  //Calls super from the parent class User for it's toString() method. 
+  // Calls super from the parent class User for it's toString() method. 
   public String toString() {
     return super.toString();
   }

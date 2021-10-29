@@ -22,10 +22,12 @@ public class Extracurricular extends Experience {
       this.activities.add(activity);
   }
 
+  // Getter method for the title.
   public String getTitle() {
     return this.title;
   }
 
+  // Getter method for ArrayList of activities the student can have.
   public ArrayList<String> getActivities() {
     return this.activities;
   }

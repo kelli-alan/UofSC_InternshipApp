@@ -33,22 +33,30 @@ public class Employer extends User {
     this.internshipListings = new ArrayList<Listing>();
   }
 
+  /**
+   * Adds a new listing to the ArrayList of internshipListings.
+   * @param listing
+   */
   public void addListing(Listing listing) {
     this.internshipListings.add(listing);
   }
 
+  // Getter method for the name of the company.
   public String getCompanyName() {
     return this.companyName;
   }
 
+  // Getter method for the description of the company.
   public String getCompanyDescription() {
     return this.companyDescription;
   }
 
+  // Getter method for the ArrayList of internship listings.
   public ArrayList<Listing> getListings() {
     return this.internshipListings;
   }
 
+  //Move to UI
   public void createListing() {
     String jobTitle;
     String city;
@@ -144,10 +152,9 @@ public class Employer extends User {
     return listing.getApplications();
   }
 
-  /* Unlike Moderator, doesn't ahve to filtter through as there is no
-   * input from the user required after the method is called whereas
-   * Moderator must check the user's name and sort for that specific
-   * users resumes.
+  /**
+   * Allows an employer to view all applications to their job listing.
+   * @param listing
    */
   public ArrayList<Resume> viewAllApplications(Listing listing) {
     return listing.getApplications();
@@ -160,6 +167,11 @@ public class Employer extends User {
     System.out.flush();
   }
 
+  /**
+   * Delete's a listing by having an employer enter the listing ID
+   * and has a corresponding error message if they input an invalid ID.
+   * @param id
+   */
   public void deleteListing(UUID id) {
     boolean found = false;
     do {
@@ -178,10 +190,11 @@ public class Employer extends User {
     } while (!found);
   }
 
+  /// Displays a listing with their name and the listing.
   public String displayListing(int i) {
     return this.firstName + " " + this.lastName + "\n" + this.internshipListings.get(i).toString();
   }
-
+ // Returns the company and all of their respective listings.
   public String toString() {
     String ret = super.toString();
     ret += "Company: " + this.companyName + "\n\t" + this.companyDescription + "\n";

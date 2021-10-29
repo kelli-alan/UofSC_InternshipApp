@@ -17,7 +17,7 @@ public class Student extends User {
   private String phoneNumber;
   private String email;
 
-  // constructor for loading students who have an id
+  // Constructor for loading students who have an id.
   public Student(UUID id, String firstName, String lastName, String username, String password, String email, String phoneNumber, Users STUDENT) {
     super(id, firstName, lastName, username, password, STUDENT);
     this.email = email;
@@ -28,7 +28,7 @@ public class Student extends User {
     this.listingApplications = new ArrayList<Resume>();
   }
 
-  // constructor for creating students who need an id
+  // Constructor for creating students who need an id.
   public Student(String firstName, String lastName, String username, String password, Users USER_TYPE_STUDENT) {
     super(firstName, lastName, username, password, USER_TYPE_STUDENT);
     this.resumes = new ArrayList<Resume>();
@@ -37,27 +37,41 @@ public class Student extends User {
     this.listingApplications = new ArrayList<Resume>();
   }
 
+  // Getter for a student's email.
   public String getEmail() {
     return this.email;
   }
 
+  // Getter for a student's phone number.
   public String getPhoneNumber() {
     return this.phoneNumber;
   }
 
-  
+  // Getter for the ArrayList of resumes.
   public ArrayList<Resume> getResumes() {
     return this.resumes;
   }
 
+  // Getter for an ArrayList of listings for the listings a student has saved.
   public ArrayList<Listing> getSavedListings() {
     return this.savedListings;
   }
 
+  /**
+   * Method adds a new resume through the ArrayList method add
+   * and adds a new resume to the ArrayList.
+   */
   public void addResume(Resume resume) {
     this.resumes.add(resume);
   }
 
+  /**
+   * This method deletes a user's resume and uses a do while loop with a boolean
+   * false that when it sets itself to true, breaks the loop. The method uses a
+   * nested for-if-for loop to remove the respective resume. If the input, which
+   * is the resume's unique ID value, it will output an error message back to the user.
+   * @param id
+   */
   public void deleteResume(UUID id) {
     boolean found = false;
     do {
@@ -76,36 +90,40 @@ public class Student extends User {
     } while (!found);
   }
 
+  /**
+   * This method allows a student to apply to a listing by adding their resume
+   * to the list of listingApplications, where it can be seen by an employer.
+   * @param listing
+   * @param resume
+   */
   public void applyToListing(Listing listing, Resume resume) {
     if ( resumes.contains(resume)) {
       listingApplications.add(resume);
     }
   }
 
-  /*
-   * Is this still necessary?  
-   * public ArrayList<Listing> filterListings(ArrayList<Listing> savedListings) {
-   * return savedListings; }
-   * 
-   * public void setFilterBehavior(FilterBehavior filterBehavior) {
-   * 
-   * }
+  /**
+   * Allows the student to save a listing to the ArrayList of saved listings
+   * that they can go back and view using the viewAllSavedListings() method.
+   * @param listing
    */
-
   public void saveListing(Listing listing) {
     this.savedListings.add(listing);
   }
 
+  // Returns the ArrayList of savedListings back to the student.
   public ArrayList<Listing> viewAllSavedListings() {
     for (int i = 0; i < savedListings.size(); i++)
     savedListings.get(i);
       return savedListings;
   }
 
+  // Concatenates and returns together the student's name, phone number, email, and their resume to a string.
   public String displayResume(int i) {
     return "\t\t\t" +  this.firstName + " " + this.lastName + "\n" + this.phoneNumber +"\t\t\t\t" + this.email + this.resumes.get(i).toString();
   }
 
+  // Returns both the resumes and the saved listings.
   public String toString() {
     String ret = super.toString();
     for (int i = 0; i < this.resumes.size(); i++) {
@@ -119,6 +137,7 @@ public class Student extends User {
     return ret;
   }
 
+  // When called, clears the console of any text to allow for a cleaner UI.
   private void clearScreen() {
     System.out.print("\033[H\033[2J");
     System.out.flush();
