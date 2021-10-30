@@ -10,12 +10,18 @@ public class InternshipUI {
   private static final String[] OPEN_OPTIONS = { "Create Account", "Log In" };
   private static final String[] EMPLOYER_OPTIONS = { "Listings", "Ratings", "Logout" };
   private static final String[] STUDENT_OPTIONS = { "Resumes", "View All Internship Listings",
-      "View Internship Listings by Filter", "Ratings", "Logout" };
+    "View Internship Listings by Filter", "Ratings", "Logout" };
   private static final String[] RESUME_OPTIONS = { "View Resumes", "Write Resume to File", "Create New Resume", "Edit Resume", "Back" };
   private static final String[] LISTING_OPTIONS = { "View Listings", "Write Listing to File", "Create New Listing", "Edit Listing", "Back" };
   private static final String[] LISTING_LIST_OPTIONS = { "Apply", "Save", "Back" };
   private static final String[] LISTING_LIST_FILTERS = { "Skills", "Hours per week", "Location", "Pay" };
   private static final String[] RESUME_EDIT_OPTIONS = {"Skills", "Education", "Work Experience", "Extracurricular", "Back"};
+  private static final String[] EDUCATION_EDIT_OPTIONS = {"Add new Education", "Remove Education", "Edit University", "Edit Location",
+    "Edit Degree Type", "Edit Major", "Edit Minor", "Edit Graduation Date", "Edit GPA", "Back"};
+  private static final String[] WORK_EXPERIENCE_EDIT_OPTIONS = {"Add new Work Experience", "Remove Work Experience", "Edit Responsibilities",
+    "Edit Company", "Edit Position", "Edit Location", "Edit Start Date", "Edit End Date", "Back"};
+  private static final String[] EXTRACURRICULAR_EDIT_OPTIONS = {"Add new Extracurricular", "Remove Extracurricular", "Edit Activities", "Edit Club Title",
+    "Edit Position", "Edit Start Date", "Edit End Date", "Back"};
 
   private Scanner scanner;
   private InternshipApp app;
@@ -188,6 +194,30 @@ public class InternshipUI {
     System.out.print("\nSelection: ");
   }
 
+  private void displayEducationEdit() {
+    System.out.println("************** Choose an option **************");
+    for (int i = 0; i < EDUCATION_EDIT_OPTIONS.length; i++) {
+      System.out.println((i + 1) + ". " + EDUCATION_EDIT_OPTIONS[i]);
+    }
+    System.out.print("\nSelection: ");
+  }
+
+  private void displayWorkExperienceEdit() {
+    System.out.println("************** Choose an option **************");
+    for (int i = 0; i < WORK_EXPERIENCE_EDIT_OPTIONS.length; i++) {
+      System.out.println((i + 1) + ". " + WORK_EXPERIENCE_EDIT_OPTIONS[i]);
+    }
+    System.out.print("\nSelection: ");
+  }
+
+  private void displayExtracurricularEdit() {
+    System.out.println("************** Choose an option **************");
+    for (int i = 0; i < EXTRACURRICULAR_EDIT_OPTIONS.length; i++) {
+      System.out.println((i + 1) + ". " + EXTRACURRICULAR_EDIT_OPTIONS[i]);
+    }
+    System.out.print("\nSelection: ");
+  }
+
   // log in method, asks for username and password and sets user if they are in
   // the list
   private void Login() {
@@ -295,7 +325,12 @@ public class InternshipUI {
         clearScreen();
         createResume();
         break;
-      case 4: // edit resume
+      case 4: clearScreen();
+              student.displayAllResumes();
+              System.out.print("Enter the index of the resume to edit: ");
+              int i = scanner.nextInt();
+              scanner.nextLine();
+              editResumeMenu(i);
         break;
       }
 
@@ -637,16 +672,16 @@ private void editResumeMenu(int i) {
       case 1: clearScreen();
               skillsEditor(resume);
       break; 
-      case 2: //edu
+      case 2: educationEditor(resume);
       break;
-      case 3: //work
+      case 3: workExperienceEditor(resume);
       break;
-      case 4: //extra
+      case 4: extracurricularEditor(resume);
       break;
     }
   }
 
-  student.getResumes().set(i, resume);
+  student.getResumes().set(i-1, resume);
 }
 
 private void skillsEditor(Resume resume) {
@@ -660,11 +695,170 @@ private void skillsEditor(Resume resume) {
         resume.addSkill(res);
       }
       else if(res.equalsIgnoreCase("r")) {
-        System.out.print("Enter the skill you would like to remove");
-        res = scanner.nextLine();
+        for(int i = 0; i < resume.getSkills().size(); i++) {
+          System.out.println((i+1)+": "+resume.getSkills().get(i));
+        }
+        System.out.print("Enter the Index of the skill you would like to remove");
+        int index = scanner.nextInt();
+        scanner.nextLine();
         resume.deleteSkill(res);
       }
   } 
+}
+
+private void educationEditor(Resume resume) {
+    displayEducationEdit();
+    int index;
+    String change;
+    int command = scanner.nextInt();
+    scanner.nextLine();
+    while(command != 10) {
+      switch(command) {
+        case 1: //add new
+        break; 
+        case 2: //remove by index
+        break;
+        case 3: clearScreen();
+                for(int i = 0; i < resume.getEducations().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
+                }
+                System.out.print("Enter the index number of the education to edit: ");
+                index = scanner.nextInt();
+                scanner.nextLine();
+                System.out.print("Enter the University: ");
+                change = scanner.nextLine();
+                resume.getEducations().get(index).setUniversity(change);
+        break;
+        case 4: //location
+                clearScreen();
+                for(int i = 0; i < resume.getEducations().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
+                }
+                System.out.print("Enter the index number of the education to edit: ");
+                index = scanner.nextInt();
+                scanner.nextLine();
+                System.out.print("Enter the city: ");
+                change = scanner.nextLine();
+                resume.getEducations().get(index).setCity(change);
+                System.out.print("Enter the state: ");
+                change = scanner.nextLine();
+                resume.getEducations().get(index).setState(change);
+        break;
+        case 5: //degree type
+                clearScreen();
+                for(int i = 0; i < resume.getEducations().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
+                }
+                System.out.print("Enter the index number of the education to edit: ");
+                index = scanner.nextInt();
+                scanner.nextLine();
+                System.out.print("Enter the degree type: ");
+                change = scanner.nextLine();
+                resume.getEducations().get(index).setDegreeType(change);
+        break;
+        case 6: //major
+                clearScreen();
+                for(int i = 0; i < resume.getEducations().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
+                }
+                System.out.print("Enter the index number of the education to edit: ");
+                index = scanner.nextInt();
+                scanner.nextLine();
+                System.out.print("Enter the major: ");
+                change = scanner.nextLine();
+                resume.getEducations().get(index).setMajor(change);
+        break;
+        case 7: //minor
+                clearScreen();
+                for(int i = 0; i < resume.getEducations().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
+                }
+                System.out.print("Enter the index number of the education to edit: ");
+                index = scanner.nextInt();
+                scanner.nextLine();
+                System.out.print("Enter the minor: ");
+                change = scanner.nextLine();
+                resume.getEducations().get(index).addMinor(change);
+        break;
+        case 8: //grad date
+        break;
+        case 9: 
+                clearScreen();
+                for(int i = 0; i < resume.getEducations().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
+                }
+                System.out.print("Enter the index number of the education to edit: ");
+                index = scanner.nextInt();
+                scanner.nextLine();
+                System.out.print("Enter the GPA: ");
+                int GPA = scanner.nextInt();
+                scanner.nextLine();
+                resume.getEducations().get(index).addGPA(GPA);
+        break;
+      }
+      clearScreen();
+      displayEducationEdit();
+      command = scanner.nextInt();
+      scanner.nextLine();
+    }
+}
+
+private void workExperienceEditor(Resume resume) {
+    displayWorkExperienceEdit();
+    int command = scanner.nextInt();
+    scanner.nextLine();
+    while(command != 9) {
+      switch(command) {
+        case 1: //add new
+        break; 
+        case 2: //remove by index
+        break;
+        case 3: //responsibilities new method
+        break;
+        case 4: //company
+        break;
+        case 5: //position
+        break;
+        case 6: //location
+        break;
+        case 7: //start date
+        break;
+        case 8: //end date
+        break;
+      }
+      clearScreen();
+      displayWorkExperienceEdit();
+      command = scanner.nextInt();
+      scanner.nextLine();
+    }
+}
+
+private void extracurricularEditor(Resume resume) {
+    displayExtracurricularEdit();
+    int command = scanner.nextInt();
+    scanner.nextLine();
+    while(command != 8) {
+      switch(command) {
+        case 1: //add new
+        break; 
+        case 2: //remove by index
+        break;
+        case 3: //activities
+        break;
+        case 4: //club title
+        break;
+        case 5: //position
+        break;
+        case 6: //start date
+        break;
+        case 7: //end date
+        break;
+      }
+      clearScreen();
+      displayExtracurricularEdit();
+      command = scanner.nextInt();
+      scanner.nextLine();
+    }
 }
 
   public static void main(String[] args) {
