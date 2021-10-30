@@ -140,26 +140,28 @@ public class Resume {
    * education, work experiences, extracurricular activites, and skills they bring to the job.
    */
   public String toString() {
-    String ret = "\nEducation:\n";
+    String ret = "\nEducation\n";
     for (int i = 0; i < education.size(); i++) {
-      ret += "\t" + education.get(i).toString() + "\n";
+      ret += education.get(i).toString() + "\n\n";
     }
 
-    ret += "Work Experiences:\n";
+    ret += "Work Experience\n";
     for (int i = 0; i < workExperiences.size(); i++) {
-      ret += "\t" + workExperiences.get(i).toString() + "\n";
+      ret += workExperiences.get(i).toString() + "\n";
     }
 
-    ret += "Extracurriculars:\n";
+    ret += "Extracurricular Activities\n";
     for (int i = 0; i < extracurriculars.size(); i++) {
-      ret += "\t" + extracurriculars.get(i).toString() + "\n";
+      ret += extracurriculars.get(i).toString() + "\n";
     }
 
     ret += "Skills:\n";
 
     for (int i = 0; i < skills.size(); i++) {
-      ret += "\t- " + skills.get(i) + "\n";
+      ret += "  - " + skills.get(i) + "\n";
     }
+
+    ret += "______________________________________________________________________________________________\n";
     return ret;
   }
 }

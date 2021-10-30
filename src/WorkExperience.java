@@ -99,12 +99,12 @@ public class WorkExperience extends Experience {
    * @return String representation of above format
    */
   public String toString() {
-    String ret = this.company + ", " + this.city + ", " + this.state + "\n" + this.position + ", "
+    String ret = "  " + this.company + ", " + this.city + ", " + this.state + "\n    " + this.position + ", "
         + this.startMonth.getDisplayName(TextStyle.FULL, Locale.US) + " " + this.startYear + " - "
         + (ongoing ? "present" : this.endMonth.getDisplayName(TextStyle.FULL, Locale.US) + " " + this.endYear) + "\n";
 
     for (int i = 0; i < responsibilities.size(); i++) {
-      ret += "\t- " + responsibilities.get(i) + "\n";
+      ret += "      - " + responsibilities.get(i) + "\n";
     }
     return ret;
   }
