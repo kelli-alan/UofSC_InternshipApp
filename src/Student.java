@@ -77,42 +77,22 @@ public class Student extends User {
   }
 
   /**
-   * This method deletes a user's resume and uses a do while loop with a boolean
-   * false that when it sets itself to true, breaks the loop. The method uses a
-   * nested for-if-for loop to remove the respective resume. If the input, which
-   * is the resume's unique ID value, it will output an error message back to the user.
-   * @param id
+   * This method deletes a user's resume at the specified index in their resume ArrayList
+   * @param index of resume to delete
    */
-  public void deleteResume(UUID id) {
-   /* boolean found = false;
-    do {
-      for (int i = 0; i < this.students.size(); i++) {
-        if (id == students.get(i).id) {
-          for (int j = 0; j < (students.get(i)).getResumes().size(); j++) {
-            students.remove(j);
-            found = true;
-          }
-          break;
-        }
-      }
-      if (!found) {
-        System.out.println("Invalid ID. Please try again.");
-      }
-    } while (!found);*/
+  public void deleteResume(int index) {
+    this.resumes.remove(index);
   }
 
-
+//TODO MOVE
   /**
    * This method allows a student to apply to a listing by adding their resume
    * to the list of listingApplications, where it can be seen by an employer.
    * @param listing
    * @param resume
    */
-  public void applyToListing(Listing listing, Resume resume) {
-  /*public void applyToListing(Listing listing, Resume resume) {
-    if ( resumes.contains(resume)) {
-      listingApplications.add(resume);
-    }*/
+  public void applyToListing(int listingIndex, int resumeIndex) {
+
   }
 
   /**
@@ -143,8 +123,6 @@ public class Student extends User {
     }
     return ret;
   }
-
-  //public void printResume()   placeholder for file IO
 
   public String toString() {
     String ret = super.toString();

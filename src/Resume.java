@@ -92,29 +92,35 @@ public class Resume {
   }
 
   /**
-   * Removes a work experience, workExperience, from the ArrayList of the student's
-   * previous or current work experiences, workExperiences.
-   * @param workExperience
+   * Removes the education entry at the specified index from the ArrayList of educations 
+   * @param index of education to remove
    */
-  public void deleteWorkExperience(WorkExperience workExperience) {
-    workExperiences.remove(workExperience);
+  public void deleteEducation(int index) {
+    education.remove(index);
   }
 
   /**
-   * Removes an extracurricular activity, extracirricular, from the ArrayList of the student's
-   * extracurricular activites during college, extracurriculars.
-   * @param extracurricular
+   * Removes the work experience entry at the specified index from the ArrayList of work experiences
+   * @param index of work experience to remove
    */
-  public void deleteExtraCurricular(Extracurricular extracurricular) {
-    extracurriculars.remove(extracurricular);
+  public void deleteWorkExperience(int index) {
+    workExperiences.remove(index);
   }
 
   /**
-   * Removes a skill, skill, from the ArrayList of the student's job skills, skills.
-   * @param skill
+   * Removes the extracurricular entry at the specified index from the ArrayList of extracurriculars
+   * @param index of extracurricular to remove
    */
-  public void deleteSkill(String skill) {
-    skills.remove(skill);
+  public void deleteExtraCurricular(int index) {
+    extracurriculars.remove(index);
+  }
+
+  /**
+   * Removes a skill at the specified index from the ArrayList of skills
+   * @param index of skill to remove
+   */
+  public void deleteSkill(int index) {
+    skills.remove(index);
   }
 
   /**
