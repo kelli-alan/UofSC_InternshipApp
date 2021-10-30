@@ -31,6 +31,9 @@
       "Helping customers with technical difficulties",
       "Perform routine maintenance"
     ],
-    "applications": ["eb9e9de7-8fed-487c-97c7-be730dd3f452"]
+    "applications": [
+      "eb9e9de7-8fed-487c-97c7-be730dd3f452",
+      "d7b13acd-61b8-401b-ae33-64bdca554336"
+    ]
   }
 ]

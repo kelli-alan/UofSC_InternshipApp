@@ -6,12 +6,16 @@ import java.time.Month;
  * @authors Evan Grunewald, Kelli Alan
  */
 public abstract class Experience {
+  
+  protected final static int CURRENT_YEAR = 2021;
+  
   protected String position;
   protected Month startMonth;
   protected int startYear;
   protected Month endMonth;
   protected int endYear;
   protected boolean ongoing;
+
 
   /**
    * Constructor method for the Experience class for its variables such as position.
@@ -67,4 +71,25 @@ public abstract class Experience {
   public int getEndYear() {
     return this.endYear;
   }
+
+  public void setPosition(String position) {
+    if (position != null && position != "") {
+      this.position = position;
+    }
+  }
+
+  public void setStartMonth(int month) {
+    if (month > 0 && month < 13) {
+      this.startMonth = Month.values()[month-1];
+    }
+  }
+
+  public void setStartYear(int year) {
+    if (year >= CURRENT_YEAR) {
+      this.startYear = year;
+    }
+  }
+
+
+
 }

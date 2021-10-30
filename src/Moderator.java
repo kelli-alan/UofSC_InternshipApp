@@ -18,8 +18,8 @@ public class Moderator extends User {
       Users USER_TYPE_MODERATOR) {
     super(id, firstName, lastName, username, password, USER_TYPE_MODERATOR);
 
-    this.students = DataLoader.loadStudents();
-    this.employers = DataLoader.loadEmployers();
+   // this.students = DataLoader.loadStudents();
+   // this.employers = DataLoader.loadEmployers();
   }
 
   // Constructor for creating a moderator that does not have an ID. 
@@ -27,8 +27,8 @@ public class Moderator extends User {
       Users USER_TYPE_MODERATOR) {
     super(firstName, lastName, username, password, USER_TYPE_MODERATOR);
 
-    this.students = DataLoader.loadStudents();
-    this.employers = DataLoader.loadEmployers();
+  //  this.students = DataLoader.loadStudents();
+   // this.employers = DataLoader.loadEmployers();
   }
 
   /**
@@ -91,7 +91,7 @@ public class Moderator extends User {
         for (int i = 0; i < this.students.size(); i++) {
           if (id == students.get(i).id) {
             for (int j = 0; j < (students.get(i)).getResumes().size(); j++) {
-              students.get(i).deleteResume(id);
+      //        students.get(i).deleteResume(id);
               found = true;
             }
             break;

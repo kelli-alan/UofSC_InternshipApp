@@ -77,53 +77,42 @@ public class Student extends User {
   }
 
   /**
-   * This method deletes a user's resume and uses a do while loop with a boolean
-   * false that when it sets itself to true, breaks the loop. The method uses a
-   * nested for-if-for loop to remove the respective resume. If the input, which
-   * is the resume's unique ID value, it will output an error message back to the user.
-   * @param id
+   * This method deletes a user's resume at the specified index in their resume ArrayList
+   * @param index of resume to delete
    */
-  public void deleteResume(UUID id) {
-   /* boolean found = false;
-    do {
-      for (int i = 0; i < this.students.size(); i++) {
-        if (id == students.get(i).id) {
-          for (int j = 0; j < (students.get(i)).getResumes().size(); j++) {
-            students.remove(j);
-            found = true;
-          }
-          break;
-        }
-      }
-      if (!found) {
-        System.out.println("Invalid ID. Please try again.");
-      }
-    } while (!found);*/
+  public void deleteResume(int index) {
+    this.resumes.remove(index);
   }
 
 
   /**
-   * This method allows a student to apply to a listing by adding their resume
-   * to the list of listingApplications, where it can be seen by an employer.
-   * @param listing
-   * @param resume
+   * Allows the student to save a listing to their ArrayList of saved listings, if it was not 
+   * previously saved so that they can go back and view using the viewAllSavedListings() method.
+   * @param listing to save
+   * @return true if save was successful, false if listing is already saved
    */
-  public void applyToListing(Listing listing, Resume resume) {
-  /*public void applyToListing(Listing listing, Resume resume) {
-    if ( resumes.contains(resume)) {
-      listingApplications.add(resume);
-    }*/
+  public boolean saveListing(Listing listing) {
+    
+    if (!isSaved(listing)) {
+      this.savedListings.add(listing);
+      return true;
+    }
+    return false;
   }
-
   /**
-   * Allows the student to save a listing to the ArrayList of saved listings
-   * that they can go back and view using the viewAllSavedListings() method.
-   * @param listing
+   * Determines if listing already is student's ArrayList of saved listings
+   * @param listing the listing the student is attempting to save
+   * @return true if listing is already saved; false if listing is not saved
    */
-  public void saveListing(Listing listing) {
-    this.savedListings.add(listing);
+  public boolean isSaved(Listing listing) {
+    for (int i = 0; i < this.savedListings.size();  i++) {
+      if (this.savedListings.get(i).getID().toString().equals(listing.getID().toString()))
+      {
+        return true;
+      }
+    }
+    return false;
   }
-
   // Returns the ArrayList of savedListings back to the student.
   public ArrayList<Listing> viewAllSavedListings() {
     for (int i = 0; i < savedListings.size(); i++)
@@ -143,8 +132,6 @@ public class Student extends User {
     }
     return ret;
   }
-
-  //public void printResume()   placeholder for file IO
 
   public String toString() {
     String ret = super.toString();

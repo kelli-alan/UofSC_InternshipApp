@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.io.FileWriter;
+import java.util.UUID;
 
 /**
  * Contains core functions of the application such as the login and logout.
@@ -8,10 +9,14 @@ import java.io.FileWriter;
 public class InternshipApp {
     
     private UserList userList;
-    private ListingList listingList;
     private ArrayList<User> users;
+
+    private ListingList listingList;
+    private ArrayList<Listing> listings;
+
     private ResumeList resumeList;
-    private ArrayList<Listing> listing;
+    private ArrayList<Resume> resumes;
+  
 
     /**
      * Constructor for the InternshipApp that gathers the instance of all
@@ -22,8 +27,8 @@ public class InternshipApp {
         this.userList = UserList.getInstance();
         this.users = this.userList.getAllUsers();
         this.listingList = ListingList.getInstance();
-        this.resumeList = ResumeList.getInstance();
-        this.listing = this.listingList.getAllListings();
+        this.listings = this.listingList.getAllListings();
+        this.resumes = ResumeList.getInstance().getResumes();
     }
 
     // Logs user in from userlist's arraylist.
@@ -35,19 +40,20 @@ public class InternshipApp {
     // Logs the user out of the application, shows an exit message, and ends the app.
     public void logout() {
         System.out.println("Thank you for using the Internship App");
-       // DataWriter.saveUsers();
-       // DataWriter.saveResumes();
-       // DataWriter.saveListings();
+        DataWriter.saveUsers();
+        //DataWriter.saveResumes();
+        DataWriter.saveListings();
         System.exit(0);
     }
 
     // Displays all of the listings on the entire Internship application.
     public void viewAllListings() {
         
-        for(int i = 0; i < this.listing.size(); i++) {
-            System.out.println((i+1)+": "+this.listing.get(i).toString());
+        for(int i = 0; i < this.listings.size(); i++) {
+            System.out.println((i+1)+": "+this.listings.get(i).toString());
         }
     }
+
 
     /**
      * Method to add a user to the ArrayList of users.
@@ -56,6 +62,30 @@ public class InternshipApp {
     public void addUser(User user) {
 
         this.users.add(user);
+    }
+
+    public void addListing(Listing listing) {
+      this.listings.add(listing);
+    }
+
+    public void applyToListing(UUID listingID, UUID resumeID) {
+      Resume resume = null;
+      for (int i = 0; i < resumes.size(); i++) {
+        if (resumes.get(i).getUUID().toString().equals(resumeID.toString())) {
+          resume = resumes.get(i);
+          break;
+        }
+      }
+      for (int i = 0; i < listings.size(); i++) {
+        if (listings.get(i).getID().toString().equals(listingID.toString())) {
+          listings.get(i).updateApplications(resume);
+          break;
+        }
+      }
+    }
+
+    public Listing getListing(int index) {
+      return listings.get(index);
     }
 
     public User hasUser(String username, String password) {

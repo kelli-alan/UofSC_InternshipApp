@@ -12,7 +12,7 @@ public class SortResumes {
    * 
    * @param resumes List of resumes to be sorted
    */
-    public static ArrayList<Resume> sortByTimeRecieved(ArrayList<Resume> resumes) {
+    public static ArrayList<Resume> sortByTimeReceived(ArrayList<Resume> resumes) {
         int n = resumes.size();
         ArrayList<Resume> ret = new ArrayList<Resume>();
         int j = n;
