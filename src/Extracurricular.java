@@ -42,6 +42,18 @@ public class Extracurricular extends Experience {
     }
   }
 
+  public void setPostition(String position) {
+    super.setPosition(position);
+  }
+
+  public void setStartMonth(int month) {
+    super.setStartMonth(month);
+  }
+
+  public void setStartYear(int year) {
+    super.setStartYear(year);
+  }
+
   /**
    * Ensures extracurriculars do not have duplicate details
    * 

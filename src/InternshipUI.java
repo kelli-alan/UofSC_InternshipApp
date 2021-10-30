@@ -3,7 +3,7 @@ import java.time.Month;
 
 /**
  * 
- * @author Robbie Clark, Evan Grunewald
+ * @author Robbie Clark, Evan Grunewald, Kelli Alan
  */
 public class InternshipUI {
   private static final String WELCOME = "\t  Welcome to the Internship App";
@@ -12,17 +12,17 @@ public class InternshipUI {
   private static final String[] STUDENT_OPTIONS = { "Resumes", "View All Internship Listings",
     "View Internship Listings by Filter", "Ratings", "Logout" };
   private static final String[] RESUME_OPTIONS = { "View Resumes", "Write Resume to File", "Create New Resume", "Edit Resume", "Back" };
-  private static final String[] LISTING_OPTIONS = { "View Listings", "Write Listing to File", "Create New Listing", "Edit Listing", "Back" };
+  private static final String[] LISTING_OPTIONS = { "View Listings", "Write Listing to File", "Create New Listing", "Delete Listing", "Edit Listing", "Back" };
   private static final String[] LISTING_LIST_OPTIONS = { "Apply", "Save", "Back" };
   private static final String[] LISTING_LIST_FILTERS = { "Skills", "Hours per week", "Location", "Pay" };
-  private static final String[] RESUME_EDIT_OPTIONS = {"Skills", "Education", "Work Experience", "Extracurricular", "Back"};
+  private static final String[] RESUME_EDIT_OPTIONS = {"Skills", "Education", "Work Experience", "Extracurricular", "Delete Resume", "Back"};
   private static final String[] EDUCATION_EDIT_OPTIONS = {"Add new Education", "Remove Education", "Edit University", "Edit Location",
     "Edit Degree Type", "Edit Major", "Edit Minor", "Edit Graduation Date", "Edit GPA", "Back"};
   private static final String[] WORK_EXPERIENCE_EDIT_OPTIONS = {"Add new Work Experience", "Remove Work Experience", "Edit Responsibilities",
     "Edit Company", "Edit Position", "Edit Location", "Edit Start Date", "Edit End Date", "Back"};
   private static final String[] EXTRACURRICULAR_EDIT_OPTIONS = {"Add new Extracurricular", "Remove Extracurricular", "Edit Activities", "Edit Club Title",
     "Edit Position", "Edit Start Date", "Edit End Date", "Back"};
-
+  private static final String[] LISTNG_EDIT_OPTIONS = {"Edit Job Title", "Edit location", "Edit Start Date", "Edit Hours per Week", "Edit Pay per Hour", "Edit Desired Skills", "Edit Duties", "Back"};
   private Scanner scanner;
   private InternshipApp app;
   private User user;
@@ -326,10 +326,11 @@ public class InternshipUI {
         createResume();
         break;
       case 4: clearScreen();
-              student.displayAllResumes();
+              System.out.println(student.displayAllResumes());
               System.out.print("Enter the index of the resume to edit: ");
               int i = scanner.nextInt();
               scanner.nextLine();
+              clearScreen();
               editResumeMenu(i);
         break;
       }
@@ -345,23 +346,38 @@ public class InternshipUI {
     displayListingOptions();
     int command = scanner.nextInt();
     scanner.nextLine();
-    while (command != 5) {
+    while (command != 6) {
       switch (command) {
       case 1:
-        app.viewAllListings();
+        System.out.println(employer.displayListingsWithApplications());
         break;
       case 2: clearScreen();
-        app.viewAllListings();
-        System.out.println("Enter file name to write to: ");
+        System.out.println(employer.displayAllListing());
+        System.out.print("Enter file name to write to: ");
         String path = scanner.nextLine();
-        System.out.println("Enter index of listing to write: ");
+        System.out.print("Enter index of listing to write: ");
         int id = scanner.nextInt();
+        scanner.nextLine();
         String content = employer.getListings().get(id-1).toString();
         app.writeFile(content, path);
         break;
-      case 3: // create listing
+      case 3: clearScreen();
+              createListing();
         break;
-      case 4: // edit listing
+      case 4: clearScreen();
+              System.out.println(employer.displayAllListing());
+              System.out.print("Enter the index of the listing to delete: ");
+              int index = scanner.nextInt()-1;
+              scanner.nextLine();
+              employer.deleteListing(index);
+        break;
+      case 5: clearScreen();
+              System.out.println(employer.displayAllListing());
+              System.out.print("Enter the index of the listing to edit: ");
+              int i = scanner.nextInt();
+              scanner.nextLine();
+              clearScreen();
+              editListingMenu(i);
         break;
       }
       displayListingOptions();
@@ -391,110 +407,20 @@ public class InternshipUI {
 
     cont = "y";
     while (cont.equalsIgnoreCase("y")) {
-
-      System.out.println("Enter the university: ");
-      String university = scanner.nextLine();
-
-      System.out.println("Enter the city: ");
-      String city = scanner.nextLine();
-
-      System.out.println("Enter the state: ");
-      String state = scanner.nextLine();
-
-      System.out.println("Enter the degree type: ");
-      String degreeType = scanner.nextLine();
-
-      System.out.println("Enter your major: ");
-      String major = scanner.nextLine();
-
-      System.out.println("Enter the number of your graduation month (January is 1, February is 2, etc.): ");
-      int monthNumber = scanner.nextInt();
-      scanner.nextLine();
-      Month gradMonth = Month.values()[monthNumber];
-
-      System.out.println("Enter your graduation year: ");
-      int gradYear = scanner.nextInt();
-      scanner.nextLine();
-
-      Education edu = new Education(university, city, state, degreeType, major, gradMonth, gradYear);
-
-      System.out.println("Enter your minor (enter \"none\" if you don't have one): ");
-      String minor = scanner.nextLine();
-      if (!minor.equalsIgnoreCase("none"))
-        edu.addMinor(minor);
-
-      System.out.println("Enter your GPA (Enter -1 if you do not wish to include a GPA): ");
-      double gpa = scanner.nextDouble();
-      scanner.nextLine();
-      if (gpa != -1)
-        edu.addGPA(gpa);
-
-      res.addEducation(edu);
-
+      System.out.println("\tEducation");
+      addEducation(res);
       System.out.println("Would you like to enter another education? (y)es or (n)o?");
       cont = scanner.nextLine();
     }
 
     clearScreen();
 
-    // create work experience section
-
     System.out.println("Would you like to enter any work experience? (y)es or (n)o?");
     cont = scanner.nextLine();
 
     while (cont.equalsIgnoreCase("y")) {
-
-      System.out.println("Enter the position: ");
-      String position = scanner.nextLine();
-
-      System.out.println("Enter the company: ");
-      String company = scanner.nextLine();
-
-      System.out.println("Enter the city: ");
-      String Wcity = scanner.nextLine();
-
-      System.out.println("Enter the state: ");
-      String Wstate = scanner.nextLine();
-
-      System.out.println("Enter the number of the month you started (January is 1, February is 2, etc.): ");
-      int monthNumber = scanner.nextInt();
-      scanner.nextLine();
-      Month startMonth = Month.values()[monthNumber];
-
-      System.out.println("Enter the year you started: ");
-      int startYear = scanner.nextInt();
-      scanner.nextLine();
-
-      /*
-       * creates a work experience with given position, month, startYear, company,
-       * city, state; work experience constructor creates a responsibilities array for
-       * this work experience
-       */
-      WorkExperience workXP = new WorkExperience(position, startMonth, startYear, company, Wcity, Wstate);
-
-      String inner = "no";
-      System.out.println("Enter responsibilities (type \"done\" when finished)");
-      while (!inner.equalsIgnoreCase("done")) {
-        inner = scanner.nextLine();
-        if (!inner.equalsIgnoreCase("done"))
-          workXP.addResponsibility(inner);
-      }
-
-      System.out.println("Are you currently working this position? (y)es or (n)o");
-      String response = scanner.nextLine();
-      if (response.equalsIgnoreCase("n")) {
-        System.out.println("Enter the number of the month you ended (January is 1, February is 2, etc.): ");
-        monthNumber = scanner.nextInt();
-        scanner.nextLine();
-        Month endMonth = Month.values()[monthNumber];
-
-        System.out.println("Enter the year you ended: ");
-        int endYear = scanner.nextInt();
-        scanner.nextLine();
-
-        workXP.addEndDate(endMonth, endYear);
-      }
-      res.addWorkExperience(workXP);
+      System.out.println("\tWork Experience");
+      addWorkExperience(res);
       System.out.println("Would you like to add another work experience? (y)es or (n)o?");
       cont = scanner.nextLine();
     }
@@ -505,46 +431,8 @@ public class InternshipUI {
     cont = scanner.nextLine();
 
     while (cont.equalsIgnoreCase("y")) {
-      System.out.println("Enter the name of the extracurricular organization: ");
-      String title = scanner.nextLine();
-
-      System.out.println("Enter your position within the organization: ");
-      String position = scanner.nextLine();
-
-      System.out.println("Enter the number of the month you joined (January is 1, February is 2, etc.): ");
-      int monthNumber = scanner.nextInt();
-      scanner.nextLine();
-      Month startMonth = Month.values()[monthNumber];
-
-      System.out.println("Enter the year you joined: ");
-      int startYear = scanner.nextInt();
-      scanner.nextLine();
-
-      Extracurricular extrac = new Extracurricular(position, startMonth, startYear, title);
-
-      String inner = "no";
-      System.out.println("Enter responsibilities/activities (type \"done\" when finished)");
-      while (!inner.equalsIgnoreCase("done")) {
-        inner = scanner.nextLine();
-        if (!inner.equalsIgnoreCase("done"))
-          extrac.addExtracurricularActivity(inner);
-      }
-
-      System.out.println("Are you currently in this organization? (y)es or (n)o");
-      if (scanner.nextLine().equalsIgnoreCase("n")) {
-        System.out.println("Enter the number of the month you ended (January is 1, February is 2, etc.): ");
-        monthNumber = scanner.nextInt();
-        scanner.nextLine();
-        Month endMonth = Month.values()[monthNumber];
-
-        System.out.println("Enter the year you ended: ");
-        int endYear = scanner.nextInt();
-        scanner.nextLine();
-        extrac.addEndDate(endMonth, endYear);
-      }
-
-      res.addExtracurricular(extrac);
-
+      System.out.println("\tExtracurricular");
+      addExtracurricular(res);
       System.out.println("Would you like to add another extracurricular? (y)es or (n)o?");
       cont = scanner.nextLine();
     }
@@ -666,7 +554,7 @@ private void editResumeMenu(int i) {
   displayResumeEdit();
   int command = scanner.nextInt();
   scanner.nextLine();
-  if(command < 5) {
+  if(command < 6) {
 
     switch(command) {
       case 1: clearScreen();
@@ -680,8 +568,11 @@ private void editResumeMenu(int i) {
       break;
     }
   }
-
-  student.getResumes().set(i-1, resume);
+  if(command == 5) {
+    student.getResumes().remove(i-1);
+  }
+  else
+    student.getResumes().set(i-1, resume);
 }
 
 private void skillsEditor(Resume resume) {
@@ -698,8 +589,8 @@ private void skillsEditor(Resume resume) {
         for(int i = 0; i < resume.getSkills().size(); i++) {
           System.out.println((i+1)+": "+resume.getSkills().get(i));
         }
-        System.out.print("Enter the Index of the skill you would like to remove");
-        int index = scanner.nextInt();
+        System.out.print("Enter the Index of the skill you would like to remove: ");
+        int index = scanner.nextInt()-1;
         scanner.nextLine();
         resume.deleteSkill(index);
       }
@@ -715,16 +606,27 @@ private void educationEditor(Resume resume) {
     while(command != 10) {
       switch(command) {
         case 1: //add new
+                clearScreen();
+                addWorkExperience(resume);
         break; 
-        case 2: //remove by index
+        case 2: 
+                clearScreen();
+                for(int i = 0; i < resume.getEducations().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
+                }
+                System.out.print("Enter the index number of the education to delete: ");
+                index = scanner.nextInt()-1;
+                scanner.nextLine();
+                resume.deleteEducation(index);
         break;
         case 3: clearScreen();
                 for(int i = 0; i < resume.getEducations().size(); i++) {
                   System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
                 }
                 System.out.print("Enter the index number of the education to edit: ");
-                index = scanner.nextInt();
+                index = scanner.nextInt()-1;
                 scanner.nextLine();
+                clearScreen();
                 System.out.print("Enter the University: ");
                 change = scanner.nextLine();
                 resume.getEducations().get(index).setUniversity(change);
@@ -735,8 +637,9 @@ private void educationEditor(Resume resume) {
                   System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
                 }
                 System.out.print("Enter the index number of the education to edit: ");
-                index = scanner.nextInt();
+                index = scanner.nextInt()-1;
                 scanner.nextLine();
+                clearScreen();
                 System.out.print("Enter the city: ");
                 change = scanner.nextLine();
                 resume.getEducations().get(index).setCity(change);
@@ -750,8 +653,9 @@ private void educationEditor(Resume resume) {
                   System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
                 }
                 System.out.print("Enter the index number of the education to edit: ");
-                index = scanner.nextInt();
+                index = scanner.nextInt()-1;
                 scanner.nextLine();
+                clearScreen();
                 System.out.print("Enter the degree type: ");
                 change = scanner.nextLine();
                 resume.getEducations().get(index).setDegreeType(change);
@@ -762,8 +666,9 @@ private void educationEditor(Resume resume) {
                   System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
                 }
                 System.out.print("Enter the index number of the education to edit: ");
-                index = scanner.nextInt();
+                index = scanner.nextInt()-1;
                 scanner.nextLine();
+                clearScreen();
                 System.out.print("Enter the major: ");
                 change = scanner.nextLine();
                 resume.getEducations().get(index).setMajor(change);
@@ -774,13 +679,33 @@ private void educationEditor(Resume resume) {
                   System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
                 }
                 System.out.print("Enter the index number of the education to edit: ");
-                index = scanner.nextInt();
+                index = scanner.nextInt()-1;
                 scanner.nextLine();
+                clearScreen();
                 System.out.print("Enter the minor: ");
                 change = scanner.nextLine();
                 resume.getEducations().get(index).addMinor(change);
         break;
         case 8: //grad date
+                clearScreen();
+                for(int i = 0; i < resume.getEducations().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
+                }
+                System.out.print("Enter the index number of the education to edit: ");
+                index = scanner.nextInt()-1;
+                scanner.nextLine();
+                clearScreen();
+                System.out.print("Enter the number of the month you graduate (January is 1, February is 2, etc.): ");
+                int monthNumber = scanner.nextInt();
+                scanner.nextLine();
+                Month month = Month.values()[monthNumber];
+                resume.getEducations().get(index).setGradMonth(month);
+
+                System.out.print("Enter the year you graduate: ");
+                int year = scanner.nextInt();
+                scanner.nextLine();
+                resume.getEducations().get(index).setGradYear(year);
+
         break;
         case 9: 
                 clearScreen();
@@ -788,8 +713,9 @@ private void educationEditor(Resume resume) {
                   System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
                 }
                 System.out.print("Enter the index number of the education to edit: ");
-                index = scanner.nextInt();
+                index = scanner.nextInt()-1;
                 scanner.nextLine();
+                clearScreen();
                 System.out.print("Enter the GPA: ");
                 int GPA = scanner.nextInt();
                 scanner.nextLine();
@@ -805,25 +731,114 @@ private void educationEditor(Resume resume) {
 
 private void workExperienceEditor(Resume resume) {
     displayWorkExperienceEdit();
+    int index;
+    String change;
     int command = scanner.nextInt();
     scanner.nextLine();
     while(command != 9) {
       switch(command) {
-        case 1: //add new
+        case 1: clearScreen();
+                addWorkExperience(resume);
         break; 
-        case 2: //remove by index
+        case 2: 
+                clearScreen();
+                for(int i = 0; i < resume.getWorkExperiences().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getWorkExperiences().get(i).toString());
+                }
+                System.out.print("Enter the index number of the work experience to delete: ");
+                index = scanner.nextInt()-1;
+                scanner.nextLine();
+                resume.deleteWorkExperience(index);
         break;
-        case 3: //responsibilities new method
+        case 3: 
+                clearScreen();
+                for(int i = 0; i < resume.getWorkExperiences().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getWorkExperiences().get(i).toString());
+                }
+                System.out.print("Enter the index number of the work experience to edit: ");
+                index = scanner.nextInt()-1;
+                scanner.nextLine();
+                clearScreen();
+                responsibilitiesEditor(resume, index);
         break;
-        case 4: //company
+        case 4:
+                clearScreen();
+                for(int i = 0; i < resume.getWorkExperiences().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getWorkExperiences().get(i).toString());
+                }
+                System.out.print("Enter the index number of the work experience to edit: ");
+                index = scanner.nextInt()-1;
+                scanner.nextLine();
+                clearScreen();
+                System.out.print("Enter the company title: ");
+                change = scanner.nextLine();
+                resume.getWorkExperiences().get(index).setCompany(change);
         break;
-        case 5: //position
+        case 5: //pos
+                clearScreen();
+                for(int i = 0; i < resume.getWorkExperiences().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getWorkExperiences().get(i).toString());
+                }
+                System.out.print("Enter the index number of the work experience to edit: ");
+                index = scanner.nextInt()-1;
+                scanner.nextLine();
+                clearScreen();
+                System.out.print("Enter the position: ");
+                change = scanner.nextLine();
+                resume.getWorkExperiences().get(index).setPosition(change);
         break;
         case 6: //location
+                clearScreen();
+                for(int i = 0; i < resume.getWorkExperiences().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getWorkExperiences().get(i).toString());
+                }
+                System.out.print("Enter the index number of the work experience to edit: ");
+                index = scanner.nextInt()-1;
+                scanner.nextLine();
+                clearScreen();
+                System.out.print("Enter the city: ");
+                change = scanner.nextLine();
+                resume.getWorkExperiences().get(index).setCity(change);
+                System.out.print("Enter the state: ");
+                change = scanner.nextLine();
+                resume.getWorkExperiences().get(index).setState(change);
         break;
         case 7: //start date
+                clearScreen();
+                for(int i = 0; i < resume.getWorkExperiences().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getWorkExperiences().get(i).toString());
+                }
+                System.out.print("Enter the index number of the work experience to edit: ");
+                index = scanner.nextInt()-1;
+                scanner.nextLine();
+                clearScreen();
+                System.out.print("Enter the number of the month you started (January is 1, February is 2, etc.): ");
+                int monthNumber = scanner.nextInt();
+                scanner.nextLine();
+                resume.getWorkExperiences().get(index).setStartMonth(monthNumber);
+
+                System.out.print("Enter the year you started: ");
+                int year = scanner.nextInt();
+                scanner.nextLine();
+                resume.getWorkExperiences().get(index).setStartYear(year);
         break;
         case 8: //end date
+                clearScreen();
+                for(int i = 0; i < resume.getWorkExperiences().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getWorkExperiences().get(i).toString());
+                }
+                System.out.print("Enter the index number of the work experience to edit: ");
+                index = scanner.nextInt()-1;
+                scanner.nextLine();
+                clearScreen();
+                System.out.print("Enter the number of the month you ended (January is 1, February is 2, etc.): ");
+                monthNumber = scanner.nextInt();
+                scanner.nextLine();
+                Month month = Month.values()[monthNumber];
+                System.out.print("Enter the year you ended: ");
+                year = scanner.nextInt();
+                scanner.nextLine();
+                resume.getWorkExperiences().get(index).addEndDate(month, year);
         break;
       }
       clearScreen();
@@ -833,25 +848,124 @@ private void workExperienceEditor(Resume resume) {
     }
 }
 
+private void responsibilitiesEditor(Resume resume, int index) {
+  String res = "s";
+  while(res.equalsIgnoreCase("done")) {
+      clearScreen();
+      System.out.println("Would you like to (a)dd or (r)emove responsibilities? Enter \"done\" when you are done");
+      res = scanner.nextLine();
+      if(res.equalsIgnoreCase("a")) {
+        System.out.print("Enter the responsibility you would like to add: ");
+        res = scanner.nextLine();
+        resume.getWorkExperiences().get(index).addResponsibility(res);
+      }
+      else if(res.equalsIgnoreCase("r")) {
+        for(int i = 0; i < resume.getWorkExperiences().get(index).getResponsibilities().size(); i++) {
+          System.out.println((i+1)+": "+resume.getWorkExperiences().get(i).getResponsibilities().toString());
+        }
+        System.out.print("Enter the Index of the responsibility you would like to remove: ");
+        int i = scanner.nextInt()-1;
+        scanner.nextLine();
+        resume.getWorkExperiences().get(index).getResponsibilities().remove(i);
+      }
+  } 
+}
+
 private void extracurricularEditor(Resume resume) {
     displayExtracurricularEdit();
     int command = scanner.nextInt();
     scanner.nextLine();
+    int index;
+    String change;
     while(command != 8) {
       switch(command) {
         case 1: //add new
+                clearScreen();
+                addExtracurricular(resume);
         break; 
         case 2: //remove by index
+                clearScreen();
+                for(int i = 0; i < resume.getExtracurriculars().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getExtracurriculars().get(i).toString());
+                }
+                System.out.print("Enter the index number of the extracurricular to delete: ");
+                index = scanner.nextInt()-1;
+                scanner.nextLine();
+                resume.deleteExtraCurricular(index);
         break;
-        case 3: //activities
+        case 3: 
+                clearScreen();
+                for(int i = 0; i < resume.getExtracurriculars().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getExtracurriculars().get(i).toString());
+                }
+                System.out.print("Enter the index number of the extracurricular to edit: ");
+                index = scanner.nextInt()-1;
+                scanner.nextLine();
+                clearScreen();
+                activitiesEditor(resume, index);
         break;
         case 4: //club title
+                clearScreen();
+                for(int i = 0; i < resume.getExtracurriculars().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getExtracurriculars().get(i).toString());
+                }
+                System.out.print("Enter the index number of the extracurricular to edit: ");
+                index = scanner.nextInt()-1;
+                scanner.nextLine();
+                clearScreen();
+                System.out.print("Enter the title of the extracurricular: ");
+                change = scanner.nextLine();
+                resume.getExtracurriculars().get(index).setTitle(change);
         break;
         case 5: //position
+                clearScreen();
+                for(int i = 0; i < resume.getExtracurriculars().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getExtracurriculars().get(i).toString());
+                }
+                System.out.print("Enter the index number of the extracurricular to edit: ");
+                index = scanner.nextInt()-1;
+                scanner.nextLine();
+                clearScreen();
+                System.out.print("Enter your position in the extracurricular: ");
+                change = scanner.nextLine();
+                resume.getExtracurriculars().get(index).setPosition(change);
         break;
         case 6: //start date
+                clearScreen();
+                for(int i = 0; i < resume.getExtracurriculars().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getExtracurriculars().get(i).toString());
+                }
+                System.out.print("Enter the index number of the extracurricular to edit: ");
+                index = scanner.nextInt()-1;
+                scanner.nextLine();
+                clearScreen();
+                System.out.print("Enter the number of the month you started (January is 1, February is 2, etc.): ");
+                int monthNumber = scanner.nextInt();
+                scanner.nextLine();
+                resume.getExtracurriculars().get(index).setStartMonth(monthNumber);
+
+                System.out.print("Enter the year you started: ");
+                int year = scanner.nextInt()-1;
+                scanner.nextLine();
+                resume.getExtracurriculars().get(index).setStartYear(year);
         break;
         case 7: //end date
+                clearScreen();
+                for(int i = 0; i < resume.getExtracurriculars().size(); i++) {
+                  System.out.println((i+1)+": "+resume.getExtracurriculars().get(i).toString());
+                }
+                System.out.print("Enter the index number of the extracurricular to edit: ");
+                index = scanner.nextInt()-1;
+                scanner.nextLine();
+                clearScreen();
+                System.out.print("Enter the number of the month you ended (January is 1, February is 2, etc.): ");
+                monthNumber = scanner.nextInt();
+                scanner.nextLine();
+                Month month = Month.values()[monthNumber];
+                System.out.print("Enter the year you ended: ");
+                year = scanner.nextInt();
+                scanner.nextLine();
+                resume.getExtracurriculars().get(index).addEndDate(month, year);
         break;
       }
       clearScreen();
@@ -859,6 +973,290 @@ private void extracurricularEditor(Resume resume) {
       command = scanner.nextInt();
       scanner.nextLine();
     }
+}
+
+private void activitiesEditor(Resume resume, int index) {
+  String res = "s";
+  while(res.equalsIgnoreCase("done")) {
+      clearScreen();
+      System.out.println("Would you like to (a)dd or (r)emove activities? Enter \"done\" when you are done");
+      res = scanner.nextLine();
+      if(res.equalsIgnoreCase("a")) {
+        System.out.print("Enter the activity you would like to add: ");
+        res = scanner.nextLine();
+        resume.getExtracurriculars().get(index).addExtracurricularActivity(res);
+      }
+      else if(res.equalsIgnoreCase("r")) {
+        for(int i = 0; i < resume.getExtracurriculars().get(index).getActivities().size(); i++) {
+          System.out.println((i+1)+": "+resume.getExtracurriculars().get(i).toString());
+        }
+        System.out.print("Enter the Index of the activity you would like to remove: ");
+        int i = scanner.nextInt()-1;
+        scanner.nextLine();
+        resume.getExtracurriculars().get(index).getActivities().remove(i);
+      }
+  } 
+}
+
+private void addEducation(Resume resume) {
+      System.out.print("Enter the university: ");
+      String university = scanner.nextLine();
+
+      System.out.print("Enter the city: ");
+      String city = scanner.nextLine();
+
+      System.out.print("Enter the state: ");
+      String state = scanner.nextLine();
+
+      System.out.print("Enter the degree type: ");
+      String degreeType = scanner.nextLine();
+
+      System.out.print("Enter your major: ");
+      String major = scanner.nextLine();
+
+      System.out.print("Enter the number of your graduation month (January is 1, February is 2, etc.): ");
+      int monthNumber = scanner.nextInt();
+      scanner.nextLine();
+      Month gradMonth = Month.values()[monthNumber];
+
+      System.out.print("Enter your graduation year: ");
+      int gradYear = scanner.nextInt();
+      scanner.nextLine();
+
+      Education edu = new Education(university, city, state, degreeType, major, gradMonth, gradYear);
+
+      System.out.print("Enter your minor (enter \"none\" if you don't have one): ");
+      String minor = scanner.nextLine();
+      if (!minor.equalsIgnoreCase("none"))
+        edu.addMinor(minor);
+
+      System.out.print("Enter your GPA (Enter -1 if you do not wish to include a GPA): ");
+      double gpa = scanner.nextDouble();
+      scanner.nextLine();
+      if (gpa != -1)
+        edu.addGPA(gpa);
+
+      resume.addEducation(edu);
+}
+
+private void addWorkExperience(Resume resume) {
+  System.out.print("Enter the position: ");
+      String position = scanner.nextLine();
+
+      System.out.print("Enter the company: ");
+      String company = scanner.nextLine();
+
+      System.out.print("Enter the city: ");
+      String Wcity = scanner.nextLine();
+
+      System.out.print("Enter the state: ");
+      String Wstate = scanner.nextLine();
+
+      System.out.print("Enter the number of the month you started (January is 1, February is 2, etc.): ");
+      int monthNumber = scanner.nextInt();
+      scanner.nextLine();
+      Month startMonth = Month.values()[monthNumber];
+
+      System.out.print("Enter the year you started: ");
+      int startYear = scanner.nextInt();
+      scanner.nextLine();
+
+      /*
+       * creates a work experience with given position, month, startYear, company,
+       * city, state; work experience constructor creates a responsibilities array for
+       * this work experience
+       */
+      WorkExperience workXP = new WorkExperience(position, startMonth, startYear, company, Wcity, Wstate);
+
+      String inner = "no";
+      System.out.println("Enter responsibilities (type \"done\" when finished)");
+      while (!inner.equalsIgnoreCase("done")) {
+        inner = scanner.nextLine();
+        if (!inner.equalsIgnoreCase("done"))
+          workXP.addResponsibility(inner);
+      }
+
+      System.out.println("Are you currently working this position? (y)es or (n)o");
+      String response = scanner.nextLine();
+      if (response.equalsIgnoreCase("n")) {
+        System.out.print("Enter the number of the month you ended (January is 1, February is 2, etc.): ");
+        monthNumber = scanner.nextInt();
+        scanner.nextLine();
+        Month endMonth = Month.values()[monthNumber];
+
+        System.out.print("Enter the year you ended: ");
+        int endYear = scanner.nextInt();
+        scanner.nextLine();
+
+        workXP.addEndDate(endMonth, endYear);
+      }
+      resume.addWorkExperience(workXP);
+}
+
+private void addExtracurricular(Resume resume) {
+  System.out.print("Enter the name of the extracurricular organization: ");
+      String title = scanner.nextLine();
+
+      System.out.print("Enter your position within the organization: ");
+      String position = scanner.nextLine();
+
+      System.out.print("Enter the number of the month you joined (January is 1, February is 2, etc.): ");
+      int monthNumber = scanner.nextInt();
+      scanner.nextLine();
+      Month startMonth = Month.values()[monthNumber];
+
+      System.out.print("Enter the year you joined: ");
+      int startYear = scanner.nextInt();
+      scanner.nextLine();
+
+      Extracurricular extrac = new Extracurricular(position, startMonth, startYear, title);
+
+      String inner = "no";
+      System.out.println("Enter responsibilities/activities (type \"done\" when finished)");
+      while (!inner.equalsIgnoreCase("done")) {
+        inner = scanner.nextLine();
+        if (!inner.equalsIgnoreCase("done"))
+          extrac.addExtracurricularActivity(inner);
+      }
+
+      System.out.print("Are you currently in this organization? (y)es or (n)o: ");
+      if (scanner.nextLine().equalsIgnoreCase("n")) {
+        System.out.print("Enter the number of the month you ended (January is 1, February is 2, etc.): ");
+        monthNumber = scanner.nextInt();
+        scanner.nextLine();
+        Month endMonth = Month.values()[monthNumber];
+
+        System.out.print("Enter the year you ended: ");
+        int endYear = scanner.nextInt();
+        scanner.nextLine();
+        extrac.addEndDate(endMonth, endYear);
+      }
+
+      resume.addExtracurricular(extrac);
+}
+
+private void displayListingEditMenu() {
+  System.out.println("************** Choose an option **************");
+  for (int i = 0; i < LISTNG_EDIT_OPTIONS.length; i++) {
+    System.out.println((i + 1) + ". " + LISTNG_EDIT_OPTIONS[i]);
+  }
+  System.out.print("\nSelection: ");
+}
+
+private void editListingMenu(int i) {
+  Listing listing = employer.getListings().get(i-1);
+  clearScreen();
+  displayListingEditMenu();
+  int command = scanner.nextInt();
+  scanner.nextLine();
+  String change;
+  while(command != 8) {
+    switch(command) {
+      case 1: //job title
+              clearScreen();
+              System.out.print("Enter the job title: ");
+              change = scanner.nextLine();
+              listing.setJobTitle(change);
+      break; 
+      case 2: //location
+              clearScreen();
+              System.out.print("Is this listing remote? (y)es or (n)o: ");
+              change = scanner.nextLine();
+              if(change.equalsIgnoreCase("y")) {listing.setRemote(true);}
+              else {listing.setRemote(false);}
+              System.out.print("Enter the city of your business: ");
+              change = scanner.nextLine();
+              listing.setCity(change);
+              System.out.print("Enter the state of your business: ");
+              change = scanner.nextLine();
+              listing.setState(change);
+      break;
+      case 3:
+              clearScreen();
+              System.out.print("Enter the number of the month the internship starts (January is 1, February is 2, etc.): ");
+              int monthNumber = scanner.nextInt();
+              scanner.nextLine();
+              System.out.print("Enter the year the internship starts: ");
+              int year = scanner.nextInt()-1;
+              scanner.nextLine();
+              listing.setStartMonth(monthNumber);
+              listing.setStartYear(year);
+      break;
+      case 4: //hours
+              clearScreen();
+              System.out.print("Enter the hours per week: ");
+              int hours = scanner.nextInt();
+              scanner.nextLine();
+              listing.setHoursPerWeek(hours);
+      break;
+      case 5: //pay
+              clearScreen();
+              System.out.print("Enter the pay per hour: ");
+              double pay = scanner.nextDouble();
+              scanner.nextLine();
+              listing.setPay(pay);
+      break;
+      case 6: //skills
+              clearScreen();
+              desiredSkillsEditor(listing);
+      break;
+      case 7: //duties
+              clearScreen();
+              dutiesEditor(listing);
+      break;
+    }
+    clearScreen();
+    displayListingEditMenu();
+    command = scanner.nextInt();
+    scanner.nextLine();
+  }
+  employer.getListings().set(i-1, listing);
+}
+
+private void desiredSkillsEditor(Listing listing) {
+  String res = "s";
+  while(res.equalsIgnoreCase("done")) {
+      clearScreen();
+      System.out.println("Would you like to (a)dd or (r)emove desired skills? Enter \"done\" when you are done");
+      res = scanner.nextLine();
+      if(res.equalsIgnoreCase("a")) {
+        System.out.print("Enter the skill you would like to add: ");
+        res = scanner.nextLine();
+        listing.addSkills(res);
+      }
+      else if(res.equalsIgnoreCase("r")) {
+        for(int i = 0; i < listing.getSkills().size(); i++) {
+          System.out.println((i+1)+": "+listing.getSkills().get(i));
+        }
+        System.out.print("Enter the Index of the activity you would like to remove: ");
+        int i = scanner.nextInt()-1;
+        scanner.nextLine();
+        listing.getSkills().remove(i);
+      }
+  } 
+}
+
+private void dutiesEditor(Listing listing) {
+  String res = "s";
+  while(res.equalsIgnoreCase("done")) {
+      clearScreen();
+      System.out.println("Would you like to (a)dd or (r)emove duties? Enter \"done\" when you are done");
+      res = scanner.nextLine();
+      if(res.equalsIgnoreCase("a")) {
+        System.out.print("Enter the duty you would like to add: ");
+        res = scanner.nextLine();
+        listing.addDuties(res);
+      }
+      else if(res.equalsIgnoreCase("r")) {
+        for(int i = 0; i < listing.getDuties().size(); i++) {
+          System.out.println((i+1)+": "+listing.getDuties().get(i));
+        }
+        System.out.print("Enter the Index of the duty you would like to remove: ");
+        int i = scanner.nextInt()-1;
+        scanner.nextLine();
+        listing.getDuties().remove(i);
+      }
+  } 
 }
 
   public static void main(String[] args) {

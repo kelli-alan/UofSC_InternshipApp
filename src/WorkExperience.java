@@ -5,13 +5,16 @@ import java.util.Locale;
 
 /**
  * A class for a student's prior work experience
- * @author Kelli Alan
+ * @author Kelli Alan & Robbie Clark
  */
+
 public class WorkExperience extends Experience {
   private String company;
   private String city;
   private String state;
   private ArrayList<String> responsibilities;
+  private static final int STATE_ABBREVIATION_LENGTH = 2;
+  private static final int CURRENT_YEAR = 2021;
 
   /**
    * Creates a work experience with given properties and initializes responsibilities
@@ -72,6 +75,39 @@ public class WorkExperience extends Experience {
     return this.responsibilities;
   }
 
+  public void setPostition(String position) {
+    super.setPosition(position);
+  }
+
+  public void setStartMonth(int month) {
+    if (month > 0 && month < 13) {
+      this.startMonth = Month.values()[month-1];
+    }
+  }
+
+  public void setStartYear(int year) {
+    if (year >= CURRENT_YEAR) {
+      this.startYear = year;
+    }
+  }
+
+  public void setCompany(String company) {
+    if(company != null && !company.equalsIgnoreCase(""))
+      this.company = company;
+  }
+
+  public void setCity(String city) {
+    if (isValidString(city)) {
+      this.city = city;
+    }
+  }
+
+  public void setState(String state) {
+    if (isValidString(state) && state.length() >= STATE_ABBREVIATION_LENGTH) {
+      this.state = state;
+    }
+  }
+
   /**
    * Checks if given responsibility is already on the list of responsibilities held by the work 
    * experience
@@ -108,4 +144,9 @@ public class WorkExperience extends Experience {
     }
     return ret;
   }
+
+  private boolean isValidString(String string) {
+    return (!string.equals(null) || !string.equals(""));
+  }
+
 }
