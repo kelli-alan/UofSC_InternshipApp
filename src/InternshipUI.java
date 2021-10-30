@@ -76,7 +76,7 @@ public class InternshipUI {
           displayListingListOptions();
           int choice = scanner.nextInt();
           scanner.nextLine();
-          if (choice == 1) {
+          if (choice == 1) { // apply
             System.out.println("Which listing would you like to apply to?");
             int listingIndex = scanner.nextInt();
             scanner.nextLine();
@@ -90,13 +90,22 @@ public class InternshipUI {
             scanner.nextLine();
 
             app.applyToListing(app.getListing(listingIndex-1).getID(), student.getResumes().get(resumeIndex-1).getUUID());
+            
+            clearScreen();
 
-          } // apply
-          else if (choice == 2) {
+            System.out.println("Application sent!");
+
+          }
+          else if (choice == 2) { // save listing
             System.out.println("Which listing would you like to save?");
             choice = scanner.nextInt();
             scanner.nextLine();
-            // student.saveListing();
+            if(student.saveListing(app.getListing(choice-1))) {
+              System.out.println("Listing saved!");
+              clearScreen();
+              break;
+            }
+            System.out.println("Listing was already saved!");
           } // save
           break;
         case 3: // View listings by filter

@@ -84,26 +84,35 @@ public class Student extends User {
     this.resumes.remove(index);
   }
 
-//TODO MOVE
-  /**
-   * This method allows a student to apply to a listing by adding their resume
-   * to the list of listingApplications, where it can be seen by an employer.
-   * @param listing
-   * @param resume
-   */
-  public void applyToListing(int listingIndex, int resumeIndex) {
-
-  }
 
   /**
-   * Allows the student to save a listing to the ArrayList of saved listings
-   * that they can go back and view using the viewAllSavedListings() method.
-   * @param listing
+   * Allows the student to save a listing to their ArrayList of saved listings, if it was not 
+   * previously saved so that they can go back and view using the viewAllSavedListings() method.
+   * @param listing to save
+   * @return true if save was successful, false if listing is already saved
    */
-  public void saveListing(Listing listing) {
-    this.savedListings.add(listing);
+  public boolean saveListing(Listing listing) {
+    
+    if (!isSaved(listing)) {
+      this.savedListings.add(listing);
+      return true;
+    }
+    return false;
   }
-
+  /**
+   * Determines if listing already is student's ArrayList of saved listings
+   * @param listing the listing the student is attempting to save
+   * @return true if listing is already saved; false if listing is not saved
+   */
+  public boolean isSaved(Listing listing) {
+    for (int i = 0; i < this.savedListings.size();  i++) {
+      if (this.savedListings.get(i).getID().toString().equals(listing.getID().toString()))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
   // Returns the ArrayList of savedListings back to the student.
   public ArrayList<Listing> viewAllSavedListings() {
     for (int i = 0; i < savedListings.size(); i++)

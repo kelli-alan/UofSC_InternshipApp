@@ -4,8 +4,7 @@ import java.util.ArrayList;
 public class test {
     
     public static void main(String[] args) {
-      ArrayList<Student> students = DataLoader.loadStudents();
-      
-      System.out.println(students.get(0).displayAllResumes());
+     ArrayList<Listing> listings = DataLoader.loadListings();
+      System.out.println(listings.get(1).getApplications());
     }
   }
