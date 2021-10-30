@@ -19,7 +19,7 @@ public class FilterListings {
 
     for (int i = 0; i < listings.size(); i++) {
       Listing currentListing = listings.get(i);
-      if (currentListing.getHoursPerWeek() >= comparison) {
+      if (currentListing.getHoursPerWeek() <= comparison) {
         newArray.add(currentListing);
       }
     }
@@ -39,7 +39,7 @@ public class FilterListings {
 
     for (int i = 0; i < listings.size(); i++) {
       Listing currentListing = listings.get(i);
-      if (currentListing.getLocation().equalsIgnoreCase(comparison)) {
+      if (currentListing.getLocation().toLowerCase().contains(comparison.toLowerCase())) {
         newArray.add(currentListing);
       }
     }

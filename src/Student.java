@@ -84,6 +84,14 @@ public class Student extends User {
     this.resumes.remove(index);
   }
 
+  public boolean deleteSavedListing(Listing listing) {
+    if (isSaved(listing)) {
+      savedListings.remove(listing);
+      return true;
+    }
+    return false;
+  }
+
 
   /**
    * Allows the student to save a listing to their ArrayList of saved listings, if it was not 
@@ -114,10 +122,12 @@ public class Student extends User {
     return false;
   }
   // Returns the ArrayList of savedListings back to the student.
-  public ArrayList<Listing> viewAllSavedListings() {
-    for (int i = 0; i < savedListings.size(); i++)
-    savedListings.get(i);
-      return savedListings;
+  public String viewAllSavedListings() {
+    String ret = "";
+    for (int i = 0; i < savedListings.size(); i++) {
+      ret+= (i+1) + ". " + savedListings.get(i).toString();
+    }
+    return ret;
   }
 
   // Concatenates and returns together the student's name, phone number, email, and their resume to a string.
@@ -129,19 +139,6 @@ public class Student extends User {
     String ret = "";
     for (int i = 0; i < resumes.size(); i++) {
       ret+= (i + 1) + ".\n" + displayResume(i) + "\n\n";
-    }
-    return ret;
-  }
-
-  public String toString() {
-    String ret = super.toString();
-    for (int i = 0; i < this.resumes.size(); i++) {
-      ret += displayResume(i);
-    }
-
-    ret += "Saved Listings: " + "\n";
-    for (int i = 0; i < this.savedListings.size(); i++) {
-      ret += savedListings.get(i).toString();
     }
     return ret;
   }
