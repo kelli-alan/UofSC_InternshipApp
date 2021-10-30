@@ -10,7 +10,7 @@ public class InternshipUI {
   private static final String WELCOME = "\t  Welcome to the Internship App";
   private static final String[] OPEN_OPTIONS = { "Create Account", "Log In" };
   private static final String[] EMPLOYER_OPTIONS = { "Listings", "Ratings", "Logout" };
-
+  private static final String[] MOD_OPTIONS = {"View all Resumes", "View all Lisings", "Delete Resume", "Delete Listing", "Logout"};
   private static final String[] RESUME_OPTIONS = { "View Resumes", "Write Resume to File", "Create New Resume", "Edit Resume", "Back" };
   private static final String[] LISTING_OPTIONS = { "View Listings", "Write Listing to File", "Create New Listing", "Delete Listing", "Edit Listing", "Back" };
   private static final String[] LISTING_LIST_OPTIONS = { "Apply", "Save", "Back" };
@@ -132,6 +132,27 @@ public class InternshipUI {
       System.out.println("Log out Successful");
       app.logout();
     }
+
+    else if(user.type == Users.MODERATOR) {
+      while(command != 5) {
+        displayModOptions();
+        command = scanner.nextInt();
+        scanner.nextLine();
+        switch(command) {
+          case 1: //view all resumes
+          break;
+          case 2: //view all listings
+          break;
+          case 3: //delete resume
+          break;
+          case 4: //delete listing
+          break;
+        }
+      }
+      clearScreen();
+      System.out.println("Log out successful");
+      app.logout();
+    }
   }
 
   // displays the text options for the main menu
@@ -177,6 +198,14 @@ public class InternshipUI {
         + "\n************** Choose an option **************");
     for (int i = 0; i < STUDENT_OPTIONS.length; i++) {
       System.out.println((i + 1) + ". " + STUDENT_OPTIONS[i]);
+    }
+    System.out.print("\nSelection: ");
+  }
+
+  private void displayModOptions() {
+    System.out.println("************** Choose an option **************");
+    for (int i = 0; i < MOD_OPTIONS.length; i++) {
+      System.out.println((i + 1) + ". " + MOD_OPTIONS[i]);
     }
     System.out.print("\nSelection: ");
   }
