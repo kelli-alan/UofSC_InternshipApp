@@ -3,7 +3,7 @@ import java.time.Month;
 
 /**
  * 
- * @author Robbie Clark
+ * @author Robbie Clark, Evan Grunewald
  */
 public class InternshipUI {
   private static final String WELCOME = "\t  Welcome to the Internship App";
@@ -288,7 +288,7 @@ public class InternshipUI {
         String path = scanner.nextLine();
         System.out.println("Enter index of resume to write: ");
         int id = scanner.nextInt();
-        String content = student.getResumes().get(id).toString();
+        String content = student.getResumes().get(id-1).toString();
         app.writeFile(content, path);
         break;
       case 3:
@@ -321,7 +321,7 @@ public class InternshipUI {
         String path = scanner.nextLine();
         System.out.println("Enter index of listing to write: ");
         int id = scanner.nextInt();
-        String content = employer.getListings().get(id).toString();
+        String content = employer.getListings().get(id-1).toString();
         app.writeFile(content, path);
         break;
       case 3: // create listing
