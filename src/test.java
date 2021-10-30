@@ -5,6 +5,6 @@ public class test {
     
     public static void main(String[] args) {
      ArrayList<Listing> listings = DataLoader.loadListings();
-      System.out.println(listings.get(1).getApplications());
+      System.out.println(listings.get(3));
     }
   }

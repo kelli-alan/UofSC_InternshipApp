@@ -54,7 +54,6 @@ public class InternshipApp {
         }
     }
 
-
     /**
      * Method to add a user to the ArrayList of users.
      * @param user

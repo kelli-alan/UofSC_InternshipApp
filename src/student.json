@@ -25,5 +25,17 @@
     "resumes": ["d7b13acd-61b8-401b-ae33-64bdca554336"],
     "email": "anaedwards@gmail.com",
     "username": "edwards_a"
+  },
+  {
+    "firstName": "Chris",
+    "lastName": "Johnson",
+    "password": "classof2023",
+    "phoneNumber": "(803) 646-4670",
+    "savedListings": [],
+    "id": "bdd034c9-f6be-4e8b-a91d-777168e548be",
+    "type": "STUDENT",
+    "resumes": [],
+    "email": "johnsc@gmail.com",
+    "username": "johnson_c"
   }
 ]

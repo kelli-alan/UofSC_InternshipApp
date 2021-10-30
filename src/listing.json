@@ -35,5 +35,47 @@
       "eb9e9de7-8fed-487c-97c7-be730dd3f452",
       "d7b13acd-61b8-401b-ae33-64bdca554336"
     ]
+  },
+  {
+    "hoursPerWeek": 30,
+    "city": "Charleston",
+    "startMonth": 3,
+    "jobTitle": "Computer Application Designer",
+    "isRemote": true,
+    "startYear": 2022,
+    "pay": 20.0,
+    "desiredSkills": [
+      "Fundamentals of modern computer software",
+      "JavaScript"
+    ],
+    "id": "195ad205-19c9-43b6-b89c-523a517495a5",
+    "state": "SC",
+    "duties": [
+      "Designing new computer applications",
+      "Develop newly designed apps"
+    ],
+    "applications": [
+    ]
+  },
+  {
+    "hoursPerWeek": 35,
+    "city": "Columbia",
+    "startMonth": 7,
+    "jobTitle": "Software Developer",
+    "isRemote": false,
+    "startYear": 2023,
+    "pay": 23.0,
+    "desiredSkills": [
+      "Fundamentals of modern computer software",
+      "JavaScript, other languages"
+    ],
+    "id": "195ad205-19c9-43b6-b89c-523a517495a5",
+    "state": "SC",
+    "duties": [
+      "Programming for many computer applications",
+      "Group work for major projects"
+    ],
+    "applications": [
+    ]
   }
 ]
