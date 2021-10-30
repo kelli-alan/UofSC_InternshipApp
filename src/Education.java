@@ -2,6 +2,10 @@ import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
+/**
+ * @author Evan Grunewald
+ * Element of Resume class for a students education(s)
+ */
 public class Education {
 
   private String university;
