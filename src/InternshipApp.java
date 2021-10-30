@@ -16,14 +16,13 @@ public class InternshipApp {
         this.users = this.userList.getAllUsers();
         this.listingList = ListingList.getInstance();
         this.resumeList = ResumeList.getInstance();
-        this.listing = new ArrayList<Listing>();
         this.listing = this.listingList.getAllListings();
     }
 
     //logs user in from userlist's arraylist
     public User login(String username, String password) {
         
-        return userList.hasUser(username, password);
+        return hasUser(username, password);
     }
 
     public void logout() {
@@ -44,5 +43,22 @@ public class InternshipApp {
     public void addUser(User user) {
 
         this.users.add(user);
+    }
+
+    public User hasUser(String username, String password) {
+      for(int i = 0; i < users.size(); i++) {
+          if(users.get(i).username.equals(username) && users.get(i).password.equals(password))
+              return users.get(i);
+      }
+      return null;
+    }
+
+    public boolean usernameTaken (String username) {
+      for (int i = 0; i < users.size(); i++) {
+        if (users.get(i).username.equals(username)) {
+          return true;
+        }
+      }
+      return false;
     }
 }

@@ -4,10 +4,14 @@ import java.util.UUID;
 
 /**
  * 
- * @authors Robbie Clark, Evan Grunewald
+ * @authors Robbie Clark, Evan Grunewald, Kelli Alan
  */
 
 public class Listing {
+
+  private static final int HOURS_IN_WEEK = 112;
+  private static final int STATE_ABBREVIATION_LENGTH = 2;
+  private static final int CURRENT_YEAR = 2021;
 
   private UUID id;
   private String jobTitle;
@@ -23,7 +27,8 @@ public class Listing {
   private ArrayList<Resume> applications;
 
   /**
-   * The main constructor for Listing, takes in all needed fields
+   * The main constructor for Listing, takes in all needed fields;
+   * Used for loading in listing from listing.json
    * 
    * @param id The Listing's unique identifier
    * @param jobTitle The Listing's title
@@ -46,6 +51,17 @@ public class Listing {
     this.hoursPerWeek = hoursPerWeek;
     this.pay = pay;
     this.isRemote = isRemote;
+    this.desiredSkills = new ArrayList<String>();
+    this.duties = new ArrayList<String>();
+    this.applications = new ArrayList<Resume>();
+  }
+
+  /**
+   * Default constructor; generates a new UUID and initializes all necessary arrays
+   * Used for creating listings in the UI
+   */
+  public Listing() {
+    this.id = UUID.randomUUID();
     this.desiredSkills = new ArrayList<String>();
     this.duties = new ArrayList<String>();
     this.applications = new ArrayList<Resume>();
@@ -168,6 +184,52 @@ public class Listing {
     return this.city + ", " + this.state;
   }
 
+  public void setJobTitle(String title) {
+    if (isValidString(title)) {
+      this.jobTitle = title;
+    }
+  }
+
+  public void setCity(String city) {
+    if (isValidString(city)) {
+      this.city = city;
+    }
+  }
+
+  public void setState(String state) {
+    if (isValidString(state) && state.length() >= STATE_ABBREVIATION_LENGTH) {
+      this.state = state;
+    }
+  }
+
+  public void setStartMonth(int month) {
+    if (month > 0 && month < 13) {
+      this.startMonth = Month.values()[month-1];
+    }
+  }
+
+  public void setStartYear(int year) {
+    if (year >= CURRENT_YEAR) {
+      this.startYear = year;
+    }
+  }
+
+  public void setHoursPerWeek(int hours) {
+    if (hours > 0 && hours <= HOURS_IN_WEEK) {
+      this.hoursPerWeek = hours;
+    }
+  }
+
+  public void setPay(double pay) {
+    if (pay >= 0) {
+      this.pay = pay;
+    }
+  }
+
+  public void setRemote(boolean isRemote) {
+    this.isRemote = isRemote;
+  }
+
   /**
    * Adds a new skill to the Listings list of skills
    * 
@@ -224,7 +286,10 @@ public class Listing {
    * @param resume Resume to add to the applications
    */
   public void updateApplications(Resume resume) {
-    this.applications.add(resume);
+    if (resume != null) {
+      this.applications.add(resume);
+    }
+    
   }
 
   /**
@@ -260,6 +325,10 @@ public class Listing {
       ret += "\t- " + this.duties.get(i) + "\n\t";
 
     return ret;
+  }
+
+  private boolean isValidString(String string) {
+    return (!string.equals(null) || !string.equals(""));
   }
 
 }

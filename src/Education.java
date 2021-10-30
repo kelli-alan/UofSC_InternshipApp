@@ -1,4 +1,6 @@
 import java.time.Month;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 public class Education {
 
@@ -108,13 +110,12 @@ public class Education {
 
   public String toString() {
 
-    String ret = university + "\n" + city + ", " + state;
-    ret += "\n" + degreeType + " in " + major;
-    if (minor != "")
-      ret += "\nMinor in " + minor;
+    String ret = "  " + university + ", " + gradMonth.getDisplayName(TextStyle.FULL, Locale.US) + " " + gradYear +"\n    " + city + ", " + state;
+    ret += "\n    " + degreeType + " in " + major;
+    if (minor.length() > 1)
+      ret += "\n    Minor in " + minor;
     if (GPA != 0)
-      ret += "\n" +GPA + " GPA";
-    ret += "\nGraduation " + gradMonth + " " + gradYear;
+      ret += "\n    " +GPA + " GPA";
     return ret;
   }
 

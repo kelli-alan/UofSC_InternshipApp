@@ -7,34 +7,28 @@ import java.util.Scanner;
  * @authors Yousef Afshar, Robbie Clark, Kelli Alan
  */
 public class Student extends User {
-  private ArrayList<Student> students;
-  private ArrayList<Resume> resumes;
-  private ArrayList<Listing> listings;
-  private ArrayList<Resume> listingApplications;
-  private ArrayList<Listing> savedListings;
-  private Scanner key = new Scanner(System.in);
-  private String major;
-  private String phoneNumber;
   private String email;
+  private String phoneNumber;
+  private ArrayList<Resume> resumes;
+  private ArrayList<Listing> savedListings;
+
 
   // constructor for loading students who have an id
-  public Student(UUID id, String firstName, String lastName, String username, String password, String email, String phoneNumber, Users STUDENT) {
-    super(id, firstName, lastName, username, password, STUDENT);
+  public Student(UUID id, String firstName, String lastName, String username, String password, String email, String phoneNumber, Users type) {
+    super(id, firstName, lastName, username, password, type);
     this.email = email;
     this.phoneNumber = phoneNumber;
     this.resumes = new ArrayList<Resume>();
-    this.listings = DataLoader.loadListings();
     this.savedListings = new ArrayList<Listing>();
-    this.listingApplications = new ArrayList<Resume>();
   }
 
   // constructor for creating students who need an id
-  public Student(String firstName, String lastName, String username, String password, Users USER_TYPE_STUDENT) {
-    super(firstName, lastName, username, password, USER_TYPE_STUDENT);
+  public Student(String firstName, String lastName, String username, String password, String email, String phoneNumber, Users type) {
+    super(firstName, lastName, username, password, type);
+    this.email = email;
+    this.phoneNumber = phoneNumber;
     this.resumes = new ArrayList<Resume>();
-    this.listings = DataLoader.loadListings();
     this.savedListings = new ArrayList<Listing>();
-    this.listingApplications = new ArrayList<Resume>();
   }
 
   public String getEmail() {
@@ -58,7 +52,7 @@ public class Student extends User {
     this.resumes.add(resume);
   }
 
-  public void deleteResume(UUID id) {
+  /*public void deleteResume(UUID id) {
     boolean found = false;
     do {
       for (int i = 0; i < this.students.size(); i++) {
@@ -74,13 +68,13 @@ public class Student extends User {
         System.out.println("Invalid ID. Please try again.");
       }
     } while (!found);
-  }
+  }*/
 
-  public void applyToListing(Listing listing, Resume resume) {
+  /*public void applyToListing(Listing listing, Resume resume) {
     if ( resumes.contains(resume)) {
       listingApplications.add(resume);
     }
-  }
+  }*/ 
 
   /*
    * Is this still necessary?  
@@ -103,8 +97,18 @@ public class Student extends User {
   }
 
   public String displayResume(int i) {
-    return "\t\t\t" +  this.firstName + " " + this.lastName + "\n" + this.phoneNumber +"\t\t\t\t" + this.email + this.resumes.get(i).toString();
+    return "\t\t\t" +  this.firstName + " " + this.lastName + "\n" + this.phoneNumber +"\t\t\t\t" + this.email + "\n" + this.resumes.get(i).toString();
   }
+
+  public String displayAllResumes() {
+    String ret = "";
+    for (int i = 0; i < resumes.size(); i++) {
+      ret+= (i + 1) + ".\n" + displayResume(i) + "\n\n";
+    }
+    return ret;
+  }
+
+  //public void printResume()   placeholder for file IO
 
   public String toString() {
     String ret = super.toString();

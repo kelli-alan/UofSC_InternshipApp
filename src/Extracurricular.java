@@ -50,12 +50,12 @@ public class Extracurricular extends Experience {
    * date (ongoing ? : in-line if-else) - activity 1 ... - activity n
    */
   public String toString() {
-    String ret = this.title + "\n" + this.position + ", " + this.startMonth.getDisplayName(TextStyle.FULL, Locale.US)
+    String ret = "  " + this.title + "\n    " + this.position + ", " + this.startMonth.getDisplayName(TextStyle.FULL, Locale.US)
         + " " + this.startYear + " - "
         + (ongoing ? "present" : this.endMonth.getDisplayName(TextStyle.FULL, Locale.US) + " " + this.endYear) + "\n";
 
     for (int i = 0; i < activities.size(); i++) {
-      ret += "\t- " + activities.get(i) + "\n";
+      ret += "      - " + activities.get(i) + "\n";
     }
     return ret;
   }
