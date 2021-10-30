@@ -15,6 +15,7 @@ public class InternshipUI {
   private static final String[] LISTING_OPTIONS = { "View Listings", "Create New Listing", "Edit Listing", "Back" };
   private static final String[] LISTING_LIST_OPTIONS = { "Apply", "Save", "Back" };
   private static final String[] LISTING_LIST_FILTERS = { "Skills", "Hours per week", "Location", "Pay" };
+  private static final String[] RESUME_EDIT_OPTIONS = {"Skills", "Education", "Work Experience", "Extracurricular", "Back"};
 
   private Scanner scanner;
   private InternshipApp app;
@@ -178,6 +179,14 @@ public class InternshipUI {
     }
     System.out.print("\nSelection: ");
   }
+  
+  private void displayResumeEdit() {
+    System.out.println("************** Choose an option **************");
+    for (int i = 0; i < RESUME_EDIT_OPTIONS.length; i++) {
+      System.out.println((i + 1) + ". " + RESUME_EDIT_OPTIONS[i]);
+    }
+    System.out.print("\nSelection: ");
+  }
 
   // log in method, asks for username and password and sets user if they are in
   // the list
@@ -268,7 +277,7 @@ public class InternshipUI {
       switch (command) {
       case 1:
         clearScreen();
-        displayResumes();
+        student.displayAllResumes();
         System.out.println("Enter \"back\" when you want to go back to menu");
         scanner.nextLine();
         clearScreen();
@@ -597,12 +606,48 @@ public class InternshipUI {
     System.out.flush();
   }
 
-  private void displayResumes() {
-    int size = student.getResumes().size();
-    for (int i = 0; i < size; i++) {
-      System.out.println("\n" + (i + 1) + ":\n" + student.displayResume(i));
+private void editResumeMenu(int i) {
+  Resume resume = student.getResumes().get(i-1);
+
+  System.out.println("Enter the number for the section you would like to edit.");
+  displayResumeEdit();
+  int command = scanner.nextInt();
+  scanner.nextLine();
+  if(command < 5) {
+
+    switch(command) {
+      case 1: clearScreen();
+              skillsEditor(resume);
+      break; 
+      case 2: //edu
+      break;
+      case 3: //work
+      break;
+      case 4: //extra
+      break;
     }
   }
+
+  student.getResumes().set(i, resume);
+}
+
+private void skillsEditor(Resume resume) {
+  String res = "s";
+  while(res.equalsIgnoreCase("done")) {
+      System.out.println("Would you like to (a)dd or (r)emove skills? Enter \"done\" when you are done");
+      res = scanner.nextLine();
+      if(res.equalsIgnoreCase("a")) {
+        System.out.print("Enter the skill you would like to add: ");
+        res = scanner.nextLine();
+        resume.addSkill(res);
+      }
+      else if(res.equalsIgnoreCase("r")) {
+        System.out.print("Enter the skill you would like to remove");
+        res = scanner.nextLine();
+        resume.deleteSkill(res);
+      }
+  } 
+}
 
   public static void main(String[] args) {
     InternshipUI internshipUI = new InternshipUI();
