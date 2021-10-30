@@ -47,11 +47,22 @@ public class InternshipApp {
     }
 
     // Displays all of the listings on the entire Internship application.
-    public void viewAllListings() {
-        
+    public String viewAllListings() {
+        String ret = "";
         for(int i = 0; i < this.listings.size(); i++) {
-            System.out.println((i+1)+": "+this.listings.get(i).toString());
+          int j = i+1;
+          ret += (j) + ": "+this.listings.get(i).toString() + "\n\n";
         }
+        return ret;
+    }
+
+    public String viewFilteredListings(ArrayList<Listing> filtered) {
+      String ret = "";
+        for(int i = 0; i < filtered.size(); i++) {
+          int j = i+1;
+          ret += (j) + ": "+ filtered.get(i).toString() + "\n\n";
+        }
+        return ret;
     }
 
 
@@ -68,32 +79,62 @@ public class InternshipApp {
       this.listings.add(listing);
     }
 
-    public void applyToListing(UUID listingID, UUID resumeID) {
-      Resume resume = null;
-      for (int i = 0; i < resumes.size(); i++) {
-        if (resumes.get(i).getUUID().toString().equals(resumeID.toString())) {
-          resume = resumes.get(i);
-          break;
-        }
+    public boolean applyToListing(UUID listingID, UUID resumeID) {
+      Listing listing = getListing(listingID);
+      Resume resume = getResume(resumeID);
+      
+      if (!hasApplication(listing, resume.getUUID())) {
+        listing.updateApplications(resume);
+        return true;
       }
+      return false;
+    }
+
+    public Listing getListing(UUID listingID) {
       for (int i = 0; i < listings.size(); i++) {
         if (listings.get(i).getID().toString().equals(listingID.toString())) {
-          listings.get(i).updateApplications(resume);
-          break;
+          return listings.get(i);
         }
       }
+
+      return null;  // listing not found
     }
 
-    public Listing getListing(int index) {
-      return listings.get(index);
+    public ArrayList<Listing> getListings() {
+      return this.listings;
     }
 
-    public User hasUser(String username, String password) {
+
+    private Resume getResume(UUID resumeID) {
+      for (int i = 0; i < resumes.size(); i++) {
+        if (resumes.get(i).getUUID().toString().equals(resumeID.toString())) {
+          return resumes.get(i);
+        }
+      }
+      return null;  // resume not found
+    }
+
+    private User hasUser(String username, String password) {
       for(int i = 0; i < users.size(); i++) {
           if(users.get(i).username.equals(username) && users.get(i).password.equals(password))
               return users.get(i);
       }
       return null;
+    }
+
+    /**
+     * Determines if a student's resume has already been submitted to a given listing
+     * @param listing student is attempting to apply to
+     * @param resumeID the UUID associated with the student's resume
+     * @return true if student has already applied to the listing, false if they have not applied
+     */
+    private boolean hasApplication(Listing listing, UUID resumeID){
+      for (int i = 0; i < listing.getApplications().size(); i++) {
+        if (listing.getApplications().get(i).getUUID().toString().equals(resumeID.toString())) {
+          return true;
+        }
+      }
+      return false;
     }
 
     public boolean usernameTaken (String username) {

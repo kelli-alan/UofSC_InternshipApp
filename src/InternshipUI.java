@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.Month;
 
@@ -9,19 +10,25 @@ public class InternshipUI {
   private static final String WELCOME = "\t  Welcome to the Internship App";
   private static final String[] OPEN_OPTIONS = { "Create Account", "Log In" };
   private static final String[] EMPLOYER_OPTIONS = { "Listings", "Ratings", "Logout" };
-  private static final String[] STUDENT_OPTIONS = { "Resumes", "View All Internship Listings",
-    "View Internship Listings by Filter", "Ratings", "Logout" };
-  private static final String[] RESUME_OPTIONS = { "View Resumes", "Write Resume to File", "Create New Resume", "Edit Resume", "Back" };
-  private static final String[] LISTING_OPTIONS = { "View Listings", "Write Listing to File", "Create New Listing", "Edit Listing", "Back" };
+  private static final String[] STUDENT_OPTIONS = { "Resumes", "Listings", "Ratings", "Logout" };
+  private static final String[] RESUME_OPTIONS = { "View Resumes", "Write Resume to File", "Create New Resume",
+      "Edit Resume", "Back" };
+  private static final String[] EMPLOYER_LISTING_OPTIONS = { "View Listings", "Write Listing to File", "Create New Listing", "Edit Listing",
+      "Back" };
+  private static final String[] STUDENT_LISTING_OPTIONS = { "View All Listings", "View Saved Listings",
+      "Filter Listings", "Back" };
   private static final String[] LISTING_LIST_OPTIONS = { "Apply", "Save", "Back" };
-  private static final String[] LISTING_LIST_FILTERS = { "Skills", "Hours per week", "Location", "Pay" };
-  private static final String[] RESUME_EDIT_OPTIONS = {"Skills", "Education", "Work Experience", "Extracurricular", "Back"};
-  private static final String[] EDUCATION_EDIT_OPTIONS = {"Add new Education", "Remove Education", "Edit University", "Edit Location",
-    "Edit Degree Type", "Edit Major", "Edit Minor", "Edit Graduation Date", "Edit GPA", "Back"};
-  private static final String[] WORK_EXPERIENCE_EDIT_OPTIONS = {"Add new Work Experience", "Remove Work Experience", "Edit Responsibilities",
-    "Edit Company", "Edit Position", "Edit Location", "Edit Start Date", "Edit End Date", "Back"};
-  private static final String[] EXTRACURRICULAR_EDIT_OPTIONS = {"Add new Extracurricular", "Remove Extracurricular", "Edit Activities", "Edit Club Title",
-    "Edit Position", "Edit Start Date", "Edit End Date", "Back"};
+  private static final String[] SAVED_LISTING_OPTIONS = { "Apply", "Remove", "Back" };
+  private static final String[] LISTING_LIST_FILTERS = { "Skills", "Hours per week", "Location", "Pay", "Back" };
+  private static final String[] RESUME_EDIT_OPTIONS = { "Skills", "Education", "Work Experience", "Extracurricular",
+      "Back" };
+  private static final String[] EDUCATION_EDIT_OPTIONS = { "Add new Education", "Remove Education", "Edit University",
+      "Edit Location", "Edit Degree Type", "Edit Major", "Edit Minor", "Edit Graduation Date", "Edit GPA", "Back" };
+  private static final String[] WORK_EXPERIENCE_EDIT_OPTIONS = { "Add new Work Experience", "Remove Work Experience",
+      "Edit Responsibilities", "Edit Company", "Edit Position", "Edit Location", "Edit Start Date", "Edit End Date",
+      "Back" };
+  private static final String[] EXTRACURRICULAR_EDIT_OPTIONS = { "Add new Extracurricular", "Remove Extracurricular",
+      "Edit Activities", "Edit Club Title", "Edit Position", "Edit Start Date", "Edit End Date", "Back" };
 
   private Scanner scanner;
   private InternshipApp app;
@@ -61,7 +68,7 @@ public class InternshipUI {
 
     // student's menu, displays student choices
     if (user.type == Users.STUDENT) {
-      while (command != 5) {
+      while (command != 4) {
         displayStudentOptions();
         command = scanner.nextInt();
         scanner.nextLine();
@@ -70,47 +77,30 @@ public class InternshipUI {
           clearScreen();
           ResumeMenu();
           break;
-        case 2: // View all listings
-          clearScreen();
-          app.viewAllListings();
-          displayListingListOptions();
-          int choice = scanner.nextInt();
-          scanner.nextLine();
-          if (choice == 1) { // apply
-            System.out.println("Which listing would you like to apply to?");
-            int listingIndex = scanner.nextInt();
-            scanner.nextLine();
-            
-            clearScreen();
 
-            System.out.print(student.displayAllResumes());
-            System.out.println("Applying to " + app.getListing(listingIndex-1).getJobTitle());
-            System.out.println("Which resume would you like to apply with?");
-            int resumeIndex = scanner.nextInt();
-            scanner.nextLine();
-
-            app.applyToListing(app.getListing(listingIndex-1).getID(), student.getResumes().get(resumeIndex-1).getUUID());
-            
-            clearScreen();
-
-            System.out.println("Application sent!");
-
-          }
-          else if (choice == 2) { // save listing
-            System.out.println("Which listing would you like to save?");
+        case 2: // listings
+          int choice = 0;
+          while (choice != 4) {
+            displayStudentListingOptions();
             choice = scanner.nextInt();
             scanner.nextLine();
-            if(student.saveListing(app.getListing(choice-1))) {
-              System.out.println("Listing saved!");
+
+            if (choice == 1) { // view all
               clearScreen();
-              break;
+              System.out.print(app.viewAllListings());
+              StudentListingMenu();
+            } else if (choice == 2) { // view saved
+              clearScreen();
+              SavedListingMenu();
+            } else if (choice == 3) {
+              clearScreen();
+              FilterMenu();
             }
-            System.out.println("Listing was already saved!");
-          } // save
+          }
+          clearScreen();
           break;
-        case 3: // View listings by filter
-          
-        case 4: // ratings
+
+        case 3: // ratings
           System.out.println("Ratings coming soon");
           break;
         }
@@ -129,7 +119,7 @@ public class InternshipUI {
         switch (command) {
         case 1:
           clearScreen();
-          ListingMenu();
+          EmployerListingMenu();
           break;
         case 2:
           clearScreen();
@@ -148,6 +138,15 @@ public class InternshipUI {
     System.out.println("************** Choose an option **************");
     for (int i = 0; i < OPEN_OPTIONS.length; i++) {
       System.out.println((i + 1) + ". " + OPEN_OPTIONS[i]);
+    }
+    System.out.print("\nSelection: ");
+  }
+
+  // displays the ListingList menu
+  private void displayStudentListingOptions() {
+    System.out.println("************** Choose an option **************");
+    for (int i = 0; i < STUDENT_LISTING_OPTIONS.length; i++) {
+      System.out.println((i + 1) + ". " + STUDENT_LISTING_OPTIONS[i]);
     }
     System.out.print("\nSelection: ");
   }
@@ -191,22 +190,30 @@ public class InternshipUI {
   }
 
   // displays the employer's listing menu
-  private void displayListingOptions() {
-    System.out.println("\n\tResume Menu");
-    for (int i = 0; i < LISTING_OPTIONS.length; i++) {
-      System.out.println((i + 1) + ". " + LISTING_OPTIONS[i]);
+  private void displayEmployerListingOptions() {
+    System.out.println("\n\tListing Menu");
+    for (int i = 0; i < EMPLOYER_LISTING_OPTIONS.length; i++) {
+      System.out.println((i + 1) + ". " + EMPLOYER_LISTING_OPTIONS[i]);
+    }
+    System.out.print("\nSelection: ");
+  }
+
+  private void displaySavedListingOptions() {
+    System.out.println("************** Choose an option **************");
+    for (int i = 0; i < SAVED_LISTING_OPTIONS.length; i++) {
+      System.out.println((i + 1) + ". " + SAVED_LISTING_OPTIONS[i]);
     }
     System.out.print("\nSelection: ");
   }
 
   private void displayListingFilters() {
-    System.out.println("************** Choose an option **************");
+    System.out.println("************** Choose a filter **************");
     for (int i = 0; i < LISTING_LIST_FILTERS.length; i++) {
       System.out.println((i + 1) + ". " + LISTING_LIST_FILTERS[i]);
     }
     System.out.print("\nSelection: ");
   }
-  
+
   private void displayResumeEdit() {
     System.out.println("************** Choose an option **************");
     for (int i = 0; i < RESUME_EDIT_OPTIONS.length; i++) {
@@ -330,32 +337,43 @@ public class InternshipUI {
     scanner.nextLine();
     while (command != 5) {
       switch (command) {
-      case 1:
+
+      case 1: // view all resumes
         clearScreen();
-        student.displayAllResumes();
+        System.out.print(student.displayAllResumes());
         System.out.println("Enter \"back\" when you want to go back to menu");
         scanner.nextLine();
         clearScreen();
         break;
-      case 2: clearScreen();
-        student.displayAllResumes();
+
+      case 2:
+        clearScreen(); // print resume
+        System.out.print(student.displayAllResumes());
         System.out.println("Enter file name to write to: ");
         String path = scanner.nextLine();
+
         System.out.println("Enter index of resume to write: ");
         int id = scanner.nextInt();
-        String content = student.getResumes().get(id-1).toString();
+        String content = student.displayResume(id - 1);
+
         app.writeFile(content, path);
+
+        clearScreen();
+        System.out.println("Resume printed!");
         break;
-      case 3:
+
+      case 3: // create resume
         clearScreen();
         createResume();
         break;
-      case 4: clearScreen();
-              student.displayAllResumes();
-              System.out.print("Enter the index of the resume to edit: ");
-              int i = scanner.nextInt();
-              scanner.nextLine();
-              editResumeMenu(i);
+
+      case 4:
+        clearScreen(); // edit resume
+        System.out.print(student.displayAllResumes());
+        System.out.print("Enter the index of the resume to edit: ");
+        int i = scanner.nextInt();
+        scanner.nextLine();
+        editResumeMenu(i);
         break;
       }
 
@@ -366,8 +384,8 @@ public class InternshipUI {
   }
 
   // functionality for listing menu
-  private void ListingMenu() {
-    displayListingOptions();
+  private void EmployerListingMenu() {
+    displayEmployerListingOptions();
     int command = scanner.nextInt();
     scanner.nextLine();
     while (command != 5) {
@@ -375,13 +393,14 @@ public class InternshipUI {
       case 1:
         app.viewAllListings();
         break;
-      case 2: clearScreen();
+      case 2:
+        clearScreen();
         app.viewAllListings();
         System.out.println("Enter file name to write to: ");
         String path = scanner.nextLine();
         System.out.println("Enter index of listing to write: ");
         int id = scanner.nextInt();
-        String content = employer.getListings().get(id-1).toString();
+        String content = employer.getListings().get(id - 1).toString();
         app.writeFile(content, path);
         break;
       case 3: // create listing
@@ -389,9 +408,199 @@ public class InternshipUI {
       case 4: // edit listing
         break;
       }
-      displayListingOptions();
+      displayEmployerListingOptions();
       command = scanner.nextInt();
       scanner.nextLine();
+    }
+  }
+
+  private void FilterMenu() {
+    int command = 0;
+    ArrayList<Listing> filtered = new ArrayList<Listing>();
+    while (command != 5) {
+      displayListingFilters();
+      command = scanner.nextInt();
+      scanner.nextLine();
+
+      switch (command) {
+      case 1: // skills
+        System.out.println("Which skill are you looking for?");
+        filtered = FilterListings.filterBySkill(app.getListings(), scanner.nextLine());
+        if (filtered.size() == 0) {
+          System.out.println("Sorry! No jobs found. Please check back later.");
+        } else {
+          System.out.print(app.viewFilteredListings(filtered));
+        }
+        break;
+
+      case 2: // hours
+        System.out.println("How many hours per week can you work?");
+        filtered = FilterListings.filterByHoursPerWeek(app.getListings(), scanner.nextInt());
+        scanner.nextLine();
+        if (filtered.size() == 0) {
+          System.out.println("Sorry! No jobs found. Please check back later.");
+          break;
+        } else {
+          System.out.print(app.viewFilteredListings(filtered));
+        }
+        break;
+        
+      case 3: // location
+        System.out.println("Enter location: city or state");
+        filtered = FilterListings.filterByLocation(app.getListings(), scanner.nextLine());
+
+        if (filtered.size() == 0) {
+          System.out.println("Sorry! No jobs found. Please check back later.");
+          break;
+        } else {
+          System.out.print(app.viewFilteredListings(filtered));
+        }
+        break;
+
+      case 4: // pay
+        System.out.println("How much would you like to make per hour?");
+        filtered = FilterListings.filterByPay(app.getListings(), scanner.nextDouble());
+
+        if (filtered.size() == 0) {
+          System.out.println("Sorry! No jobs found. Please check back later.");
+          break;
+        } else {
+          System.out.print(app.viewFilteredListings(filtered));
+        }
+        break;
+    }
+
+      int choice = 0;
+      while (command < 5) {
+        displayListingListOptions();
+        choice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (choice) {
+          case 1: // apply
+            System.out.println("Which listing would you like to apply to?");
+            int listingIndex = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.print(student.displayAllResumes());
+            System.out.println("Which resume would you like to apply with?");
+            int resumeIndex = scanner.nextInt();
+            scanner.nextLine();
+
+            if (app.applyToListing(filtered.get(listingIndex - 1).getID(),
+                    student.getResumes().get(resumeIndex - 1).getUUID())) {
+              System.out.println("Application sent!\n\n");
+            } else {
+              System.out.println("Application already submitted!\n\n");
+            }
+            break;
+          
+            case 2: // save
+            System.out.println("Which listing would you like to save?");
+            listingIndex = scanner.nextInt();
+            scanner.nextLine();           
+            
+            if (student.saveListing(filtered.get(listingIndex- 1))) {
+              System.out.println("Listing saved!");
+            } else {
+              System.out.println("Listing was already saved!");
+            }
+            break;
+
+            case 3:
+              command = 6;
+              break;
+        }
+      }
+
+    }
+
+  }
+
+  private void StudentListingMenu() {
+    int command = 0;
+    while (command != 3) {
+      displayListingListOptions();
+      command = scanner.nextInt();
+      scanner.nextLine();
+      switch (command) {
+      case 1: // apply
+        System.out.println("Which listing would you like to apply to?");
+        int listingIndex = scanner.nextInt();
+        scanner.nextLine();
+
+        clearScreen();
+
+        System.out.print(student.displayAllResumes());
+        System.out.println("Which resume would you like to apply with?");
+        int resumeIndex = scanner.nextInt();
+        scanner.nextLine();
+
+        if (app.applyToListing(app.getListings().get(listingIndex - 1).getID(),
+            student.getResumes().get(resumeIndex - 1).getUUID())) {
+          clearScreen();
+          System.out.println("Application sent!\n\n");
+        } else {
+          clearScreen();
+          System.out.println("Application already submitted!\n\n");
+        }
+        break;
+      case 2: // save listing
+        System.out.println("Which listing would you like to save?");
+        command = scanner.nextInt();
+        scanner.nextLine();
+        if (student.saveListing(app.getListings().get(command - 1))) {
+          clearScreen();
+          System.out.println("Listing saved!");
+        } else {
+          System.out.println("Listing was already saved!");
+        }
+        break;
+      }
+    }
+
+  }
+
+  private void SavedListingMenu() {
+
+    int command = 0;
+    while (command != 3) {
+      System.out.println("Your saved listings:");
+      System.out.print(student.viewAllSavedListings());
+      displaySavedListingOptions();
+      command = scanner.nextInt();
+      scanner.nextLine();
+      switch (command) {
+      case 1: // apply
+        System.out.println("Which listing would you like to apply to?");
+        int listingIndex = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print(student.displayAllResumes());
+        System.out.println("Which resume would you like to apply with?");
+        int resumeIndex = scanner.nextInt();
+        scanner.nextLine();
+
+        if (app.applyToListing(student.getSavedListings().get(listingIndex - 1).getID(),
+            student.getResumes().get(resumeIndex - 1).getUUID())) {
+          clearScreen();
+          System.out.println("Application sent!\n\n");
+        } else {
+          clearScreen();
+          System.out.println("Application already submitted!\n\n");
+        }
+        break;
+      case 2: // remove
+        System.out.println("Enter the number of the listing you would like to remove from your saved listings");
+        listingIndex = scanner.nextInt();
+        if (student.deleteSavedListing(student.getSavedListings().get(listingIndex - 1))) {
+          clearScreen();
+          System.out.println("Listing Removed");
+        } else {
+          System.out.println("Listing was already removed");
+        }
+      }
+
     }
   }
 
@@ -645,14 +854,13 @@ public class InternshipUI {
     System.out.println("Enter pay per hour or 0 if you don't wish to specify: ");
     listing.setPay(scanner.nextDouble());
     scanner.nextLine();
-  
+
     System.out.println("Enter \"true\" if the internship is remote or \"false\" if it is not:");
     listing.setRemote(scanner.nextBoolean());
 
     clearScreen();
 
-    
-    while(true) {
+    while (true) {
       System.out.println("Enter duties for this position (Enter \"done\" when finished): ");
       String duty = scanner.nextLine();
       if (duty.equalsIgnoreCase("done")) {
@@ -663,7 +871,7 @@ public class InternshipUI {
 
     clearScreen();
 
-    while(true) {
+    while (true) {
       System.out.println("Enter skills for this position (Enter \"done\" when finished");
       String skill = scanner.nextLine();
       if (skill.equalsIgnoreCase("done")) {
@@ -677,148 +885,152 @@ public class InternshipUI {
     clearScreen();
     System.out.println("Listing Created!");
   }
-   
+
   // clears the info on the screen
   private void clearScreen() {
     System.out.print("\033[H\033[2J");
     System.out.flush();
   }
 
-private void editResumeMenu(int i) {
-  Resume resume = student.getResumes().get(i-1);
+  private void editResumeMenu(int i) {
+    Resume resume = student.getResumes().get(i - 1);
 
-  System.out.println("Enter the number for the section you would like to edit.");
-  displayResumeEdit();
-  int command = scanner.nextInt();
-  scanner.nextLine();
-  if(command < 5) {
+    System.out.println("Enter the number for the section you would like to edit.");
+    displayResumeEdit();
+    int command = scanner.nextInt();
+    scanner.nextLine();
+    if (command < 5) {
 
-    switch(command) {
-      case 1: clearScreen();
-              skillsEditor(resume);
-      break; 
-      case 2: educationEditor(resume);
-      break;
-      case 3: workExperienceEditor(resume);
-      break;
-      case 4: extracurricularEditor(resume);
-      break;
+      switch (command) {
+      case 1:
+        clearScreen();
+        skillsEditor(resume);
+        break;
+      case 2:
+        educationEditor(resume);
+        break;
+      case 3:
+        workExperienceEditor(resume);
+        break;
+      case 4:
+        extracurricularEditor(resume);
+        break;
+      }
     }
+
+    student.getResumes().set(i - 1, resume);
   }
 
-  student.getResumes().set(i-1, resume);
-}
-
-private void skillsEditor(Resume resume) {
-  String res = "s";
-  while(res.equalsIgnoreCase("done")) {
+  private void skillsEditor(Resume resume) {
+    String res = "s";
+    while (res.equalsIgnoreCase("done")) {
       System.out.println("Would you like to (a)dd or (r)emove skills? Enter \"done\" when you are done");
       res = scanner.nextLine();
-      if(res.equalsIgnoreCase("a")) {
+      if (res.equalsIgnoreCase("a")) {
         System.out.print("Enter the skill you would like to add: ");
         res = scanner.nextLine();
         resume.addSkill(res);
-      }
-      else if(res.equalsIgnoreCase("r")) {
-        for(int i = 0; i < resume.getSkills().size(); i++) {
-          System.out.println((i+1)+": "+resume.getSkills().get(i));
+      } else if (res.equalsIgnoreCase("r")) {
+        for (int i = 0; i < resume.getSkills().size(); i++) {
+          System.out.println((i + 1) + ": " + resume.getSkills().get(i));
         }
         System.out.print("Enter the Index of the skill you would like to remove");
         int index = scanner.nextInt();
         scanner.nextLine();
         resume.deleteSkill(index);
       }
-  } 
-}
+    }
+  }
 
-private void educationEditor(Resume resume) {
+  private void educationEditor(Resume resume) {
     displayEducationEdit();
     int index;
     String change;
     int command = scanner.nextInt();
     scanner.nextLine();
-    while(command != 10) {
-      switch(command) {
-        case 1: //add new
-        break; 
-        case 2: //remove by index
+    while (command != 10) {
+      switch (command) {
+      case 1: // add new
         break;
-        case 3: clearScreen();
-                for(int i = 0; i < resume.getEducations().size(); i++) {
-                  System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
-                }
-                System.out.print("Enter the index number of the education to edit: ");
-                index = scanner.nextInt();
-                scanner.nextLine();
-                System.out.print("Enter the University: ");
-                change = scanner.nextLine();
-                resume.getEducations().get(index).setUniversity(change);
+      case 2: // remove by index
         break;
-        case 4: //location
-                clearScreen();
-                for(int i = 0; i < resume.getEducations().size(); i++) {
-                  System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
-                }
-                System.out.print("Enter the index number of the education to edit: ");
-                index = scanner.nextInt();
-                scanner.nextLine();
-                System.out.print("Enter the city: ");
-                change = scanner.nextLine();
-                resume.getEducations().get(index).setCity(change);
-                System.out.print("Enter the state: ");
-                change = scanner.nextLine();
-                resume.getEducations().get(index).setState(change);
+      case 3:
+        clearScreen();
+        for (int i = 0; i < resume.getEducations().size(); i++) {
+          System.out.println((i + 1) + ": " + resume.getEducations().get(i).toString());
+        }
+        System.out.print("Enter the index number of the education to edit: ");
+        index = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Enter the University: ");
+        change = scanner.nextLine();
+        resume.getEducations().get(index).setUniversity(change);
         break;
-        case 5: //degree type
-                clearScreen();
-                for(int i = 0; i < resume.getEducations().size(); i++) {
-                  System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
-                }
-                System.out.print("Enter the index number of the education to edit: ");
-                index = scanner.nextInt();
-                scanner.nextLine();
-                System.out.print("Enter the degree type: ");
-                change = scanner.nextLine();
-                resume.getEducations().get(index).setDegreeType(change);
+      case 4: // location
+        clearScreen();
+        for (int i = 0; i < resume.getEducations().size(); i++) {
+          System.out.println((i + 1) + ": " + resume.getEducations().get(i).toString());
+        }
+        System.out.print("Enter the index number of the education to edit: ");
+        index = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Enter the city: ");
+        change = scanner.nextLine();
+        resume.getEducations().get(index).setCity(change);
+        System.out.print("Enter the state: ");
+        change = scanner.nextLine();
+        resume.getEducations().get(index).setState(change);
         break;
-        case 6: //major
-                clearScreen();
-                for(int i = 0; i < resume.getEducations().size(); i++) {
-                  System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
-                }
-                System.out.print("Enter the index number of the education to edit: ");
-                index = scanner.nextInt();
-                scanner.nextLine();
-                System.out.print("Enter the major: ");
-                change = scanner.nextLine();
-                resume.getEducations().get(index).setMajor(change);
+      case 5: // degree type
+        clearScreen();
+        for (int i = 0; i < resume.getEducations().size(); i++) {
+          System.out.println((i + 1) + ": " + resume.getEducations().get(i).toString());
+        }
+        System.out.print("Enter the index number of the education to edit: ");
+        index = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Enter the degree type: ");
+        change = scanner.nextLine();
+        resume.getEducations().get(index).setDegreeType(change);
         break;
-        case 7: //minor
-                clearScreen();
-                for(int i = 0; i < resume.getEducations().size(); i++) {
-                  System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
-                }
-                System.out.print("Enter the index number of the education to edit: ");
-                index = scanner.nextInt();
-                scanner.nextLine();
-                System.out.print("Enter the minor: ");
-                change = scanner.nextLine();
-                resume.getEducations().get(index).addMinor(change);
+      case 6: // major
+        clearScreen();
+        for (int i = 0; i < resume.getEducations().size(); i++) {
+          System.out.println((i + 1) + ": " + resume.getEducations().get(i).toString());
+        }
+        System.out.print("Enter the index number of the education to edit: ");
+        index = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Enter the major: ");
+        change = scanner.nextLine();
+        resume.getEducations().get(index).setMajor(change);
         break;
-        case 8: //grad date
+      case 7: // minor
+        clearScreen();
+        for (int i = 0; i < resume.getEducations().size(); i++) {
+          System.out.println((i + 1) + ": " + resume.getEducations().get(i).toString());
+        }
+        System.out.print("Enter the index number of the education to edit: ");
+        index = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Enter the minor: ");
+        change = scanner.nextLine();
+        resume.getEducations().get(index).addMinor(change);
         break;
-        case 9: 
-                clearScreen();
-                for(int i = 0; i < resume.getEducations().size(); i++) {
-                  System.out.println((i+1)+": "+resume.getEducations().get(i).toString());
-                }
-                System.out.print("Enter the index number of the education to edit: ");
-                index = scanner.nextInt();
-                scanner.nextLine();
-                System.out.print("Enter the GPA: ");
-                int GPA = scanner.nextInt();
-                scanner.nextLine();
-                resume.getEducations().get(index).addGPA(GPA);
+      case 8: // grad date
+        break;
+      case 9:
+        clearScreen();
+        for (int i = 0; i < resume.getEducations().size(); i++) {
+          System.out.println((i + 1) + ": " + resume.getEducations().get(i).toString());
+        }
+        System.out.print("Enter the index number of the education to edit: ");
+        index = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Enter the GPA: ");
+        int GPA = scanner.nextInt();
+        scanner.nextLine();
+        resume.getEducations().get(index).addGPA(GPA);
         break;
       }
       clearScreen();
@@ -826,29 +1038,29 @@ private void educationEditor(Resume resume) {
       command = scanner.nextInt();
       scanner.nextLine();
     }
-}
+  }
 
-private void workExperienceEditor(Resume resume) {
+  private void workExperienceEditor(Resume resume) {
     displayWorkExperienceEdit();
     int command = scanner.nextInt();
     scanner.nextLine();
-    while(command != 9) {
-      switch(command) {
-        case 1: //add new
-        break; 
-        case 2: //remove by index
+    while (command != 9) {
+      switch (command) {
+      case 1: // add new
         break;
-        case 3: //responsibilities new method
+      case 2: // remove by index
         break;
-        case 4: //company
+      case 3: // responsibilities new method
         break;
-        case 5: //position
+      case 4: // company
         break;
-        case 6: //location
+      case 5: // position
         break;
-        case 7: //start date
+      case 6: // location
         break;
-        case 8: //end date
+      case 7: // start date
+        break;
+      case 8: // end date
         break;
       }
       clearScreen();
@@ -856,27 +1068,27 @@ private void workExperienceEditor(Resume resume) {
       command = scanner.nextInt();
       scanner.nextLine();
     }
-}
+  }
 
-private void extracurricularEditor(Resume resume) {
+  private void extracurricularEditor(Resume resume) {
     displayExtracurricularEdit();
     int command = scanner.nextInt();
     scanner.nextLine();
-    while(command != 8) {
-      switch(command) {
-        case 1: //add new
-        break; 
-        case 2: //remove by index
+    while (command != 8) {
+      switch (command) {
+      case 1: // add new
         break;
-        case 3: //activities
+      case 2: // remove by index
         break;
-        case 4: //club title
+      case 3: // activities
         break;
-        case 5: //position
+      case 4: // club title
         break;
-        case 6: //start date
+      case 5: // position
         break;
-        case 7: //end date
+      case 6: // start date
+        break;
+      case 7: // end date
         break;
       }
       clearScreen();
@@ -884,7 +1096,7 @@ private void extracurricularEditor(Resume resume) {
       command = scanner.nextInt();
       scanner.nextLine();
     }
-}
+  }
 
   public static void main(String[] args) {
     InternshipUI internshipUI = new InternshipUI();

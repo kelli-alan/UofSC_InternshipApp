@@ -258,7 +258,7 @@ public class Listing {
    */
   public boolean containsSkill(String skill) {
     for (int i = 0; i < this.desiredSkills.size(); i++) {
-      if (this.desiredSkills.get(i).equalsIgnoreCase(skill)) {
+      if (this.desiredSkills.get(i).toLowerCase().contains(skill.toLowerCase())) {
         return true;
       }
     }
