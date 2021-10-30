@@ -10,10 +10,8 @@ import java.util.Scanner;
 public class Employer extends User {
   private String companyName;
   private String companyDescription;
-  private ArrayList<Employer> employers;
   private ArrayList<Listing> internshipListings;
   //To-be moved to InternshipUI
-  private Scanner key = new Scanner(System.in);
 
   //This Employer constructor with a UUID is used by the DataLoader.
   public Employer(UUID id, String firstName, String lastName, String username, String password,
@@ -56,75 +54,7 @@ public class Employer extends User {
     return this.internshipListings;
   }
 
-  //Move to UI
-  public void createListing() {
-    String jobTitle;
-    String city;
-    String state;
-    String startDate;
-    int hoursPerWeek;
-    double pay;
-    boolean isRemote;
-    UUID listingID = UUID.randomUUID();
-
-    System.out.println("Enter job title: ");
-    jobTitle = key.nextLine();
-
-    System.out.println("Enter the city the position is located in: ");
-    city = key.nextLine();
-
-    System.out.println("Enter the state the position is located in: ");
-    state = key.nextLine();
-
-    System.out.println("Enter the start date: ");
-    startDate = key.nextLine();
-
-    System.out.println("Enter hours per week: ");
-    hoursPerWeek = key.nextInt();
-    key.nextLine();
-
-    System.out.println("Enter the pay per hour: ");
-    pay = key.nextDouble();
-    key.nextLine();
-
-    System.out.println("Enter \"true\" if the internship is remote or \"false\" if it is not: ");
-    isRemote = key.nextBoolean();
-    key.nextLine();
-
-    /** rework ui to account for month, year format for date */
-    /*
-     * Listing list = new Listing(id, jobTitle, city, state, startMonth, startYear,
-     * hoursPerWeek, pay, isRemote);
-     * 
-     * clearScreen();
-     * 
-     * String cont = "y";
-     * 
-     * while(cont.equalsIgnoreCase("y")) {
-     * 
-     * System.out.
-     * println("Enter duties for this position (Enter \"done\" when finished): ");
-     * if(!key.nextLine().equalsIgnoreCase("done")) list.addDuties(key.nextLine());
-     * else {cont = key.nextLine();} }
-     * 
-     * clearScreen();
-     * 
-     * cont = "y";
-     * 
-     * while(cont.equalsIgnoreCase("y")) {
-     * 
-     * System.out.
-     * println("Enter skills for this position (Enter \"done\" when finished): ");
-     * if(!key.nextLine().equalsIgnoreCase("done")) list.addSkills(key.nextLine());
-     * else {cont = key.nextLine();} }
-     * 
-     * clearScreen();
-     * 
-     * System.out.println("Listing Created!");
-     * 
-     * this.internshipListings.add(list);
-     */
-  }
+  
 
   // if a listing is filled, it doesn't need to display to the user
   public void fillListing(Listing listing) {
@@ -166,6 +96,10 @@ public class Employer extends User {
    * @param id
    */
   public void deleteListing(UUID id) {
+  //This method probably doesn't need to exist in Employer after UI handles
+  //almost all of our interface.
+
+ /* public void deleteListing(UUID id) {
     boolean found = false;
     do {
       for (int i = 0; i < this.employers.size(); i++) {
@@ -180,7 +114,7 @@ public class Employer extends User {
       if (!found) {
         System.out.println("Invalid ID. Please try again.");
       }
-    } while (!found);
+    } while (!found); */
   }
 
   /// Displays a listing with their name and the listing.
