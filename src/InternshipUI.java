@@ -61,16 +61,16 @@ public class InternshipUI {
 
     // student's menu, displays student choices
     if (user.type == Users.STUDENT) {
-      while (command != 4) {
+      while (command != 5) {
         displayStudentOptions();
         command = scanner.nextInt();
         scanner.nextLine();
         switch (command) {
-        case 1:
+        case 1: // Resumes
           clearScreen();
           ResumeMenu();
           break;
-        case 2:
+        case 2: // View all listings
           clearScreen();
           app.viewAllListings();
           displayListingListOptions();
@@ -78,8 +78,18 @@ public class InternshipUI {
           scanner.nextLine();
           if (choice == 1) {
             System.out.println("Which listing would you like to apply to?");
-            choice = scanner.nextInt();
+            int listingIndex = scanner.nextInt();
             scanner.nextLine();
+            
+            clearScreen();
+
+            System.out.print(student.displayAllResumes());
+            System.out.println("Applying to " + app.getListing(listingIndex-1).getJobTitle());
+            System.out.println("Which resume would you like to apply with?");
+            int resumeIndex = scanner.nextInt();
+            scanner.nextLine();
+
+            app.applyToListing(app.getListing(listingIndex-1).getID(), student.getResumes().get(resumeIndex-1).getUUID());
 
           } // apply
           else if (choice == 2) {
@@ -89,7 +99,9 @@ public class InternshipUI {
             // student.saveListing();
           } // save
           break;
-        case 3:
+        case 3: // View listings by filter
+          
+        case 4: // ratings
           System.out.println("Ratings coming soon");
           break;
         }
@@ -229,6 +241,10 @@ public class InternshipUI {
       System.out.print("Enter your password: ");
       String password = scanner.nextLine();
       user = app.login(username, password);
+
+      if (user == null) {
+        System.out.println("Wrong username or password. Please try again");
+      }
     } while (user == null);
     if (user.type == Users.STUDENT) {
       student = (Student) user;
@@ -647,7 +663,7 @@ public class InternshipUI {
       listing.addSkills(skill);
     }
 
-    //this.internshipListings.add(list);
+    app.addListing(listing);
 
     clearScreen();
     System.out.println("Listing Created!");
