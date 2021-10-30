@@ -12,7 +12,6 @@ public class InternshipUI {
   private static final String[] EMPLOYER_OPTIONS = { "Listings", "Ratings", "Logout" };
   private static final String[] MOD_OPTIONS = {"View all Resumes", "View all Lisings", "Delete Resume", "Delete Listing", "Logout"};
   private static final String[] RESUME_OPTIONS = { "View Resumes", "Write Resume to File", "Create New Resume", "Edit Resume", "Back" };
-  private static final String[] LISTING_OPTIONS = { "View Listings", "Write Listing to File", "Create New Listing", "Delete Listing", "Edit Listing", "Back" };
   private static final String[] LISTING_LIST_OPTIONS = { "Apply", "Save", "Back" };
   private static final String[] RESUME_EDIT_OPTIONS = {"Skills", "Education", "Work Experience", "Extracurricular", "Delete Resume", "Back"};
   private static final String[] EDUCATION_EDIT_OPTIONS = {"Add new Education", "Remove Education", "Edit University", "Edit Location",
