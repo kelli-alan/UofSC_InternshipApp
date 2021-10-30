@@ -117,9 +117,34 @@ public class Employer extends User {
     } while (!found); */
   }
 
+  public void deleteListing(int index) {
+    if(index < this.internshipListings.size()) 
+      this.internshipListings.remove(index);
+  }
+
   /// Displays a listing with their name and the listing.
   public String displayListing(int i) {
     return this.firstName + " " + this.lastName + "\n" + this.internshipListings.get(i).toString();
+  }
+
+  public String displayAllListing() {
+    String ret = "";
+
+    for (int i = 0; i < this.internshipListings.size(); i++) {
+      ret+= (i + 1) + ".\n" + displayListing(i) + "\n\n";
+    }
+
+    return ret;
+  }
+
+  public String displayListingsWithApplications() {
+    String ret = "";
+
+    for (int i = 0; i < this.internshipListings.size(); i++) {
+      ret+= (i + 1) + ".\n" + displayListing(i) + "\n" + this.internshipListings.get(i).getApplications().get(i).toString()+ "\n\n";
+    }
+
+    return ret;
   }
  // Returns the company and all of their respective listings.
   public String toString() {
