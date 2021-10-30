@@ -701,7 +701,7 @@ private void skillsEditor(Resume resume) {
         System.out.print("Enter the Index of the skill you would like to remove");
         int index = scanner.nextInt();
         scanner.nextLine();
-        resume.deleteSkill(res);
+        resume.deleteSkill(index);
       }
   } 
 }
