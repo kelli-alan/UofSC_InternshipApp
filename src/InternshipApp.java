@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.io.FileWriter;
+
 /**
  * Contains core functions of the application such as the login and logout.
  * @authors Evan Grunewald, Robbie Clark
@@ -71,5 +73,15 @@ public class InternshipApp {
         }
       }
       return false;
+    }
+  
+    // Generic method for writing to a file with a given path and content
+    public void writeFile(String content, String path)
+    {
+        try(FileWriter writer = new FileWriter(path)) {
+            writer.write(content);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

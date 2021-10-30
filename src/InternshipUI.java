@@ -11,8 +11,8 @@ public class InternshipUI {
   private static final String[] EMPLOYER_OPTIONS = { "Listings", "Ratings", "Logout" };
   private static final String[] STUDENT_OPTIONS = { "Resumes", "View All Internship Listings",
       "View Internship Listings by Filter", "Ratings", "Logout" };
-  private static final String[] RESUME_OPTIONS = { "View Resumes", "Create New Resume", "Edit Resume", "Back" };
-  private static final String[] LISTING_OPTIONS = { "View Listings", "Create New Listing", "Edit Listing", "Back" };
+  private static final String[] RESUME_OPTIONS = { "View Resumes", "Write Resume to File", "Create New Resume", "Edit Resume", "Back" };
+  private static final String[] LISTING_OPTIONS = { "View Listings", "Write Listing to File", "Create New Listing", "Edit Listing", "Back" };
   private static final String[] LISTING_LIST_OPTIONS = { "Apply", "Save", "Back" };
   private static final String[] LISTING_LIST_FILTERS = { "Skills", "Hours per week", "Location", "Pay" };
   private static final String[] RESUME_EDIT_OPTIONS = {"Skills", "Education", "Work Experience", "Extracurricular", "Back"};
@@ -273,7 +273,7 @@ public class InternshipUI {
     displayResumeOptions();
     int command = scanner.nextInt();
     scanner.nextLine();
-    while (command != 4) {
+    while (command != 5) {
       switch (command) {
       case 1:
         clearScreen();
@@ -282,11 +282,20 @@ public class InternshipUI {
         scanner.nextLine();
         clearScreen();
         break;
-      case 2:
+      case 2: clearScreen();
+        student.displayAllResumes();
+        System.out.println("Enter file name to write to: ");
+        String path = scanner.nextLine();
+        System.out.println("Enter index of resume to write: ");
+        int id = scanner.nextInt();
+        String content = student.getResumes().get(id).toString();
+        app.writeFile(content, path);
+        break;
+      case 3:
         clearScreen();
         createResume();
         break;
-      case 3: // edit resume
+      case 4: // edit resume
         break;
       }
 
@@ -301,14 +310,23 @@ public class InternshipUI {
     displayListingOptions();
     int command = scanner.nextInt();
     scanner.nextLine();
-    while (command != 4) {
+    while (command != 5) {
       switch (command) {
       case 1:
         app.viewAllListings();
         break;
-      case 2: // create listing
+      case 2: clearScreen();
+        app.viewAllListings();
+        System.out.println("Enter file name to write to: ");
+        String path = scanner.nextLine();
+        System.out.println("Enter index of listing to write: ");
+        int id = scanner.nextInt();
+        String content = employer.getListings().get(id).toString();
+        app.writeFile(content, path);
         break;
-      case 3: // edit listing
+      case 3: // create listing
+        break;
+      case 4: // edit listing
         break;
       }
       displayListingOptions();
