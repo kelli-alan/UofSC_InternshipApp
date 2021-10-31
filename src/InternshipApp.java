@@ -51,6 +51,7 @@ public class InternshipApp {
     return ret;
   }
 
+  //Dsiplays all of the listings through a specific listing filter.
   public String viewFilteredListings(ArrayList<Listing> filtered) {
     String ret = "";
     for (int i = 0; i < filtered.size(); i++) {
@@ -70,10 +71,20 @@ public class InternshipApp {
     this.users.add(user);
   }
 
+  /**
+   * Method to add a listing to the ArrayList of listings.
+   * @param listing
+   */
   public void addListing(Listing listing) {
     this.listings.add(listing);
   }
 
+  /**
+   * Allows user to apply to a job listing with their resume.
+   * @param listingID
+   * @param resumeID
+   * @return True if the application is made, false otherwise.
+   */
   public boolean applyToListing(UUID listingID, UUID resumeID) {
     Listing listing = getListing(listingID);
     Resume resume = getResume(resumeID);
@@ -119,10 +130,15 @@ public class InternshipApp {
     return null; // resume not connected to any students
   }
 
+  //Getter method for resumes.
   public ArrayList<Resume> getResumes() {
     return this.resumes;
   }
 
+  /**
+   * Returns all of a student's resumes.
+   * @return All of a students resumes.
+   */
   public String viewAllResumes() {
     int index = 1;
     String ret = "";
@@ -135,6 +151,10 @@ public class InternshipApp {
     return ret;
   }
 
+  /**
+   * Deletes a resume.
+   * @param resume
+   */
   public void deleteResume(Resume resume) {
     if (hasResume(resume.getUUID())) {
       for (int i = 0; i < this.resumes.size(); i++) { // remove from overall list
@@ -147,6 +167,10 @@ public class InternshipApp {
     }
   }
 
+  /**
+   * Deletes a listing.
+   * @param listing
+   */
   public void deleteListing(Listing listing) {
     if (hasListing(listing.getID())) {
       for (int i = 0; i < this.listings.size(); i++) {
@@ -157,6 +181,11 @@ public class InternshipApp {
     }
   }
 
+  /**
+   * Deletes a specific resume from a student.
+   * @param resume
+   * @param student
+   */
   private void deleteResumeFromStudent(Resume resume, Student student) {
     for (int i = 0; i < students.size(); i++) {
       if (students.get(i).getID().toString().equals(student.getID().toString())) {
@@ -166,6 +195,12 @@ public class InternshipApp {
     }
   }
 
+  /**
+   * Checks if the user with their specific username and password exist in the system.
+   * @param username
+   * @param password
+   * @return the user, null otherwise.
+   */
   private User hasUser(String username, String password) {
     for (int i = 0; i < users.size(); i++) {
       if (users.get(i).username.equals(username) && users.get(i).password.equals(password))
@@ -174,6 +209,11 @@ public class InternshipApp {
     return null;
   }
 
+  /**
+   * Checks if a resume with a specific resumeID already exist.
+   * @param resumeID
+   * @return True if there is a resume, false otherwise.
+   */
   private boolean hasResume(UUID resumeID) {
     for (int i = 0; i < this.resumes.size(); i++) {
       if (this.resumes.get(i).getUUID().toString().equals(resumeID.toString())) {
@@ -183,6 +223,11 @@ public class InternshipApp {
     return false;
   }
 
+  /**
+   * Checks if a listing with a specific listingID already exist.
+   * @param listingID
+   * @return True if there is a listing, false otherwise.
+   */
   private boolean hasListing(UUID listingID) {
     for (int i = 0; i < this.listings.size(); i++) {
       if (this.listings.get(i).getID().toString().equals(listingID.toString())) {
@@ -210,6 +255,11 @@ public class InternshipApp {
     return false;
   }
 
+  /**
+   * Checks if a username is already taken by another user in the system.
+   * @param username
+   * @return True if another user has that username already, false otherwise.
+   */
   public boolean usernameTaken(String username) {
     for (int i = 0; i < users.size(); i++) {
       if (users.get(i).username.equals(username)) {

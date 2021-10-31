@@ -5,8 +5,6 @@ import java.util.ArrayList;
  * @authors Evan Grunewald
  */
 public class SortResumes {
-
-
   /**
    * Returns a given resume list in reverse order
    * 
