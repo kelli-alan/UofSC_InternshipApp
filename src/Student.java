@@ -80,10 +80,25 @@ public class Student extends User {
    * This method deletes a user's resume at the specified index in their resume ArrayList
    * @param index of resume to delete
    */
-  public void deleteResume(int index) {
-    this.resumes.remove(index);
+  public void deleteResume(Resume resume) {
+    if (hasResume(resume.getUUID())) {
+      for (int i = 0; i < this.resumes.size(); i++) {
+        if (resumes.get(i).getUUID().toString().equals(resume.getUUID().toString())) {
+          this.resumes.remove(i);
+        }
+      }
+    }
   }
 
+  private boolean hasResume(UUID resumeID) {
+    for (int i = 0; i < this.resumes.size(); i++) {
+      if (this.resumes.get(i).getUUID().toString().equals(resumeID.toString())) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
   public boolean deleteSavedListing(Listing listing) {
     if (isSaved(listing)) {
       savedListings.remove(listing);
