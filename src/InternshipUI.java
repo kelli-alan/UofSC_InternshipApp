@@ -3,51 +3,65 @@ import java.util.Scanner;
 import java.time.Month;
 
 /**
- * 
- * @author Robbie Clark, Evan Grunewald, Kelli Alan
+ * The user interface for the UofSC Internship App
+ * @authors Robbie Clark, Evan Grunewald, Kelli Alan
  */
 public class InternshipUI {
   private static final String WELCOME = "\t  Welcome to the Internship App";
   private static final String[] OPEN_OPTIONS = { "Create Account", "Log In" };
-  private static final String[] EMPLOYER_OPTIONS = { "Listings", "Ratings", "Logout" };
-  private static final String[] MOD_OPTIONS = { "View all Resumes", "View all Listings", "Delete Resume",
-      "Delete Listing", "Logout" };
-  private static final String[] RESUME_OPTIONS = { "View Resumes", "Write Resume to File", "Create New Resume",
-      "Edit Resume", "Back" };
-  private static final String[] LISTING_LIST_OPTIONS = { "Apply", "Save", "Back" };
-  private static final String[] RESUME_EDIT_OPTIONS = { "Skills", "Education", "Work Experience", "Extracurricular",
-      "Delete Resume", "Back" };
-  private static final String[] EDUCATION_EDIT_OPTIONS = { "Add new Education", "Remove Education", "Edit University",
-      "Edit Location", "Edit Degree Type", "Edit Major", "Edit Minor", "Edit Graduation Date", "Edit GPA", "Back" };
-  private static final String[] WORK_EXPERIENCE_EDIT_OPTIONS = { "Add new Work Experience", "Remove Work Experience",
-      "Edit Responsibilities", "Edit Company", "Edit Position", "Edit Location", "Edit Start Date", "Edit End Date",
-      "Back" };
-  private static final String[] EXTRACURRICULAR_EDIT_OPTIONS = { "Add new Extracurricular", "Remove Extracurricular",
-      "Edit Activities", "Edit Club Title", "Edit Position", "Edit Start Date", "Edit End Date", "Back" };
-  private static final String[] LISTNG_EDIT_OPTIONS = { "Edit Job Title", "Edit location", "Edit Start Date",
-      "Edit Hours per Week", "Edit Pay per Hour", "Edit Desired Skills", "Edit Duties", "Back" };
-  private static final String[] STUDENT_OPTIONS = { "Resumes", "Listings", "Ratings", "Logout" };
-  private static final String[] EMPLOYER_LISTING_OPTIONS = { "View Listings", "Write Listing to File",
-      "Create New Listing", "Edit Listing", "Back" };
-  private static final String[] STUDENT_LISTING_OPTIONS = { "View All Listings", "View Saved Listings",
-      "Filter Listings", "Back" };
-  private static final String[] SAVED_LISTING_OPTIONS = { "Apply", "Remove", "Back" };
-  private static final String[] LISTING_LIST_FILTERS = { "Skills", "Hours per week", "Location", "Pay", "Back" };
+  
 
+  /* Constants
+   * welcome menus for each user type */
+  private static final String[] STUDENT_OPTIONS = { "Resumes", "Listings", "Ratings", "Logout" };
+  private static final String[] EMPLOYER_OPTIONS = { "Listings", "Ratings", "Logout" };
+  private static final String[] MOD_OPTIONS = { "View all Resumes", "View all Listings", "Delete Resume", "Delete Listing", "Logout" };
+  
+  /* student resume menus */
+  private static final String[] RESUME_OPTIONS = { "View Resumes", "Write Resume to File", "Create New Resume", "Edit Resume", "Back" };
+  
+  private static final String[] RESUME_EDIT_OPTIONS = { "Skills", "Education", "Work Experience", "Extracurricular", "Delete Resume", "Back" };
+
+  private static final String[] EDUCATION_EDIT_OPTIONS = { "Add new Education", "Remove Education", "Edit University", "Edit Location", "Edit Degree Type", "Edit Major", "Edit Minor", "Edit Graduation Date", "Edit GPA", "Back" };
+
+  private static final String[] WORK_EXPERIENCE_EDIT_OPTIONS = { "Add new Work Experience", "Remove Work Experience", "Edit Responsibilities", "Edit Company", "Edit Position", "Edit Location", "Edit Start Date", "Edit End Date", "Back" };
+  
+  private static final String[] EXTRACURRICULAR_EDIT_OPTIONS = { "Add new Extracurricular", "Remove Extracurricular", "Edit Activities", "Edit Club Title", "Edit Position", "Edit Start Date", "Edit End Date", "Back" };
+
+  /* student listing menus */
+  private static final String[] STUDENT_LISTING_OPTIONS = { "View All Listings", "View Saved Listings", "Filter Listings", "Back" };
+  
+  private static final String[] LISTING_LIST_OPTIONS = { "Apply", "Save", "Back" };
+  private static final String[] SAVED_LISTING_OPTIONS = { "Apply", "Remove", "Back" };
+  
+  private static final String[] LISTING_LIST_FILTERS = { "Skills", "Hours per week", "Location", "Pay", "Back" };
+  
+  /* employer listing menus */
+  private static final String[] EMPLOYER_LISTING_OPTIONS = { "View Listings", "Write Listing to File", "Create New Listing", "Edit Listing", "Back" };
+
+  private static final String[] LISTING_EDIT_OPTIONS = { "Edit Job Title", "Edit location", "Edit Start Date", "Edit Hours per Week", "Edit Pay per Hour", "Edit Desired Skills", "Edit Duties", "Back" };
+  
+  
   private Scanner scanner;
   private InternshipApp app;
   private User user;
   private Student student;
   private Employer employer;
 
+  /**
+   * Constructor; initializes scanner for user input and InternshipApp facade
+   */
   InternshipUI() {
     scanner = new Scanner(System.in);
     app = new InternshipApp();
   }
 
+  /**
+   * Users interact with the app until they logout
+   */
   public void run() {
     System.out.println(WELCOME);
-    displayMainMenu();
+    displayMainMenu();  // create account, login
 
     int command = scanner.nextInt();
     scanner.nextLine();
@@ -70,7 +84,7 @@ public class InternshipUI {
       }
     }
 
-    // student's menu, displays student choices
+    // student menu, displays student choices
     if (user.type == Users.STUDENT) {
       while (command != 4) {
         displayStudentOptions();
@@ -82,21 +96,21 @@ public class InternshipUI {
           ResumeMenu();
           break;
 
-        case 2: // listings
+        case 2: // Listings
           int choice = 0;
           while (choice != 4) {
             displayStudentListingOptions();
             choice = scanner.nextInt();
             scanner.nextLine();
 
-            if (choice == 1) { // view all
+            if (choice == 1) { // view all listings
               clearScreen();
               System.out.print(app.viewAllListings());
               StudentListingMenu();
-            } else if (choice == 2) { // view saved
+            } else if (choice == 2) { // view saved listings
               clearScreen();
               SavedListingMenu();
-            } else if (choice == 3) {
+            } else if (choice == 3) { // filter listings
               clearScreen();
               FilterMenu();
             }
@@ -114,7 +128,8 @@ public class InternshipUI {
       app.logout();
 
     }
-    // employer menu
+    
+    // employer menu, displays employer choices
     else if (user.type == Users.EMPLOYER) {
       while (command != 3) {
         displayEmployerOptions();
@@ -123,7 +138,7 @@ public class InternshipUI {
         switch (command) {
         case 1:
           clearScreen();
-          EmployerListingMenu();
+          EmployerListingMenu();  // view, write to file, create, edit
           break;
         case 2:
           clearScreen();
@@ -201,7 +216,10 @@ public class InternshipUI {
     }
   }
 
-  // displays the text options for the main menu
+  /**
+   * Prints welcome menu for app;
+   * Options: Create Account, Logout
+   */
   private void displayMainMenu() {
     System.out.println("************** Choose an option **************");
     for (int i = 0; i < OPEN_OPTIONS.length; i++) {
@@ -210,35 +228,10 @@ public class InternshipUI {
     System.out.print("\nSelection: ");
   }
 
-  // displays the ListingList menu
-  private void displayStudentListingOptions() {
-    System.out.println("************** Choose an option **************");
-    for (int i = 0; i < STUDENT_LISTING_OPTIONS.length; i++) {
-      System.out.println((i + 1) + ". " + STUDENT_LISTING_OPTIONS[i]);
-    }
-    System.out.print("\nSelection: ");
-  }
-
-  // displays the ListingList menu
-  private void displayListingListOptions() {
-    System.out.println("************** Choose an option **************");
-    for (int i = 0; i < LISTING_LIST_OPTIONS.length; i++) {
-      System.out.println((i + 1) + ". " + LISTING_LIST_OPTIONS[i]);
-    }
-    System.out.print("\nSelection: ");
-  }
-
-  // displays the employer menu
-  private void displayEmployerOptions() {
-    System.out.println("\n\tWelcome Employer: " + user.firstName + " " + user.lastName
-        + "\n************** Choose an option **************");
-    for (int i = 0; i < EMPLOYER_OPTIONS.length; i++) {
-      System.out.println((i + 1) + ". " + EMPLOYER_OPTIONS[i]);
-    }
-    System.out.print("\nSelection: ");
-  }
-
-  // displays the student menu
+  /**
+   * Prints student welcome menu
+   * Options: Resumes, Listings, Ratings, Logout
+   */
   private void displayStudentOptions() {
     System.out.println("\n\tWelcome Student: " + user.firstName + " " + user.lastName
         + "\n************** Choose an option **************");
@@ -248,6 +241,23 @@ public class InternshipUI {
     System.out.print("\nSelection: ");
   }
 
+  /**
+   * Prints employer welcome menu
+   * Options: Listings, Ratings, Logout
+   */
+  private void displayEmployerOptions() {
+    System.out.println("\n\tWelcome Employer: " + user.firstName + " " + user.lastName
+        + "\n************** Choose an option **************");
+    for (int i = 0; i < EMPLOYER_OPTIONS.length; i++) {
+      System.out.println((i + 1) + ". " + EMPLOYER_OPTIONS[i]);
+    }
+    System.out.print("\nSelection: ");
+  }
+
+  /**
+   * Prints moderator welcome menu;
+   * Options: View Resumes, View Listings, Remove Resume, Remove Listing, Logout
+   */
   private void displayModOptions() {
     System.out.println("************** Choose an option **************");
     for (int i = 0; i < MOD_OPTIONS.length; i++) {
@@ -256,7 +266,11 @@ public class InternshipUI {
     System.out.print("\nSelection: ");
   }
 
-  // displays the resume menu
+    
+  /**
+   * Prints resume menu for students;
+   * Options: View, Write to File, Create, Edit, Back
+   */
   private void displayResumeOptions() {
     System.out.println("\n\tResume Menu");
     for (int i = 0; i < RESUME_OPTIONS.length; i++) {
@@ -265,31 +279,10 @@ public class InternshipUI {
     System.out.print("\nSelection: ");
   }
 
-  // displays the employer's listing menu
-  private void displayEmployerListingOptions() {
-    System.out.println("\n\tListing Menu");
-    for (int i = 0; i < EMPLOYER_LISTING_OPTIONS.length; i++) {
-      System.out.println((i + 1) + ". " + EMPLOYER_LISTING_OPTIONS[i]);
-    }
-    System.out.print("\nSelection: ");
-  }
-
-  private void displaySavedListingOptions() {
-    System.out.println("************** Choose an option **************");
-    for (int i = 0; i < SAVED_LISTING_OPTIONS.length; i++) {
-      System.out.println((i + 1) + ". " + SAVED_LISTING_OPTIONS[i]);
-    }
-    System.out.print("\nSelection: ");
-  }
-
-  private void displayListingFilters() {
-    System.out.println("************** Choose a filter **************");
-    for (int i = 0; i < LISTING_LIST_FILTERS.length; i++) {
-      System.out.println((i + 1) + ". " + LISTING_LIST_FILTERS[i]);
-    }
-    System.out.print("\nSelection: ");
-  }
-
+  /**
+   * Prints menu for students to edit their resumes;
+   * Options: Skills, Education, Work Experience, Extracurricular, Delete, Back
+   */
   private void displayResumeEdit() {
     System.out.println("************** Choose an option **************");
     for (int i = 0; i < RESUME_EDIT_OPTIONS.length; i++) {
@@ -298,6 +291,11 @@ public class InternshipUI {
     System.out.print("\nSelection: ");
   }
 
+  /**
+   * Prints menu for students to edit the education section of a resume;
+   * Options: Add Education, Remove Education, Edit University, Edit Location, 
+   * Edit Degree Type, Edit Major, Edit Minor, Edit Graduation data, Edit GPA, Back
+   */
   private void displayEducationEdit() {
     System.out.println("************** Choose an option **************");
     for (int i = 0; i < EDUCATION_EDIT_OPTIONS.length; i++) {
@@ -306,6 +304,11 @@ public class InternshipUI {
     System.out.print("\nSelection: ");
   }
 
+  /**
+   * Prints menu for students to edit the work experience section of a resume;
+   * Options: Add Work Experience, Remove Work Experience, Edit Responsibilities, 
+   * Edit Company, Edit Position, Edit Location, Edit Start Date, Edit End Date, Back 
+   */
   private void displayWorkExperienceEdit() {
     System.out.println("************** Choose an option **************");
     for (int i = 0; i < WORK_EXPERIENCE_EDIT_OPTIONS.length; i++) {
@@ -314,6 +317,11 @@ public class InternshipUI {
     System.out.print("\nSelection: ");
   }
 
+  /**
+   * Prints menu for students to edit the extracurricular section of a resume;
+   * Options: Add Extracurricular, Remove Extracurricular, Edit Activities, Edit Club Title, 
+   * Edit Position, Edit Start Date, Edit End Date, Back
+   */
   private void displayExtracurricularEdit() {
     System.out.println("************** Choose an option **************");
     for (int i = 0; i < EXTRACURRICULAR_EDIT_OPTIONS.length; i++) {
@@ -321,6 +329,81 @@ public class InternshipUI {
     }
     System.out.print("\nSelection: ");
   }
+
+  /**
+   * Prints options for students to view listings;
+   * Options: View All, View Saved, Filter, Back
+   */
+  private void displayStudentListingOptions() {
+    System.out.println("************** Choose an option **************");
+    for (int i = 0; i < STUDENT_LISTING_OPTIONS.length; i++) {
+      System.out.println((i + 1) + ". " + STUDENT_LISTING_OPTIONS[i]);
+    }
+    System.out.print("\nSelection: ");
+  }
+
+  /**
+   * Prints listings options when students choose to view all listings;
+   * Options: Apply, Save, Back
+   */
+  private void displayListingListOptions() {
+    System.out.println("************** Choose an option **************");
+    for (int i = 0; i < LISTING_LIST_OPTIONS.length; i++) {
+      System.out.println((i + 1) + ". " + LISTING_LIST_OPTIONS[i]);
+    }
+    System.out.print("\nSelection: ");
+  }
+
+  /**
+   * Prints the saved listings menu for students;
+   * Options: Apply, Remove, Back
+   */
+  private void displaySavedListingOptions() {
+    System.out.println("************** Choose an option **************");
+    for (int i = 0; i < SAVED_LISTING_OPTIONS.length; i++) {
+      System.out.println((i + 1) + ". " + SAVED_LISTING_OPTIONS[i]);
+    }
+    System.out.print("\nSelection: ");
+  }
+
+  /**
+   * Prints filter options for constraining student search;
+   * Options: Skills, Hours, Location, Pay, Back
+   */
+  private void displayListingFilters() {
+    System.out.println("************** Choose a filter **************");
+    for (int i = 0; i < LISTING_LIST_FILTERS.length; i++) {
+      System.out.println((i + 1) + ". " + LISTING_LIST_FILTERS[i]);
+    }
+    System.out.print("\nSelection: ");
+  }
+
+
+  /**
+   * Prints listing menu for employers;
+   * Options: View, Write to File, Create, Edit, Back
+   */
+  private void displayEmployerListingOptions() {
+    System.out.println("\n\tListing Menu");
+    for (int i = 0; i < EMPLOYER_LISTING_OPTIONS.length; i++) {
+      System.out.println((i + 1) + ". " + EMPLOYER_LISTING_OPTIONS[i]);
+    }
+    System.out.print("\nSelection: ");
+  }
+
+  /**
+   * Prints menu for employers to edit their listings;
+   * Options: Edit Job Title, Edit location, Edit Start Date, 
+   * Edit Hours per Week, Edit Pay per Hour, Edit Desired Skills, Edit Duties, Back 
+   */
+  private void displayListingEditMenu() {
+    System.out.println("************** Choose an option **************");
+    for (int i = 0; i < LISTING_EDIT_OPTIONS.length; i++) {
+      System.out.println((i + 1) + ". " + LISTING_EDIT_OPTIONS[i]);
+    }
+    System.out.print("\nSelection: ");
+  }
+
 
   // log in method, asks for username and password and sets user if they are in
   // the list
@@ -1446,14 +1529,6 @@ public class InternshipUI {
     }
 
     resume.addExtracurricular(extrac);
-  }
-
-  private void displayListingEditMenu() {
-    System.out.println("************** Choose an option **************");
-    for (int i = 0; i < LISTNG_EDIT_OPTIONS.length; i++) {
-      System.out.println((i + 1) + ". " + LISTNG_EDIT_OPTIONS[i]);
-    }
-    System.out.print("\nSelection: ");
   }
 
   private void editListingMenu(int i) {
