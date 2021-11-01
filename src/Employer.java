@@ -11,7 +11,6 @@ public class Employer extends User {
   private String companyName;
   private String companyDescription;
   private ArrayList<Listing> internshipListings;
-  //To-be moved to InternshipUI
 
   //This Employer constructor with a UUID is used by the DataLoader.
   public Employer(UUID id, String firstName, String lastName, String username, String password,
