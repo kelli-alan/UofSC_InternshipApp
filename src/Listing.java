@@ -186,54 +186,90 @@ public class Listing {
     return this.city + ", " + this.state;
   }
 
+  /**
+   * Sets job title if given a valid, non-empty string
+   * @param title employee will be given
+   */
   public void setJobTitle(String title) {
     if (isValidString(title)) {
       this.jobTitle = title;
     }
   }
 
+  /**
+   * Sets city if given a valid, non-empty string
+   * @param city job is located in
+   */
   public void setCity(String city) {
     if (isValidString(city)) {
       this.city = city;
     }
   }
 
+  /**
+   * Sets state if given a valid string, of at least two characters, since states can be
+   * represented with their abbreviation
+   * @param state job is located in
+   */
   public void setState(String state) {
     if (isValidString(state) && state.length() >= STATE_ABBREVIATION_LENGTH) {
       this.state = state;
     }
   }
 
+  /**
+   * Sets start month for job, if given a number 1 through 12
+   * @param month numerical representation of month job starts, January = 1
+   */
   public void setStartMonth(int month) {
     if (month > 0 && month < 13) {
       this.startMonth = Month.values()[month-1];
     }
   }
 
+  /**
+   * Sets start year for job if given this year or later; 
+   * Only current listings should be created, stored, and displayed to users  
+   * @param year job begins
+   */
   public void setStartYear(int year) {
     if (year >= CURRENT_YEAR) {
       this.startYear = year;
     }
   }
 
+  /**
+   * Sets hours per week if total given is less than or equal to 16 hours per day, 7 days a week
+   * @param hours per week
+   */
   public void setHoursPerWeek(int hours) {
     if (hours > 0 && hours <= SIXTEEN_HOURS_PER_DAY) {
       this.hoursPerWeek = hours;
     }
   }
 
+  /**
+   * Sets pay if given a non-negative amount
+   * @param pay per hour
+   */
   public void setPay(double pay) {
     if (pay >= 0) {
       this.pay = pay;
     }
   }
 
+  /**
+   * Sets remoteness of job
+   * @param isRemote true if students can complete work entirely at home, false if students 
+   * need to come to the job site
+   */
   public void setRemote(boolean isRemote) {
     this.isRemote = isRemote;
   }
 
   /**
-   * Adds a new skill to the Listings list of skills
+   * Adds a new skill to the Listings list of skills, if the skill is not already on the list
+   * of desired skills
    * 
    * @param skill The skill to add to the list
    */
@@ -243,7 +279,8 @@ public class Listing {
   }
 
   /**
-   * Adds a new duty to the Listings list of duties
+   * Adds a new duty to the Listings list of duties, if the duty is not already on the list 
+   * of duties
    * 
    * @param duty The duty to add to the list
    */
@@ -256,7 +293,7 @@ public class Listing {
    * Check all skills in the Listing to see if any match what is provided
    * 
    * @param skill The name of the skill to look for
-   * @return Boolean for if the skill was found
+   * @return true if the skill was found, false if the skill was not found
    */
   public boolean containsSkill(String skill) {
     for (int i = 0; i < this.desiredSkills.size(); i++) {
@@ -271,7 +308,7 @@ public class Listing {
    * Check all duties in the Listing to see if any match what is provided
    * 
    * @param duty The name of the duty to look for
-   * @return Boolean for if the duty was found
+   * @return true if the duty was found, false if the duty was not found
    */
   private boolean containsDuties(String duty) {
     for (int i = 0; i < this.duties.size(); i++) {
@@ -283,7 +320,7 @@ public class Listing {
   }
 
   /**
-   * Updates list of applications
+   * Updates list of applications, if given a valid resume
    * 
    * @param resume Resume to add to the applications
    */
@@ -294,6 +331,10 @@ public class Listing {
     
   }
 
+  /**
+   * Concatenates all desired skills into a list
+   * @return String representation of the listing's list of desired skills, 1 indexed
+   */
   public String displayDesiredSkills() {
     String ret = "";
     for (int i = 0; i < this.desiredSkills.size(); i++) {
@@ -303,6 +344,10 @@ public class Listing {
     return ret;
   }
 
+  /**
+   * Concatenates all job duties into a list
+   * @return String representation of the listing's list of duties, 1 indexed
+   */
   public String displayDuties() {
     String ret = "";
     for (int i = 0; i < this.duties.size(); i++) {
@@ -311,6 +356,7 @@ public class Listing {
     }
     return ret;
   }
+  
   /**
    * Return a String object of all fields of the Listing put together
    * 
@@ -348,6 +394,12 @@ public class Listing {
     return ret;
   }
 
+  /**
+   * Helper method to check if a given String is valid (not null and not empty)
+   * @param string to check
+   * @return true if provided String is not null and not empty, false if provided String is 
+   * null or empty 
+   */
   private boolean isValidString(String string) {
     return (!string.equals(null) || !string.equals(""));
   }

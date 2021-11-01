@@ -9,86 +9,110 @@ public class Resume {
 
   private UUID id;
   private ArrayList<String> skills;
-  private ArrayList<Education> education;
+  private ArrayList<Education> educations;
   private ArrayList<WorkExperience> workExperiences;
   private ArrayList<Extracurricular> extracurriculars;
 
   /**
-   * Constructor for reading from the database the pre-existing ID's.
-   * @param id
+   * Constructor for reading a resume from the database using pre-existing ID's.
+   * @param id of resume from database
    */
   public Resume(UUID id) {
     this.id = id;
     this.skills = new ArrayList<String>();
-    this.education = new ArrayList<Education>();
+    this.educations = new ArrayList<Education>();
     this.workExperiences = new ArrayList<WorkExperience>();
     this.extracurriculars = new ArrayList<Extracurricular>();
   }
 
-  // Constructor for new resumes that do not have an id yet.
+  /**
+   * Constructor for creating new resumes from the student UI
+   */
   public Resume() {
     this.id = UUID.randomUUID();
     this.skills = new ArrayList<String>();
-    this.education = new ArrayList<Education>();
+    this.educations = new ArrayList<Education>();
     this.workExperiences = new ArrayList<WorkExperience>();
     this.extracurriculars = new ArrayList<Extracurricular>();
   }
 
-  // Getter method for the user's unique UUID, id.
+  /**
+   * Getter method for the resume's unique UUID, id.
+   * @return UUID associated with the resume
+   */
   public UUID getUUID() {
     return this.id;
   }
 
-  // Getter method for an ArrayList of skills, skills.
+  /**
+   * Getter method for the ArrayList of skills on the resume
+   * @return ArrayList of skills
+   */
   public ArrayList<String> getSkills() {
     return this.skills;
   }
 
-  // Getter method for an ArrayList containing the student's education.
+  /**
+   * Getter method for an ArrayList containing the student's education.
+   * @return ArrayList of all educations on the resume
+   */
   public ArrayList<Education> getEducations() {
-    return this.education;
+    return this.educations;
   }
 
-  // Getter method for an ArrayList of the students past and current work experiences.
+  /**
+   * Getter method for an ArrayList of the students past and current work experiences.
+   * @return ArrayList of all work experiences on the resume
+   */
   public ArrayList<WorkExperience> getWorkExperiences() {
     return this.workExperiences;
   }
 
-  // Getter method for an ArrayList of past and present extracirricular activities.
+  /**
+   * Getter method for an ArrayList of past and present extracurricular activities.
+   * @return ArrayList of all extracurriculars on the resume
+   */
   public ArrayList<Extracurricular> getExtracurriculars() {
     return this.extracurriculars;
   }
 
   /**
-   * Adds a new work experience, workXP to the ArrayList workExperiences.
-   * @param workXP
+   * Adds a new work experience to the ArrayList workExperiences, if it is not 
+   * already on the resume.
+   * @param workExperience a work experience to add to the resume
    */
-  public void addWorkExperience(WorkExperience workXP) {
-    this.workExperiences.add(workXP);
+  public void addWorkExperience(WorkExperience workExperience) {
+    if (!containsWorkExperience(workExperience))
+      this.workExperiences.add(workExperience);
   }
 
   /**
-   * Adds a new extracurricular activity, extrac to the ArrayList extracurriculars.
-   * @param extrac
+   * Adds a new extracurricular activity to the ArrayList extracurriculars, if it is not
+   * already on the resume
+   * @param extracurricular an extracurriuclar experience to add to the resume
    */
-  public void addExtracurricular(Extracurricular extrac) {
-    this.extracurriculars.add(extrac);
+  public void addExtracurricular(Extracurricular extracurricular) {
+    if (!containsExtracurricular(extracurricular))
+      this.extracurriculars.add(extracurricular);
   }
 
   /**
-   * Adds a new education to the ArrayList of a student's education, education.
-   * @param edu
+   * Adds a new education to the ArrayList of a student's education section, 
+   * if it is not already on their resume
+   * @param education to add to the resume
    */
-  public void addEducation(Education edu) {
-    this.education.add(edu);
+  public void addEducation(Education education) {
+    if(!containsEducation(education))
+      this.educations.add(education);
   }
 
   /**
-   * Adds a new skill to the ArrayList skills.
-   * @param skill
+   * Adds a new skill to the ArrayList skills, if skill is not already on the resume.
+   * @param skill to add to the resume
    */
   public void addSkill(String skill) {
-    this.skills.add(skill);
+    if (!containsSkill(skill))
+      this.skills.add(skill);
   }
 
   /**
@@ -96,7 +120,7 @@ public class Resume {
    * @param index of education to remove
    */
   public void deleteEducation(int index) {
-    education.remove(index);
+    educations.remove(index);
   }
 
   /**
@@ -124,32 +148,84 @@ public class Resume {
   }
 
   /**
-   * Method to check if a workExperience exist within the ArrayList of workExperiences.
-   * @param workExperience
-   * @return true if the workExperiences ArrayList contains an instance of a workExperience.
+   * Helper method to check if a workExperience exists within the ArrayList of workExperiences.
+   * A work experience with the same position title and company is considered a duplicate. All 
+   * fields of an existing work experience can be edited from the UI 
+   * @param workExperience student is attempting to add or remove from their resume
+   * @return true if the work experience is already on the resume, false if it is not
    */
-  public boolean contains(WorkExperience workExperience) {
-    return workExperiences.contains(workExperience);
+  private boolean containsWorkExperience(WorkExperience workExperience) {
+    for (int i = 0; i < this.workExperiences.size(); i++) {
+      if (this.workExperiences.get(i).getCompany().equalsIgnoreCase(workExperience.getCompany()) 
+          && this.workExperiences.get(i).getPostion().equalsIgnoreCase(workExperience.getPostion()))
+            return true;
+    }
+    return false;
   }
 
   /**
-   * Method to check if an extracurricular exist within the Arraylist of extracurriculars.
-   * @param extracurricular
-   * @return true if the extracurriculars ArrayList contains an instance of an extracurricular.
+   * Helper method to check if an extracurricular exists within the ArrayList of extracurriculars.
+   * An extracurricular with a matching organization title is considered a duplicate. All fields 
+   * of an existing extracurricular can be edited from the UI
+   * @param extracurricular student is attempting to add or remove from their resume
+   * @return true if the extracurricular is already on the resume, false if it is not
    */
-  public boolean contains(Extracurricular extracurricular) {
-    return extracurriculars.contains(extracurricular);
+  private boolean containsExtracurricular(Extracurricular extracurricular) {
+    for (int i = 0; i < this.extracurriculars.size(); i++) {
+      if (this.extracurriculars.get(i).getTitle().equalsIgnoreCase(extracurricular.getTitle()))
+        return true;
+    }
+    return false;
   }
+
+  /**
+   * Helper method to check if an education exists within the ArrayList of educations.
+   * An education with matching university name and grad date is considered a duplicate.
+   * All fields of an existing education can be edited from the UI
+   * @param education student is attempting to add or remove from their resume
+   * @return true if the education already on the resume, false if not
+   */
+  private boolean containsEducation(Education education) {
+    for (int i = 0; i < this.educations.size(); i++) {
+      if (this.educations.get(i).getUniversity().equalsIgnoreCase(education.getUniversity())
+            && this.educations.get(i).getGradYear() == education.getGradYear())
+              return true;
+    }
+    return false;
+  }
+
+  /**
+   * Helper method to check if skill exists within the ArrayList of skills
+   * @param skill student is attempting to add or remove from their resume
+   * @return true if skill is already on the resume, false if it is not
+   */
+  private boolean containsSkill (String skill) {
+    for (int i = 0; i < this.skills.size(); i++) {
+      if (this.skills.get(i).equalsIgnoreCase(skill))
+        return true;
+    }
+    return false;
+  }
+
+
+  /**
+   * Concatenates all educations on the resume into a list
+   * @return String representation of education list, 1 indexed
+   */
 
   public String displayEducations() {
     String ret = "";
-    for (int i = 0; i < this.education.size(); i++) {
+    for (int i = 0; i < this.educations.size(); i++) {
       int j = i+1;
-      ret+= (j + ": " + education.get(i).toString()) + "\n\n";
+      ret+= (j + ": " + educations.get(i).toString()) + "\n\n";
     }
     return ret;
   }
 
+  /**
+   * Concatenates all work experiences on the resume into a list
+   * @return String representation of the work experience list, 1 indexed
+   */
   public String displayWorkExperiences() {
     String ret = "";
     for (int i = 0; i < this.workExperiences.size(); i++) {
@@ -159,6 +235,10 @@ public class Resume {
     return ret;
   }
 
+  /**
+   * Concatenates all extracurriculars on the resume into a list
+   * @return String representation of the extracurriculars list, 1 indexed
+   */
   public String displayExtracurriculars() {
     String ret = "";
     for (int i = 0; i < this.extracurriculars.size(); i++) {
@@ -168,6 +248,10 @@ public class Resume {
     return ret;
   }
 
+  /**
+   * Concatenates all skills on the resume into a list
+   * @return list of skills, 1 indexed
+   */
   public String displaySkills() {
     String ret = "";
     for (int i = 0; i < this.skills.size(); i++) {
@@ -180,11 +264,12 @@ public class Resume {
   /**
    * Concatenates together all of the elements that make up the resume including the student's 
    * education, work experiences, extracurricular activites, and skills they bring to the job.
+   * @return String representation of a student's resume body
    */
   public String toString() {
     String ret = "\nEducation\n";
-    for (int i = 0; i < education.size(); i++) {
-      ret += education.get(i).toString() + "\n\n";
+    for (int i = 0; i < educations.size(); i++) {
+      ret += educations.get(i).toString() + "\n\n";
     }
 
     ret += "Work Experience\n";
