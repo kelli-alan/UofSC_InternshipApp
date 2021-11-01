@@ -19,8 +19,15 @@ public class User {
   protected String password;
   protected Users type;
 
-  /*
-   * Constructors for loading user with a pre-existing ID.
+
+  /**
+   * Constructor for loading user with a pre-existing ID.
+   * @param id unique identifier for user
+   * @param firstName of user
+   * @param lastName of user
+   * @param username of user
+   * @param password of user
+   * @param type of user (STUDENT, EMPLOYER, MODERATOR)
    */
   public User(UUID id, String firstName, String lastName, String username, String password, Users type) {
     this.id = id;
@@ -32,7 +39,13 @@ public class User {
   }
 
   /** 
-   *  Constructor for creating users who need to have to a new random UUID, id.
+   * Constructor for creating users who need to have to a new random UUID, id.
+   * Needed when creating accounts from UI
+   * @param firstName of user
+   * @param lastName of user
+   * @param username of user
+   * @param password of user
+   * @param type of user (STUDENT, EMPLOYER, MODERATOR)
    */
   public User(String firstName, String lastName, String username, String password, Users type) {
     this.id = UUID.randomUUID();
@@ -76,7 +89,7 @@ public class User {
   }
 
   /**
-   * Gets the password that users have tied to their account.
+   * Gets the password that user has tied to their account.
    * @return this instance of a password.
    */
   public String getPassword() {
@@ -89,11 +102,5 @@ public class User {
    */
   public Users getType() {
     return this.type;
-  }
-
-  // Returns the user's information to a string containing their user type, name, username, and password.
-  public String toString() {
-    return this.type + "\n" + this.firstName + " " + this.lastName + "\nUsername: " + this.username + "\nPassword: "
-        + this.password;
   }
 }
