@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- *
+ * A user type, who can manage their resumes, and view, filter, apply, and save listings.
  * @authors Yousef Afshar, Robbie Clark, Kelli Alan
  */
 public class Student extends User {
@@ -13,18 +13,18 @@ public class Student extends User {
 
 
   /**
-   * Constructor for loading students who have a pre-existing id.
-   * @param id
-   * @param firstName
-   * @param lastName
-   * @param username
-   * @param password
-   * @param email
-   * @param phoneNumber
-   * @param type 
+   * Constructor for loading students from JSON who have a pre-existing id.
+   * @param id the student's unique ID
+   * @param firstName of student
+   * @param lastName of student
+   * @param username of student
+   * @param password of student
+   * @param email of student
+   * @param phoneNumber of student
+   * @param type STUDENT
    */
-  // constructor for loading students who have an id
-  public Student(UUID id, String firstName, String lastName, String username, String password, String email, String phoneNumber, Users type) {
+  public Student(UUID id, String firstName, String lastName, String username, String password, 
+                    String email, String phoneNumber, Users type) {
     super(id, firstName, lastName, username, password, type);
     this.email = email;
     this.phoneNumber = phoneNumber;
@@ -34,11 +34,14 @@ public class Student extends User {
 
   /**
    * Constructor for creating students who need an id.
-   * @param firstName
-   * @param lastName
-   * @param username
-   * @param password
-   * @param USER_TYPE_STUDENT
+   * New student account created from the UI
+   * @param firstName of student
+   * @param lastName of student
+   * @param username of student
+   * @param password of student
+   * @param email of student
+   * @param phoneNumber of student
+   * @param type STUDENT
    */
   public Student(String firstName, String lastName, String username, String password, String email, String phoneNumber, Users type) {
     super(firstName, lastName, username, password, type);
@@ -48,37 +51,52 @@ public class Student extends User {
     this.savedListings = new ArrayList<Listing>();
   }
 
-  // Getter for a student's email.
+  /**
+   * Getter for a student's email.
+   * @return student's email address
+   */
   public String getEmail() {
     return this.email;
   }
 
-  // Getter for a student's phone number.
+  /**
+   * Getter for a student's phone number.
+   * @return student's phone number
+   */
   public String getPhoneNumber() {
     return this.phoneNumber;
   }
 
-  // Getter for the ArrayList of resumes.
+  /**
+   * Getter for a student's ArrayList of resumes.
+   * @return ArrayList of all resumes the student has created
+   */
   public ArrayList<Resume> getResumes() {
     return this.resumes;
   }
 
-  // Getter for an ArrayList of listings for the listings a student has saved.
+  /**
+   * Getter for an ArrayList of listings for the listings a student has saved. 
+   * @return ArrayList of student's saved listings
+   */
   public ArrayList<Listing> getSavedListings() {
     return this.savedListings;
   }
 
   /**
-   * Method adds a new resume through the ArrayList method add
-   * and adds a new resume to the ArrayList.
+   * Adds a resume to the student's ArrayList of resumes, if that resume is not already 
+   * part of their list (checked by comparing UUID)
+   * @param resume to add to the student's ArrayList of resumes
    */
   public void addResume(Resume resume) {
-    this.resumes.add(resume);
+    if (!hasResume(resume.getUUID()))
+      this.resumes.add(resume);
   }
 
   /**
-   * This method deletes a user's resume at the specified index in their resume ArrayList
-   * @param index of resume to delete
+   * Deletes a given resume, if the resume is currently on the student's ArrayList of resumes;
+   * Deletes resume of student's list that matches the UUID of the resume passed in
+   * @param resume student wants to remove from their account
    */
   public void deleteResume(Resume resume) {
     if (hasResume(resume.getUUID())) {
@@ -90,6 +108,12 @@ public class Student extends User {
     }
   }
 
+  /**
+   * Searches through a student's ArrayList of resumes to determine if they have a resume with the 
+   * same ID as the one passed in
+   * @param resumeID UUID to look for
+   * @return true if student has the resume, false if they do not
+   */
   public boolean hasResume(UUID resumeID) {
     for (int i = 0; i < this.resumes.size(); i++) {
       if (this.resumes.get(i).getUUID().toString().equals(resumeID.toString())) {
@@ -99,6 +123,12 @@ public class Student extends User {
     return false;
   }
   
+  /**
+   * Attempts to delete a listing from the student's saved listings
+   * @param listing student wants to remove from their saved list
+   * @return true if delete is successful, false if listing cannot be found on the student's list 
+   * (previously deleted, or wrong user)
+   */
   public boolean deleteSavedListing(Listing listing) {
     if (isSaved(listing)) {
       savedListings.remove(listing);
@@ -136,7 +166,11 @@ public class Student extends User {
     }
     return false;
   }
-  // Returns the ArrayList of savedListings back to the student.
+
+  /**
+   * Concatenates all of the student's saved listings into a list
+   * @return String representation of all saved listings in a list, 1 indexed.
+   */
   public String viewAllSavedListings() {
     String ret = "";
     for (int i = 0; i < savedListings.size(); i++) {
@@ -145,11 +179,19 @@ public class Student extends User {
     return ret;
   }
 
-  // Concatenates and returns together the student's name, phone number, email, and their resume to a string.
+  /**
+   * Concatenates all fields of a resume, add the index specified
+   * @param i index of student's ArrayList of resumes
+   * @return String representation of student's resume at index i
+   */
   public String displayResume(int i) {
     return "\t\t\t" +  this.firstName + " " + this.lastName + "\n" + this.phoneNumber +"\t\t\t\t" + this.email + "\n" + this.resumes.get(i).toString();
   }
 
+  /**
+   * Concatenates all fields of all resumes
+   * @return String representation of all of the student's resumes in a list, 1 indexed.
+   */
   public String displayAllResumes() {
     String ret = "";
     for (int i = 0; i < resumes.size(); i++) {
