@@ -27,8 +27,11 @@ public class ListingList {
 
     return listingList;
   }
-
-  // Getter method for the ArrayList of listings, listings
+ 
+  /**
+   * Getter method for the ArrayList of listings, listings
+   * @return all listings in the system
+   */
   public ArrayList<Listing> getAllListings() {
     return listings;
   }

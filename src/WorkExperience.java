@@ -124,6 +124,15 @@ public class WorkExperience extends Experience {
     return false;
   }
 
+  public String displayResponsibilities() {
+    String ret = "";
+    for (int i = 0; i < this.responsibilities.size(); i++) {
+      int j = i+1;
+      ret += j + ": " + this.responsibilities.get(i) + "\n\n";
+    }
+    return ret;
+  }
+
   /**
    * Creates a String representation of a work experience
    * Format:

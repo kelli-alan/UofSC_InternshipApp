@@ -26,7 +26,10 @@ public class ResumeList {
     return resumeList;
   }
 
-  // Getter method for an ArrayList of resumes, resumes.
+  /**
+   * Getter method for an ArrayList of resumes, resumes.
+   * @return all resumes in the system
+   */
   public ArrayList<Resume> getResumes() {
     return this.resumes;
   }

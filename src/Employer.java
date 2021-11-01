@@ -90,62 +90,37 @@ public class Employer extends User {
     return listing.getApplications();
   }
 
-  /**
-   * Delete's a listing by having an employer enter the listing ID
-   * and has a corresponding error message if they input an invalid ID.
-   * @param id
-   */
-  public void deleteListing(UUID id) {
-  //This method probably doesn't need to exist in Employer after UI handles
-  //almost all of our interface.
-
- /* public void deleteListing(UUID id) {
-    boolean found = false;
-    do {
-      for (int i = 0; i < this.employers.size(); i++) {
-        if (id == employers.get(i).id) {
-          for (int j = 0; j < (employers.get(i)).getListings().size(); j++) {
-            employers.remove(j);
-            found = true;
-          }
-          break;
-        }
-      }
-      if (!found) {
-        System.out.println("Invalid ID. Please try again.");
-      }
-    } while (!found); */
-  }
 
   public void deleteListing(int index) {
     if(index < this.internshipListings.size()) 
       this.internshipListings.remove(index);
   }
 
-  /// Displays a listing with their name and the listing.
-  public String displayListing(int i) {
-    return this.firstName + " " + this.lastName + "\n" + this.internshipListings.get(i).toString();
+  /**
+   * Gets the listing at the specified index
+   * @param index of employer's internship listings to display
+   * @return String representing the requested listing
+   */ 
+  public String displayListing(int index) {
+    return this.internshipListings.get(index).toString();
   }
 
-  public String displayAllListing() {
+  /**
+   * Concatenates all listings the employer has created
+   * @return String representing all listings
+   */
+  public String displayAllListings() {
     String ret = "";
 
     for (int i = 0; i < this.internshipListings.size(); i++) {
-      ret+= (i + 1) + ".\n" + displayListing(i) + "\n\n";
+      int j = i+1;
+      ret+= (j) + ".\n" + displayListing(i) + "\n\n";
     }
 
     return ret;
   }
 
-  public String displayListingsWithApplications() {
-    String ret = "";
 
-    for (int i = 0; i < this.internshipListings.size(); i++) {
-      ret+= (i + 1) + ".\n" + displayListing(i) + "\n" + this.internshipListings.get(i).getApplications().get(i).toString()+ "\n\n";
-    }
-
-    return ret;
-  }
  // Returns the company and all of their respective listings.
   public String toString() {
     String ret = super.toString();
@@ -155,6 +130,7 @@ public class Employer extends User {
     for (int i = 0; i < internshipListings.size(); i++) {
       ret += internshipListings.get(i).toString() + "\n";
     }
+
     return ret;
   }
 }

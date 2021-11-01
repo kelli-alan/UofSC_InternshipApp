@@ -4,7 +4,8 @@
     "lastName": "Jones",
     "internshipListings": [
       "43e2c2a7-24f2-4066-ad6c-bd018b31d8e2",
-      "edee3bdc-1a41-4cc4-8695-35ea55361af9"
+      "edee3bdc-1a41-4cc4-8695-35ea55361af9",
+      "195ad205-19c9-43b6-b89c-523a517495a5"
     ],
     "password": "IBMRecruiter",
     "companyName": "IBM",
@@ -16,7 +17,7 @@
   {
     "firstName": "Martha",
     "lastName": "Williams",
-    "internshipListings": [],
+    "internshipListings": ["10359d11-46c9-4dbf-868a-47d2f538dafe"],
     "password": "looking4interns",
     "companyName": "Microsoft",
     "companyDescription": "Microsoft's mission is to empower every person and every organization on the planet to achieve more.",

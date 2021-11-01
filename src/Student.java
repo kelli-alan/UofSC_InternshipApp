@@ -90,7 +90,7 @@ public class Student extends User {
     }
   }
 
-  private boolean hasResume(UUID resumeID) {
+  public boolean hasResume(UUID resumeID) {
     for (int i = 0; i < this.resumes.size(); i++) {
       if (this.resumes.get(i).getUUID().toString().equals(resumeID.toString())) {
         return true;

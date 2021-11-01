@@ -69,6 +69,16 @@ public class Extracurricular extends Experience {
     return false;
   }
 
+
+  public String displayActivities() {
+    String ret = "";
+    for (int i = 0; i < this.activities.size(); i++) {
+      int j = i+1;
+      ret += j + ": " + this.activities.get(i) + "\n\n";
+    }
+    return ret;
+  }
+
   /**
    * Extracurricular format Name of extracurricular position, start date - end
    * date (ongoing ? : in-line if-else) - activity 1 ... - activity n

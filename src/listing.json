@@ -44,10 +44,7 @@
     "isRemote": true,
     "startYear": 2022,
     "pay": 20.0,
-    "desiredSkills": [
-      "Fundamentals of modern computer software",
-      "JavaScript"
-    ],
+    "desiredSkills": ["Fundamentals of modern computer software", "JavaScript"],
     "id": "195ad205-19c9-43b6-b89c-523a517495a5",
     "state": "SC",
     "duties": [
@@ -55,6 +52,8 @@
       "Develop newly designed apps"
     ],
     "applications": [
+      "eb9e9de7-8fed-487c-97c7-be730dd3f452",
+      "d7b13acd-61b8-401b-ae33-64bdca554336"
     ]
   },
   {
@@ -69,13 +68,12 @@
       "Fundamentals of modern computer software",
       "JavaScript, other languages"
     ],
-    "id": "195ad205-19c9-43b6-b89c-523a517495a5",
+    "id": "10359d11-46c9-4dbf-868a-47d2f538dafe",
     "state": "SC",
     "duties": [
       "Programming for many computer applications",
       "Group work for major projects"
     ],
-    "applications": [
-    ]
+    "applications": []
   }
 ]

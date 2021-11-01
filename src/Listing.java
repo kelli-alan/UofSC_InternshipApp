@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.time.Month;
+import java.time.format.TextStyle;
 import java.util.UUID;
 
 /**
@@ -9,7 +11,7 @@ import java.util.UUID;
 
 public class Listing {
 
-  private static final int HOURS_IN_WEEK = 112;
+  private static final int SIXTEEN_HOURS_PER_DAY = 112;
   private static final int STATE_ABBREVIATION_LENGTH = 2;
   private static final int CURRENT_YEAR = 2021;
 
@@ -215,7 +217,7 @@ public class Listing {
   }
 
   public void setHoursPerWeek(int hours) {
-    if (hours > 0 && hours <= HOURS_IN_WEEK) {
+    if (hours > 0 && hours <= SIXTEEN_HOURS_PER_DAY) {
       this.hoursPerWeek = hours;
     }
   }
@@ -292,6 +294,23 @@ public class Listing {
     
   }
 
+  public String displayDesiredSkills() {
+    String ret = "";
+    for (int i = 0; i < this.desiredSkills.size(); i++) {
+      int j = i+1;
+      ret += j + ": " + this.desiredSkills.get(i) + "\n\n";
+    }
+    return ret;
+  }
+
+  public String displayDuties() {
+    String ret = "";
+    for (int i = 0; i < this.duties.size(); i++) {
+      int j = i+1;
+      ret += j + ": " + this.duties.get(i) + "\n\n";
+    }
+    return ret;
+  }
   /**
    * Return a String object of all fields of the Listing put together
    * 
@@ -303,12 +322,14 @@ public class Listing {
 
     ret += this.city + ", " + this.state + "\n\t";
 
-    ret += "Start Date: " + this.startMonth + " " + this.startYear + "\n\t";
+    ret += "Start Date: " + this.startMonth.getDisplayName(TextStyle.FULL, Locale.US) + " " + this.startYear + "\n\t";
 
     ret += this.hoursPerWeek + " hours per week\n\t";
 
-    ret += "$" + this.pay + " per hour\n\t";
-
+    if (this.pay > 0) {
+      ret += "$" + this.pay + " per hour\n\t";
+    }
+    
     if (this.isRemote)
       ret += "Remote Internship\n\t";
     else

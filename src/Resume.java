@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * 
+ * A student's resume and all its fields
  * @authors Robbie Clark, Evan Grunewald
  */
 public class Resume {
@@ -139,6 +139,42 @@ public class Resume {
    */
   public boolean contains(Extracurricular extracurricular) {
     return extracurriculars.contains(extracurricular);
+  }
+
+  public String displayEducations() {
+    String ret = "";
+    for (int i = 0; i < this.education.size(); i++) {
+      int j = i+1;
+      ret+= (j + ": " + education.get(i).toString()) + "\n\n";
+    }
+    return ret;
+  }
+
+  public String displayWorkExperiences() {
+    String ret = "";
+    for (int i = 0; i < this.workExperiences.size(); i++) {
+      int j = i+1;
+      ret += j + ": " + workExperiences.get(i).toString() + "\n\n";
+    }
+    return ret;
+  }
+
+  public String displayExtracurriculars() {
+    String ret = "";
+    for (int i = 0; i < this.extracurriculars.size(); i++) {
+      int j = i+1;
+      ret += j + ": " + extracurriculars.get(i).toString() + "\n\n";
+    }
+    return ret;
+  }
+
+  public String displaySkills() {
+    String ret = "";
+    for (int i = 0; i < this.skills.size(); i++) {
+      int j = i+1;
+      ret+= (j + ": " + skills.get(i)) + "\n\n";
+    }
+    return ret;
   }
 
   /**
