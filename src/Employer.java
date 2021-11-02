@@ -1,10 +1,8 @@
 import java.util.ArrayList;
 import java.util.UUID;
-//To-be removed after InternshipUI up.
-import java.util.Scanner;
 
 /**
- *
+ * A user type, who can create listings
  * @authors Yousef Afshar, Kelli Alan, Robbie Clark
  */
 public class Employer extends User {
@@ -12,19 +10,39 @@ public class Employer extends User {
   private String companyDescription;
   private ArrayList<Listing> internshipListings;
 
-  //This Employer constructor with a UUID is used by the DataLoader.
+
+  /**
+   * Constructor for employers with a UUID; used for loading employers from the JSON files
+   * @param id employer's unique ID
+   * @param firstName of employer
+   * @param lastName of employer
+   * @param username of employer
+   * @param password of employer
+   * @param type EMPLOYER
+   * @param companyName name of company the employer is recruiting for
+   * @param companyDescription brief overview of company employer is recruiting for
+   */
   public Employer(UUID id, String firstName, String lastName, String username, String password,
-      Users EMPLOYER, String companyName, String companyDescription) {
-    super(id, firstName, lastName, username, password, EMPLOYER);
+      Users type, String companyName, String companyDescription) {
+    super(id, firstName, lastName, username, password, type);
     this.companyName = companyName;
     this.companyDescription = companyDescription;
     this.internshipListings = new ArrayList<Listing>();
   }
 
-  //This Employer constructor without a UUID is used by the InternshipUI.
+  /**
+   * Constructor for new employer accounts, called from the UI
+   * @param firstName of employer
+   * @param lastName of employer
+   * @param username of employer
+   * @param password of employer
+   * @param type EMPLOYER
+   * @param companyName name of company the employer is recruiting for
+   * @param companyDescription brief overview of company employer is recruiting for
+   */
   public Employer(String firstName, String lastName, String username, String password,
-      Users USER_TYPE_EMPLOYER, String companyName, String companyDescription) {
-    super(firstName, lastName, username, password, USER_TYPE_EMPLOYER);
+      Users type, String companyName, String companyDescription) {
+    super(firstName, lastName, username, password, type);
     this.companyName = companyName;
     this.companyDescription = companyDescription;
     this.internshipListings = new ArrayList<Listing>();
@@ -53,33 +71,6 @@ public class Employer extends User {
     return this.internshipListings;
   }
 
-  
-
-  // if a listing is filled, it doesn't need to display to the user
-  public void fillListing(Listing listing) {
-    this.internshipListings.remove(listing);
-  }
-
-  public ArrayList<Resume> sortApplications(Listing listing) {
-    //Prompt for how user would like to sort (in InternshipUI)
-    //Temp structure here for now. If we want new sorts, this
-    //will need to be updated obviously but going for time being
-    // we have our default sort and by time recieved.
-    Scanner key = new Scanner(System.in);
-    System.out.println("Input your desired sort:\n1. Sort by time recieved.\n"
-    + "2. Default sort.");
-    String userInput = key.nextLine();
-    key.close();
-    if( userInput == "1") {
-      //Calls SortByTimeRecieved (sorting not written yet).
-    } else if (userInput == "2") {
-      return listing.getApplications();
-    } else {
-      System.out.println("Invalid input. Please try again with 1 or 2.");
-      sortApplications(listing);
-    }
-    return listing.getApplications();
-  }
 
   /**
    * Allows an employer to view all applications to their job listing.
@@ -101,7 +92,7 @@ public class Employer extends User {
    * @return String representing the requested listing
    */ 
   public String displayListing(int index) {
-    return this.internshipListings.get(index).toString();
+    return this.companyName + "\n" + internshipListings.get(index).toString();
   }
 
   /**
@@ -112,8 +103,7 @@ public class Employer extends User {
     String ret = "";
 
     for (int i = 0; i < this.internshipListings.size(); i++) {
-      int j = i+1;
-      ret+= (j) + ".\n" + displayListing(i) + "\n\n";
+      ret+= displayListing(i) + "\n\n";
     }
 
     return ret;

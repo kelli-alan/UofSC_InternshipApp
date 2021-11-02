@@ -534,6 +534,11 @@ public class InternshipUI {
 
       case 1: // view all resumes
         clearScreen();
+        if (student.getResumes().size() == 0) {
+          System.out.println("You have no resumes on file! You can create one now!");
+          break;
+        }
+        
         System.out.print(student.displayAllResumes());
         System.out.println("Enter \"back\" when you want to go back to menu");
         scanner.nextLine();
@@ -542,6 +547,11 @@ public class InternshipUI {
 
       case 2: // print to file
         clearScreen();
+        if (student.getResumes().size() == 0) {
+          System.out.println("You have no resumes on file! You can create one now!");
+          break;
+        }
+        
         System.out.print(student.displayAllResumes());
         System.out.println("Enter file name to write to: ");
         String path = scanner.nextLine();
@@ -562,6 +572,10 @@ public class InternshipUI {
         break;
       case 4: // edit resume
         clearScreen();
+        if (student.getResumes().size() == 0) {
+          System.out.println("You have no resumes on file! You can create one now!");
+          break;
+        }
         System.out.println(student.displayAllResumes());
         
         System.out.print("Enter the index of the resume to edit: ");
@@ -593,6 +607,13 @@ public class InternshipUI {
       
       switch (command) {
       case 1: // apply
+        if (student.getResumes().size() == 0) {
+          clearScreen();
+          System.out.println(app.viewAllListings());
+          System.out.println("You must create a resume before you can apply!");
+          break;
+        } 
+      
         System.out.println("Which listing would you like to apply to?");
         int listingIndex = scanner.nextInt();
         scanner.nextLine();
@@ -613,6 +634,7 @@ public class InternshipUI {
           System.out.println("Application already submitted!\n\n");
         }
         break;
+
       case 2: // save listing
         System.out.println("Which listing would you like to save?");
         command = scanner.nextInt();

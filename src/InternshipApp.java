@@ -308,9 +308,13 @@ public class InternshipApp {
    */
   public String viewAllListings() {
     String ret = "";
-    for (int i = 0; i < this.listings.size(); i++) {
-      int j = i + 1;
-      ret += (j) + ": " + this.listings.get(i).toString() + "\n\n";
+    int k = 1;
+    for (int i = 0; i < this.employers.size(); i++) {
+      for (int j = 0; j < this.employers.get(i).getListings().size(); j++) {
+        ret += (k) + ": " + this.employers.get(i).displayListing(j) + "\n\n";
+        k++;
+      }
+      
     }
     return ret;
   }
@@ -364,28 +368,26 @@ public class InternshipApp {
       if (employer.getListings().get(i).getApplications().size() == 0) {
         ret += "No applications yet! Check back soon!\n________________________________________________________________\n"; 
       } else {
-        ret += "Applicants: \n\n";
-      }
-    }
-
-    /* match listing applications with student account, so that applications will have the 
-     * student's name and contact information at the top 
-     */
-    for (int i = 0; i < employer.getListings().size(); i++){
-      for (int j = 0; j < employer.getListings().get(i).getApplications().size(); j++) {  
-        Student student = getStudent(employer.getListings().get(i).getApplications().get(j).getUUID());
-    
-        /* if student has resume ID matching listing application, add the correct resume from 
-         * the student's ArrayList of resumes to the return String
-         */
-        if (student.hasResume(employer.getListings().get(i).getApplications().get(j).getUUID())) {
-          ret += student.displayResume(getResumeIndex(student, 
-                                          employer.getListings().get(i).getApplications().get(j).getUUID()));
-        }
+          ret += "Applicants: \n\n";
+          
+          /* match listing applications with student account, so that applications will have the 
+          * student's name and contact information at the top 
+          */
+          for (int k = 0; k < employer.getListings().get(i).getApplications().size(); k++) {  
+            Student student = getStudent(employer.getListings().get(i).getApplications().get(k).getUUID());
         
+            /* if student has resume ID matching listing application, add the correct resume from 
+            * the student's ArrayList of resumes to the return String
+            */
+            if (student.hasResume(employer.getListings().get(i).getApplications().get(k).getUUID())) {
+              ret += student.displayResume(getResumeIndex(student, 
+                                              employer.getListings().get(i).getApplications().get(k).getUUID()));
+              } 
+            }
       }
     }
 
+   
     return ret;
 
   }
