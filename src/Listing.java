@@ -5,7 +5,7 @@ import java.time.format.TextStyle;
 import java.util.UUID;
 
 /**
- * 
+ * An internship listing, created by employers
  * @authors Robbie Clark, Evan Grunewald, Kelli Alan
  */
 

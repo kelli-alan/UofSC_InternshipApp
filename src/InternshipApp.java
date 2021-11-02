@@ -65,6 +65,12 @@ public class InternshipApp {
     return false;
   }
   
+  /**
+   * Finds a student account based on a given resume ID
+   * @param resumeID unique ID of resume
+   * @return Student associated when the given resume ID, if found; 
+   * null if the resume ID cannot be matched to any student
+   */
   private Student getStudent(UUID resumeID) {
     for (int i = 0; i < this.students.size(); i++) {
       for (int j = 0; j < this.students.get(i).getResumes().size(); j++) {

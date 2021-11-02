@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * 
+ * Singleton, how all listings in the system are accessed
  * @authors Robbie Clark, Kelli Alan
  */
 public class ListingList {

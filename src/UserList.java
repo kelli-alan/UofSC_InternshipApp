@@ -1,11 +1,17 @@
 import java.util.ArrayList;
 
-
+/**
+ * Singleton, how all users (students, employers, and moderators) in the system are accessed
+ * @author Kelli Alan
+ */
 public class UserList {
 
   private static UserList userList;
   private ArrayList<User> users;
 
+  /**
+   * Loads in all users from student, employer, and moderator JSON files
+   */
   private UserList() {
     users = DataLoader.loadUsers();
   }
