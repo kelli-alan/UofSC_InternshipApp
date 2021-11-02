@@ -831,10 +831,44 @@ public class InternshipUI {
     
     while (command != 6) {  // returns to employer welcome screen when command == 6
       switch (command) {
-      case 1: // view all listings
+      case 1: // view listings
         clearScreen();
-        System.out.println(app.displayListingsWithApplications(employer.getID()));
-        break;
+        int choice = 0;
+        do {
+          System.out.println("1: View all listings\n2: View particular listing");
+          System.out.print("Selection: ");
+          choice = scanner.nextInt();
+          scanner.nextLine();
+
+          if (choice < 1 || choice > 2) {
+            clearScreen();
+            System.out.println("Invalid Option");            
+          }
+        } while(choice < 1 || choice > 2);
+
+        if (choice == 1) {
+          clearScreen();
+          System.out.println(app.displayListingsWithApplications(employer.getID()));
+          System.out.println("Enter \"back\" when you want to go back to menu");
+          scanner.nextLine();
+          break;
+        } else {
+          clearScreen(); 
+          System.out.println(employer.displayAllListings());
+          System.out.print("Which listing would you like to view applications for: ");
+
+          int index = scanner.nextInt();
+          scanner.nextLine();
+          clearScreen(); 
+          System.out.println(app.displayListingWithApplications(employer.getID(), index));
+          System.out.println("Enter \"back\" when you want to go back to menu");
+          scanner.nextLine();
+          break;
+        }
+
+         
+
+        
       
       case 2: // write listing to file
         clearScreen();

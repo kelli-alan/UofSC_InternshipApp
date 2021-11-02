@@ -350,7 +350,6 @@ public class InternshipApp {
     return ret;
   }
 
-
   /**
    * Concatenates all listings and appends each listing's applications for a given employer
    * @param employerID the UUID of the employer
@@ -389,6 +388,42 @@ public class InternshipApp {
 
    
     return ret;
+
+  }
+
+  /**
+   * Concatenates a single provided listing with its current applications
+   * @param employerID unique ID of employer
+   * @param index of listing employer wants to see applications for
+   * @return String representation of employer's listing at given index, 
+   * with applications appended, if any exist
+   */
+  public String displayListingWithApplications(UUID employerID, int index) {
+    Employer employer = getEmployer(employerID);
+    Listing listing = employer.getListings().get(index-1);
+    String ret = employer.displayListing(index-1);
+
+    
+    if (listing.getApplications().size() == 0) {
+      ret += "\nNo applications yet! Check back soon!\n________________________________________________________________\n"; 
+    } else {
+        ret += "\nApplicants: \n\n";
+
+
+        for (int i = 0; i < listing.getApplications().size(); i++) {
+          Student student = getStudent(listing.getApplications().get(i).getUUID());
+  
+        /* if student has resume ID matching listing application, add the correct resume from 
+        * the student's ArrayList of resumes to the return String
+        */
+          if (student.hasResume(listing.getApplications().get(i).getUUID())) {
+          ret += student.displayResume(getResumeIndex(student, 
+                                        listing.getApplications().get(i).getUUID()));
+          } 
+        }
+      }
+      return ret;
+
 
   }
 

@@ -92,7 +92,7 @@ public class Employer extends User {
    * @return String representing the requested listing
    */ 
   public String displayListing(int index) {
-    return this.companyName + "\n" + internshipListings.get(index).toString();
+    return (index+1) + ": " + this.companyName + "\n" + internshipListings.get(index).toString();
   }
 
   /**
