@@ -8,10 +8,10 @@ import java.util.UUID;
 public class Resume {
 
   private UUID id;
-  private ArrayList<String> skills;
   private ArrayList<Education> educations;
   private ArrayList<WorkExperience> workExperiences;
   private ArrayList<Extracurricular> extracurriculars;
+  private ArrayList<String> skills;
 
   /**
    * Constructor for reading a resume from the database using pre-existing ID's.

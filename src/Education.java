@@ -29,8 +29,8 @@ public class Education {
    * @param gradMonth month when student graduated or anticipates graduating
    * @param gradYear year when student graduated or anticipates graduating
    */
-  public Education(String university, String city, String state, String degreeType, String major, Month gradMonth,
-      int gradYear) {
+  public Education(String university, String city, String state, String degreeType, String major, 
+                      Month gradMonth, int gradYear) {
     this.university = university;
     this.city = city;
     this.state = state;

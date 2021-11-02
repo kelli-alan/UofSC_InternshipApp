@@ -9,12 +9,14 @@ import java.util.Locale;
  */
 
 public class WorkExperience extends Experience {
+  private static final int CURRENT_YEAR = 2021;
+  private static final int STATE_ABBREVIATION_LENGTH = 2;
+  
   private String company;
   private String city;
   private String state;
   private ArrayList<String> responsibilities;
-  private static final int STATE_ABBREVIATION_LENGTH = 2;
-  private static final int CURRENT_YEAR = 2021;
+
 
   /**
    * Creates a work experience with given properties and initializes responsibilities
@@ -25,7 +27,8 @@ public class WorkExperience extends Experience {
    * @param city the city the company is located in
    * @param state the state the company is located in
    */
-  public WorkExperience(String position, Month startMonth, int startYear, String company, String city, String state) {
+  public WorkExperience(String position, Month startMonth, int startYear, String company, 
+                            String city, String state) {
     super(position, startMonth, startYear);
     this.company = company;
     this.city = city;

@@ -22,7 +22,7 @@ public class Employer extends User {
    * @param companyDescription brief overview of company employer is recruiting for
    */
   public Employer(UUID id, String firstName, String lastName, String username, String password,
-      Users type, String companyName, String companyDescription) {
+                    Users type, String companyName, String companyDescription) {
     super(id, firstName, lastName, username, password, type);
     this.companyName = companyName;
     this.companyDescription = companyDescription;
@@ -40,7 +40,7 @@ public class Employer extends User {
    * @param companyDescription brief overview of company employer is recruiting for
    */
   public Employer(String firstName, String lastName, String username, String password,
-      Users type, String companyName, String companyDescription) {
+                    Users type, String companyName, String companyDescription) {
     super(firstName, lastName, username, password, type);
     this.companyName = companyName;
     this.companyDescription = companyDescription;

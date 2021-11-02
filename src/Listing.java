@@ -42,8 +42,8 @@ public class Listing {
    * @param pay The Listing's pay
    * @param isRemote The Listing's flag for whether or not it is remote
    */
-  public Listing(UUID id, String jobTitle, String city, String state, Month startMonth, int startYear, int hoursPerWeek,
-      double pay, boolean isRemote) {
+  public Listing(UUID id, String jobTitle, String city, String state, Month startMonth, int 
+                    startYear, int hoursPerWeek, double pay, boolean isRemote) {
     this.id = id;
     this.jobTitle = jobTitle;
     this.city = city;
@@ -310,7 +310,7 @@ public class Listing {
    * @param duty The name of the duty to look for
    * @return true if the duty was found, false if the duty was not found
    */
-  private boolean containsDuties(String duty) {
+  public boolean containsDuties(String duty) {
     for (int i = 0; i < this.duties.size(); i++) {
       if (this.duties.get(i).equalsIgnoreCase(duty)) {
         return true;
