@@ -75,33 +75,62 @@ public class WorkExperience extends Experience {
     return this.responsibilities;
   }
 
+  /**
+   * Used to set the position value of the experience
+   * @param position the String name to be set as position
+   */
   public void setPostition(String position) {
     super.setPosition(position);
   }
 
+  /**
+   * Used to set the starting month value of the work experience
+   * Checks that the month is a valid range of values.
+   * @param month the Month enum to be set as the works start month
+   */
   public void setStartMonth(int month) {
     if (month > 0 && month < 13) {
       this.startMonth = Month.values()[month-1];
     }
   }
 
+  /**
+   * Used to set the starting year value of the work experience
+   * Checks that the year is valid.
+   * @param year the year Integer to be set as the works starting year
+   */
   public void setStartYear(int year) {
     if (year >= CURRENT_YEAR) {
       this.startYear = year;
     }
   }
 
+  /**
+   * Used to set the company value of the work experience
+   * Checks that the company is valid (namely that it is not empty).
+   * @param company the name String to be set as the work's company
+   */
   public void setCompany(String company) {
-    if(company != null && !company.equalsIgnoreCase(""))
+    if (isValidString(company))
       this.company = company;
   }
 
+  /**
+   * Used to set the city value of the work experience
+   * Checks that the city is valid (namely that it is not empty).
+   * @param city the name String to be set as the work's city
+   */
   public void setCity(String city) {
     if (isValidString(city)) {
       this.city = city;
     }
   }
 
+  /**
+   * Used to set the state value of the work experience
+   * Checks that the state is valid (namely that it is not empty).
+   * @param state the name String to be set as the work's state
+   */
   public void setState(String state) {
     if (isValidString(state) && state.length() >= STATE_ABBREVIATION_LENGTH) {
       this.state = state;
@@ -124,6 +153,15 @@ public class WorkExperience extends Experience {
     return false;
   }
 
+  /**
+   * Used to combine all responsibilities of a job combined together.
+   * Format:
+   * 
+   * 1: Responsibility
+   * 
+   * 
+   * @return a String that represents all responsibilities of an Experience.
+   */
   public String displayResponsibilities() {
     String ret = "";
     for (int i = 0; i < this.responsibilities.size(); i++) {
@@ -154,6 +192,10 @@ public class WorkExperience extends Experience {
     return ret;
   }
 
+  /**
+   * Used to check if a provided String is not null and not empty
+   * @return true of the String is valid
+   */
   private boolean isValidString(String string) {
     return (!string.equals(null) || !string.equals(""));
   }

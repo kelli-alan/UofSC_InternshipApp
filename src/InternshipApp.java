@@ -303,7 +303,7 @@ public class InternshipApp {
 
 
   /**
-   * Used by moderator to see all listings in the system
+   * Used by moderator and student to see all available listings in the system
    * @return String representation of all listings in a numbered list, 1 indexed
    */
   public String viewAllListings() {
