@@ -230,6 +230,7 @@ public class InternshipUI {
             int listingIndex = scanner.nextInt();
             scanner.nextLine();
             app.deleteListing(app.getListings().get(listingIndex-1));
+            clearScreen();
             System.out.println("Listing deleted");
         }
         break;
@@ -444,6 +445,7 @@ public class InternshipUI {
       user = app.login(username, password);
 
       if (user == null) {
+        clearScreen();
         System.out.println("Wrong username or password. Please try again\n");
       }
     } while (user == null);
@@ -657,7 +659,7 @@ public class InternshipUI {
   private void SavedListingMenu() {
     int command = 0;
     while (command != 3) {  // returns to student listing options when command == 3
-      
+      clearScreen();
       System.out.println("Your saved listings:");
       System.out.print(student.viewAllSavedListings());
       
@@ -1075,18 +1077,23 @@ public class InternshipUI {
         skillsEditor(resume);
         break;
       case 2:
+        clearScreen();
         educationEditor(resume);
         break;
       case 3:
+        clearScreen();
         workExperienceEditor(resume);
         break;
       case 4:
+        clearScreen();
         extracurricularEditor(resume);
         break;
       }
     }
     if (command == 5) {
+      clearScreen();
       student.getResumes().remove(i - 1);
+      System.out.println("Resume removed");
     } else
       student.getResumes().set(i - 1, resume);
   }
@@ -1099,6 +1106,7 @@ public class InternshipUI {
     String res = "s";
     
     while (res.equalsIgnoreCase("done")) {
+      clearScreen();
       System.out.println("Would you like to (a)dd or (r)emove skills? Enter \"done\" when you are done");
       res = scanner.nextLine();
       
@@ -1359,7 +1367,7 @@ public class InternshipUI {
           System.out.print("Enter the number of the month you started (January is 1, February is 2, etc.): ");
           int monthNumber = scanner.nextInt();
           scanner.nextLine();
-          resume.getWorkExperiences().get(index).setStartMonth(monthNumber);
+          resume.getWorkExperiences().get(index).setStartMonth(monthNumber - 1);
 
           System.out.print("Enter the year you started: ");
           int year = scanner.nextInt();
@@ -1572,6 +1580,7 @@ public class InternshipUI {
    * @param resume student is adding education to
    */
   private void addEducation(Resume resume) {
+    clearScreen();
     System.out.print("Enter the university: ");
     String university = scanner.nextLine();
 
@@ -1618,6 +1627,7 @@ public class InternshipUI {
    * @param resume student is adding work experience to
    */
   private void addWorkExperience(Resume resume) {
+    clearScreen();
     System.out.print("Enter the position: ");
     String position = scanner.nextLine();
 
@@ -1672,6 +1682,7 @@ public class InternshipUI {
    * @param resume student is adding an extracurricular to
    */
   private void addExtracurricular(Resume resume) {
+    clearScreen();
     System.out.print("Enter the name of the extracurricular organization: ");
     String title = scanner.nextLine();
 
