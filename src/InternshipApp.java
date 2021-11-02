@@ -64,7 +64,6 @@ public class InternshipApp {
     }
     return false;
   }
-
   
   private Student getStudent(UUID resumeID) {
     for (int i = 0; i < this.students.size(); i++) {
@@ -152,7 +151,6 @@ public class InternshipApp {
 
     return null; // listing not found
   }
-
 
   /**
    * Helper method to determine if the username and password combination exist as a user profile in 
@@ -280,8 +278,6 @@ public class InternshipApp {
     }
   }
 
-
-
   /**
    * Adds a student's resume to a given listing's list of applications, if not previously
    * submitted
@@ -300,7 +296,6 @@ public class InternshipApp {
     }
     return false;
   }
-
 
   /**
    * Used by moderator and student to see all available listings in the system
@@ -332,7 +327,6 @@ public class InternshipApp {
     }
     return ret;
   }
-
 
   /**
    * Used by moderator to see all resumes in the system

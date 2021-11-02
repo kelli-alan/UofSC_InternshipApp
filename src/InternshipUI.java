@@ -172,7 +172,6 @@ public class InternshipUI {
     app.logout();
   }
 
-
   /**
    * Moderators interact with the moderator version of the app, until they logout
    */
@@ -403,7 +402,6 @@ public class InternshipUI {
     }
     System.out.print("\nSelection: ");
   }
-
 
   /**
    * Prints listing menu for employers;
@@ -820,7 +818,6 @@ public class InternshipUI {
       }
     }
   }
-
 
   /**
    * Functionality for the employer listing options: viewing their listings, 

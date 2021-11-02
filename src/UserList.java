@@ -85,7 +85,7 @@ public class UserList {
    * not, will output back an error to the user. 
    * @param username
    * @param password
-   * @return The user's existence in the system.
+   * @return the user's existence in the system.
    */
   public User hasUser(String username, String password) {
       for(int i = 0; i < users.size(); i++) {
