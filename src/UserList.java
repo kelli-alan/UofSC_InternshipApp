@@ -10,7 +10,10 @@ public class UserList {
     users = DataLoader.loadUsers();
   }
 
-  // Static method to get an instance of a userList if there isn't one.
+  /**
+   * Used to obtain the single instance of the UserList object
+   * @param UserList the single instance of UserList to be used by the caller
+   */
   public static UserList getInstance() {
     if (userList == null)
       userList = new UserList();
@@ -18,12 +21,18 @@ public class UserList {
     return userList;
   }
 
-  // Getter method for the users in the system.
+  /**
+   * Used to obtain a list of every user in the database
+   * @return the list of all Users
+   */
   public ArrayList<User> getAllUsers() {
     return users;
   }
 
-  // Returns an ArrayList of all of the Student type users in system.
+  /**
+   * Used to obtain a list of every student in the database
+   * @return the list of all students
+   */
   public ArrayList<Student> getAllStudents() {
     ArrayList<Student> ret = new ArrayList<Student>();
     int numberUsers = getAllUsers().size();
@@ -37,7 +46,10 @@ public class UserList {
     return ret;
   }
 
-  // Returns an ArrayList of all of the Employer type users in system.
+  /**
+   * Used to obtain a list of every employer in the database
+   * @return the list of all employers
+   */
   public ArrayList<Employer> getAllEmployers() {
     ArrayList<Employer> ret = new ArrayList<Employer>();
     int numberUsers = getAllUsers().size();
@@ -51,7 +63,10 @@ public class UserList {
     return ret;
   }
 
-  // Returns an ArrayList of all of the Moderator type users in system.
+  /**
+   * Used to obtain a list of every moderator in the database
+   * @return the list of all moderator
+   */  
   public ArrayList<Moderator> getAllModerators() {
     ArrayList<Moderator> ret = new ArrayList<Moderator>();
     int numberUsers = getAllUsers().size();

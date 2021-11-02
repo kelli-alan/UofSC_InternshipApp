@@ -10,7 +10,6 @@ public class Employer extends User {
   private String companyDescription;
   private ArrayList<Listing> internshipListings;
 
-
   /**
    * Constructor for employers with a UUID; used for loading employers from the JSON files
    * @param id employer's unique ID
@@ -56,17 +55,26 @@ public class Employer extends User {
     this.internshipListings.add(listing);
   }
 
-  // Getter method for the name of the company.
+  /**
+   * Returns the name of the Employer's company
+   * @return String of companies name
+   */
   public String getCompanyName() {
     return this.companyName;
   }
 
-  // Getter method for the description of the company.
+  /**
+   * Returns the name of the Employer's companies description
+   * @return String of companies description
+   */
   public String getCompanyDescription() {
     return this.companyDescription;
   }
 
-  // Getter method for the ArrayList of internship listings.
+  /**
+   * Returns the list of the Employer's Listings
+   * @return List of all the employer's Listings.
+   */
   public ArrayList<Listing> getListings() {
     return this.internshipListings;
   }
@@ -80,7 +88,10 @@ public class Employer extends User {
     return listing.getApplications();
   }
 
-
+  /**
+   * Used to remove a Listing from the Employer's list
+   * @param index the index in the Employer's list of listings to delete
+   */
   public void deleteListing(int index) {
     if(index < this.internshipListings.size()) 
       this.internshipListings.remove(index);
@@ -110,7 +121,10 @@ public class Employer extends User {
   }
 
 
- // Returns the company and all of their respective listings.
+  /**
+   * Used to obtain a text representation of an Employer and all its properties
+   * @return the String represnting the employer
+   */
   public String toString() {
     String ret = super.toString();
     ret += "Company: " + this.companyName + "\n\t" + this.companyDescription + "\n";
