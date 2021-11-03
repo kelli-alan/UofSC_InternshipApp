@@ -1,0 +1,29 @@
+			Ana Edwards
+(803) 746-8164				anaedwards@gmail.com
+
+Education
+  University of South Carolina, December 2022
+    Columbia, SC
+    Bachelor of Science in Engineering in Computer Engineering in Computer Engineering
+    3.84 GPA
+
+Work Experience
+  UofSC Student Success Center, Columbia, SC
+    Peer Mentor, January 2021 - present
+      - Helped freshmen in computer related fields adjust to college
+      - Tutored students in Algorithmic Design
+
+Extracurricular Activities
+  Society of Women Engineers
+    Vice President, January 2018 - present
+      - Assisted the President with organizing weekly meetings
+      - Led an educational booth during Engineering Week
+
+Skills:
+  - Matlab
+  - Java
+  - Github
+  - C++
+  - Compiler design
+  - Assembling computers
+______________________________________________________________________________________________

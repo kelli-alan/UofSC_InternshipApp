@@ -277,9 +277,11 @@ public class Resume {
       ret += workExperiences.get(i).toString() + "\n";
     }
 
-    ret += "Extracurricular Activities\n";
-    for (int i = 0; i < extracurriculars.size(); i++) {
-      ret += extracurriculars.get(i).toString() + "\n";
+    if(extracurriculars.size() != 0) {
+      ret += "Extracurricular Activities\n";
+      for (int i = 0; i < extracurriculars.size(); i++) {
+        ret += extracurriculars.get(i).toString() + "\n";
+      }
     }
 
     ret += "Skills:\n";

@@ -237,6 +237,15 @@ public class InternshipApp {
   }
 
   /**
+   * Adds a resume to the ArrayList of resumes, if it is not already in the system
+   * @param resume created by student in create resume menu
+   */
+  public void addResume(Resume resume) {
+    if (!hasResume(resume.getUUID()))
+      this.resumes.add(resume);
+  }
+
+  /**
    * Used by moderators;
    * Removes resume from system's list of resumes and from the student's list of resumes, 
    * who created it, if resume exists
