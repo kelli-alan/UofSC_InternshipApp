@@ -137,5 +137,62 @@
         "title": "Society of Women Engineers"
       }
     ]
+  },
+  {
+    "skills": [
+      "Python",
+      "Java",
+      "Javascript",
+      "HTML",
+      "CSS"
+    ],
+    "workExperiences": [
+      {
+        "ongoing": false,
+        "responsibilities": [
+          "Created a Python program to predict clients needs",
+          "Managed incoming customers and future predictions"
+        ],
+        "startMonth": 5,
+        "city": "Columbia",
+        "startYear": 2019,
+        "company": "JP Morgan",
+        "position": "Software Developer Intern",
+        "state": "SC",
+        "endMonth": 8,
+        "endYear": 2019
+      },
+      {
+        "ongoing": false,
+        "responsibilities": [
+          "Created JUnit tests cases to test new features of the back end of the banks website",
+          "Executed test cases and reported issues to engineering"
+        ],
+        "startMonth": 5,
+        "city": "Charlotte",
+        "startYear": 2020,
+        "company": "Bank of America",
+        "position": "Test Case Intern",
+        "state": "NC",
+        "endMonth": 8,
+        "endYear": 2020
+      }
+    ],
+    "education": [
+      {
+        "gradMonth": 5,
+        "major": "Computer Information Systems",
+        "minor": "",
+        "city": "Columbia",
+        "university": "University of South Carolina",
+        "degreeType": "Bachelors in Computer Information Systems",
+        "gpa": 0.0,
+        "state": "SC",
+        "gradYear": 2023
+      }
+    ],
+    "id": "0a3df1f1-048e-4f01-adee-86e9cf4e6811",
+    "extracurriculars": [
+    ]
   }
 ]
