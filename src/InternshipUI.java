@@ -980,7 +980,7 @@ public class InternshipUI {
     clearScreen();
 
     student.addResume(res);
-    
+    app.addResume(res);
 
     System.out.println("Resume Created!");
 
