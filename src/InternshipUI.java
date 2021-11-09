@@ -1125,9 +1125,12 @@ public class InternshipUI {
     if (command == 5) {
       clearScreen();
       student.getResumes().remove(i - 1);
+      app.deleteResume(resume);
       System.out.println("Resume removed");
     } else
       student.getResumes().set(i - 1, resume);
+      app.deleteResume(resume);
+      app.addResume(resume);
   }
 
   /**
@@ -1137,7 +1140,7 @@ public class InternshipUI {
   private void skillsEditor(Resume resume) {
     String res = "s";
     
-    while (res.equalsIgnoreCase("done")) {
+    while (!res.equalsIgnoreCase("done")) {
       clearScreen();
       System.out.println("Would you like to (a)dd or (r)emove skills? Enter \"done\" when you are done");
       res = scanner.nextLine();
@@ -1443,7 +1446,7 @@ public class InternshipUI {
   private void responsibilitiesEditor(Resume resume, int index) {
     String res = "s";
     
-    while (res.equalsIgnoreCase("done")) {
+    while (!res.equalsIgnoreCase("done")) {
       clearScreen();
       
       System.out.println("Would you like to (a)dd or (r)emove responsibilities? Enter \"done\" when you are done");
@@ -1586,7 +1589,7 @@ public class InternshipUI {
   private void activitiesEditor(Resume resume, int index) {
     String res = "s";
     
-    while (res.equalsIgnoreCase("done")) {
+    while (!res.equalsIgnoreCase("done")) {
       clearScreen();
       System.out.println("Would you like to (a)dd or (r)emove activities? Enter \"done\" when you are done");
       res = scanner.nextLine();
@@ -1843,6 +1846,8 @@ public class InternshipUI {
       scanner.nextLine();
     }
     employer.getListings().set(i - 1, listing);
+    app.deleteListing(listing);
+    app.addListing(listing);
   }
 
   /**
@@ -1851,7 +1856,7 @@ public class InternshipUI {
    */
   private void desiredSkillsEditor(Listing listing) {
     String res = "s";
-    while (res.equalsIgnoreCase("done")) {
+    while (!res.equalsIgnoreCase("done")) {
       clearScreen();
       System.out.println("Would you like to (a)dd or (r)emove desired skills? Enter \"done\" when you are done");
       res = scanner.nextLine();
@@ -1875,7 +1880,7 @@ public class InternshipUI {
    */
   private void dutiesEditor(Listing listing) {
     String res = "s";
-    while (res.equalsIgnoreCase("done")) {
+    while (!res.equalsIgnoreCase("done")) {
       clearScreen();
       System.out.println("Would you like to (a)dd or (r)emove duties? Enter \"done\" when you are done");
       res = scanner.nextLine();
