@@ -180,7 +180,7 @@ public class InternshipApp {
    * @param listingID UUID to match
    * @return true if listing found with matching ID, false if match can not be made
    */
-  private boolean hasListing(UUID listingID) {
+  public boolean hasListing(UUID listingID) {
     for (int i = 0; i < this.listings.size(); i++) {
       if (this.listings.get(i).getID().toString().equals(listingID.toString())) {
         return true;
@@ -213,6 +213,12 @@ public class InternshipApp {
    */
   public void addUser(User user) {
     this.users.add(user);
+    if(user.type == Users.EMPLOYER) {
+      this.employers.add(getEmployer(user.getID()));
+    }
+    if(user.type == Users.STUDENT) {
+      this.students.add(getStudent(user.getID()));
+    }
   }
 
   /**

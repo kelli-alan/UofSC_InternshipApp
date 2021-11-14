@@ -45,7 +45,7 @@ public class UserList {
     for (int i = 0; i < numberUsers; i++) {
       Users type = getAllUsers().get(i).type;
       if (type == Users.STUDENT) {
-        ret.add((Student) getAllUsers().get(i));
+        ret.add((Student)getAllUsers().get(i));
       }
     }
 

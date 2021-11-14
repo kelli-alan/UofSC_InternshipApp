@@ -61,9 +61,19 @@ public class InternshipAppTester {
     }
 
     @Test
-    public void testCreateSaved() {
+    public void testCreateSavedStudent() {
         UUID id = UUID.randomUUID();
         internshipApp.addUser(new User(id, "Dan", "Jones", "D_JONES", "CheeryWod", Users.STUDENT));
+        internshipApp.logout();
+        internshipApp = new InternshipApp();
+        User user = internshipApp.login("D_JONES", "CheeryWod");
+        assertEquals("D_JONES", user.username);
+    }
+
+    @Test
+    public void testCreateSavedEmployer() {
+        UUID id = UUID.randomUUID();
+        internshipApp.addUser(new User(id, "Dan", "Jones", "D_JONES", "CheeryWod", Users.EMPLOYER));
         internshipApp.logout();
         internshipApp = new InternshipApp();
         User user = internshipApp.login("D_JONES", "CheeryWod");
@@ -104,7 +114,7 @@ public class InternshipAppTester {
     }
 
     @Test
-    public void testHasResume() {
+    public void testAddResume() {
 
         UUID resID = UUID.randomUUID();
         Resume resume = new Resume(resID);
@@ -120,4 +130,44 @@ public class InternshipAppTester {
         boolean hasRes = internshipApp.hasResume(resID);
         assertFalse(hasRes);
     }
+
+    @Test
+    public void testAddListing() {
+        UUID listID = UUID.randomUUID();
+        Listing listing = new Listing(listID, "jobTitle", "city", "state", Month.AUGUST, 2021, 40, 20.5, false);
+        internshipApp.addListing(listing);
+        boolean hasList = internshipApp.hasListing(listID);
+        assertTrue(hasList);
+    }
+
+    @Test
+    public void testHasListingFalse() {
+        UUID listID = UUID.randomUUID();
+        boolean hasList = internshipApp.hasListing(listID);
+        assertFalse(hasList);
+    }
+
+    @Test
+    public void testDeleteListing() {
+        UUID listID = UUID.randomUUID();
+        Listing listing = new Listing(listID, "jobTitle", "city", "state", Month.AUGUST, 2021, 40, 20.5, false);
+        internshipApp.addListing(listing);
+        internshipApp.deleteListing(listing);
+        boolean hasList = internshipApp.hasListing(listID);
+        assertFalse(hasList);
+    }
+
+    @Test
+    public void testDeleteResume() {
+        UUID id = UUID.randomUUID();
+        UUID resID = UUID.randomUUID();
+        Student student = new Student(id, "Dan", "Jones", "D_JONES", "CheeryWod", "email@email.org", "555-222-1234", Users.STUDENT);
+        Resume resume = new Resume(resID);
+        internshipApp.addResume(resume);
+        internshipApp.deleteResume(resume);
+        boolean hasResume = internshipApp.hasResume(resID);
+        assertFalse(hasResume);
+    }
+
+    
 }
