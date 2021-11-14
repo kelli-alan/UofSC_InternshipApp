@@ -1,8 +1,5 @@
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.Locale;
 import org.junit.jupiter.api.Test;
 public class ExtracurricularTester {
     
