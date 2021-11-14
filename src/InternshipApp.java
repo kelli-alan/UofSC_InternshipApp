@@ -29,14 +29,17 @@ public class InternshipApp {
   }
 
   /**
-   * Logs user in if the account exists and the user's credentials match what is on file
+   * Logs user in if the account exists and the user's credentials match what is on file in the JSON
    * @param username attempt by user
    * @param password attempt by user
    * @return the user associated with the given username and password, if one exists
    */
   public User login(String username, String password) {
-
-    return hasUser(username, password);
+    for (int i = 0; i < users.size(); i++) {
+      if (users.get(i).username.equals(username) && users.get(i).password.equals(password))
+        return users.get(i);
+    }
+    return null;
   }
 
   /**
@@ -159,26 +162,11 @@ public class InternshipApp {
   }
 
   /**
-   * Helper method to determine if the username and password combination exist as a user profile in 
-   * any of the user JSON files (students, employers, or moderators)
-   * @param username of user
-   * @param password of user
-   * @return user that matches username and password, null if a user match is not found
-   */
-  private User hasUser(String username, String password) {
-    for (int i = 0; i < users.size(); i++) {
-      if (users.get(i).username.equals(username) && users.get(i).password.equals(password))
-        return users.get(i);
-    }
-    return null;
-  }
-
-  /**
    * Helper method to determine if a resume matching a given ID exists in the system
    * @param resumeID UUID to match
    * @return true if resume matching given ID is found, false if match can not be made
    */
-  private boolean hasResume(UUID resumeID) {
+  public boolean hasResume(UUID resumeID) {
     for (int i = 0; i < this.resumes.size(); i++) {
       if (this.resumes.get(i).getUUID().toString().equals(resumeID.toString())) {
         return true;
@@ -192,7 +180,7 @@ public class InternshipApp {
    * @param listingID UUID to match
    * @return true if listing found with matching ID, false if match can not be made
    */
-  private boolean hasListing(UUID listingID) {
+  public boolean hasListing(UUID listingID) {
     for (int i = 0; i < this.listings.size(); i++) {
       if (this.listings.get(i).getID().toString().equals(listingID.toString())) {
         return true;
@@ -225,6 +213,12 @@ public class InternshipApp {
    */
   public void addUser(User user) {
     this.users.add(user);
+    if(user.type == Users.EMPLOYER) {
+      this.employers.add(getEmployer(user.getID()));
+    }
+    if(user.type == Users.STUDENT) {
+      this.students.add(getStudent(user.getID()));
+    }
   }
 
   /**
