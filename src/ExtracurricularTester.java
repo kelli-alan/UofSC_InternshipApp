@@ -12,6 +12,14 @@ public class ExtracurricularTester {
    }
 
    @Test
+   public void testAddEmptyActivity() {
+        Extracurricular extracurricular = new Extracurricular("position", Month.AUGUST, 2020, "title");
+        extracurricular.addExtracurricularActivity("activity");
+        extracurricular.addExtracurricularActivity("");
+        assertNotEquals(2, extracurricular.getActivities().size());
+   }
+
+   @Test
    public void testListedFalse() {
         Extracurricular extracurricular = new Extracurricular("position", Month.AUGUST, 2020, "title");
         boolean isListed = extracurricular.listed("activity");
@@ -40,6 +48,34 @@ public class ExtracurricularTester {
    }
 
    @Test
+   public void testSetEmptyPosition() {
+        Extracurricular extracurricular = new Extracurricular("position", Month.AUGUST, 2020, "title");
+        extracurricular.setPosition("");
+        assertNotEquals("", extracurricular.getPostion());
+   }
+
+   @Test
+   public void testSetPosition() {
+        Extracurricular extracurricular = new Extracurricular("position", Month.AUGUST, 2020, "title");
+        extracurricular.setPosition("new position");
+        assertEquals("new position", extracurricular.getPostion());
+   }
+
+   @Test
+   public void testSetInvalidStartMonth() {
+        Extracurricular extracurricular = new Extracurricular("position", Month.AUGUST, 2020, "title");
+        extracurricular.setStartMonth(15);
+        assertNotEquals(15, extracurricular.getStartMonth().getValue());
+   }
+
+   @Test
+   public void testSetStartMonth() {
+        Extracurricular extracurricular = new Extracurricular("position", Month.AUGUST, 2020, "title");
+        extracurricular.setStartMonth(12);
+        assertEquals(12, extracurricular.getStartMonth().getValue());
+   }
+
+   @Test
    public void testSetInvalidStartYear() {
         Extracurricular extracurricular = new Extracurricular("position", Month.APRIL, 2021, "");
         extracurricular.setStartYear(1);
@@ -50,5 +86,25 @@ public class ExtracurricularTester {
    public void testInitInvalidStartYear() {
         Extracurricular extracurricular = new Extracurricular("position", Month.APRIL, 1, "");
         assertNotEquals(1, extracurricular.startYear);
+   }
+
+   @Test
+   public void testAddEndDate() {
+        Extracurricular extracurricular = new Extracurricular("position", Month.AUGUST, 2020, "title");
+        extracurricular.addEndDate(Month.APRIL, 2025);
+        assertEquals(Month.APRIL, extracurricular.endMonth);
+   }
+   @Test
+   public void testAddEndDateP2() {
+        Extracurricular extracurricular = new Extracurricular("position", Month.AUGUST, 2020, "title");
+        extracurricular.addEndDate(Month.APRIL, 2025);
+        assertEquals(2025, extracurricular.endYear);
+   }
+
+   @Test
+   public void testAddEndDateP3() {
+        Extracurricular extracurricular = new Extracurricular("position", Month.AUGUST, 2020, "title");
+        extracurricular.addEndDate(Month.APRIL, 2025);
+        assertFalse(extracurricular.ongoing);
    }
 }
