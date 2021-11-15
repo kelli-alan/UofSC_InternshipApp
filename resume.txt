@@ -1,29 +1,26 @@
-			Ana Edwards
-(803) 746-8164				anaedwards@gmail.com
+			Chris Johnson
+(803) 646-4670				johnsc@gmail.com
 
 Education
-  University of South Carolina, December 2022
+  University of South Carolina, May 2023
     Columbia, SC
-    Bachelor of Science in Engineering in Computer Engineering in Computer Engineering
-    3.84 GPA
+    Bachelors in Computer Information Systems in Computer Information Systems
 
 Work Experience
-  UofSC Student Success Center, Columbia, SC
-    Peer Mentor, January 2021 - present
-      - Helped freshmen in computer related fields adjust to college
-      - Tutored students in Algorithmic Design
+  JP Morgan, Columbia, SC
+    Software Developer Intern, May 2019 - August 2019
+      - Created a Python program to predict clients needs
+      - Managed incoming customers and future predictions
 
-Extracurricular Activities
-  Society of Women Engineers
-    Vice President, January 2018 - present
-      - Assisted the President with organizing weekly meetings
-      - Led an educational booth during Engineering Week
+  Bank of America, Charlotte, NC
+    Test Case Intern, May 2020 - August 2020
+      - Created JUnit tests cases to test new features of the back end of the banks website
+      - Executed test cases and reported issues to engineering
 
 Skills:
-  - Matlab
+  - Python
   - Java
-  - Github
-  - C++
-  - Compiler design
-  - Assembling computers
+  - Javascript
+  - HTML
+  - CSS
 ______________________________________________________________________________________________
