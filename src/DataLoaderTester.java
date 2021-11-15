@@ -375,8 +375,5 @@ public class DataLoaderTester {
     listingList = ListingList.getInstance().getAllListings();
     assertEquals(1, listingList.get(1).getDuties().size());
   }
-
   //////////////////////////////////////////////////////////////////////////////////////
-
-
 }
