@@ -7,6 +7,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * @author Robbie Clark
+ */
 public class InternshipAppTester {
     
     private InternshipApp internshipApp = new InternshipApp();
