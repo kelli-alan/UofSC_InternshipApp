@@ -3,6 +3,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 import java.util.ArrayList;
 
+/**
+ * Testing for the FilterListings
+ * @authors Evan Grunewald
+ */
 public class FilterListingsTest {
 
     private ArrayList<Listing> list;

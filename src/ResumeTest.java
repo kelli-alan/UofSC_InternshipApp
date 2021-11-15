@@ -4,6 +4,10 @@ import java.time.Month;
 
 import org.junit.jupiter.api.*;
 
+/**
+ * Testing for the Resume Class
+ * @authors Evan Grunewald
+ */
 public class ResumeTest {
 
     private Resume resume;
