@@ -465,10 +465,10 @@ public class InternshipUI {
     System.out.println("\t      Create Account");
     System.out.println("********** Enter Account Type **********");
     String sType = "n";
-    while(!sType.equalsIgnoreCase("s") || !sType.equalsIgnoreCase("m") || !sType.equalsIgnoreCase("e")){
-    System.out.println("(S)tudent\n(E)mployer\n(M)oderator");
-    System.out.print("Type: ");
-    sType = scanner.nextLine();
+    while((!sType.equalsIgnoreCase("s")) && (!sType.equalsIgnoreCase("m")) && (!sType.equalsIgnoreCase("e"))) {
+      System.out.println("(S)tudent\n(E)mployer\n(M)oderator");
+      System.out.print("Type: ");
+      sType = scanner.nextLine();
     }
     // first name, last name, username, and password required for all users
     System.out.print("Enter first name: ");

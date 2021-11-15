@@ -63,7 +63,7 @@ public class InternshipAppTester {
     @Test
     public void testCreateSavedStudent() {
         UUID id = UUID.randomUUID();
-        internshipApp.addUser(new User(id, "Dan", "Jones", "D_JONES", "CheeryWod", Users.STUDENT));
+        internshipApp.addUser(new Student(id, "Dan", "Jones", "D_JONES", "CheeryWod", "email@email.com", "123456790", Users.STUDENT));
         internshipApp.logout();
         internshipApp = new InternshipApp();
         User user = internshipApp.login("D_JONES", "CheeryWod");
@@ -73,7 +73,7 @@ public class InternshipAppTester {
     @Test
     public void testCreateSavedEmployer() {
         UUID id = UUID.randomUUID();
-        internshipApp.addUser(new User(id, "Dan", "Jones", "D_JONES", "CheeryWod", Users.EMPLOYER));
+        internshipApp.addUser(new Employer(id, "Dan", "Jones", "D_JONES", "CheeryWod", Users.EMPLOYER, "companyName", "companyDescription"));
         internshipApp.logout();
         internshipApp = new InternshipApp();
         User user = internshipApp.login("D_JONES", "CheeryWod");
