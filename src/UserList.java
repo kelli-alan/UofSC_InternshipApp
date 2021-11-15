@@ -85,20 +85,4 @@ public class UserList {
 
     return ret;
   }
-
-  /**
-   * Method that checks if the user's username and password exist in the system, and if
-   * not, will output back an error to the user. 
-   * @param username
-   * @param password
-   * @return the user's existence in the system.
-   */
-  public User hasUser(String username, String password) {
-      for(int i = 0; i < users.size(); i++) {
-          if(users.get(i).username.equals(username) && users.get(i).password.equals(password))
-              return users.get(i);
-      }
-      System.out.println("Invalid username or password");
-      return null;
-    }
 }
