@@ -98,6 +98,20 @@ public class Employer extends User {
   }
 
   /**
+   * Helper method to determine if a listing matching a given ID exists in the system
+   * @param listingID UUID to match
+   * @return true if listing found with matching ID, false if match can not be made
+   */
+  public boolean hasListing(UUID listingID) {
+    for (int i = 0; i < internshipListings.size(); i++) {
+      if (this.internshipListings.get(i).getID().toString().equals(listingID.toString())) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
    * Gets the listing at the specified index
    * @param index of employer's internship listings to display
    * @return String representing the requested listing

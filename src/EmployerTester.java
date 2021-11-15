@@ -42,7 +42,7 @@ public class EmployerTester {
     public void testAddListing() {
         Listing listing = new Listing(id, "Tech", "Columbia", "SC", Month.DECEMBER, 2021, 30, 25, false);
         employer.addListing(listing);
-        boolean hasListing = internshipApp.hasListing(id);
+        boolean hasListing = employer.hasListing(id);
         assertTrue(hasListing);
     }
 
