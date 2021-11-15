@@ -1,6 +1,10 @@
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.Month;
 import org.junit.jupiter.api.Test;
+
+/**
+ * @author Robbie Clark
+ */
 public class ExtracurricularTester {
     
    @Test

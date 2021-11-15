@@ -51,7 +51,7 @@ public class InternshipApp {
     DataWriter.saveUsers();
     DataWriter.saveResumes();
     DataWriter.saveListings();
-    System.exit(0);
+    //System.exit(0); //commented out for testing purposes
   }
 
   /**
@@ -213,12 +213,6 @@ public class InternshipApp {
    */
   public void addUser(User user) {
     this.users.add(user);
-    if(user.type == Users.EMPLOYER) {
-      this.employers.add(getEmployer(user.getID()));
-    }
-    if(user.type == Users.STUDENT) {
-      this.students.add(getStudent(user.getID()));
-    }
   }
 
   /**
